@@ -25,9 +25,11 @@ let expand xts ini addf addi =
   classify
     xts
     ini
-    (fun (offset, acc) x ->
+    (*(fun (offset, acc) x ->
       let offset = align offset in
-      (offset + 8, addf x offset acc))
+      (offset + 8, addf x offset acc))*)
+    (fun (offset, acc) x t ->
+      offset + 4, addf x offset acc)
     (fun (offset, acc) x t ->
       (offset + 4, addi x t offset acc))
 
@@ -48,6 +50,8 @@ let rec g env = function (* 式の仮想マシンコード生成 (caml2html: vir
   | Closure.Neg(x) -> Ans(Neg(x))
   | Closure.Add(x, y) -> Ans(Add(x, V(y)))
   | Closure.Sub(x, y) -> Ans(Sub(x, V(y)))
+  | Closure.Mul(x, y) -> Ans(Mul(x, V(y)))
+  | Closure.Div(x, y) -> Ans(Div(x, V(y)))
   | Closure.FNeg(x) -> Ans(FNeg(x))
   | Closure.FAdd(x, y) -> Ans(FAdd(x, y))
   | Closure.FSub(x, y) -> Ans(FSub(x, y))
