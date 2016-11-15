@@ -1,7 +1,8 @@
 open Asm
 
-external gethi : float -> int32 = "gethi"
-external getlo : float -> int32 = "getlo"
+(*external gethi : float -> int32 = "gethi"
+external getlo : float -> int32 = "getlo"*)
+external getbits : float -> int32 = "getbits"
 
 let stackset = ref S.empty (* すでにSaveされた変数の集合 (caml2html: emit_stackset) *)
 let stackmap = ref [] (* Saveされた変数の、スタックにおける位置 (caml2html: emit_stackmap) *)
