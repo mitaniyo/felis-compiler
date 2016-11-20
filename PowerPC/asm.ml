@@ -15,7 +15,6 @@ and exp = (* 一つ一つの命令に対応する式 (caml2html: sparcasm_exp) *
   | Sub of Id.t * id_or_imm
   | Mul of Id.t * id_or_imm
   | Div of Id.t * id_or_imm (* mul and div will be converted to shift operator *)
-  | Slw of Id.t * id_or_imm (* really need? *)
   | Ld of Id.t * id_or_imm
   | St of Id.t * Id.t * id_or_imm
   | FMr of Id.t
