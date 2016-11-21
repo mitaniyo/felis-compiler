@@ -25,6 +25,15 @@ let locate x =
 let offset x = 4 * List.hd (locate x)
 let stacksize () = align ((List.length !stackmap + 1) * 4)
 
+let small_log x =
+  match x with
+  | 1 -> 0
+  | 2 -> 1
+  | 4 -> 2
+  | 8 -> 3
+  | 16 -> 4
+  | _ -> failwith "implement mul/div!!\n"
+
 let reg r =
   if is_reg r
   then String.sub r 1 (String.length r - 1)
@@ -60,30 +69,41 @@ let rec g oc = function (* 命令列のアセンブリ生成 (caml2html: emit_g)
 and g' oc = function (* 各命令のアセンブリ生成 (caml2html: emit_gprime) *)
   (* 末尾でなかったら計算結果をdestにセット (caml2html: emit_nontail) *)
   | NonTail(_), Nop -> ()
-  | NonTail(x), Li(i) when -32768 <= i && i < 32768 -> Printf.fprintf oc "\tli\t%s, %d\n" (reg x) i
+  | NonTail(x), Li(i) when -32768 <= i && i < 32768 -> Printf.fprintf oc "\taddi\t%s %s %d\n" (reg x) "r0" i
   | NonTail(x), Li(i) ->
-      let n = i lsr 16 in
+      (*let n = i lsr 16 in
       let m = i lxor (n lsl 16) in
-      let r = reg x in
-      Printf.fprintf oc "\tlis\t%s, %d\n" r n;
-      Printf.fprintf oc "\tori\t%s, %s, %d\n" r r m
-  | NonTail(x), FLi(Id.L(l)) ->
+      let r = reg x in*)
+      let lo = i land 32767 in
+      let hi = ((i land (32767 lsl 16)) lsr 16) in
+      Printf.fprintf oc "\taddi\t%s %s %d\n" (reg x) "r0" hi;
+      Printf.fprintf oc "\tlui\t%s\n" (reg x);
+      Printf.fprintf oc "\taddi %s %s %d\n" (reg x) (reg x) lo
+      (*Printf.fprintf oc "\tlis\t%s, %d\n" r n;
+      Printf.fprintf oc "\tori\t%s, %s, %d\n" r r m*)
+  | NonTail(x), FLi(Id.L(l)) -> (* TODO *)
       let s = load_label (reg reg_tmp) l in
       Printf.fprintf oc "%s\tlfd\t%s, 0(%s)\n" s (reg x) (reg reg_tmp)
   | NonTail(x), SetL(Id.L(y)) ->
       let s = load_label x y in
       Printf.fprintf oc "%s" s
   | NonTail(x), Mr(y) when x = y -> ()
-  | NonTail(x), Mr(y) -> Printf.fprintf oc "\tmr\t%s, %s\n" (reg x) (reg y)
+  | NonTail(x), Mr(y) -> Printf.fprintf oc "\tmov\t%s, %s\n" (reg x) (reg y)
   | NonTail(x), Neg(y) -> Printf.fprintf oc "\tneg\t%s, %s\n" (reg x) (reg y)
   | NonTail(x), Add(y, V(z)) -> Printf.fprintf oc "\tadd\t%s, %s, %s\n" (reg x) (reg y) (reg z)
   | NonTail(x), Add(y, C(z)) -> Printf.fprintf oc "\taddi\t%s, %s, %d\n" (reg x) (reg y) z
   | NonTail(x), Sub(y, V(z)) -> Printf.fprintf oc "\tsub\t%s, %s, %s\n" (reg x) (reg y) (reg z)
   | NonTail(x), Sub(y, C(z)) -> Printf.fprintf oc "\tsubi\t%s, %s, %d\n" (reg x) (reg y) z
-  | NonTail(x), Slw(y, V(z)) -> Printf.fprintf oc "\tslw\t%s, %s, %s\n" (reg x) (reg y) (reg z)
-  | NonTail(x), Slw(y, C(z)) -> Printf.fprintf oc "\tslwi\t%s, %s, %d\n" (reg x) (reg y) z
+  (*| NonTail(x), Slw(y, V(z)) -> Printf.fprintf oc "\tslw\t%s, %s, %s\n" (reg x) (reg y) (reg z)
+  | NonTail(x), Slw(y, C(z)) -> Printf.fprintf oc "\tslwi\t%s, %s, %d\n" (reg x) (reg y) z*)
+  | Nontail(x), Mul(y, C(z)) -> let l = small_log z in Printf.fprintf "\tsll\t%s %s %d\n" (reg x) (reg y) l
+  | Nontail(x), Mul(y, V(z)) -> failwith "implement mul!\n"
+  | Nontial(x), Div(y, C(z)) -> let l = small_log z in Printf.fprintf "\tsrl\t%s %s %d\n" (reg x) (reg y) l
+  | Nontail(x), Div(y, V(z)) -> failwith "implement div!\n"
+  
   | NonTail(x), Lwz(y, V(z)) -> Printf.fprintf oc "\tlwzx\t%s, %s, %s\n" (reg x) (reg y) (reg z)
   | NonTail(x), Lwz(y, C(z)) -> Printf.fprintf oc "\tlwz\t%s, %d(%s)\n" (reg x) z (reg y)
+  | Nontail(x), Ld(y, V(z))
   | NonTail(_), Stw(x, y, V(z)) -> Printf.fprintf oc "\tstwx\t%s, %s, %s\n" (reg x) (reg y) (reg z)
   | NonTail(_), Stw(x, y, C(z)) -> Printf.fprintf oc "\tstw\t%s, %d(%s)\n" (reg x) z (reg y)
   | NonTail(x), FMr(y) when x = y -> ()
