@@ -7,7 +7,8 @@ type t = (* 命令の列 (caml2html: sparcasm_t) *)
 and exp = (* 一つ一つの命令に対応する式 (caml2html: sparcasm_exp) *)
   | Nop
   | Li of int
-  | FLi of Id.l
+  | FLi of float
+  (*| FLi of Id.l*)
   | SetL of Id.l
   | Mr of Id.t
   | Neg of Id.t
@@ -44,7 +45,7 @@ type prog = Prog of (Id.l * float) list * fundef list * t
 let fletd(x, e1, e2) = Let((x, Type.Float), e1, e2)
 let seq(e1, e2) = Let((Id.gentmp Type.Unit, Type.Unit), e1, e2)
 
-let regs = Array.init 26 (fun i -> Printf.sprintf "%%r%d" i) (* 26 - 31: used for specific purposes (defined below) *)
+let regs = Array.init 25 (fun i -> Printf.sprintf "%%r%d" i) (* 26 - 31: used for specific purposes (defined below) *)
 let fregs = Array.init 32 (fun i -> Printf.sprintf "%%f%d" i)
 let allregs = Array.to_list regs
 let allfregs = Array.to_list fregs
@@ -58,6 +59,9 @@ let reg_fsw = "%f31"
 
 let reg_hp = "%r27"
 let reg_tmp = "%r26"
+
+let reg_adr = "%r25"
+let reg_fimm = "%r24"
 
 (*let is_reg x = (x.[0] = 'r' || x.[0] = 'f')*)
 let is_reg x = (x.[0] = '%')

@@ -6,17 +6,19 @@ external getbits : float -> int32 = "getbits"
 
 let stackset = ref S.empty (* すでにSaveされた変数の集合 (caml2html: emit_stackset) *)
 let stackmap = ref [] (* Saveされた変数の、スタックにおける位置 (caml2html: emit_stackmap) *)
-let save x =
+let save x = (* add x to stackset/map *)
   stackset := S.add x !stackset;
   if not (List.mem x !stackmap) then
     stackmap := !stackmap @ [x]
 let savef x =
-  stackset := S.add x !stackset;
+  (* save of 32-bit float is same as save of int *)
+  save x
+  (*stackset := S.add x !stackset;
   if not (List.mem x !stackmap) then
     (let pad =
       if List.length !stackmap mod 2 = 0 then [] else [Id.gentmp Type.Int] in
-    stackmap := !stackmap @ pad @ [x; x])
-let locate x =
+    stackmap := !stackmap @ pad @ [x; x])*)
+let locate x = (* find all locations of x in stackmap *)
   let rec loc = function
     | [] -> []
     | y :: zs when x = y -> 0 :: List.map succ (loc zs)
@@ -81,9 +83,14 @@ and g' oc = function (* 各命令のアセンブリ生成 (caml2html: emit_gprim
       Printf.fprintf oc "\taddi %s %s %d\n" (reg x) (reg x) lo
       (*Printf.fprintf oc "\tlis\t%s, %d\n" r n;
       Printf.fprintf oc "\tori\t%s, %s, %d\n" r r m*)
-  | NonTail(x), FLi(Id.L(l)) -> (* TODO *)
-      let s = load_label (reg reg_tmp) l in
-      Printf.fprintf oc "%s\tlfd\t%s, 0(%s)\n" s (reg x) (reg reg_tmp)
+  | NonTail(x), FLi(d) ->
+      let v = getbits d in
+      let lo = v land 32767 in
+      let hi = ((v land (32767 lsl 16)) lsr 16) in
+      Printf.fprintf oc "\taddi\t%s %s %d\n" (reg reg_fimm) "r0" hi;
+      Printf.fprintf oc "\tlui\t%s\n" (reg reg_fimm);
+      Printf.fprintf oc "\taddi\t%s %s %d\n" (reg reg_fimm) (reg reg_fimm) lo;
+      Printf.fprintf oc "\tmtc1\t%s %s\n" (reg x) (reg reg_fimm)
   | NonTail(x), SetL(Id.L(y)) ->
       let s = load_label x y in
       Printf.fprintf oc "%s" s
@@ -101,37 +108,48 @@ and g' oc = function (* 各命令のアセンブリ生成 (caml2html: emit_gprim
   | Nontial(x), Div(y, C(z)) -> let l = small_log z in Printf.fprintf "\tsrl\t%s %s %d\n" (reg x) (reg y) l
   | Nontail(x), Div(y, V(z)) -> failwith "implement div!\n"
   
-  | NonTail(x), Lwz(y, V(z)) -> Printf.fprintf oc "\tlwzx\t%s, %s, %s\n" (reg x) (reg y) (reg z)
-  | NonTail(x), Lwz(y, C(z)) -> Printf.fprintf oc "\tlwz\t%s, %d(%s)\n" (reg x) z (reg y)
-  | Nontail(x), Ld(y, V(z))
-  | NonTail(_), Stw(x, y, V(z)) -> Printf.fprintf oc "\tstwx\t%s, %s, %s\n" (reg x) (reg y) (reg z)
-  | NonTail(_), Stw(x, y, C(z)) -> Printf.fprintf oc "\tstw\t%s, %d(%s)\n" (reg x) z (reg y)
+  (*| NonTail(x), Lwz(y, V(z)) -> Printf.fprintf oc "\tlwzx\t%s, %s, %s\n" (reg x) (reg y) (reg z)
+  | NonTail(x), Lwz(y, C(z)) -> Printf.fprintf oc "\tlwz\t%s, %d(%s)\n" (reg x) z (reg y)*)
+  | Nontail(x), Ld(y, V(z)) -> Printf.fprintf oc "\tadd\t%s %s %s\n" (reg reg_adr) (reg y) (reg z);
+      Printf.fprintf oc "\tlw\t%s %s %d" (reg x) (reg reg_adr) 0
+  | Nontail(x), Ld(y, C(z)) -> Printf.fprintf oc "\tlw\t%s %s %d\n" (reg x) (reg y) z
+  (*| NonTail(_), Stw(x, y, V(z)) -> Printf.fprintf oc "\tstwx\t%s, %s, %s\n" (reg x) (reg y) (reg z)
+  | NonTail(_), Stw(x, y, C(z)) -> Printf.fprintf oc "\tstw\t%s, %d(%s)\n" (reg x) z (reg y)*)
+  | Nontail(_), St(x, y, V(z)) -> Printf.fprintf oc "\tadd\t%s %s %s\n" (reg reg_adr) (reg y) (reg z);
+      Printf.fprintf oc "\tsw\t%s %s %d\n" (reg x) (reg reg_adr) 0
+  | Nontail(_), St(x, y, C(z)) -> Printf.fprintf oc "\tsw\t%s %s %d\n" (reg x) (reg y) z
   | NonTail(x), FMr(y) when x = y -> ()
-  | NonTail(x), FMr(y) -> Printf.fprintf oc "\tfmr\t%s, %s\n" (reg x) (reg y)
-  | NonTail(x), FNeg(y) -> Printf.fprintf oc "\tfneg\t%s, %s\n" (reg x) (reg y)
+  | NonTail(x), FMr(y) -> Printf.fprintf oc "\tmov.s\t%s, %s\n" (reg x) (reg y)
+  | NonTail(x), FNeg(y) -> Printf.fprintf oc "\tneg.s\t%s, %s\n" (reg x) (reg y)
   | NonTail(x), FAdd(y, z) -> Printf.fprintf oc "\tfadd\t%s, %s, %s\n" (reg x) (reg y) (reg z)
   | NonTail(x), FSub(y, z) -> Printf.fprintf oc "\tfsub\t%s, %s, %s\n" (reg x) (reg y) (reg z)
   | NonTail(x), FMul(y, z) -> Printf.fprintf oc "\tfmul\t%s, %s, %s\n" (reg x) (reg y) (reg z)
   | NonTail(x), FDiv(y, z) -> Printf.fprintf oc "\tfdiv\t%s, %s, %s\n" (reg x) (reg y) (reg z)
-  | NonTail(x), Lfd(y, V(z)) -> Printf.fprintf oc "\tlfdx\t%s, %s, %s\n" (reg x) (reg y) (reg z)
-  | NonTail(x), Lfd(y, C(z)) -> Printf.fprintf oc "\tlfd\t%s, %d(%s)\n" (reg x) z (reg y)
-  | NonTail(_), Stfd(x, y, V(z)) -> Printf.fprintf oc "\tstfdx\t%s, %s, %s\n" (reg x) (reg y) (reg z)
-  | NonTail(_), Stfd(x, y, C(z)) -> Printf.fprintf oc "\tstfd\t%s, %d(%s)\n" (reg x) z (reg y)
+  (*| NonTail(x), Lfd(y, V(z)) -> Printf.fprintf oc "\tlfdx\t%s, %s, %s\n" (reg x) (reg y) (reg z)
+  | NonTail(x), Lfd(y, C(z)) -> Printf.fprintf oc "\tlfd\t%s, %d(%s)\n" (reg x) z (reg y)*)
+  | Nontail(x), Ldf(y, V(z)) -> Printf.fprintf oc "\tadd\t%s %s %s\n" (reg reg_adr) (reg y) (reg z);
+      Printf.fprintf oc "\tlwc1\t%s %s %d\n" (reg x) (reg reg_adr) 0
+  | Nontail(x), Ldf(y, C(z)) -> Printf.fprintf oc "\tlwc1\t%s %s %d\n" (reg x) (reg y) z
+  (*| NonTail(_), Stfd(x, y, V(z)) -> Printf.fprintf oc "\tstfdx\t%s, %s, %s\n" (reg x) (reg y) (reg z)
+  | NonTail(_), Stfd(x, y, C(z)) -> Printf.fprintf oc "\tstfd\t%s, %d(%s)\n" (reg x) z (reg y)*)
+  | Nontail(_), Stf(x, y, V(z)) -> Printf.fprintf oc "\tadd\t%s %s %s\n" (reg reg_adr) (reg y) (reg z);
+      Printf.fprintf oc "\tswc1\t%s %s %d\n" (reg x) (reg reg_adr) 0
+  | Nontail(_), Stf(x, y, C(z)) -> Printf.fprintf oc "\tswc1\t%s %s %d\n" (reg x) (reg y) z
   | NonTail(_), Comment(s) -> Printf.fprintf oc "#\t%s\n" s
   (* 退避の仮想命令の実装 (caml2html: emit_save) *)
-  | NonTail(_), Save(x, y) when List.mem x allregs && not (S.mem y !stackset) ->
+  | NonTail(_), Save(x, y) when List.mem x allregs && not (S.mem y !stackset) -> (* save register x, variable y if needed *)
       save y;
-      Printf.fprintf oc "\tstw\t%s, %d(%s)\n" (reg x) (offset y) (reg reg_sp)
+      Printf.fprintf oc "\tsw\t%s %s %d\n" (reg x) (reg reg_sp) (offset y)
   | NonTail(_), Save(x, y) when List.mem x allfregs && not (S.mem y !stackset) ->
       savef y;
-      Printf.fprintf oc "\tstfd\t%s, %d(%s)\n" (reg x) (offset y) (reg reg_sp)
-  | NonTail(_), Save(x, y) -> assert (S.mem y !stackset); ()
+      Printf.fprintf oc "\tswc1\t%s %s %d\n" (reg x) (reg reg_sp) (offset y)
+  | NonTail(_), Save(x, y) -> assert (S.mem y !stackset); () (* already saved *)
   (* 復帰の仮想命令の実装 (caml2html: emit_restore) *)
   | NonTail(x), Restore(y) when List.mem x allregs ->
-      Printf.fprintf oc "\tlwz\t%s, %d(%s)\n" (reg x) (offset y) (reg reg_sp)
+      Printf.fprintf oc "\tlw %s %s %d\n" (reg x) (reg reg_sp) (offset y)
   | NonTail(x), Restore(y) ->
       assert (List.mem x allfregs);
-      Printf.fprintf oc "\tlfd\t%s, %d(%s)\n" (reg x) (offset y) (reg reg_sp)
+      Printf.fprintf oc "\tlwc1\t %s %s %d\n" (reg x) (reg reg_sp) (offset y)
   (* 末尾だったら計算結果を第一レジスタにセットしてリターン (caml2html: emit_tailret) *)
   | Tail, (Nop | Stw _ | Stfd _ | Comment _ | Save _ as exp) ->
       g' oc (NonTail(Id.gentmp Type.Unit), exp);
