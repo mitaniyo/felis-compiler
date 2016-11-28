@@ -18,14 +18,24 @@ let savef x =
     (let pad =
       if List.length !stackmap mod 2 = 0 then [] else [Id.gentmp Type.Int] in
     stackmap := !stackmap @ pad @ [x; x])*)
-let locate x = (* find all locations of x in stackmap *)
+(*let locate x = (* find all locations of x in stackmap *)
   let rec loc = function
     | [] -> []
     | y :: zs when x = y -> 0 :: List.map succ (loc zs)
     | y :: zs -> List.map succ (loc zs) in
+  loc !stackmap*)
+let locate x =
+  let rec loc s =
+  match s with
+  | [] -> failwith "cannot find requied variable in stack\n"
+  | y :: zs when x = y -> 0
+  | y :: zs -> 1 + loc zs
+  in
   loc !stackmap
-let offset x = 4 * List.hd (locate x)
-let stacksize () = align ((List.length !stackmap + 1) * 4)
+let offset x = 4 * (locate x)
+(*let offset x = 4 * List.hd (locate x)*)
+let stacksize () = (List.ength (!stackmap)) * 4
+(*let stacksize () = align ((List.length !stackmap + 1) * 4)*)
 
 let small_log x =
   match x with
@@ -153,23 +163,24 @@ and g' oc = function (* 各命令のアセンブリ生成 (caml2html: emit_gprim
   (* 末尾だったら計算結果を第一レジスタにセットしてリターン (caml2html: emit_tailret) *)
   | Tail, (Nop | Stw _ | Stfd _ | Comment _ | Save _ as exp) ->
       g' oc (NonTail(Id.gentmp Type.Unit), exp);
-      Printf.fprintf oc "\tblr\n";
+      Printf.fprintf oc "\tjr\t%s\n" (reg reg_link)
   | Tail, (Li _ | SetL _ | Mr _ | Neg _ | Add _ | Sub _ | Slw _ | Lwz _ as exp) ->
       g' oc (NonTail(regs.(0)), exp);
-      Printf.fprintf oc "\tblr\n";
+      Printf.fprintf oc "\tjr\t%s\n" (reg reg_link)
   | Tail, (FLi _ | FMr _ | FNeg _ | FAdd _ | FSub _ | FMul _ | FDiv _ | Lfd _ as exp) ->
       g' oc (NonTail(fregs.(0)), exp);
-      Printf.fprintf oc "\tblr\n";
-  | Tail, (Restore(x) as exp) ->
+      Printf.fprintf oc "\tjr\t%s\n" (reg reg_link)
+  | Tail, (Restore(x) as exp) -> (* must know int or float: TODO *)
+      g' oc (Nontail(regs.(0)), exp)
       (match locate x with
       | [i] -> g' oc (NonTail(regs.(0)), exp)
-      | [i; j] when i + 1 = j -> g' oc (NonTail(fregs.(0)), exp)
+      (*| [i; j] when i + 1 = j -> g' oc (NonTail(fregs.(0)), exp)*) (* No *)
       | _ -> assert false);
-      Printf.fprintf oc "\tblr\n";
-  | Tail, IfEq(x, V(y), e1, e2) ->
+      Printf.fprintf oc "\tjr\t%s\n" (reg reg_link)
+  | Tail, IfEq(x, V(y), e1, e2) -> (* TODO *)
       Printf.fprintf oc "\tcmpw\tcr7, %s, %s\n" (reg x) (reg y);
       g'_tail_if oc e1 e2 "beq" "bne"
-  | Tail, IfEq(x, C(y), e1, e2) ->
+  | Tail, IfEq(x, C(y), e1, e2) -> (* TODO *)
       Printf.fprintf oc "\tcmpwi\tcr7, %s, %d\n" (reg x) y;
       g'_tail_if oc e1 e2 "beq" "bne"
   | Tail, IfLE(x, V(y), e1, e2) ->
@@ -215,14 +226,14 @@ and g' oc = function (* 各命令のアセンブリ生成 (caml2html: emit_gprim
       Printf.fprintf oc "\tfcmpu\tcr7, %s, %s\n" (reg x) (reg y);
       g'_non_tail_if oc (NonTail(z)) e1 e2 "ble" "bgt"
   (* 関数呼び出しの仮想命令の実装 (caml2html: emit_call) *)
-  | Tail, CallCls(x, ys, zs) -> (* 末尾呼び出し (caml2html: emit_tailcall) *)
+  | Tail, CallCls(x, ys, zs) -> (* 末尾呼び出し (caml2html: emit_tailcall) *) (* TODO *)
       g'_args oc [(x, reg_cl)] ys zs;
       Printf.fprintf oc "\tlwz\t%s, 0(%s)\n" (reg reg_sw) (reg reg_cl);
       Printf.fprintf oc "\tmtctr\t%s\n\tbctr\n" (reg reg_sw);
   | Tail, CallDir(Id.L(x), ys, zs) -> (* 末尾呼び出し *)
       g'_args oc [] ys zs;
-      Printf.fprintf oc "\tb\t%s\n" x
-  | NonTail(a), CallCls(x, ys, zs) ->
+      Printf.fprintf oc "\tj%t%s\n" x
+  | NonTail(a), CallCls(x, ys, zs) -> (* TODO *)
       Printf.fprintf oc "\tmflr\t%s\n" (reg reg_tmp);
       g'_args oc [(x, reg_cl)] ys zs;
       let ss = stacksize () in
@@ -238,20 +249,19 @@ and g' oc = function (* 各命令のアセンブリ生成 (caml2html: emit_gprim
       else if List.mem a allfregs && a <> fregs.(0) then
 	Printf.fprintf oc "\tfmr\t%s, %s\n" (reg a) (reg fregs.(0));
       Printf.fprintf oc "\tmtlr\t%s\n" (reg reg_tmp)
-  | (NonTail(a), CallDir(Id.L(x), ys, zs)) ->
-      Printf.fprintf oc "\tmflr\t%s\n" (reg reg_tmp);
-      g'_args oc [] ys zs;
+  | (NonTail(a), CallDir(Id.L(x), ys, zs)) -> (*******)
       let ss = stacksize () in
-      Printf.fprintf oc "\tstw\t%s, %d(%s)\n" (reg reg_tmp) (ss - 4) (reg reg_sp);
-      Printf.fprintf oc "\taddi\t%s, %s, %d\n" (reg reg_sp) (reg reg_sp) ss;
-      Printf.fprintf oc "\tbl\t%s\n" x;
-      Printf.fprintf oc "\tsubi\t%s, %s, %d\n" (reg reg_sp) (reg reg_sp) ss;
-      Printf.fprintf oc "\tlwz\t%s, %d(%s)\n" (reg reg_tmp) (ss - 4) (reg reg_sp);
+      Printf.fprintf oc "\tsw\t%s %s %d\n" (reg reg_link) (reg reg_sp) (ss + 4); (* save link register *)
+      Printf.fprintf oc "\taddi\t%s %s %d\n" (reg reg_sp) (reg reg_sp) (ss + 4); (* update stack pointer *)
+      g'_args oc [] ys zs; (* set arguments to correct positions *)
+      Printf.fprintf oc "\tjal\t%s\n" x; (* branch *)
+      Printf.fprintf oc "\taddi\t%s %s %d\n" (reg reg_sp) (reg reg_sp) (-(ss + 4)); (* restore stack pointer *)
+      Printf.fprintf oc "\tlw\t%s %s %d\n" (reg reg_link) (reg reg_sp) (ss + 4); (* restore link register *)
       if List.mem a allregs && a <> regs.(0) then
-	Printf.fprintf oc "\tmr\t%s, %s\n" (reg a) (reg regs.(0))
-      else if List.mem a allfregs && a <> fregs.(0) then
-	Printf.fprintf oc "\tfmr\t%s, %s\n" (reg a) (reg fregs.(0));
-      Printf.fprintf oc "\tmtlr\t%s\n" (reg reg_tmp)
+        Printf.fprintf oc "\tmov\t%s %s\n" (reg a) (reg regs.(0))
+      else
+        Printf.fprintf oc "\tmov.s\t%s %s\n" (reg a) (reg regs.(0))
+
 and g'_tail_if oc e1 e2 b bn =
   let b_else = Id.genid (b ^ "_else") in
   Printf.fprintf oc "\t%s\tcr7, %s\n" bn b_else;
@@ -281,7 +291,7 @@ and g'_args oc x_reg_cl ys zs =
       (0, x_reg_cl)
       ys in
   List.iter
-    (fun (y, r) -> Printf.fprintf oc "\tmr\t%s, %s\n" (reg r) (reg y))
+    (fun (y, r) -> Printf.fprintf oc "\tmov\t%s, %s\n" (reg r) (reg y))
     (shuffle reg_sw yrs);
   let (d, zfrs) =
     List.fold_left
@@ -289,7 +299,7 @@ and g'_args oc x_reg_cl ys zs =
       (0, [])
       zs in
   List.iter
-    (fun (z, fr) -> Printf.fprintf oc "\tfmr\t%s, %s\n" (reg fr) (reg z))
+    (fun (z, fr) -> Printf.fprintf oc "\tmov.s\t%s, %s\n" (reg fr) (reg z))
     (shuffle reg_fsw zfrs)
 
 let h oc { name = Id.L(x); args = _; fargs = _; body = e; ret = _ } =
