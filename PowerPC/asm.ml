@@ -60,7 +60,7 @@ let reg_fsw = "%f31"
 let reg_hp = "%r27"
 let reg_tmp = "%r26"
 
-let reg_adr = "%r25"
+let reg_cond = "%r25"
 let reg_fimm = "%r24"
 
 (*let is_reg x = (x.[0] = 'r' || x.[0] = 'f')*)
