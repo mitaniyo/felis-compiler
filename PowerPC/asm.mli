@@ -5,7 +5,7 @@ type t =
 and exp =
   | Nop
   | Li of int
-  | FLi of Id.l
+  | FLi of float
   | SetL of Id.l
   | Mr of Id.t
   | Neg of Id.t
@@ -13,7 +13,6 @@ and exp =
   | Sub of Id.t * id_or_imm
   | Mul of Id.t * id_or_imm
   | Div of Id.t * id_or_imm (* mul and div will be converted to shift operator *)
-  | Slw of Id.t * id_or_imm (* real;y need? *)
   | Ld of Id.t * id_or_imm
   | St of Id.t * Id.t * id_or_imm
   | FMr of Id.t 
@@ -22,8 +21,8 @@ and exp =
   | FSub of Id.t * Id.t
   | FMul of Id.t * Id.t
   | FDiv of Id.t * Id.t
-  | Lfd of Id.t * id_or_imm
-  | Stfd of Id.t * Id.t * id_or_imm
+  | Ldf of Id.t * id_or_imm
+  | Stf of Id.t * Id.t * id_or_imm
   | Comment of string
   (* virtual instructions *)
   | IfEq of Id.t * id_or_imm * t * t
@@ -53,6 +52,19 @@ val reg_hp : Id.t
 val reg_sp : Id.t
 val reg_tmp : Id.t
 val is_reg : Id.t -> bool
+
+
+(*let reg_sp = "%r30"*)
+val reg_link : Id.t
+
+
+val reg_cond : Id.t
+val reg_fimm : Id.t
+
+(*let is_reg x = (x.[0] = 'r' || x.[0] = 'f')*)
+(*let is_reg x = (x.[0] = '%')*)
+val is_reg : Id.t -> bool
+
 
 val fv : t -> Id.t list
 val concat : t -> Id.t * Type.t -> t -> t

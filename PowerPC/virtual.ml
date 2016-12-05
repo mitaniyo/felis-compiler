@@ -28,7 +28,7 @@ let expand xts ini addf addi =
     (*(fun (offset, acc) x ->
       let offset = align offset in
       (offset + 8, addf x offset acc))*)
-    (fun (offset, acc) x t ->
+    (fun (offset, acc) x ->
       offset + 4, addf x offset acc)
     (fun (offset, acc) x t ->
       (offset + 4, addi x t offset acc))
@@ -121,16 +121,28 @@ let rec g env = function (* 式の仮想マシンコード生成 (caml2html: vir
 	    if not (S.mem x s) then load else (* [XX] a little ad hoc optimization *)
 	    Let((x, t), Ld(y, C(offset)), load)) in
       load
+ (* | Closure.Get (x, y) -> (* 配列の読み出し *)
+      let offset = Id.genid "o" in  
+  (match M.find x env with
+     | Type.Array (Type.Unit) -> Ans (Nop)
+     | Type.Array (Type.Float) ->
+         Let ((offset, Type.Int), Slw (y, C (3)), 
+        Ans (Lfd (x, V (offset))))
+     | Type.Array (_) ->
+         Let ((offset, Type.Int), Slw (y, C (2)),
+        Ans (Lwz (x, V (offset))))
+     | _ -> assert false)
+*)
   | Closure.Get(x, y) -> (* 配列の読み出し (caml2html: virtual_get) *)
       let offset = Id.genid "o" in
       (match M.find x env with
       | Type.Array(Type.Unit) -> Ans(Nop)
       | Type.Array(Type.Float) ->
-        Let((offset, Type.Int), Mul(y, 4)),
+        Let((offset, Type.Int), Mul(y, C(4)),
 	  (*Let((offset, Type.Int), Slw(y, C(3)), float in ppc is 8-bit*)
 	      Ans(Ldf(x, V(offset))))
       | Type.Array(_) ->
-        Let((offset, Type.Int), Mul(y, 4)),
+        Let((offset, Type.Int), Mul(y, C(4)),
 	  (*Let((offset, Type.Int), Slw(y, C(2)),*)
 	      Ans(Ld(x, V(offset))))
       | _ -> assert false)
@@ -139,10 +151,10 @@ let rec g env = function (* 式の仮想マシンコード生成 (caml2html: vir
       (match M.find x env with
       | Type.Array(Type.Unit) -> Ans(Nop)
       | Type.Array(Type.Float) ->
-	  Let((offset, Type.Int), Mul(y, 4)),
+	  Let((offset, Type.Int), Mul(y, C(4)),
 	      Ans(Stf(z, x, V(offset))))
       | Type.Array(_) ->
-	  Let((offset, Type.Int), Mul(y, 4)),
+	  Let((offset, Type.Int), Mul(y, C(4)),
 	      Ans(St(z, x, V(offset))))
       | _ -> assert false)
   | Closure.ExtArray(Id.L(x)) -> Ans(SetL(Id.L("min_caml_" ^ x)))

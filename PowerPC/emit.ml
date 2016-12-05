@@ -364,6 +364,17 @@ let h oc { name = Id.L(x); args = _; fargs = _; body = e; ret = _ } =
   g oc (Tail, e)
 
 let f oc (Prog(data, fundefs, e)) =
+	Format.eprintf "generating assembly...\n";
+	(* do not use data section *)
+	List.iter (fun fundef -> h oc fundef) fundefs;
+	Printf.fprintf oc "_min_caml_start:\n";
+	stackset := S.empty;
+	stackmap := [];
+	stacktypemap := [];
+	g oc (Nontail("r0"), e)
+
+(*
+let f oc (Prog(data, fundefs, e)) =
   Format.eprintf "generating assembly...@.";
   if data <> [] then
     (Printf.fprintf oc "\t.data\n\t.literal8\n";
@@ -395,3 +406,4 @@ let f oc (Prog(data, fundefs, e)) =
   Printf.fprintf oc "\tmtlr\tr0\n";
   Printf.fprintf oc "\tlmw\tr30, -8(r1)\n";
   Printf.fprintf oc "\tblr\n"
+*)

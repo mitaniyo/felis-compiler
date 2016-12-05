@@ -1,4 +1,10 @@
 *.cmi
 *.cmx
 *.o
+*.out
+lexer.ml
+parser.ml
+parser.mli
+min-caml.opt
+/.*
 
