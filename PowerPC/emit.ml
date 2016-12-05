@@ -116,12 +116,12 @@ and g' oc = function (* 各命令のアセンブリ生成 (caml2html: emit_gprim
       let s = load_label x y in
       Printf.fprintf oc "%s" s
   | NonTail(x), Mr(y) when x = y -> ()
-  | NonTail(x), Mr(y) -> Printf.fprintf oc "\tmov\t%s, %s\n" (reg x) (reg y)
-  | NonTail(x), Neg(y) -> Printf.fprintf oc "\tneg\t%s, %s\n" (reg x) (reg y)
-  | NonTail(x), Add(y, V(z)) -> Printf.fprintf oc "\tadd\t%s, %s, %s\n" (reg x) (reg y) (reg z)
-  | NonTail(x), Add(y, C(z)) -> Printf.fprintf oc "\taddi\t%s, %s, %d\n" (reg x) (reg y) z
-  | NonTail(x), Sub(y, V(z)) -> Printf.fprintf oc "\tsub\t%s, %s, %s\n" (reg x) (reg y) (reg z)
-  | NonTail(x), Sub(y, C(z)) -> Printf.fprintf oc "\tsubi\t%s, %s, %d\n" (reg x) (reg y) z
+  | NonTail(x), Mr(y) -> Printf.fprintf oc "\tmov\t%s %s\n" (reg x) (reg y)
+  | NonTail(x), Neg(y) -> Printf.fprintf oc "\tsub\t%s %s %s\n" (reg x) ("r0") (reg y)
+  | NonTail(x), Add(y, V(z)) -> Printf.fprintf oc "\tadd\t%s %s %s\n" (reg x) (reg y) (reg z)
+  | NonTail(x), Add(y, C(z)) -> Printf.fprintf oc "\taddi\t%s %s %d\n" (reg x) (reg y) z
+  | NonTail(x), Sub(y, V(z)) -> Printf.fprintf oc "\tsub\t%s %s %s\n" (reg x) (reg y) (reg z)
+  | NonTail(x), Sub(y, C(z)) -> Printf.fprintf oc "\tsubi\t%s %s %d\n" (reg x) (reg y) z
   (*| NonTail(x), Slw(y, V(z)) -> Printf.fprintf oc "\tslw\t%s, %s, %s\n" (reg x) (reg y) (reg z)
   | NonTail(x), Slw(y, C(z)) -> Printf.fprintf oc "\tslwi\t%s, %s, %d\n" (reg x) (reg y) z*)
   | NonTail(x), Mul(y, C(z)) -> let l = small_log z in Printf.fprintf oc "\tsll\t%s %s %d\n" (reg x) (reg y) l
@@ -138,12 +138,12 @@ and g' oc = function (* 各命令のアセンブリ生成 (caml2html: emit_gprim
   | NonTail(_), St(x, y, V(z)) -> Printf.fprintf oc "\tswo\t%s %s %s\n" (reg x) (reg y) (reg z)
   | NonTail(_), St(x, y, C(z)) -> Printf.fprintf oc "\tsw\t%s %s %d\n" (reg x) (reg y) z
   | NonTail(x), FMr(y) when x = y -> ()
-  | NonTail(x), FMr(y) -> Printf.fprintf oc "\tmov.s\t%s, %s\n" (reg x) (reg y)
-  | NonTail(x), FNeg(y) -> Printf.fprintf oc "\tneg.s\t%s, %s\n" (reg x) (reg y)
-  | NonTail(x), FAdd(y, z) -> Printf.fprintf oc "\tfadd\t%s, %s, %s\n" (reg x) (reg y) (reg z)
-  | NonTail(x), FSub(y, z) -> Printf.fprintf oc "\tfsub\t%s, %s, %s\n" (reg x) (reg y) (reg z)
-  | NonTail(x), FMul(y, z) -> Printf.fprintf oc "\tfmul\t%s, %s, %s\n" (reg x) (reg y) (reg z)
-  | NonTail(x), FDiv(y, z) -> Printf.fprintf oc "\tfdiv\t%s, %s, %s\n" (reg x) (reg y) (reg z)
+  | NonTail(x), FMr(y) -> Printf.fprintf oc "\tmov.s\t%s %s\n" (reg x) (reg y)
+  | NonTail(x), FNeg(y) -> Printf.fprintf oc "\tneg.s\t%s %s\n" (reg x) (reg y)
+  | NonTail(x), FAdd(y, z) -> Printf.fprintf oc "\tfadd\t%s %s %s\n" (reg x) (reg y) (reg z)
+  | NonTail(x), FSub(y, z) -> Printf.fprintf oc "\tfsub\t%s %s %s\n" (reg x) (reg y) (reg z)
+  | NonTail(x), FMul(y, z) -> Printf.fprintf oc "\tfmul\t%s %s %s\n" (reg x) (reg y) (reg z)
+  | NonTail(x), FDiv(y, z) -> Printf.fprintf oc "\tfdiv\t%s %s %s\n" (reg x) (reg y) (reg z)
   (*| NonTail(x), Lfd(y, V(z)) -> Printf.fprintf oc "\tlfdx\t%s, %s, %s\n" (reg x) (reg y) (reg z)
   | NonTail(x), Lfd(y, C(z)) -> Printf.fprintf oc "\tlfd\t%s, %d(%s)\n" (reg x) z (reg y)*)
   | NonTail(x), Ldf(y, V(z)) -> Printf.fprintf oc "\tadd\t%s %s %s\n" (reg reg_adr) (reg y) (reg z);
@@ -294,7 +294,7 @@ and g' oc = function (* 各命令のアセンブリ生成 (caml2html: emit_gprim
       Printf.fprintf oc "\tlw\t%s %s %d\n" (reg reg_link) (reg reg_sp) (ss + 4); (* restore link register *)
       if List.mem a allregs && a <> regs.(0) then
         Printf.fprintf oc "\tmov\t%s %s\n" (reg a) (reg regs.(0))
-      else
+      else if List.mem a allfregs && a <> fregs.(0) then
         Printf.fprintf oc "\tmov.s\t%s %s\n" (reg a) (reg regs.(0))
 
 and g'_tail_if oc e1 e2 btag binst =
@@ -349,7 +349,7 @@ and g'_args oc x_reg_cl ys zs =
       (0, x_reg_cl)
       ys in
   List.iter
-    (fun (y, r) -> Printf.fprintf oc "\tmov\t%s, %s\n" (reg r) (reg y))
+    (fun (y, r) -> Printf.fprintf oc "\tmov\t%s %s\n" (reg r) (reg y))
     (shuffle reg_sw yrs);
   let (d, zfrs) =
     List.fold_left
@@ -357,7 +357,7 @@ and g'_args oc x_reg_cl ys zs =
       (0, [])
       zs in
   List.iter
-    (fun (z, fr) -> Printf.fprintf oc "\tmov.s\t%s, %s\n" (reg fr) (reg z))
+    (fun (z, fr) -> Printf.fprintf oc "\tmov.s\t%s %s\n" (reg fr) (reg z))
     (shuffle reg_fsw zfrs)
 
 let h oc { name = Id.L(x); args = _; fargs = _; body = e; ret = _ } =
