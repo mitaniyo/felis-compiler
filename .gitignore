@@ -7,4 +7,5 @@ parser.ml
 parser.mli
 min-caml.opt
 /.*
+/test/*.s
 

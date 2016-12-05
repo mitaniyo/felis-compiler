@@ -21,12 +21,29 @@ value getlo(value v) {
 }
 */
 typedef union {
-	int32_t i;
+	uint32_t i;
 	float f;
 } fl;
 
-value getbits(value v) {
+value gethi(value v) {
+  fl f;
+  f.f = (float)(Double_val(v));
+  uint32_t x = f.i;
+  int ret = x >> 16;
+  return copy_int32(ret);
+}
+
+value getlo(value v) {
+  fl f;
+  f.f = (float)(Double_val(v));
+  uint32_t x = f.i;
+  int ret = (int)(x & ((1 << 16) - 1));
+  return copy_int32(ret);
+}
+
+/*value getbits(value v) {
 	fl f;
 	f.f = (float)(Double_val(v));
 	return copy_int32(f.i);
 }
+*/

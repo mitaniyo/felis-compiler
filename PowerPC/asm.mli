@@ -61,6 +61,8 @@ val reg_link : Id.t
 val reg_cond : Id.t
 val reg_fimm : Id.t
 
+val reg_adr : Id.t
+
 (*let is_reg x = (x.[0] = 'r' || x.[0] = 'f')*)
 (*let is_reg x = (x.[0] = '%')*)
 val is_reg : Id.t -> bool
