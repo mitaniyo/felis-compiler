@@ -46,7 +46,7 @@ let fletd(x, e1, e2) = Let((x, Type.Float), e1, e2)
 let seq(e1, e2) = Let((Id.gentmp Type.Unit, Type.Unit), e1, e2)
 
 let regs = Array.init 22 (fun i -> Printf.sprintf "%%r%d" (i + 1)) (* 24 - 31: used for specific purposes (defined below) *)
-let fregs = Array.init 31 (fun i -> Printf.sprintf "%%f%d" i)
+let fregs = Array.init 30 (fun i -> Printf.sprintf "%%f%d" i)
 let allregs = Array.to_list regs
 let allfregs = Array.to_list fregs
 
@@ -64,6 +64,8 @@ let reg_cond = "%r25"
 let reg_fimm = "%r24"
 
 let reg_adr = "%r23"
+
+let reg_fcond = "%f30"
 
 (*let is_reg x = (x.[0] = 'r' || x.[0] = 'f')*)
 let is_reg x = (x.[0] = '%')
