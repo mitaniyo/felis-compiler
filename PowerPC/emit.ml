@@ -294,14 +294,19 @@ and g' oc = function (* 各命令のアセンブリ生成 (caml2html: emit_gprim
       else if List.mem a allfregs && a <> fregs.(0) then
 	Printf.fprintf oc "\tfmr\t%s, %s\n" (reg a) (reg fregs.(0));
       Printf.fprintf oc "\tmtlr\t%s\n" (reg reg_tmp)
+  | NonTail(a), CallCls(x, ys, zs) ->
+      g'_args oc [(x, reg_cl)] ys zs;
+      let ss = stacksize () in
+      Printf.fprintf oc "\tsw\t%s %s %d\n" (reg reg_link) (reg reg_sp) ss;
+      Printf.fprintf oc "\taddi\t%s %s %d\n" (reg reg_sp) (reg reg_sp) (ss + 4);
   | (NonTail(a), CallDir(Id.L(x), ys, zs)) ->
       let ss = stacksize () in
-      Printf.fprintf oc "\tsw\t%s %s %d\n" (reg reg_link) (reg reg_sp) (ss + 4); (* save link register *)
+      Printf.fprintf oc "\tsw\t%s %s %d\n" (reg reg_link) (reg reg_sp) ss; (* save link register *)
       Printf.fprintf oc "\taddi\t%s %s %d\n" (reg reg_sp) (reg reg_sp) (ss + 4); (* update stack pointer *)
       g'_args oc [] ys zs; (* set arguments to correct positions *)
       Printf.fprintf oc "\tjal\t%s\n" x; (* branch *)
       Printf.fprintf oc "\taddi\t%s %s %d\n" (reg reg_sp) (reg reg_sp) (-(ss + 4)); (* restore stack pointer *)
-      Printf.fprintf oc "\tlw\t%s %s %d\n" (reg reg_link) (reg reg_sp) (ss + 4); (* restore link register *)
+      Printf.fprintf oc "\tlw\t%s %s %d\n" (reg reg_link) (reg reg_sp) ss; (* restore link register *)
       if List.mem a allregs && a <> regs.(0) then
         Printf.fprintf oc "\tmov\t%s %s\n" (reg a) (reg regs.(0))
       else if List.mem a allfregs && a <> fregs.(0) then
@@ -385,7 +390,8 @@ let f oc (Prog(data, fundefs, e)) =
 	stackset := S.empty;
 	stackmap := [];
 	stacktypemap := [];
-	g oc (NonTail("r0"), e)
+	g oc (NonTail("r0"), e);
+	Printf.fprintf oc "halt\n"
 
 (*
 let f oc (Prog(data, fundefs, e)) =
