@@ -162,7 +162,7 @@ let rec g env = function (* 式の仮想マシンコード生成 (caml2html: vir
 (* 関数の仮想マシンコード生成 (caml2html: virtual_h) *)
 let h { Closure.name = (Id.L(x), t); Closure.args = yts; Closure.formal_fv = zts; Closure.body = e } =
   let (int, float) = separate yts in
-  let (offset, load) =
+  let (offset, load) = (* add instructions to load actual fv *)
     expand
       zts
       (4, g (M.add x t (M.add_list yts (M.add_list zts M.empty))) e)

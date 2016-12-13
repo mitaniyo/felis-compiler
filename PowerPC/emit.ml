@@ -294,11 +294,12 @@ and g' oc = function (* 各命令のアセンブリ生成 (caml2html: emit_gprim
       else if List.mem a allfregs && a <> fregs.(0) then
 	Printf.fprintf oc "\tfmr\t%s, %s\n" (reg a) (reg fregs.(0));
       Printf.fprintf oc "\tmtlr\t%s\n" (reg reg_tmp)
-  | NonTail(a), CallCls(x, ys, zs) ->
+  (*| NonTail(a), CallCls(x, ys, zs) ->
       g'_args oc [(x, reg_cl)] ys zs;
       let ss = stacksize () in
       Printf.fprintf oc "\tsw\t%s %s %d\n" (reg reg_link) (reg reg_sp) ss;
       Printf.fprintf oc "\taddi\t%s %s %d\n" (reg reg_sp) (reg reg_sp) (ss + 4);
+      Printf.fprintf oc "\t"*)
   | (NonTail(a), CallDir(Id.L(x), ys, zs)) ->
       let ss = stacksize () in
       Printf.fprintf oc "\tsw\t%s %s %d\n" (reg reg_link) (reg reg_sp) ss; (* save link register *)

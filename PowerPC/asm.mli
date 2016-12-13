@@ -60,6 +60,7 @@ val reg_link : Id.t
 
 val reg_cond : Id.t
 val reg_fimm : Id.t
+val reg_fcond : Id.t
 
 val reg_adr : Id.t
 
