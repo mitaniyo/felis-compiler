@@ -89,7 +89,7 @@ let rec g oc = function (* 命令列のアセンブリ生成 (caml2html: emit_g)
 and g' oc = function (* 各命令のアセンブリ生成 (caml2html: emit_gprime) *)
   (* 末尾でなかったら計算結果をdestにセット (caml2html: emit_nontail) *)
   | NonTail(_), Nop -> ()
-  | NonTail(x), Li(i) when -32768 <= i && i < 32768 -> Printf.fprintf oc "\taddi\t%s %s %d\n" (reg x) "r0" i
+  | NonTail(x), Li(i) when -32768 <= i && i < 32768 -> Printf.fprintf oc "\taddi\t%s %s %d\n" "r0" (reg x) i
   | NonTail(x), Li(i) ->
       (*let n = i lsr 16 in
       let m = i lxor (n lsl 16) in
@@ -98,9 +98,8 @@ and g' oc = function (* 各命令のアセンブリ生成 (caml2html: emit_gprim
       let hi = ((i land (32767 lsl 16)) lsr 16) in
       (*let hi = gethi d in
       let lo = getlo d in*)
-      Printf.fprintf oc "\taddi\t%s %s %d\n" (reg x) "r0" hi;
-      Printf.fprintf oc "\tlui\t%s\n" (reg x);
-      Printf.fprintf oc "\taddi %s %s %d\n" (reg x) (reg x) lo
+	  Printf.fprintf oc "\tlui\t%s %d\n" (reg x) hi;
+	  Printf.fprintf oc "\taddi %s %s %d\n" (reg x) (reg x) lo
       (*Printf.fprintf oc "\tlis\t%s, %d\n" r n;
       Printf.fprintf oc "\tori\t%s, %s, %d\n" r r m*)
   | NonTail(x), FLi(d) ->
@@ -109,46 +108,45 @@ and g' oc = function (* 各命令のアセンブリ生成 (caml2html: emit_gprim
       (*let v = getbits d in
       let lo = v land 32767 in
       let hi = ((v land (32767 lsl 16)) lsr 16) in*)
-      Printf.fprintf oc "\taddi\t%s %s %ld\n" (reg reg_fimm) "r0" hi;
-      Printf.fprintf oc "\tlui\t%s\n" (reg reg_fimm);
+	  Printf.fprintf oc "\tlui\t%s %ld\n" (reg reg_fimm) hi;
       Printf.fprintf oc "\taddi\t%s %s %ld\n" (reg reg_fimm) (reg reg_fimm) lo;
-      Printf.fprintf oc "\tmtc1\t%s %s\n" (reg x) (reg reg_fimm)
+	  Printf.fprintf oc "\tmtc1\t%s %s\n" (reg reg_fimm) (reg x)
   | NonTail(x), SetL(Id.L(y)) ->
       let s = load_label x y in
       Printf.fprintf oc "%s" s
   | NonTail(x), Mr(y) when x = y -> ()
   | NonTail(x), Mr(y) -> Printf.fprintf oc "\tmov\t%s %s\n" (reg x) (reg y)
-  | NonTail(x), Neg(y) -> Printf.fprintf oc "\tsub\t%s %s %s\n" (reg x) ("r0") (reg y)
-  | NonTail(x), Add(y, V(z)) -> Printf.fprintf oc "\tadd\t%s %s %s\n" (reg x) (reg y) (reg z)
-  | NonTail(x), Add(y, C(z)) -> Printf.fprintf oc "\taddi\t%s %s %d\n" (reg x) (reg y) z
-  | NonTail(x), Sub(y, V(z)) -> Printf.fprintf oc "\tsub\t%s %s %s\n" (reg x) (reg y) (reg z)
-  | NonTail(x), Sub(y, C(z)) -> Printf.fprintf oc "\tsubi\t%s %s %d\n" (reg x) (reg y) z
+  | NonTail(x), Neg(y) -> Printf.fprintf oc "\tsub\t%s %s %s\n" ("r0") (reg y) (reg x)
+  | NonTail(x), Add(y, V(z)) -> Printf.fprintf oc "\tadd\t%s %s %s\n" (reg y) (reg z) (reg x)
+  | NonTail(x), Add(y, C(z)) -> Printf.fprintf oc "\taddi\t%s %s %d\n" (reg y) (reg x) z
+  | NonTail(x), Sub(y, V(z)) -> Printf.fprintf oc "\tsub\t%s %s %s\n" (reg y) (reg z) (reg x)
+  | NonTail(x), Sub(y, C(z)) -> Printf.fprintf oc "\tsubi\t%s %s %d\n" (reg y) (reg x) z
   (*| NonTail(x), Slw(y, V(z)) -> Printf.fprintf oc "\tslw\t%s, %s, %s\n" (reg x) (reg y) (reg z)
   | NonTail(x), Slw(y, C(z)) -> Printf.fprintf oc "\tslwi\t%s, %s, %d\n" (reg x) (reg y) z*)
-  | NonTail(x), Mul(y, C(z)) -> let l = small_log z in Printf.fprintf oc "\tsll\t%s %s %d\n" (reg x) (reg y) l
+  | NonTail(x), Mul(y, C(z)) -> let l = small_log z in Printf.fprintf oc "\tsll\t%s %s %d\n" (reg y) (reg x) l
   | NonTail(x), Mul(y, V(z)) -> failwith "implement mul!\n"
-  | NonTail(x), Div(y, C(z)) -> let l = small_log z in Printf.fprintf oc "\tsrl\t%s %s %d\n" (reg x) (reg y) l
+  | NonTail(x), Div(y, C(z)) -> let l = small_log z in Printf.fprintf oc "\tsrl\t%s %s %d\n" (reg y) (reg x) l
   | NonTail(x), Div(y, V(z)) -> failwith "implement div!\n"
   
   (*| NonTail(x), Lwz(y, V(z)) -> Printf.fprintf oc "\tlwzx\t%s, %s, %s\n" (reg x) (reg y) (reg z)
   | NonTail(x), Lwz(y, C(z)) -> Printf.fprintf oc "\tlwz\t%s, %d(%s)\n" (reg x) z (reg y)*)
-  | NonTail(x), Ld(y, V(z)) -> Printf.fprintf oc "\tlwo\t%s %s %s\n" (reg x) (reg y) (reg z)
-  | NonTail(x), Ld(y, C(z)) -> Printf.fprintf oc "\tlw\t%s %s %d\n" (reg x) (reg y) z
+  | NonTail(x), Ld(y, V(z)) -> Printf.fprintf oc "\tlwo\t%s %s %s\n" (reg y) (reg z) (reg x)
+  | NonTail(x), Ld(y, C(z)) -> Printf.fprintf oc "\tlw\t%s %s %d\n" (reg y) (reg x) z
   (*| NonTail(_), Stw(x, y, V(z)) -> Printf.fprintf oc "\tstwx\t%s, %s, %s\n" (reg x) (reg y) (reg z)
   | NonTail(_), Stw(x, y, C(z)) -> Printf.fprintf oc "\tstw\t%s, %d(%s)\n" (reg x) z (reg y)*)
   | NonTail(_), St(x, y, V(z)) -> Printf.fprintf oc "\tswo\t%s %s %s\n" (reg x) (reg y) (reg z)
   | NonTail(_), St(x, y, C(z)) -> Printf.fprintf oc "\tsw\t%s %s %d\n" (reg x) (reg y) z
   | NonTail(x), FMr(y) when x = y -> ()
-  | NonTail(x), FMr(y) -> Printf.fprintf oc "\tmov.s\t%s %s\n" (reg x) (reg y)
-  | NonTail(x), FNeg(y) -> Printf.fprintf oc "\tneg.s\t%s %s\n" (reg x) (reg y)
-  | NonTail(x), FAdd(y, z) -> Printf.fprintf oc "\tfadd\t%s %s %s\n" (reg x) (reg y) (reg z)
-  | NonTail(x), FSub(y, z) -> Printf.fprintf oc "\tfsub\t%s %s %s\n" (reg x) (reg y) (reg z)
-  | NonTail(x), FMul(y, z) -> Printf.fprintf oc "\tfmul\t%s %s %s\n" (reg x) (reg y) (reg z)
-  | NonTail(x), FDiv(y, z) -> Printf.fprintf oc "\tfdiv\t%s %s %s\n" (reg x) (reg y) (reg z)
+  | NonTail(x), FMr(y) -> Printf.fprintf oc "\tmov.s\t%s %s\n" (reg y) (reg x)
+  | NonTail(x), FNeg(y) -> Printf.fprintf oc "\tneg.s\t%s %s\n" (reg y) (reg x)
+  | NonTail(x), FAdd(y, z) -> Printf.fprintf oc "\tfadd\t%s %s %s\n" (reg y) (reg z) (reg x)
+  | NonTail(x), FSub(y, z) -> Printf.fprintf oc "\tfsub\t%s %s %s\n" (reg y) (reg z) (reg x)
+  | NonTail(x), FMul(y, z) -> Printf.fprintf oc "\tfmul\t%s %s %s\n" (reg y) (reg z) (reg x)
+  | NonTail(x), FDiv(y, z) -> Printf.fprintf oc "\tfdiv\t%s %s %s\n" (reg y) (reg z) (reg x)
   (*| NonTail(x), Lfd(y, V(z)) -> Printf.fprintf oc "\tlfdx\t%s, %s, %s\n" (reg x) (reg y) (reg z)
   | NonTail(x), Lfd(y, C(z)) -> Printf.fprintf oc "\tlfd\t%s, %d(%s)\n" (reg x) z (reg y)*)
-  | NonTail(x), Ldf(y, V(z)) -> Printf.fprintf oc "\tlwoc1\t%s %s %s\n" (reg x) (reg y) (reg z)
-  | NonTail(x), Ldf(y, C(z)) -> Printf.fprintf oc "\tlwc1\t%s %s %d\n" (reg x) (reg y) z
+  | NonTail(x), Ldf(y, V(z)) -> Printf.fprintf oc "\tlwoc1\t%s %s %s\n" (reg y) (reg z) (reg x)
+  | NonTail(x), Ldf(y, C(z)) -> Printf.fprintf oc "\tlwc1\t%s %s %d\n" (reg y) (reg x) z
   (*| NonTail(_), Stfd(x, y, V(z)) -> Printf.fprintf oc "\tstfdx\t%s, %s, %s\n" (reg x) (reg y) (reg z)
   | NonTail(_), Stfd(x, y, C(z)) -> Printf.fprintf oc "\tstfd\t%s, %d(%s)\n" (reg x) z (reg y)*)
   | NonTail(_), Stf(x, y, V(z)) -> Printf.fprintf oc "\tswoc1\t%s %s %s\n" (reg x) (reg y) (reg z)
@@ -164,10 +162,10 @@ and g' oc = function (* 各命令のアセンブリ生成 (caml2html: emit_gprim
   | NonTail(_), Save(x, y) -> assert (S.mem y !stackset); () (* already saved *)
   (* 復帰の仮想命令の実装 (caml2html: emit_restore) *)
   | NonTail(x), Restore(y) when List.mem x allregs ->
-      Printf.fprintf oc "\tlw %s %s %d\n" (reg x) (reg reg_sp) (offset y)
+      Printf.fprintf oc "\tlw %s %s %d\n" (reg reg_sp) (reg x) (offset y)
   | NonTail(x), Restore(y) ->
       assert (List.mem x allfregs);
-      Printf.fprintf oc "\tlwc1\t %s %s %d\n" (reg x) (reg reg_sp) (offset y)
+      Printf.fprintf oc "\tlwc1\t %s %s %d\n" (reg reg_sp) (reg x) (offset y)
   (* 末尾だったら計算結果を第一レジスタにセットしてリターン (caml2html: emit_tailret) *)
   | Tail, (Nop | St _ | Stf _ | Comment _ | Save _ as exp) ->
       g' oc (NonTail(Id.gentmp Type.Unit), exp);
@@ -193,76 +191,76 @@ and g' oc = function (* 各命令のアセンブリ生成 (caml2html: emit_gprim
       | _ -> assert false);
       Printf.fprintf oc "\tjr\t%s\n" (reg reg_link)*)
   | Tail, IfEq(x, V(y), e1, e2) ->
-      Printf.fprintf oc "\tsub\t%s %s %s\n" (reg reg_cond) (reg x) (reg y);
+      Printf.fprintf oc "\tsub\t%s %s %s\n" (reg x) (reg y) (reg reg_cond);
       g'_tail_if oc e2 e1 "beq_tail" "beq" (* if equal then jump *)
   | Tail, IfEq(x, C(y), e1, e2) ->
-      Printf.fprintf oc "\taddi\t%s %s %d\n" (reg reg_cond) (reg x) (-y);
+      Printf.fprintf oc "\taddi\t%s %s %d\n" (reg x) (reg reg_cond) (-y);
       g'_tail_if oc e2 e1 "beq_tail" "beq"
 (*      Printf.fprintf oc "\tcmpwi\tcr7, %s, %d\n" (reg x) y;
       g'_tail_if oc e1 e2 "beq" "bne"*)
   | Tail, IfLE(x, V(y), e1, e2) ->
-      Printf.fprintf oc "\tsub\t%s %s %s\n" (reg reg_cond) (reg x) (reg y);
+      Printf.fprintf oc "\tsub\t%s %s %s\n" (reg x) (reg y) (reg reg_cond);
       g'_tail_if oc e2 e1 "ble_tail" "blez"
   (*| Tail, IfLE(x, V(y), e1, e2) ->
       Printf.fprintf oc "\tcmpw\tcr7, %s, %s\n" (reg x) (reg y);
       g'_tail_if oc e1 e2 "ble" "bgt"*)
   | Tail, IfLE(x, C(y), e1, e2) ->
-      Printf.fprintf oc "\taddi\t%s %s %d\n" (reg reg_cond) (reg x) (-y);
+      Printf.fprintf oc "\taddi\t%s %s %d\n" (reg x) (reg reg_cond) (-y);
       g'_tail_if oc e2 e1 "ble_tail" "blez"
   | Tail, IfGE(x, V(y), e1, e2) ->
-      Printf.fprintf oc "\tsub\t%s %s %s\n" (reg reg_cond) (reg x) (reg y);
+      Printf.fprintf oc "\tsub\t%s %s %s\n" (reg x) (reg y) (reg reg_cond);
       g'_tail_if oc e2 e1 "bge_tail" "bgez"
   | Tail, IfGE(x, C(y), e1, e2) ->
-      Printf.fprintf oc "\taddi\t%s %s %d\n" (reg reg_cond) (reg x) (-y);
+      Printf.fprintf oc "\taddi\t%s %s %d\n" (reg x) (reg reg_cond) (-y);
       g'_tail_if oc e2 e1 "bge_tail" "bgez"
   | Tail, IfFEq(x, y, e1, e2) ->
-  	  Printf.fprintf oc "\tfsub\t%s %s %s\n" (reg reg_fcond) (reg x) (reg y);
+  	  Printf.fprintf oc "\tsub.s\t%s %s %s\n" (reg x) (reg y) (reg reg_fcond);
   	  Printf.fprintf oc "\tmfc1\t%s %s\n" (reg reg_cond) (reg reg_fcond);
   	  Printf.fprintf oc "\tsll\t%s %s %d\n" (reg reg_cond) (reg reg_cond) 1;
       g'_tail_if oc e2 e1 "bfeq_tail" "beq"
   | Tail, IfFLE(x, y, e1, e2) ->
-  	  Printf.fprintf oc "\tfsub\t%s %s %s\n" (reg reg_fcond) (reg x) (reg y);
+  	  Printf.fprintf oc "\tsub.s\t%s %s %s\n" (reg x) (reg y) (reg reg_fcond);
   	  Printf.fprintf oc "\tmfc1\t%s %s\n" (reg reg_cond) (reg reg_fcond);
   	  g'_tail_if oc e2 e1 "bfle_nontail" "blez"
   | NonTail(z), IfEq(x, V(y), e1, e2) ->
-      Printf.fprintf oc "\tsub\t%s %s %s\n" (reg reg_cond) (reg x) (reg y);
+      Printf.fprintf oc "\tsub\t%s %s %s\n" (reg x) (reg y) (reg reg_cond);
       g'_non_tail_if oc (NonTail(z)) e2 e1 "beq" "beq"
   (*| NonTail(z), IfEq(x, V(y), e1, e2) ->
       Printf.fprintf oc "\tcmpw\tcr7, %s, %s\n" (reg x) (reg y);
       g'_non_tail_if oc (NonTail(z)) e1 e2 "beq" "bne"*)
   | NonTail(z), IfEq(x, C(y), e1, e2) ->
-      Printf.fprintf oc "\taddi\t%s %s %d\n" (reg reg_cond) (reg x) (-y);
+      Printf.fprintf oc "\taddi\t%s %s %d\n" (reg x) (reg reg_cond) (-y);
       g'_non_tail_if oc (NonTail(z)) e2 e1 "beq_nontail" "beq"
   (*| NonTail(z), IfEq(x, C(y), e1, e2) ->
       Printf.fprintf oc "\tcmpwi\tcr7, %s, %d\n" (reg x) y;
       g'_non_tail_if oc (NonTail(z)) e1 e2 "beq" "bne"*)
   | NonTail(z), IfLE(x, V(y), e1, e2) ->
-      Printf.fprintf oc "\tsub\t%s %s %s\n" (reg reg_cond) (reg x) (reg y);
+      Printf.fprintf oc "\tsub\t%s %s %s\n" (reg x) (reg y) (reg reg_cond);
       g'_non_tail_if oc (NonTail(z)) e2 e1 "ble_nontail" "blez"
       
   (*| NonTail(z), IfLE(x, V(y), e1, e2) ->
       Printf.fprintf oc "\tcmpw\tcr7, %s, %s\n" (reg x) (reg y);
       g'_non_tail_if oc (NonTail(z)) e1 e2 "ble" "bgt"*)
   | NonTail(z), IfLE(x, C(y), e1, e2) ->
-  	  Printf.fprintf oc "\taddi\t%s %s %d\n" (reg reg_cond) (reg x) (-y);
+  	  Printf.fprintf oc "\taddi\t%s %s %d\n" (reg x) (reg reg_cond) (-y);
   	  g'_non_tail_if oc (NonTail(z)) e2 e1 "ble_nontail" "blez"
   (*| NonTail(z), IfLE(x, C(y), e1, e2) ->
       Printf.fprintf oc "\tcmpwi\tcr7, %s, %d\n" (reg x) y;
       g'_non_tail_if oc (NonTail(z)) e1 e2 "ble" "bgt"*)
   | NonTail(z), IfGE(x, V(y), e1, e2) ->
-      Printf.fprintf oc "\tsub\t%s %s %s\n" (reg reg_cond) (reg x) (reg y);
+      Printf.fprintf oc "\tsub\t%s %s %s\n" (reg x) (reg y) (reg reg_cond);
       g'_non_tail_if oc (NonTail(z)) e2 e1 "bge_nontail" "bgez"
   | NonTail(z), IfGE(x, C(y), e1, e2) ->
-      Printf.fprintf oc "\taddi\t%s %s %d\n" (reg reg_cond) (reg x) (-y);
+      Printf.fprintf oc "\taddi\t%s %s %d\n" (reg x) (reg reg_cond) (-y);
       g'_non_tail_if oc (NonTail(z)) e2 e1 "bge_nontail" "bgez"
 
   | NonTail(z), IfFEq(x, y, e1, e2) ->
-  	  Printf.fprintf oc "\tfsub\t%s %s %s\n" (reg reg_fcond) (reg x) (reg y);
+  	  Printf.fprintf oc "\tsub.s\t%s %s %s\n" (reg x) (reg y) (reg reg_fcond);
   	  Printf.fprintf oc "\tmfc1\t%s %s\n" (reg reg_cond) (reg reg_fcond);
   	  Printf.fprintf oc "\tsll\t%s %s %d\n" (reg reg_cond) (reg reg_cond) 1;
       g'_non_tail_if oc (NonTail(z)) e2 e1 "bfeq_nontail" "beq"
   | NonTail(z), IfFLE(x, y, e1, e2) -> (* x <= y, x - y <= 0 *)
-  	  Printf.fprintf oc "\tfsub\t%s %s %s\n" (reg reg_fcond) (reg x) (reg y);
+  	  Printf.fprintf oc "\tsub.s\t%s %s %s\n" (reg x) (reg y) (reg reg_fcond);
   	  Printf.fprintf oc "\tmfc1\t%s %s\n" (reg reg_cond) (reg reg_fcond);
   	  g'_non_tail_if oc (NonTail(z)) e2 e1 "bfle_nontail" "blez"
 
@@ -276,7 +274,7 @@ and g' oc = function (* 各命令のアセンブリ生成 (caml2html: emit_gprim
       Printf.fprintf oc "\tmtctr\t%s\n\tbctr\n" (reg reg_sw);*)
   | Tail, CallCls(x, ys, zs) ->
       g'_args oc [(x, reg_cl)] ys zs;
-	  Printf.fprintf oc "\tlw\t%s %s %d\n" (reg reg_sw) (reg reg_cl) 0;
+	  Printf.fprintf oc "\tlw\t%s %s %d\n" (reg reg_cl) (reg reg_sw) 0;
 	  Printf.fprintf oc "\tj %s\n" (reg reg_sw)
   | Tail, CallDir(Id.L(x), ys, zs) -> (* 末尾呼び出し *)
       g'_args oc [] ys zs;
@@ -300,16 +298,16 @@ and g' oc = function (* 各命令のアセンブリ生成 (caml2html: emit_gprim
   | NonTail(a), CallCls(x, ys, zs) ->
       g'_args oc [(x, reg_cl)] ys zs;
 	  let ss = stacksize () in
-	  Printf.fprintf oc "\tlw%s %s %d\n" (reg reg_adr) (reg reg_cl); (* get address *)
+	  Printf.fprintf oc "\tlw%s %s %d\n" (reg reg_cl) (reg reg_adr) 0; (* get address *)
 	  Printf.fprintf oc "\tsw\t%s %s %d\n" (reg reg_link) (reg reg_sp) ss; (* save link register *)
 	  Printf.fprintf oc "\taddi\t%s %s %d\n" (reg reg_sp) (reg reg_sp) (ss + 4); (* update stack pointer *)
 	  Printf.fprintf oc "\tjal\t%s\n" (reg reg_adr); (* branch *)
 	  Printf.fprintf oc "\taddi\t%s %s %d\n" (reg reg_sp) (reg reg_sp) (-(ss + 4));
-	  Printf.fprintf oc "\tlw\t%s %s %d\n" (reg reg_link) (reg reg_sp) ss;
+	  Printf.fprintf oc "\tlw\t%s %s %d\n" (reg reg_sp) (reg reg_link) ss;
       if List.mem a allregs && a <> regs.(0) then
         Printf.fprintf oc "\tmov\t%s %s\n" (reg a) (reg regs.(0))
       else if List.mem a allfregs && a <> fregs.(0) then
-        Printf.fprintf oc "\tmov.s\t%s %s\n" (reg a) (reg regs.(0))
+        Printf.fprintf oc "\tmov.s\t%s %s\n" (reg regs.(0)) (reg a)
   | (NonTail(a), CallDir(Id.L(x), ys, zs)) ->
       let ss = stacksize () in
       Printf.fprintf oc "\tsw\t%s %s %d\n" (reg reg_link) (reg reg_sp) ss; (* save link register *)
@@ -317,11 +315,11 @@ and g' oc = function (* 各命令のアセンブリ生成 (caml2html: emit_gprim
       g'_args oc [] ys zs; (* set arguments to correct positions *)
       Printf.fprintf oc "\tjal\t%s\n" x; (* branch *)
       Printf.fprintf oc "\taddi\t%s %s %d\n" (reg reg_sp) (reg reg_sp) (-(ss + 4)); (* restore stack pointer *)
-      Printf.fprintf oc "\tlw\t%s %s %d\n" (reg reg_link) (reg reg_sp) ss; (* restore link register *)
+      Printf.fprintf oc "\tlw\t%s %s %d\n" (reg reg_sp) (reg reg_link) ss; (* restore link register *)
       if List.mem a allregs && a <> regs.(0) then
         Printf.fprintf oc "\tmov\t%s %s\n" (reg a) (reg regs.(0))
       else if List.mem a allfregs && a <> fregs.(0) then
-        Printf.fprintf oc "\tmov.s\t%s %s\n" (reg a) (reg regs.(0))
+        Printf.fprintf oc "\tmov.s\t%s %s\n"  (reg regs.(0)) (reg a)
 
 and g'_tail_if oc e1 e2 btag binst =
   let b_else = Id.genid (btag ^ "_else") in
@@ -385,7 +383,7 @@ and g'_args oc x_reg_cl ys zs =
       (0, [])
       zs in
   List.iter
-    (fun (z, fr) -> Printf.fprintf oc "\tmov.s\t%s %s\n" (reg fr) (reg z))
+    (fun (z, fr) -> Printf.fprintf oc "\tmov.s\t%s %s\n" (reg z) (reg fr))
     (shuffle reg_fsw zfrs)
 
 let h oc { name = Id.L(x); args = _; fargs = _; body = e; ret = _ } =
@@ -403,6 +401,7 @@ let f oc (Prog(data, fundefs, e)) =
 	stackset := S.empty;
 	stackmap := [];
 	stacktypemap := [];
+	Printf.fprintf oc "\tlui\t%s %d\n" (reg reg_hp) 32;
 	g oc (NonTail("r0"), e);
 	Printf.fprintf oc "halt\n"
 
