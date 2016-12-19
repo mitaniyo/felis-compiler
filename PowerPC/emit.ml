@@ -162,7 +162,7 @@ and g' oc = function (* 各命令のアセンブリ生成 (caml2html: emit_gprim
   | NonTail(_), Save(x, y) -> assert (S.mem y !stackset); () (* already saved *)
   (* 復帰の仮想命令の実装 (caml2html: emit_restore) *)
   | NonTail(x), Restore(y) when List.mem x allregs ->
-      Printf.fprintf oc "\tlw %s %s %d\n" (reg reg_sp) (reg x) (offset y)
+      Printf.fprintf oc "\tlw\t%s %s %d\n" (reg reg_sp) (reg x) (offset y)
   | NonTail(x), Restore(y) ->
       assert (List.mem x allfregs);
       Printf.fprintf oc "\tlwc1\t %s %s %d\n" (reg reg_sp) (reg x) (offset y)
@@ -298,7 +298,7 @@ and g' oc = function (* 各命令のアセンブリ生成 (caml2html: emit_gprim
   | NonTail(a), CallCls(x, ys, zs) ->
       g'_args oc [(x, reg_cl)] ys zs;
 	  let ss = stacksize () in
-	  Printf.fprintf oc "\tlw%s %s %d\n" (reg reg_cl) (reg reg_adr) 0; (* get address *)
+	  Printf.fprintf oc "\tlw\t%s %s %d\n" (reg reg_cl) (reg reg_adr) 0; (* get address *)
 	  Printf.fprintf oc "\tsw\t%s %s %d\n" (reg reg_link) (reg reg_sp) ss; (* save link register *)
 	  Printf.fprintf oc "\taddi\t%s %s %d\n" (reg reg_sp) (reg reg_sp) (ss + 4); (* update stack pointer *)
 	  Printf.fprintf oc "\tjal\t%s\n" (reg reg_adr); (* branch *)
