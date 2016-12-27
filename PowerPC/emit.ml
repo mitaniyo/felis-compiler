@@ -60,7 +60,7 @@ let reg r =
 
 let load_label r label = (* TO BE DECIDED *)
   let r' = reg r in
-  Printf.sprintf "\taddi\t%s %s %s\n" r' "r0" label
+  Printf.sprintf "\taddi\t%s %s %s\n" "r0" r' label
 (*  Printf.sprintf
     "\tlis\t%s, ha16(%s)\n\taddi\t%s, %s, lo16(%s)\n"
     r' label r' r' label*)
