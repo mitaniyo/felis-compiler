@@ -274,8 +274,9 @@ and g' oc = function (* 各命令のアセンブリ生成 (caml2html: emit_gprim
       Printf.fprintf oc "\tmtctr\t%s\n\tbctr\n" (reg reg_sw);*)
   | Tail, CallCls(x, ys, zs) ->
       g'_args oc [(x, reg_cl)] ys zs;
-	  Printf.fprintf oc "\tlw\t%s %s %d\n" (reg reg_cl) (reg reg_sw) 0;
-	  Printf.fprintf oc "\tj %s\n" (reg reg_sw)
+	  Printf.fprintf oc "\tlw\t%s %s %d\n" (reg reg_cl) (reg reg_adr) 0;
+    Printf.fprintf oc "\tsll\t%s %s %d\n" (reg reg_adr) (reg reg_adr) 2;
+	  Printf.fprintf oc "\tj %s\n" (reg reg_adr)
   | Tail, CallDir(Id.L(x), ys, zs) -> (* 末尾呼び出し *)
       g'_args oc [] ys zs;
       Printf.fprintf oc "\tj\t%s\n" x
@@ -301,6 +302,7 @@ and g' oc = function (* 各命令のアセンブリ生成 (caml2html: emit_gprim
 	  Printf.fprintf oc "\tlw\t%s %s %d\n" (reg reg_cl) (reg reg_adr) 0; (* get address *)
 	  Printf.fprintf oc "\tsw\t%s %s %d\n" (reg reg_link) (reg reg_sp) ss; (* save link register *)
 	  Printf.fprintf oc "\taddi\t%s %s %d\n" (reg reg_sp) (reg reg_sp) (ss + 4); (* update stack pointer *)
+    Printf.fprintf oc "\tsll %s %s %d\n" (reg reg_adr) (reg reg_adr) 2;
 	  Printf.fprintf oc "\tjal\t%s\n" (reg reg_adr); (* branch *)
 	  Printf.fprintf oc "\taddi\t%s %s %d\n" (reg reg_sp) (reg reg_sp) (-(ss + 4));
 	  Printf.fprintf oc "\tlw\t%s %s %d\n" (reg reg_sp) (reg reg_link) ss;
