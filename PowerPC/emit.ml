@@ -51,7 +51,7 @@ let small_log x =
   | 4 -> 2
   | 8 -> 3
   | 16 -> 4
-  | _ -> failwith "implement mul/div!!\n"
+  | _ -> -1
 
 let reg r =
   if is_reg r
@@ -123,11 +123,14 @@ and g' oc = function (* 各命令のアセンブリ生成 (caml2html: emit_gprim
   | NonTail(x), Sub(y, C(z)) -> Printf.fprintf oc "\tsubi\t%s %s %d\n" (reg y) (reg x) z
   (*| NonTail(x), Slw(y, V(z)) -> Printf.fprintf oc "\tslw\t%s, %s, %s\n" (reg x) (reg y) (reg z)
   | NonTail(x), Slw(y, C(z)) -> Printf.fprintf oc "\tslwi\t%s, %s, %d\n" (reg x) (reg y) z*)
-  | NonTail(x), Mul(y, C(z)) -> let l = small_log z in Printf.fprintf oc "\tsll\t%s %s %d\n" (reg y) (reg x) l
-  | NonTail(x), Mul(y, V(z)) -> failwith "implement mul!\n"
-  | NonTail(x), Div(y, C(z)) -> let l = small_log z in Printf.fprintf oc "\tsrl\t%s %s %d\n" (reg y) (reg x) l
-  | NonTail(x), Div(y, V(z)) -> failwith "implement div!\n"
-  
+  | NonTail(x), Mul(y, C(z)) -> let l = small_log z in 
+    if l >= 0 then Printf.fprintf oc "\tsll\t%s %s %d\n" (reg y) (reg x) l
+    else Printf.fprintf oc "\tmult\t%s %s %d\n" (reg y) (reg x) z
+  | NonTail(x), Mul(y, V(z)) -> Printf.fprintf oc "\tmult\t%s %s %s\n" (reg y) (reg z) (reg x)
+  | NonTail(x), Div(y, C(z)) -> let l = small_log z in
+    if l >= 0 then Printf.fprintf oc "\tsrl\t%s %s %d\n" (reg y) (reg x) l
+    else Printf.fprintf oc "\tdiv\t%s %s %d\n" (reg y) (reg x) z
+  | NonTail(x), Div(y, V(z)) -> Printf.fprintf oc "\tdiv\t%s %s %s\n" (reg y) (reg z) (reg x)
   (*| NonTail(x), Lwz(y, V(z)) -> Printf.fprintf oc "\tlwzx\t%s, %s, %s\n" (reg x) (reg y) (reg z)
   | NonTail(x), Lwz(y, C(z)) -> Printf.fprintf oc "\tlwz\t%s, %d(%s)\n" (reg x) z (reg y)*)
   | NonTail(x), Ld(y, V(z)) -> Printf.fprintf oc "\tlwo\t%s %s %s\n" (reg y) (reg z) (reg x)

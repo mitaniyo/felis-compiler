@@ -8,4 +8,5 @@ parser.mli
 min-caml.opt
 /.*
 /test/*.s
+/ltest
 
