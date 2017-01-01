@@ -70,6 +70,8 @@ rule token = parse
     { IN }
 | "rec"
     { REC }
+| "create_array"
+	{ CREATE_ARRAY }
 | ','
     { COMMA }
 | '_'
