@@ -9,4 +9,5 @@ min-caml.opt
 /.*
 /test/*.s
 /ltest
+/lib/.*
 
