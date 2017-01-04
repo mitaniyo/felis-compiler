@@ -218,13 +218,13 @@ and g' oc = function (* 各命令のアセンブリ生成 (caml2html: emit_gprim
       g'_tail_if oc e2 e1 "bge_tail" "bgez"
   | Tail, IfFEq(x, y, e1, e2) ->
   	  Printf.fprintf oc "\tsub.s\t%s %s %s\n" (reg x) (reg y) (reg reg_fcond);
-  	  Printf.fprintf oc "\tmfc1\t%s %s\n" (reg reg_cond) (reg reg_fcond);
+  	  Printf.fprintf oc "\tmfc1\t%s %s\n" (reg reg_fcond) (reg reg_cond);
   	  Printf.fprintf oc "\tsll\t%s %s %d\n" (reg reg_cond) (reg reg_cond) 1;
       g'_tail_if oc e2 e1 "bfeq_tail" "beq"
   | Tail, IfFLE(x, y, e1, e2) ->
   	  Printf.fprintf oc "\tsub.s\t%s %s %s\n" (reg x) (reg y) (reg reg_fcond);
-  	  Printf.fprintf oc "\tmfc1\t%s %s\n" (reg reg_cond) (reg reg_fcond);
-  	  g'_tail_if oc e2 e1 "bfle_nontail" "blez"
+  	  Printf.fprintf oc "\tmfc1\t%s %s\n" (reg reg_fcond) (reg reg_cond);
+  	  g'_tail_if oc e2 e1 "bfle_tail" "blez"
   | NonTail(z), IfEq(x, V(y), e1, e2) ->
       Printf.fprintf oc "\tsub\t%s %s %s\n" (reg x) (reg y) (reg reg_cond);
       g'_non_tail_if oc (NonTail(z)) e2 e1 "beq" "beq"
@@ -259,12 +259,12 @@ and g' oc = function (* 各命令のアセンブリ生成 (caml2html: emit_gprim
 
   | NonTail(z), IfFEq(x, y, e1, e2) ->
   	  Printf.fprintf oc "\tsub.s\t%s %s %s\n" (reg x) (reg y) (reg reg_fcond);
-  	  Printf.fprintf oc "\tmfc1\t%s %s\n" (reg reg_cond) (reg reg_fcond);
+  	  Printf.fprintf oc "\tmfc1\t%s %s\n" (reg reg_fcond) (reg reg_cond);
   	  Printf.fprintf oc "\tsll\t%s %s %d\n" (reg reg_cond) (reg reg_cond) 1;
       g'_non_tail_if oc (NonTail(z)) e2 e1 "bfeq_nontail" "beq"
   | NonTail(z), IfFLE(x, y, e1, e2) -> (* x <= y, x - y <= 0 *)
   	  Printf.fprintf oc "\tsub.s\t%s %s %s\n" (reg x) (reg y) (reg reg_fcond);
-  	  Printf.fprintf oc "\tmfc1\t%s %s\n" (reg reg_cond) (reg reg_fcond);
+  	  Printf.fprintf oc "\tmfc1\t%s %s\n" (reg reg_fcond) (reg reg_cond);
   	  g'_non_tail_if oc (NonTail(z)) e2 e1 "bfle_nontail" "blez"
 
   (*| NonTail(z), IfFLE(x, y, e1, e2) ->
