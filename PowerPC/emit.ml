@@ -94,12 +94,13 @@ and g' oc = function (* 各命令のアセンブリ生成 (caml2html: emit_gprim
       (*let n = i lsr 16 in
       let m = i lxor (n lsl 16) in
       let r = reg x in*)
-      let lo = i land 32767 in
-      let hi = ((i land (32767 lsl 16)) lsr 16) in
+      let lo = i land 65535 in
+      let hi = ((i land (65535 lsl 16)) lsr 16) in
       (*let hi = gethi d in
       let lo = getlo d in*)
+      Printf.fprintf stderr "%d %d %d\n" i lo hi;
 	  Printf.fprintf oc "\tlui\t%s %d\n" (reg x) hi;
-	  Printf.fprintf oc "\taddi %s %s %d\n" (reg x) (reg x) lo
+	  Printf.fprintf oc "\tori %s %s %d\n" (reg x) (reg x) lo
       (*Printf.fprintf oc "\tlis\t%s, %d\n" r n;
       Printf.fprintf oc "\tori\t%s, %s, %d\n" r r m*)
   | NonTail(x), FLi(d) ->
@@ -109,7 +110,7 @@ and g' oc = function (* 各命令のアセンブリ生成 (caml2html: emit_gprim
       let lo = v land 32767 in
       let hi = ((v land (32767 lsl 16)) lsr 16) in*)
 	  Printf.fprintf oc "\tlui\t%s %ld\n" (reg reg_fimm) hi;
-      Printf.fprintf oc "\taddi\t%s %s %ld\n" (reg reg_fimm) (reg reg_fimm) lo;
+      Printf.fprintf oc "\tori\t%s %s %ld\n" (reg reg_fimm) (reg reg_fimm) lo;
 	  Printf.fprintf oc "\tmtc1\t%s %s\n" (reg reg_fimm) (reg x)
   | NonTail(x), SetL(Id.L(y)) ->
       let s = load_label x y in
@@ -312,7 +313,7 @@ and g' oc = function (* 各命令のアセンブリ生成 (caml2html: emit_gprim
       if List.mem a allregs && a <> regs.(0) then
         Printf.fprintf oc "\tmov\t%s %s\n" (reg a) (reg regs.(0))
       else if List.mem a allfregs && a <> fregs.(0) then
-        Printf.fprintf oc "\tmov.s\t%s %s\n" (reg regs.(0)) (reg a)
+        Printf.fprintf oc "\tmov.s\t%s %s\n" (reg fregs.(0)) (reg a)
   | (NonTail(a), CallDir(Id.L(x), ys, zs)) ->
       let ss = stacksize () in
       Printf.fprintf oc "\tsw\t%s %s %d\n" (reg reg_link) (reg reg_sp) ss; (* save link register *)
@@ -324,7 +325,7 @@ and g' oc = function (* 各命令のアセンブリ生成 (caml2html: emit_gprim
       if List.mem a allregs && a <> regs.(0) then
         Printf.fprintf oc "\tmov\t%s %s\n" (reg a) (reg regs.(0))
       else if List.mem a allfregs && a <> fregs.(0) then
-        Printf.fprintf oc "\tmov.s\t%s %s\n"  (reg regs.(0)) (reg a)
+        Printf.fprintf oc "\tmov.s\t%s %s\n" (reg fregs.(0)) (reg a)
 
 and g'_tail_if oc e1 e2 btag binst =
   let b_else = Id.genid (btag ^ "_else") in

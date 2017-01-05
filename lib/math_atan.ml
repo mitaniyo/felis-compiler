@@ -132,8 +132,6 @@ in
 let rec atan x = atan_sub x 0 (fneg (pi /. 2.0)) (pi /. 2.0)
 in
 
-let x = floor 1.5 in
-let y = floor 1.0 in
-let z = x +. y in
+let x = atan 1.0
+in
 ()
-
