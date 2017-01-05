@@ -1,19 +1,19 @@
-_io_print_char:
+min_caml_print_char:
 	out r1
 	jr r31
 
-_io_print_int:
+min_caml_print_int:
 	addi r1 r25 0
-	bgez _io_print_int_get_num_digits
+	bgez r25 _io_print_int_get_num_digits
 	sub r0 r1 r1
 	addi r0 r2 45
 	out r2
-	j _io_print_int
+	j min_caml_print_int
 _io_print_int_get_num_digits:
 	addi r0 r2 10
 	addi r0 r3 1
 	sub r1 r2 r25
-	bltz _io_print_int_loop
+	bltz r25 _io_print_int_loop
 	multi r2 r2 10
 	addi r3 r3 1
 	j _io_print_int_get_num_digits
@@ -27,8 +27,7 @@ _io_print_int_loop:
 	j _io_print_int_loop
 _io_print_int_return:
 	jr r31
-
-_io_read_int:
+min_caml_read_int:
 	addi r0 r1 0 # res
 	addi r0 r2 0 # read?
 	addi r0 r3 0 # sgn
@@ -53,12 +52,12 @@ _io_read_int_check_end:
 	beq r25 r0 _io_read_int_loop
 	andi r3 r3 1
 	addi r3 r25 -1
-	beq r25 r0 _io_read_int_return
+	bltz r25 _io_read_int_return
 	sub r0 r1 r1
 _io_read_int_return:
 	jr r31
 
-_io_read_float:
+min_caml_read_float:
 	addi r0 r2 0 # read?
 	addi r0 r3 0 # sgn
 	addi r0 r5 0 # integer part
@@ -90,7 +89,7 @@ _io_read_float_change_sgn:
 _io_read_float_decimal_part:
 	in r4
 	sub r4 r25 32
-	blez _io_read_float_check_end
+	blez r25 _io_read_float_check_end
 	addi r4 r4 -48
 	multi r6 r6 10
 	add r6 r4 r6
@@ -115,5 +114,5 @@ _io_read_float_adapt_sgn:
 	addi r3 r25 -1
 	beq r25 r0 _io_read_float_return
 	neg.s f0 f0
-_io_read_float_return
+_io_read_float_return:
 	jr r31
