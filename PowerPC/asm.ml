@@ -45,8 +45,10 @@ type prog = Prog of (Id.l * float) list * fundef list * t
 let fletd(x, e1, e2) = Let((x, Type.Float), e1, e2)
 let seq(e1, e2) = Let((Id.gentmp Type.Unit, Type.Unit), e1, e2)
 
-let regs = Array.init 22 (fun i -> Printf.sprintf "%%r%d" (i + 1)) (* 24 - 31: used for specific purposes (defined below) *)
-let fregs = Array.init 30 (fun i -> Printf.sprintf "%%f%d" i)
+let regs = Array.append (Array.init 22 (fun i -> Printf.sprintf "%%r%d" (i + 1))) [|"%r28"; "%r29"|]
+let fregs = Array.append (Array.init 30 (fun i -> Printf.sprintf "%%f%d" i)) [|"%f31"|]
+
+(*let fregs = Array.init 30 (fun i -> Printf.sprintf "%%f%d" i)*)
 let allregs = Array.to_list regs
 let allfregs = Array.to_list fregs
 

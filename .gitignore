@@ -10,4 +10,7 @@ min-caml.opt
 /test/*.s
 /ltest
 /lib/.*
+/lib/ocaml
+/lib/*.s
+!/lib/math_primitive.s
 

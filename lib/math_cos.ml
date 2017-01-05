@@ -78,8 +78,8 @@ in
 
 let rec normalize x =
 	if fless x (0.0 -. pi) then normalize (x +. pi2)
-	else if fless pi x then normalize (x -. pi2)
-	else x
+	else if fless x pi then x
+	else normalize (x -. pi2)
 in
 
 (*
@@ -108,7 +108,7 @@ in
 let rec sin_coe n =
 	if ((n / 2) * 2 = n) then 0.0
 	else let c = 1.0 /. (fact n) in
-	let m = n - 1 in
+	let m = (n - 1) / 2 in
 	if ((m / 2) * 2 = m) then c else fneg c
 in
 let rec sin_sub x n a =
@@ -132,5 +132,5 @@ in
 let rec atan x = atan_sub x 0 (fneg (pi /. 2.0)) (pi /. 2.0)
 in
 
-let x = sqrt 1.0 in
+let x = cos 1.0 in
 ()
