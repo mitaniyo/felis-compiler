@@ -23,6 +23,7 @@ _io_print_int_loop:
 	divi r2 r2 10
 	addi r3 r3 -1
 	div r1 r2 r4
+	addi r4 r4 48
 	out r4
 	j _io_print_int_loop
 _io_print_int_return:
@@ -64,9 +65,9 @@ min_caml_read_float:
 	addi r0 r6 0 # decimal part
 	addi r0 r7 0 # #decimal digits
 	addi r0 r8 10 # ten
-	mtc1 f0 r0
-	mtc1 f1 r0
-	mtc1 f31 r8
+	mtc1 r0 f0
+	mtc1 r0 f1
+	mtc1 r8 f31
 	cvt.s.w f31 f2 # f2 = 10.0
 _io_read_float_integer_part:
 	in r4
@@ -98,9 +99,9 @@ _io_read_float_decimal_part:
 _io_read_float_check_end:
 	addi r2 r25 0
 	beq r25 r0 _io_read_float_integer_part
-	mtc1 f31 r5
+	mtc1 r5 f31
 	cvt.s.w f31 f0
-	mtc1 f31 r6
+	mtc1 r6 f31
 	cvt.s.w f31 f1
 _io_read_float_divide_decimal:
 	addi r7 r25 0
