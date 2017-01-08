@@ -98,7 +98,7 @@ and g' oc = function (* 各命令のアセンブリ生成 (caml2html: emit_gprim
       let hi = ((i land (65535 lsl 16)) lsr 16) in
       (*let hi = gethi d in
       let lo = getlo d in*)
-      Printf.fprintf stderr "%d %d %d\n" i lo hi;
+      (*Printf.fprintf stderr "%d %d %d\n" i lo hi;*)
 	  Printf.fprintf oc "\tlui\t%s %d\n" (reg x) hi;
 	  Printf.fprintf oc "\tori %s %s %d\n" (reg x) (reg x) lo
       (*Printf.fprintf oc "\tlis\t%s, %d\n" r n;

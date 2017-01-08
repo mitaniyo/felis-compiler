@@ -15,4 +15,5 @@ min-caml.opt
 !/lib/math_primitive.s
 !/lib/io.s
 !/lib/array.s
+!/lib/mathlib.s
 
