@@ -71,7 +71,7 @@ min_caml_read_float:
 	cvt.s.w f31 f2 # f2 = 10.0
 _io_read_float_integer_part:
 	in r4
-	sub r4 r25 32
+	addi r4 r25 -32
 	blez r25 _io_read_float_check_end
 	addi r4 r25 -45 # '-'
 	beq r25 r0 _io_read_float_change_sgn
@@ -89,7 +89,7 @@ _io_read_float_change_sgn:
 	j _io_read_float_integer_part
 _io_read_float_decimal_part:
 	in r4
-	sub r4 r25 32
+	addi r4 r25 -32
 	blez r25 _io_read_float_check_end
 	addi r4 r4 -48
 	multi r6 r6 10
@@ -110,10 +110,10 @@ _io_read_float_divide_decimal:
 	div.s f1 f2 f1
 	j _io_read_float_divide_decimal
 _io_read_float_adapt_sgn:
-	add.s f1 f2 f0
+	add.s f0 f1 f0
 	andi r3 r3 1
 	addi r3 r25 -1
-	beq r25 r0 _io_read_float_return
+	bltz r25 _io_read_float_return
 	neg.s f0 f0
 _io_read_float_return:
 	jr r31
