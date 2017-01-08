@@ -31,6 +31,7 @@ let addtyp x = (x, Type.gentyp ())
 %token IN
 %token REC
 %token COMMA
+%token CREATE_ARRAY
 %token ARRAY_CREATE
 %token DOT
 %token LESS_MINUS
@@ -140,6 +141,10 @@ exp: /* (* 一般の式 (caml2html: parser_exp) *) */
 | ARRAY_CREATE simple_exp simple_exp
     %prec prec_app
     { Array($2, $3) }
+| CREATE_ARRAY simple_exp simple_exp
+    %prec prec_app
+    { Array($2, $3) }
+
 | error
     { failwith
 	(Printf.sprintf "parse error near characters %d-%d"
