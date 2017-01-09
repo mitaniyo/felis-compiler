@@ -9,18 +9,47 @@ let rec iter n e = (* 最適化処理をくりかえす (caml2html: main_iter) *
   if e = e' then e else
   iter (n - 1) e'
 
+(* main loop. added error handling *)
 let lexbuf outchan l = (* バッファをコンパイルしてチャンネルへ出力する (caml2html: main_lexbuf) *)
   Id.counter := 0;
   Typing.extenv := M.empty;
   Emit.f outchan
     (RegAlloc.f
-      (Virtual.f
-	     (Closure.f
-		(iter !limit
-		   (Alpha.f
-		      (KNormal.f
-			 (Typing.f
-			    (Parser.exp Lexer.token l))))))))
+    (Virtual.f
+       (Closure.f
+    (iter !limit
+       (Alpha.f
+          (KNormal.f
+          (let typed = (try
+          (Typing.f
+            (let parsed = (try
+              Parser.exp Lexer.token l
+                with
+                | _ ->
+                  let cur = l.Lexing.lex_curr_p in
+                  let line = cur.Lexing.pos_lnum in
+                  let cnum = cur.Lexing.pos_cnum - cur.Lexing.pos_bol in
+                  let tok = Lexing.lexeme l in
+                  print_string "parse_error in line ";
+                  print_int line;
+                  print_string " character ";
+                  print_int cnum;
+                  print_string " token \"";
+                  print_string tok;
+                  print_string "\"\n";
+                  Unit)
+              in
+              print_string "parse succeeded!\n";
+            parsed)
+          )
+          with
+          | _ -> print_string "type inference error\n"; Unit
+          )
+            in
+          typed)
+          
+
+        ))))))
 
 let string s = lexbuf stdout (Lexing.from_string s) (* 文字列をコンパイルして標準出力に表示する (caml2html: main_string) *)
 
