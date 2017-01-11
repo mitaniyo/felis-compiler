@@ -115,6 +115,16 @@ and g' oc = function (* 各命令のアセンブリ生成 (caml2html: emit_gprim
   | NonTail(x), SetL(Id.L(y)) ->
       let s = load_label x y in
       Printf.fprintf oc "%s" s
+  | NonTail(x), SetLVar(Id.L(y)) ->
+      let ss = stacksize () in
+      Printf.fprintf oc "\taddi\t%s %s %d\n" (reg reg_sp) (reg reg_sp) ss;
+      Printf.fprintf oc "\tsw\t%s %s %d\n" "r1" (reg reg_sp) 0;
+      Printf.fprintf oc "\tsw\t%s %s %d\n" (reg reg_link) (reg reg_sp) 4;
+      Printf.fprintf oc "\tjal\t%s\n" y;
+      Printf.fprintf oc "\tmov\t%s %s\n" (reg x) "r1";
+      (if (reg x) = "r1" then () else Printf.fprintf oc "\tlw\t%s %s %d\n" (reg reg_sp) "r1" 0);
+      Printf.fprintf oc "\tlw\t%s %s %d\n" (reg reg_sp) (reg reg_link) 4;
+      Printf.fprintf oc "\taddi\t%s %s %d\n" (reg reg_sp) (reg reg_sp) (-ss)
   | NonTail(x), Mr(y) when x = y -> ()
   | NonTail(x), Mr(y) -> Printf.fprintf oc "\tmov\t%s %s\n" (reg x) (reg y)
   | NonTail(x), Neg(y) -> Printf.fprintf oc "\tsub\t%s %s %s\n" ("r0") (reg y) (reg x)
@@ -174,7 +184,7 @@ and g' oc = function (* 各命令のアセンブリ生成 (caml2html: emit_gprim
   | Tail, (Nop | St _ | Stf _ | Comment _ | Save _ as exp) ->
       g' oc (NonTail(Id.gentmp Type.Unit), exp);
       Printf.fprintf oc "\tjr\t%s\n" (reg reg_link)
-  | Tail, (Li _ | SetL _ | Mr _ | Neg _ | Add _ | Sub _ | Mul _ | Div _ | Ld _ as exp) ->
+  | Tail, (Li _ | SetL _ | SetLVar _ | Mr _ | Neg _ | Add _ | Sub _ | Mul _ | Div _ | Ld _ as exp) ->
       g' oc (NonTail(regs.(0)), exp);
       Printf.fprintf oc "\tjr\t%s\n" (reg reg_link)
   | Tail, (FLi _ | FMr _ | FNeg _ | FAdd _ | FSub _ | FMul _ | FDiv _ | Ldf _ as exp) ->
@@ -399,7 +409,7 @@ let h oc { name = Id.L(x); args = _; fargs = _; body = e; ret = _ } =
   stacktypemap := [];
   g oc (Tail, e)
 
-let f oc (Prog(data, fundefs, e)) =
+let f oc hasextvar (Prog(data, fundefs, e)) =
 	Format.eprintf "generating assembly...\n";
 	(* do not use data section *)
 	List.iter (fun fundef -> h oc fundef) fundefs;
@@ -408,6 +418,10 @@ let f oc (Prog(data, fundefs, e)) =
 	stackmap := [];
 	stacktypemap := [];
 	Printf.fprintf oc "\tlui\t%s %d\n" (reg reg_hp) 32;
+  (if hasextvar = 1 then
+    (Printf.fprintf oc "\tjal\tmin_caml_globals\n";
+    Printf.fprintf oc "\taddi\t%s %s %d\n" "r0" "r31" 0)
+  else ());
 	g oc (NonTail("r0"), e);
 	Printf.fprintf oc "halt\n"
 
