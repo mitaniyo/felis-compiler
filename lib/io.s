@@ -4,13 +4,13 @@ min_caml_print_char:
 
 min_caml_print_int:
 	addi r1 r25 0
+	addi r0 r2 10
 	bgez r25 _io_print_int_get_num_digits
 	sub r0 r1 r1
-	addi r0 r2 45
-	out r2
+	addi r0 r3 45
+	out r3
 	j min_caml_print_int
 _io_print_int_get_num_digits:
-	addi r0 r2 10
 	addi r0 r3 1
 	sub r1 r2 r25
 	bltz r25 _io_print_int_loop
