@@ -16,4 +16,6 @@ min-caml.opt
 !/lib/io.s
 !/lib/array.s
 !/lib/mathlib.s
+/globals_compiler/*
+!/globals_compiler/*.cpp
 
