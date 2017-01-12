@@ -38,13 +38,13 @@ let lexbuf outchan l = (* バッファをコンパイルしてチャンネルへ
                   print_string " token \"";
                   print_string tok;
                   print_string "\"\n";
-                  Unit)
+                  Syntax.Unit)
               in
               print_string "parse succeeded!\n";
             parsed)
           )
           with
-          | _ -> print_string "type inference error\n"; Unit
+          | _ -> print_string "type inference error\n"; Syntax.Unit
           )
             in
           typed)

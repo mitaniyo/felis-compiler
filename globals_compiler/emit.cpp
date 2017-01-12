@@ -137,7 +137,7 @@ void addVec(int id, int adr = -1){
 			else if(obj[i] == ')') obj[i] = ' ';
 			else if(obj[i] == '.') obj[i] = ' ';
 		}
-		sscanf(obj.c_str(), "%s.(%d)", buf, &i);
+		sscanf(obj.c_str(), "%s%d", buf, &i);
 		fprintf(stderr, "%s\n", obj.c_str());
 		string v = buf;
 		if(positions.count(v) == 0){
