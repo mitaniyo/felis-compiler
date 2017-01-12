@@ -19,7 +19,5 @@ min-caml.opt
 /globals_compiler/*
 !/globals_compiler/*.cpp
 !/globals_compiler/*.in
-/rt
-!/rt/programs
-!/rt/sld
+/rt/raytracer
 
