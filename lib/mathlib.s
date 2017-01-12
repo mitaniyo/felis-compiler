@@ -315,7 +315,7 @@ cos_sub.141:
 	j	cos_sub.141
 beq_tail_else.336:
 	jr	r31
-min_caml_cos
+min_caml_cos:
 cos.145:
 	lw	r29 r29 4
 	lw	r29 r23 0
@@ -393,7 +393,7 @@ sin_sub.149:
 	j	sin_sub.149
 beq_tail_else.339:
 	jr	r31
-min_caml_sin
+min_caml_sin:
 sin.153:
 	lw	r29 r29 4
 	lw	r29 r23 0
