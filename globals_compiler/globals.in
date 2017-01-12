@@ -1,0 +1,144 @@
+vec n_objects
+1 0 0 1
+
+vec dummy
+0 1 0.0 0
+tuple objects_tmp
+11
+0 0
+0 0
+0 0
+0 0
+2 dummy
+2 dummy
+0 0
+2 dummy
+2 dummy
+2 dummy
+2 dummy
+0
+vec objects
+60 2 objects_tmp 1
+
+vec screen
+3 1 0.0 1
+
+vec viewpoint
+3 1 0.0 1
+
+vec light
+3 1 0.0 1
+
+vec beam
+1 1 255.0 1
+
+vec and_net_tmp
+1 0 -1 0
+vec and_net
+50 2 and_net_tmp 1
+
+vec or_net_tmp
+1 3 and_net.(0) 0
+vec or_net
+1 1 or_net_tmp 1
+
+vec solver_dist
+1 1 0.0 1
+
+vec intsec_rectside
+1 0 0 1
+
+vec tmin
+1 1 1000000000.0 1
+
+vec intersection_point
+3 1 0.0 1
+
+vec intersected_object_id
+1 0 0 1
+
+vec nvector
+3 1 0.0 1
+
+vec texture_color
+3 1 0.0 1
+
+vec diffuse_ray
+3 1 0.0 1
+
+vec rgb
+3 1 0.0 1
+
+vec image_size
+2 0 0 1
+
+vec image_center
+2 0 0 1
+
+vec scan_pitch
+1 1 0.0 1
+
+vec startp
+3 1 0.0 1
+
+vec startp_fast
+3 1 0.0 1
+
+vec screenx_dir
+3 1 0.0 1
+
+vec screeny_dir
+3 1 0.0 1
+
+vec screenz_dir
+3 1 0.0 1
+
+vec ptrace_dirvec
+3 1 0.0 1
+
+vec dummyf
+0 1 0.0 0
+vec dummyff
+0 2 dummyf 0
+tuple dummy_vs_tmp
+2
+2 dummyf
+2 dummyff
+0
+vecv dummy_vs
+0 2 dummy_vs_tmp 0
+vec dirvecs
+5 2 dummy_vs 1
+
+vec dummyf2
+0 1 0.0 0
+vec v3
+3 1 0.0 0
+vec consts
+60 2 dummyf2 0
+tuple light_dirvec
+2
+2 v3
+2 consts
+1
+
+vec dummyf3
+0 1 0.0 0
+vec dummyff3
+0 2 dummyf3 0
+tuple dummydv
+2
+2 dummyf3
+2 dummyff3
+0
+tuple reflections_tmp
+3
+0 0
+2 dummydv
+1 0.0
+0
+vec reflections
+180 2 reflections_tmp 1
+
+vec n_reflections
+1 0 0 1
