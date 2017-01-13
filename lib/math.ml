@@ -71,15 +71,16 @@ let rec fact x =
 	if x = 0 then 1.0 else (float_of_int x) *. (fact (x - 1))
 in
 
-let pi = 3.14159265368979323846264
+(*let pi = 3.14159265368979323846264
 in
 let pi2 = pi *. 2.0
-in
+in*)
 
-let rec normalize x =
-	if fless x (0.0 -. pi) then normalize (x +. pi2)
+let rec normalize x pi=
+	let pi2 = pi *. 2.0 in
+	if fless x (0.0 -. pi) then normalize (x +. pi2) pi
 	else if fless x pi then x
-	else normalize (x -. pi2)
+	else normalize (x -. pi2) pi
 in
 
 (*
@@ -101,7 +102,7 @@ let rec cos_sub x n a =
 	else cos_sub x (n - 1) c
 in
 let rec cos x =
-	let y = normalize x in
+	let y = normalize x 3.14159265358979323846264 in
 	cos_sub y 20 0.0
 in
 
@@ -118,7 +119,7 @@ let rec sin_sub x n a =
 	else sin_sub x (n - 1) c
 in
 let rec sin x =
-	let y = normalize x in
+	let y = normalize x 3.14159265358979323846264 in
 	sin_sub y 20 0.0
 in
 
@@ -129,7 +130,7 @@ let rec atan_sub x n l r =
 	if fless a x then atan_sub x (n + 1) m r
 	else atan_sub x (n + 1) l m
 in
-let rec atan x = atan_sub x 0 (fneg (pi /. 2.0)) (pi /. 2.0)
+let rec atan x = let pi = 3.14159265358979323846264 in atan_sub x 0 (fneg (pi /. 2.0)) (pi /. 2.0)
 in
 
 let x = if fequal 1.0 2.0 then 1.0 else 2.0 in (* for typing *)
