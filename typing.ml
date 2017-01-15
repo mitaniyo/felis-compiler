@@ -1,6 +1,8 @@
 (* type inference/reconstruction *)
 
 open Syntax
+open Print_type
+open Print_syntax
 
 exception Unify of Type.t * Type.t
 exception Error of t * Type.t * Type.t
@@ -153,15 +155,20 @@ let rec g env e = (* 型推論ルーチン (caml2html: typing_g) *)
   with Unify(t1, t2) -> raise (Error(deref_term e, deref_typ t1, deref_typ t2))
 
 let f e =
-  extenv := M.empty;
-(*
-  (match deref_typ (g M.empty e) with
-  | Type.Unit -> ()
-  | _ -> Format.eprintf "warning: final result does not have type unit@.");
-*)
-  (try unify Type.Unit (g M.empty e)
-  with _ -> (try unify Type.Int (g M.empty e)
-  with _ -> failwith "top level does not have type Unit / Int"));
-  (*with Unify _ -> failwith "top level does not have type unit");*)
+  (try unify Type.Unit (try g M.empty e with
+    | Error (exp, t1, t2) -> 
+      print_string "type inference error: exp is expected type t1, but found t2\n";
+      print_string "exp, t1, t2 follow\n";
+      print_string "exp =\n";
+      print_syntax_t 0 exp;
+      print_string "t1 = ";
+      print_type t1;
+      print_string "\n";
+      print_string "t2 = ";
+      print_type t2;
+      print_string "\n";
+      Type.Float)
+    with
+    | Unify _ -> failwith "top level does not have type unit");
   extenv := M.map deref_typ !extenv;
   deref_term e
