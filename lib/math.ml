@@ -71,21 +71,71 @@ in
 in
 let pi2 = pi *. 2.0
 in*)
+(*
 let rec normalize x pi=
 	let pi2 = pi *. 2.0 in
 	if fless x (0.0 -. pi) then normalize (x +. pi2) pi
 	else if fless x pi then x
 	else normalize (x -. pi2) pi
+in*)
+
+let rec normalize x pi pi2 =
+	if x < (-.pi) then
+		let i = x /. pi2 in
+		let i2 = (int_of_float i) in
+		if i2 < (-3) then
+			let nx = x -. pi2 *. (float_of_int i2) in normalize nx pi pi2
+		else
+			normalize (x +. pi2) pi pi2
+	else if x < pi then
+		x
+	else
+		let i =(x /. pi2) in
+		let i2 = (int_of_float i) in
+		if i2 > 3 then
+			let nx = (x -. pi2 *. (float_of_int i2)) in normalize nx pi pi2
+		else
+			normalize (x -. pi2) pi pi2
 in
 (*
 taylor
 *)
+
+let rec sin2 x =
+	let pi = 3.14159265358979323846264 in
+	let tmp1 = 1.0 in
+	let tmp3 = -.(tmp1 /. 3.0 /. 2.0) in
+	let tmp5 = -.(tmp3 /. 5.0 /. 4.0) in
+	let tmp7 = -.(tmp5 /. 7.0 /. 6.0) in
+	let tmp9 = -.(tmp7 /. 9.0 /. 8.0) in
+	let tmp11 = -.(tmp9 /. 11.0 /. 10.0) in
+	let tmp13 = -.(tmp11 /. 13.0 /. 12.0) in
+	let tmp15 = -.(tmp13 /. 15.0 /. 14.0) in
+	let tmp17 = -.(tmp15 /. 17.0 /. 16.0) in
+	let tmp19 = -.(tmp17 /. 19.0 /. 18.0) in
+	let res21 = 0.0 in
+	let res19 = res21 *. x *. x +. tmp19 in
+	let res17 = res19 *. x *. x +. tmp17 in
+	let res15 = res17 *. x *. x +. tmp15 in
+	let res13 = res15 *. x *. x +. tmp13 in
+	let res11 = res13 *. x *. x +. tmp11 in
+	let res9 = res11 *. x *. x +. tmp9 in
+	let res7 = res9 *. x *. x +. tmp7 in
+	let res5 = res7 *. x *. x +. tmp5 in
+	let res3 = res5 *. x *. x +. tmp3 in
+	let res1 = res3 *. x *. x +. tmp1 in
+	res1 *. x
+
+in
+
+
 let rec cos x2 =
 	let pi = 3.14159265358979323846264 in
-	let y = normalize x2 pi in
+	let y = normalize x2 pi (pi *. 2.0) in
 	let y2 = if y < 0.0 then (-.y) else y in
 	let s = if y2 > (pi /. 2.0) then -1.0 else 1.0 in
 	let x = if y2 > (pi /. 2.0) then pi -. y2 else if y2 < (-.(pi /. 2.0)) then (-.pi -. y2) else y2 in
+	if x > (pi /. 4.0) then (sin2 (pi /. 2.0 -. x)) *. s else
 	let tmp0 = 1.0 in
 	let tmp2 = -. (tmp0 /. 2.0 /. 1.0) in
 	let tmp4 = -. (tmp2 /. 4.0 /. 3.0) in
@@ -112,8 +162,11 @@ in
 
 let rec sin x2 =
 	let pi = 3.14159265358979323846264 in
-	let y2 = normalize x2 pi in
-	let x = if y2 > (pi /. 2.0) then pi -. y2 else if y2 < (-.(pi /. 2.0)) then (-.pi -. y2) else y2 in
+	let y2 = normalize x2 pi (pi *. 2.0) in
+	let z = if y2 > (pi /. 2.0) then pi -. y2 else if y2 < (-.(pi /. 2.0)) then (-.pi -. y2) else y2 in
+	let s = if z < 0.0 then -1.0 else 1.0 in
+	let x = if z < 0.0 then (-.z) else z in
+	if (x > (pi /. 4.0)) then (cos (pi /. 2.0 -. x)) *. s else
 	let tmp1 = 1.0 in
 	let tmp3 = -.(tmp1 /. 3.0 /. 2.0) in
 	let tmp5 = -.(tmp3 /. 5.0 /. 4.0) in
@@ -135,7 +188,7 @@ let rec sin x2 =
 	let res5 = res7 *. x *. x +. tmp5 in
 	let res3 = res5 *. x *. x +. tmp3 in
 	let res1 = res3 *. x *. x +. tmp1 in
-	res1 *. x
+	res1 *. x *. s
 in
 
 let rec atan_sub x n l r =
@@ -149,7 +202,11 @@ let rec atan x = let pi = 3.14159265358979323846264 in atan_sub x 0 (fneg (pi /.
 in
 
 let x = if fequal 1.0 2.0 then 1.0 else 2.0 in (* for typing *)
-let y = (float_of_int 3) +. 1.0 in
+(*let y = (float_of_int 3) +. 1.0 in
 let z = (int_of_float 3.0) + 1 in
-let w = cos 10.0 in
+print_char 10;
+let pi = 3.141592653689793238 in
+let a = normalize 100.0 pi (pi *. 2.0) in
+let w = print_char 10; cos 10.0 in
+*)
 ()

@@ -31,6 +31,15 @@ print_syntax_t (depth : int) (prog : Syntax.t) =
 		print_string "Sub\n"; print_syntax_t (depth + 1) x;
 		print_spaces depth; print_string "and\n";
 		print_syntax_t (depth + 1) y
+	| Mul(x, y) -> print_string "mult\n"
+	| Div(x, y) -> print_string "div\n"
+	| FAdd(x, y) -> print_string "fadd\n"
+	| FSub(x, y) -> print_string "fsub\n"
+	| FMul(x, y) -> print_string "fmul\n";
+		print_syntax_t (depth + 1) x;
+		print_string "and\n";
+		print_syntax_t (depth + 1) y
+	| FDiv(x, y) -> print_string "fdiv\n"
 	| Eq (x, y) ->
 		print_string "Eq?\n";
 		print_syntax_t (depth + 1) x;
