@@ -12,10 +12,12 @@ min-caml.opt
 /lib/.*
 /lib/ocaml
 /lib/*.s
+/lib/exporter
 !/lib/math_primitive.s
 !/lib/io.s
 !/lib/array.s
 !/lib/mathlib.s
+!/lib/*.cpp
 /globals_compiler/*
 !/globals_compiler/*.cpp
 !/globals_compiler/*.in
