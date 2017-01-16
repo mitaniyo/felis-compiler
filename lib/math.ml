@@ -67,6 +67,11 @@ let rec floor x =
 	else floor_sub x (-a) a
 in
 
+let rec int_of_float x =
+	let f = floor (x +. 0.5) in
+	int_of_float_primitive f
+
+in
 (*let pi = 3.14159265368979323846264
 in
 let pi2 = pi *. 2.0
@@ -102,7 +107,7 @@ taylor
 *)
 
 let rec sin2 x =
-	let pi = 3.14159265358979323846264 in
+(*)	let pi = 3.14159265358979323846264 in
 	let tmp1 = 1.0 in
 	let tmp3 = -.(tmp1 /. 3.0 /. 2.0) in
 	let tmp5 = -.(tmp3 /. 5.0 /. 4.0) in
@@ -124,8 +129,19 @@ let rec sin2 x =
 	let res5 = res7 *. x *. x +. tmp5 in
 	let res3 = res5 *. x *. x +. tmp3 in
 	let res1 = res3 *. x *. x +. tmp1 in
+	res1 *. x*)
+	let xx = x *. x in
+	let res19 = (-0.0000000000000000082206352466243310362810) in
+	let res17 = res19 *. xx +. (0.0000000000000028114572543455209925409709) in
+	let res15 = res17 *. xx +. (-0.0000000000007647163731819817415255802895) in
+	let res13 = res15 *. xx +. (0.0000000001605904383682161592580233252316) in
+	let res11 = res13 *. xx +. (-0.0000000250521083854417202238661793213537) in
+	let res9 = res11 *. xx +. (0.0000027557319223985892510950593270457887) in
+	let res7 = res9 *. xx +. (-0.0001984126984126984125263171154784913597) in
+	let res5 = res7 *. xx +. (0.0083333333333333332176851016015461937059) in
+	let res3 = res5 *. xx +. (-0.1666666666666666574148081281236954964697) in
+	let res1 = res3 *. xx +. (1.0000000000000000000000000000000000000000) in
 	res1 *. x
-
 in
 
 
@@ -136,7 +152,7 @@ let rec cos x2 =
 	let s = if y2 > (pi /. 2.0) then -1.0 else 1.0 in
 	let x = if y2 > (pi /. 2.0) then pi -. y2 else if y2 < (-.(pi /. 2.0)) then (-.pi -. y2) else y2 in
 	if x > (pi /. 4.0) then (sin2 (pi /. 2.0 -. x)) *. s else
-	let tmp0 = 1.0 in
+(*	let tmp0 = 1.0 in
 	let tmp2 = -. (tmp0 /. 2.0 /. 1.0) in
 	let tmp4 = -. (tmp2 /. 4.0 /. 3.0) in
 	let tmp6 = -. (tmp4 /. 6.0 /. 5.0) in
@@ -157,6 +173,19 @@ let rec cos x2 =
 	let res4 = res6 *. x *. x +. tmp4 in
 	let res2 = res4 *. x *. x +. tmp2 in
 	let res0 = res2 *. x *. x +. tmp0 in
+	res0 *. s*)
+	let xx = x *. x in
+	let res20 = (0.0000000000000000004110317623312165325548) in
+	let res18 = res20 *. xx +. (-0.0000000000000001561920696858622773633873) in
+	let res16 = res18 *. xx +. (0.0000000000000477947733238738588453487681) in
+	let res14 = res16 *. xx +. (-0.0000000000114707455977297261228837043430) in
+	let res12 = res14 *. xx +. (0.0000000020876756987868100186555149434461) in
+	let res10 = res12 *. xx +. (-0.0000002755731922398589356974177733833331) in
+	let res8 = res10 *. xx +. (0.0000248015873015873015657896394348114200) in
+	let res6 = res8 *. xx +. (-0.0013888888888888889418943284326246612181) in
+	let res4 = res6 *. xx +. (0.0416666666666666643537020320309238741174) in
+	let res2 = res4 *. xx +. (-0.5000000000000000000000000000000000000000) in
+	let res0 = res2 *. xx +. (1.0000000000000000000000000000000000000000) in
 	res0 *. s
 in
 
@@ -167,7 +196,7 @@ let rec sin x2 =
 	let s = if z < 0.0 then -1.0 else 1.0 in
 	let x = if z < 0.0 then (-.z) else z in
 	if (x > (pi /. 4.0)) then (cos (pi /. 2.0 -. x)) *. s else
-	let tmp1 = 1.0 in
+	(*let tmp1 = 1.0 in
 	let tmp3 = -.(tmp1 /. 3.0 /. 2.0) in
 	let tmp5 = -.(tmp3 /. 5.0 /. 4.0) in
 	let tmp7 = -.(tmp5 /. 7.0 /. 6.0) in
@@ -188,6 +217,18 @@ let rec sin x2 =
 	let res5 = res7 *. x *. x +. tmp5 in
 	let res3 = res5 *. x *. x +. tmp3 in
 	let res1 = res3 *. x *. x +. tmp1 in
+	res1 *. x *. s*)
+	let xx = x *. x in
+	let res19 = (-0.0000000000000000082206352466243310362810) in
+	let res17 = res19 *. xx +. (0.0000000000000028114572543455209925409709) in
+	let res15 = res17 *. xx +. (-0.0000000000007647163731819817415255802895) in
+	let res13 = res15 *. xx +. (0.0000000001605904383682161592580233252316) in
+	let res11 = res13 *. xx +. (-0.0000000250521083854417202238661793213537) in
+	let res9 = res11 *. xx +. (0.0000027557319223985892510950593270457887) in
+	let res7 = res9 *. xx +. (-0.0001984126984126984125263171154784913597) in
+	let res5 = res7 *. xx +. (0.0083333333333333332176851016015461937059) in
+	let res3 = res5 *. xx +. (-0.1666666666666666574148081281236954964697) in
+	let res1 = res3 *. xx +. (1.0000000000000000000000000000000000000000) in
 	res1 *. x *. s
 in
 

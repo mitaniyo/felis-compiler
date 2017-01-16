@@ -9,17 +9,20 @@ min-caml.opt
 /.*
 /test/*.s
 /ltest
-/lib/.*
 /lib/ocaml
-/lib/*.s
-/lib/exporter
+/lib/*
+!/lib/*.ml
 !/lib/math_primitive.s
 !/lib/io.s
 !/lib/array.s
 !/lib/mathlib.s
 !/lib/*.cpp
+/lib/.*
 /globals_compiler/*
 !/globals_compiler/*.cpp
 !/globals_compiler/*.in
 /rt/raytracer
+/mathverify/*
+!/mathverify/*.ml
+!/mathverify/*.cpp
 
