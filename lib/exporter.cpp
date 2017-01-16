@@ -8,10 +8,11 @@ string strs[] = {
 	"fequal", "fless", "fispos", "fisneg", "fiszero",
 	"fhalf", "fsqr",
 	"fabs", "fneg", "sqrt", "floor",
-	"cos", "sin", "atan"
+	"cos", "sin", "atan",
+	"int_of_float"
 };
 
-const int N = 14;
+const int N = 15;
 
 int main(){
 	char buf[300];

@@ -1,4 +1,4 @@
-min_caml_int_of_float: # float -> int
+min_caml_int_of_float_primitive: # float -> int
 	cvt.w.s f0 f1
 	mfc1 f1 r1
 	jr r31
