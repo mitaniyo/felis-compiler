@@ -21,7 +21,7 @@ int main(){
 		string s = ch;
 		if(s == "_min_caml_start:") break;
 		for(int i = 0; i < N; ++i){
-			if(s.substr(0, strs[i].size()) == strs[i]){
+			if(s.substr(0, strs[i].size()) == strs[i] && (s.size() > strs[i].size() && s[strs[i].size()] == '.')){
 				printf("%s:\n", ("min_caml_" + strs[i]).c_str());
 			}
 		}
