@@ -72,6 +72,24 @@ rule token = parse
     { REC }
 | "create_array"
 	{ CREATE_ARRAY }
+| "fequal"
+    { FEQUAL }
+| "fless"
+    { FLESS }
+| "fispos"
+    { FISPOS }
+| "fisneg"
+    { FISNEG }
+| "fiszero"
+    { FISZERO }
+| "fhalf"
+    { FHALF }
+| "fsqr"
+    { FSQR }
+| "fneg"
+    { FNEG }
+| "fabs"
+    { FABS }
 | ','
     { COMMA }
 | '_'

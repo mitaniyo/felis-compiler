@@ -18,6 +18,7 @@ and exp =
   | St of Id.t * Id.t * id_or_imm
   | FMr of Id.t 
   | FNeg of Id.t
+  | FAbs of Id.t
   | FAdd of Id.t * Id.t
   | FSub of Id.t * Id.t
   | FMul of Id.t * Id.t

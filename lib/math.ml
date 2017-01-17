@@ -1,6 +1,6 @@
 (* floating point *)
 
-let rec fequal x y =
+(*let rec fequal x y =
 	if x = y then true
 	else false
 
@@ -33,27 +33,28 @@ in
 let rec fhalf x = x /. 2.0
 
 in
+*)
+(*let rec fsqr x = x *. x
 
-let rec fsqr x = x *. x
-
-in
+in*)
 
 (*
 fabs, fneg : primitive
 *)
 
 let rec sqrt_sub x n l r =
-	if n = 100 then l else
+	if n = 120 then l else
 	let m = (l +. r) /. 2.0 in
 	let y = m *. m in
-	if fless x y then sqrt_sub x (n + 1) l m
+	if x < y then sqrt_sub x (n + 1) l m
 	else sqrt_sub x (n + 1) m r
 in
 let rec sqrt x =
-	sqrt_sub x 0 0.0 (10000000000000000000.0)
+	if x > 1.0 then (1.0 /. (sqrt (1.0 /. x))) else
+	sqrt_sub x 0 0.0 1.0
 in
 
-let rec floor_sub x l r = (* maximum a such that a <= x *)
+(*let rec floor_sub x l r = (* maximum a such that a <= x *)
 	if r - l = 1 then (float_of_int l)
 	else let m = (l + r) / 2 in
 	if fless x (float_of_int m) then floor_sub x l m
@@ -65,11 +66,11 @@ let rec floor x =
 	if x < (0.0 -. b) then x
 	else if x > b then x
 	else floor_sub x (-a) a
-in
+in*)
 
 let rec int_of_float x =
 	let f = floor (x +. 0.5) in
-	int_of_float_primitive f
+	floor_retint f
 
 in
 (*let pi = 3.14159265368979323846264
@@ -233,7 +234,7 @@ let rec sin x2 =
 in
 
 let rec atan_sub x n l r =
-	if n = 100 then l else
+	if n = 120 then l else
 	let m = (l +. r) /. 2.0 in
 	let a = ((sin m) /. (cos m)) in
 	if fless a x then atan_sub x (n + 1) m r
@@ -242,7 +243,12 @@ in
 let rec atan x = let pi = 3.14159265358979323846264 in atan_sub x 0 (fneg (pi /. 2.0)) (pi /. 2.0)
 in
 
-let x = if fequal 1.0 2.0 then 1.0 else 2.0 in (* for typing *)
+let x = (int_of_float 3.0) + 1 in
+let y = (floor_retint 3.0) + 1 in
+let z = (floor 3.0) +. 1.0 in
+
+
+(*let x = if fequal 1.0 2.0 then 1.0 else 2.0 in *)(* for typing *)
 (*let y = (float_of_int 3) +. 1.0 in
 let z = (int_of_float 3.0) + 1 in
 print_char 10;

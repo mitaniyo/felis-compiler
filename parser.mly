@@ -39,6 +39,15 @@ let addtyp x = (x, Type.gentyp ())
 %token LPAREN
 %token RPAREN
 %token EOF
+%token FEQUAL
+%token FLESS
+%token FISPOS
+%token FISNEG
+%token FISZERO
+%token FHALF
+%token FSQR
+%token FNEG
+%token FABS
 
 /* (* 優先順位とassociativityの定義（低い方から高い方へ） (caml2html: parser_prior) *) */
 %right prec_let
@@ -103,6 +112,16 @@ exp: /* (* 一般の式 (caml2html: parser_exp) *) */
     { Not(LE($3, $1)) }
 | exp GREATER exp
     { Not(LE($1, $3)) }
+| FEQUAL simple_exp simple_exp
+    { If(Eq($2, $3), Bool(true), Bool(false)) }
+| FLESS simple_exp simple_exp
+    { If(LE($3, $2), Bool(false), Bool(true)) }
+| FISPOS simple_exp
+    { If(LE($2, Float(0.0)), Bool(false), Bool(true)) }
+| FISNEG simple_exp
+    { If(LE(Float(0.0), $2), Bool(false), Bool(true)) }
+| FISZERO simple_exp
+    { If(Eq($2, Float(0.0)), Bool(true), Bool(false)) }
 | exp LESS_EQUAL exp
     { LE($1, $3) }
 | exp GREATER_EQUAL exp
@@ -113,6 +132,10 @@ exp: /* (* 一般の式 (caml2html: parser_exp) *) */
 | MINUS_DOT exp
     %prec prec_unary_minus
     { FNeg($2) }
+| FNEG simple_exp
+    { FNeg($2) }
+| FABS simple_exp
+    { FAbs($2) }
 | exp PLUS_DOT exp
     { FAdd($1, $3) }
 | exp MINUS_DOT exp
@@ -121,6 +144,10 @@ exp: /* (* 一般の式 (caml2html: parser_exp) *) */
     { FMul($1, $3) }
 | exp SLASH_DOT exp
     { FDiv($1, $3) }
+| FSQR simple_exp
+    { FMul($2, $2) }
+| FHALF simple_exp
+    { FMul($2, Float(0.5)) }
 | LET IDENT EQUAL exp IN exp
     %prec prec_let
     { Let(addtyp $2, $4, $6) }
