@@ -43,7 +43,7 @@ fabs, fneg : primitive
 *)
 
 let rec sqrt_sub x n l r =
-	if n = 120 then l else
+	if n = 30 then l else
 	let m = (l +. r) /. 2.0 in
 	let y = m *. m in
 	if x < y then sqrt_sub x (n + 1) l m
@@ -51,7 +51,10 @@ let rec sqrt_sub x n l r =
 in
 let rec sqrt x =
 	if x > 1.0 then (1.0 /. (sqrt (1.0 /. x))) else
-	sqrt_sub x 0 0.0 1.0
+	if x = 1.0 then x else
+	if x > 0.0 then sqrt_sub x 0 0.0 1.0 else
+	if x = 0.0 then x else
+	x
 in
 
 (*let rec floor_sub x l r = (* maximum a such that a <= x *)
@@ -234,7 +237,7 @@ let rec sin x2 =
 in
 
 let rec atan_sub x n l r =
-	if n = 120 then l else
+	if n = 30 then l else
 	let m = (l +. r) /. 2.0 in
 	let a = ((sin m) /. (cos m)) in
 	if fless a x then atan_sub x (n + 1) m r

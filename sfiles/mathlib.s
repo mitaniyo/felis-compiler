@@ -1,7 +1,7 @@
-sqrt_sub.144:
-	addi	r0 r2 120
+sqrt_sub.147:
+	addi	r0 r2 20
 	sub	r1 r2 r25
-	beq	r25 r0 beq_tail_else.391
+	beq	r25 r0 beq_tail_else.397
 	add.s	f1 f2 f3
 	lui	r24 16384
 	ori	r24 r24 0
@@ -10,27 +10,27 @@ sqrt_sub.144:
 	mul.s	f3 f3 f4
 	sub.s	f4 f0 f30
 	mfc1	f30 r25
-	blez	r25 bfle_tail_else.392
+	blez	r25 bfle_tail_else.398
 	addi	r0 r2 1
 	add	r1 r2 r1
 	mov.s	f3 f2
-	j	sqrt_sub.144
-bfle_tail_else.392:
+	j	sqrt_sub.147
+bfle_tail_else.398:
 	addi	r0 r2 1
 	add	r1 r2 r1
 	mov.s	f3 f1
-	j	sqrt_sub.144
-beq_tail_else.391:
+	j	sqrt_sub.147
+beq_tail_else.397:
 	mov.s	f1 f0
 	jr	r31
 min_caml_sqrt:
-sqrt.149:
+sqrt.152:
 	lui	r24 16256
 	ori	r24 r24 0
 	mtc1	r24 f1
 	sub.s	f0 f1 f30
 	mfc1	f30 r25
-	blez	r25 bfle_tail_else.393
+	blez	r25 bfle_tail_else.399
 	lui	r24 16256
 	ori	r24 r24 0
 	mtc1	r24 f1
@@ -41,13 +41,26 @@ sqrt.149:
 	swc1	f1 r30 0
 	sw	r31 r30 4
 	addi	r30 r30 8
-	jal	sqrt.149
+	jal	sqrt.152
 	addi	r30 r30 -8
 	lw	r30 r31 4
 	lwc1	 r30 f1 0
 	div.s	f1 f0 f0
 	jr	r31
-bfle_tail_else.393:
+bfle_tail_else.399:
+	lui	r24 16256
+	ori	r24 r24 0
+	mtc1	r24 f1
+	sub.s	f0 f1 f30
+	mfc1	f30 r25
+	sll	r25 r25 1
+	beq	r25 r0 bfeq_tail_else.400
+	lui	r24 0
+	ori	r24 r24 0
+	mtc1	r24 f1
+	sub.s	f0 f1 f30
+	mfc1	f30 r25
+	blez	r25 bfle_tail_else.401
 	addi	r0 r1 0
 	lui	r24 0
 	ori	r24 r24 0
@@ -55,9 +68,22 @@ bfle_tail_else.393:
 	lui	r24 16256
 	ori	r24 r24 0
 	mtc1	r24 f2
-	j	sqrt_sub.144
+	j	sqrt_sub.147
+bfle_tail_else.401:
+	lui	r24 0
+	ori	r24 r24 0
+	mtc1	r24 f1
+	sub.s	f0 f1 f30
+	mfc1	f30 r25
+	sll	r25 r25 1
+	beq	r25 r0 bfeq_tail_else.402
+	jr	r31
+bfeq_tail_else.402:
+	jr	r31
+bfeq_tail_else.400:
+	jr	r31
 min_caml_int_of_float:
-int_of_float.151:
+int_of_float.154:
 	lui	r24 16128
 	ori	r24 r24 0
 	mtc1	r24 f1
@@ -68,11 +94,11 @@ int_of_float.151:
 	addi	r30 r30 -4
 	lw	r30 r31 0
 	j	min_caml_floor_retint
-normalize.153:
+normalize.156:
 	neg.s	f1 f3
 	sub.s	f3 f0 f30
 	mfc1	f30 r25
-	blez	r25 bfle_tail_else.394
+	blez	r25 bfle_tail_else.403
 	div.s	f0 f2 f3
 	swc1	f1 r30 0
 	swc1	f2 r30 4
@@ -80,13 +106,13 @@ normalize.153:
 	sw	r31 r30 12
 	addi	r30 r30 16
 	mov.s	f3 f0
-	jal	int_of_float.151
+	jal	int_of_float.154
 	addi	r30 r30 -16
 	lw	r30 r31 12
 	addi	r0 r2 10
 	addi	r0 r2 -10
 	sub	r2 r1 r25
-	blez	r25 ble_tail_else.395
+	blez	r25 ble_tail_else.404
 	sw	r31 r30 12
 	addi	r30 r30 16
 	jal	min_caml_float_of_int
@@ -97,19 +123,19 @@ normalize.153:
 	lwc1	 r30 f1 8
 	sub.s	f1 f0 f0
 	lwc1	 r30 f1 0
-	j	normalize.153
-ble_tail_else.395:
+	j	normalize.156
+ble_tail_else.404:
 	lwc1	 r30 f2 4
 	lwc1	 r30 f0 8
 	add.s	f0 f2 f0
 	lwc1	 r30 f1 0
-	j	normalize.153
-bfle_tail_else.394:
+	j	normalize.156
+bfle_tail_else.403:
 	sub.s	f1 f0 f30
 	mfc1	f30 r25
-	blez	r25 bfle_tail_else.396
+	blez	r25 bfle_tail_else.405
 	jr	r31
-bfle_tail_else.396:
+bfle_tail_else.405:
 	div.s	f0 f2 f3
 	swc1	f1 r30 0
 	swc1	f2 r30 4
@@ -117,12 +143,12 @@ bfle_tail_else.396:
 	sw	r31 r30 12
 	addi	r30 r30 16
 	mov.s	f3 f0
-	jal	int_of_float.151
+	jal	int_of_float.154
 	addi	r30 r30 -16
 	lw	r30 r31 12
 	addi	r0 r2 10
 	sub	r1 r2 r25
-	blez	r25 ble_tail_else.397
+	blez	r25 ble_tail_else.406
 	sw	r31 r30 12
 	addi	r30 r30 16
 	jal	min_caml_float_of_int
@@ -133,14 +159,14 @@ bfle_tail_else.396:
 	lwc1	 r30 f1 8
 	sub.s	f1 f0 f0
 	lwc1	 r30 f1 0
-	j	normalize.153
-ble_tail_else.397:
+	j	normalize.156
+ble_tail_else.406:
 	lwc1	 r30 f2 4
 	lwc1	 r30 f0 8
 	sub.s	f0 f2 f0
 	lwc1	 r30 f1 0
-	j	normalize.153
-sin2.157:
+	j	normalize.156
+sin2.160:
 	mul.s	f0 f0 f1
 	lui	r24 41751
 	ori	r24 r24 42202
@@ -193,7 +219,7 @@ sin2.157:
 	mul.s	f1 f0 f0
 	jr	r31
 min_caml_cos:
-cos.159:
+cos.162:
 	lui	r24 16457
 	ori	r24 r24 4059
 	mtc1	r24 f1
@@ -206,7 +232,7 @@ cos.159:
 	swc1	f1 r30 0
 	sw	r31 r30 4
 	addi	r30 r30 8
-	jal	normalize.153
+	jal	normalize.156
 	addi	r30 r30 -8
 	lw	r30 r31 4
 	lui	r24 0
@@ -214,11 +240,11 @@ cos.159:
 	mtc1	r24 f1
 	sub.s	f1 f0 f30
 	mfc1	f30 r25
-	blez	r25 bfle_nontail_else.398
+	blez	r25 bfle_nontail_else.407
 	neg.s	f0 f0
-	j	bfle_nontail_cont.399
-bfle_nontail_else.398:
-bfle_nontail_cont.399:
+	j	bfle_nontail_cont.408
+bfle_nontail_else.407:
+bfle_nontail_cont.408:
 	lui	r24 16384
 	ori	r24 r24 0
 	mtc1	r24 f1
@@ -227,16 +253,16 @@ bfle_nontail_cont.399:
 	mtc1	r24 f1
 	sub.s	f0 f1 f30
 	mfc1	f30 r25
-	blez	r25 bfle_nontail_else.400
+	blez	r25 bfle_nontail_else.409
 	lui	r24 49024
 	ori	r24 r24 0
 	mtc1	r24 f1
-	j	bfle_nontail_cont.401
-bfle_nontail_else.400:
+	j	bfle_nontail_cont.410
+bfle_nontail_else.409:
 	lui	r24 16256
 	ori	r24 r24 0
 	mtc1	r24 f1
-bfle_nontail_cont.401:
+bfle_nontail_cont.410:
 	lui	r24 16384
 	ori	r24 r24 0
 	mtc1	r24 f2
@@ -245,11 +271,11 @@ bfle_nontail_cont.401:
 	mtc1	r24 f2
 	sub.s	f0 f2 f30
 	mfc1	f30 r25
-	blez	r25 bfle_nontail_else.402
+	blez	r25 bfle_nontail_else.411
 	lwc1	 r30 f2 0
 	sub.s	f2 f0 f0
-	j	bfle_nontail_cont.403
-bfle_nontail_else.402:
+	j	bfle_nontail_cont.412
+bfle_nontail_else.411:
 	lui	r24 16384
 	ori	r24 r24 0
 	mtc1	r24 f2
@@ -261,15 +287,15 @@ bfle_nontail_else.402:
 	mtc1	r24 f2
 	sub.s	f2 f0 f30
 	mfc1	f30 r25
-	blez	r25 bfle_nontail_else.404
+	blez	r25 bfle_nontail_else.413
 	lui	r24 49225
 	ori	r24 r24 4059
 	mtc1	r24 f2
 	sub.s	f2 f0 f0
-	j	bfle_nontail_cont.405
-bfle_nontail_else.404:
-bfle_nontail_cont.405:
-bfle_nontail_cont.403:
+	j	bfle_nontail_cont.414
+bfle_nontail_else.413:
+bfle_nontail_cont.414:
+bfle_nontail_cont.412:
 	lui	r24 16512
 	ori	r24 r24 0
 	mtc1	r24 f2
@@ -278,7 +304,7 @@ bfle_nontail_cont.403:
 	mtc1	r24 f2
 	sub.s	f0 f2 f30
 	mfc1	f30 r25
-	blez	r25 bfle_tail_else.406
+	blez	r25 bfle_tail_else.415
 	lui	r24 16384
 	ori	r24 r24 0
 	mtc1	r24 f2
@@ -289,13 +315,13 @@ bfle_nontail_cont.403:
 	swc1	f1 r30 4
 	sw	r31 r30 8
 	addi	r30 r30 12
-	jal	sin2.157
+	jal	sin2.160
 	addi	r30 r30 -12
 	lw	r30 r31 8
 	lwc1	 r30 f1 4
 	mul.s	f0 f1 f0
 	jr	r31
-bfle_tail_else.406:
+bfle_tail_else.415:
 	mul.s	f0 f0 f0
 	lui	r24 8434
 	ori	r24 r24 41309
@@ -353,7 +379,7 @@ bfle_tail_else.406:
 	mul.s	f0 f1 f0
 	jr	r31
 min_caml_sin:
-sin.161:
+sin.164:
 	lui	r24 16457
 	ori	r24 r24 4059
 	mtc1	r24 f1
@@ -366,7 +392,7 @@ sin.161:
 	swc1	f1 r30 0
 	sw	r31 r30 4
 	addi	r30 r30 8
-	jal	normalize.153
+	jal	normalize.156
 	addi	r30 r30 -8
 	lw	r30 r31 4
 	lui	r24 16384
@@ -377,11 +403,11 @@ sin.161:
 	mtc1	r24 f1
 	sub.s	f0 f1 f30
 	mfc1	f30 r25
-	blez	r25 bfle_nontail_else.407
+	blez	r25 bfle_nontail_else.416
 	lwc1	 r30 f1 0
 	sub.s	f1 f0 f0
-	j	bfle_nontail_cont.408
-bfle_nontail_else.407:
+	j	bfle_nontail_cont.417
+bfle_nontail_else.416:
 	lui	r24 16384
 	ori	r24 r24 0
 	mtc1	r24 f1
@@ -393,40 +419,40 @@ bfle_nontail_else.407:
 	mtc1	r24 f1
 	sub.s	f1 f0 f30
 	mfc1	f30 r25
-	blez	r25 bfle_nontail_else.409
+	blez	r25 bfle_nontail_else.418
 	lui	r24 49225
 	ori	r24 r24 4059
 	mtc1	r24 f1
 	sub.s	f1 f0 f0
-	j	bfle_nontail_cont.410
-bfle_nontail_else.409:
-bfle_nontail_cont.410:
-bfle_nontail_cont.408:
+	j	bfle_nontail_cont.419
+bfle_nontail_else.418:
+bfle_nontail_cont.419:
+bfle_nontail_cont.417:
 	lui	r24 0
 	ori	r24 r24 0
 	mtc1	r24 f1
 	sub.s	f1 f0 f30
 	mfc1	f30 r25
-	blez	r25 bfle_nontail_else.411
+	blez	r25 bfle_nontail_else.420
 	lui	r24 49024
 	ori	r24 r24 0
 	mtc1	r24 f1
-	j	bfle_nontail_cont.412
-bfle_nontail_else.411:
+	j	bfle_nontail_cont.421
+bfle_nontail_else.420:
 	lui	r24 16256
 	ori	r24 r24 0
 	mtc1	r24 f1
-bfle_nontail_cont.412:
+bfle_nontail_cont.421:
 	lui	r24 0
 	ori	r24 r24 0
 	mtc1	r24 f2
 	sub.s	f2 f0 f30
 	mfc1	f30 r25
-	blez	r25 bfle_nontail_else.413
+	blez	r25 bfle_nontail_else.422
 	neg.s	f0 f0
-	j	bfle_nontail_cont.414
-bfle_nontail_else.413:
-bfle_nontail_cont.414:
+	j	bfle_nontail_cont.423
+bfle_nontail_else.422:
+bfle_nontail_cont.423:
 	lui	r24 16512
 	ori	r24 r24 0
 	mtc1	r24 f2
@@ -435,7 +461,7 @@ bfle_nontail_cont.414:
 	mtc1	r24 f2
 	sub.s	f0 f2 f30
 	mfc1	f30 r25
-	blez	r25 bfle_tail_else.415
+	blez	r25 bfle_tail_else.424
 	lui	r24 16384
 	ori	r24 r24 0
 	mtc1	r24 f2
@@ -446,13 +472,13 @@ bfle_nontail_cont.414:
 	swc1	f1 r30 4
 	sw	r31 r30 8
 	addi	r30 r30 12
-	jal	cos.159
+	jal	cos.162
 	addi	r30 r30 -12
 	lw	r30 r31 8
 	lwc1	 r30 f1 4
 	mul.s	f0 f1 f0
 	jr	r31
-bfle_tail_else.415:
+bfle_tail_else.424:
 	mul.s	f0 f0 f2
 	lui	r24 41751
 	ori	r24 r24 42202
@@ -505,10 +531,10 @@ bfle_tail_else.415:
 	mul.s	f2 f0 f0
 	mul.s	f0 f1 f0
 	jr	r31
-atan_sub.163:
-	addi	r0 r2 120
+atan_sub.166:
+	addi	r0 r2 30
 	sub	r1 r2 r25
-	beq	r25 r0 beq_tail_else.416
+	beq	r25 r0 beq_tail_else.425
 	add.s	f1 f2 f3
 	lui	r24 16384
 	ori	r24 r24 0
@@ -522,7 +548,7 @@ atan_sub.163:
 	sw	r31 r30 20
 	addi	r30 r30 24
 	mov.s	f3 f0
-	jal	sin.161
+	jal	sin.164
 	addi	r30 r30 -24
 	lw	r30 r31 20
 	lwc1	 r30 f1 16
@@ -530,7 +556,7 @@ atan_sub.163:
 	sw	r31 r30 24
 	addi	r30 r30 28
 	mov.s	f1 f0
-	jal	cos.159
+	jal	cos.162
 	addi	r30 r30 -28
 	lw	r30 r31 24
 	lwc1	 r30 f1 20
@@ -538,15 +564,15 @@ atan_sub.163:
 	lwc1	 r30 f1 12
 	sub.s	f1 f0 f30
 	mfc1	f30 r25
-	blez	r25 bfle_nontail_else.417
+	blez	r25 bfle_nontail_else.426
 	addi	r0 r1 1
-	j	bfle_nontail_cont.418
-bfle_nontail_else.417:
+	j	bfle_nontail_cont.427
+bfle_nontail_else.426:
 	addi	r0 r1 0
-bfle_nontail_cont.418:
+bfle_nontail_cont.427:
 	addi	r0 r2 0
 	sub	r1 r2 r25
-	beq	r25 r0 beq_tail_else.419
+	beq	r25 r0 beq_tail_else.428
 	addi	r0 r1 1
 	lw	r30 r2 8
 	add	r2 r1 r1
@@ -555,8 +581,8 @@ bfle_nontail_cont.418:
 	mov.s	f1 f31
 	mov.s	f0 f1
 	mov.s	f31 f0
-	j	atan_sub.163
-beq_tail_else.419:
+	j	atan_sub.166
+beq_tail_else.428:
 	addi	r0 r1 1
 	lw	r30 r2 8
 	add	r2 r1 r1
@@ -565,12 +591,12 @@ beq_tail_else.419:
 	mov.s	f1 f31
 	mov.s	f0 f1
 	mov.s	f31 f0
-	j	atan_sub.163
-beq_tail_else.416:
+	j	atan_sub.166
+beq_tail_else.425:
 	mov.s	f1 f0
 	jr	r31
 min_caml_atan:
-atan.168:
+atan.171:
 	lui	r24 16457
 	ori	r24 r24 4059
 	mtc1	r24 f1
@@ -590,4 +616,4 @@ atan.168:
 	lui	r24 16329
 	ori	r24 r24 4059
 	mtc1	r24 f2
-	j	atan_sub.163
+	j	atan_sub.166
