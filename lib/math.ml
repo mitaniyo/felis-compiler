@@ -88,7 +88,7 @@ let rec normalize x pi pi2 =
 	if x < (-.pi) then
 		let i = x /. pi2 in
 		let i2 = (int_of_float i) in
-		if i2 < (-3) then
+		if i2 < (-10) then
 			let nx = x -. pi2 *. (float_of_int i2) in normalize nx pi pi2
 		else
 			normalize (x +. pi2) pi pi2
@@ -97,7 +97,7 @@ let rec normalize x pi pi2 =
 	else
 		let i =(x /. pi2) in
 		let i2 = (int_of_float i) in
-		if i2 > 3 then
+		if i2 > 10 then
 			let nx = (x -. pi2 *. (float_of_int i2)) in normalize nx pi pi2
 		else
 			normalize (x -. pi2) pi pi2
