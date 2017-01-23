@@ -113,9 +113,9 @@ exp: /* (* 一般の式 (caml2html: parser_exp) *) */
 | exp GREATER exp
     { Not(LE($1, $3)) }
 | FEQUAL simple_exp simple_exp
-    { If(Eq($2, $3), Bool(true), Bool(false)) }
+    { If(Eq(FSub($2, $3), Float(0.0)), Bool(true), Bool(false)) }
 | FLESS simple_exp simple_exp
-    { If(LE($3, $2), Bool(false), Bool(true)) }
+    { If(LE(FSub($3, $2), Float(0.0)), Bool(false), Bool(true)) }
 | FISPOS simple_exp
     { If(LE($2, Float(0.0)), Bool(false), Bool(true)) }
 | FISNEG simple_exp
