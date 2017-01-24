@@ -1,6 +1,8 @@
 2016 年度 CPU 実験　B 班コンパイラ
 MinCaml コンパイラの改造
 
+sfiles/ 以下のファイルが課題の実行に必要なプログラムです。
+
 仕様
 ファイルをまたいで用いたい関数のラベルは min_caml ではじめる
 外部変数定義ファイルは存在すれば一つでなければならない (外部関数の定義には複数ファイルを用いて良い)
@@ -30,22 +32,22 @@ g++ -o emit emit.cpp
 ./emit < globals.in > globals.s
 
 変数の記述の文法
-obj := t str
-t := "0" | "1" | "2"
-str := (文字列)
+obj ::= t str
+t ::= "0" | "1" | "2"
+str ::= (文字列)
   t = 0 のとき、obj は整数を表し、str はその表現
   t = 1 のとき、obj は浮動小数点数を表し、str はその表現
   t = 2 のとき、obj はすでに定義された変数を表し、str はその変数名 (定義済みの変数しか参照できないことに注意)
   課題プログラムの globals.ml の上記だけでは処理できない部分を処理するため t = 4 も実装している
-vec_var := "vec" len obj flg
+vec_var ::= "vec" len obj flg
   len は長さを表す整数
   obj は要素の初期値
   flg はこの変数をプログラム本体からアクセスできるようにする場合 "1" そうでない場合 "0"
-tuple_var := "tuple" len obj_1 obj_2 ... obj_len flg
+tuple_var ::= "tuple" len obj_1 obj_2 ... obj_len flg
   len は長さを表す整数
   obj_1, ..., obj_len は各要素
   flg は vec_var の場合と同様
-var := vec_var | tuple_var
+var ::= vec_var | tuple_var
 
 として、ファイルに var を並べて記述する
 
