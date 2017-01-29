@@ -30,7 +30,17 @@ let li_large oc r v =
   let hi = ((v land (65535 lsl 16)) lsr 16) in
   if lo = 0 then (Printf.fprintf oc "\taddi %s %s %d\n" "r0" r lo) else
   (Printf.fprintf oc "\tlui %s %d\n" r hi;
-  Printf.fprintf oc "\taddi %s %s %d\n" r r lo)
+  (if lo = 0 then () else Printf.fprintf oc "\taddi %s %s %d\n" r r lo))
+
+let load_typeinfo oc r =
+  let ri = reg_id r in
+  Printf.fprintf oc "\tsrl %s %s %d\n" (reg reg_type) (reg reg_typetmp) ri;
+  Printf.fprintf oc "\tandi %s %s %d\n" (reg reg_typetmp) (reg reg_typetmp) 1
+
+let store_typeinfo oc r =
+  let ri = reg_id r in
+  Printf.fprintf oc "\tsll %s %s %d\n" (reg reg_typetmp) (reg reg_typetmp) ri;
+  Printf.fprintf oc "\tor %s %s %s\n" (reg reg_type) (reg reg_typetmp) (reg reg_type)
 
 let mov_typeinfo oc s d =
   let si = reg_id s in
@@ -64,9 +74,9 @@ let locate x =
   in
   loc !stackmap
 let gettype n = List.nth (!stacktypemap) n
-let offset x = 4 * (locate x)
+let offset x = 8 * (locate x)
 (*let offset x = 4 * List.hd (locate x)*)
-let stacksize () = (List.length (!stackmap)) * 4
+let stacksize () = (List.length (!stackmap)) * 8
 (*let stacksize () = align ((List.length !stackmap + 1) * 4)*)
 
 let small_log x =
@@ -140,7 +150,7 @@ and g' oc = function (* 各命令のアセンブリ生成 (caml2html: emit_gprim
       let s = load_label oc x y in
       Printf.fprintf oc "%s" s;
       mov_typeinfo oc "r0" (reg x)
-  | NonTail(x), SetLVar(Id.L(y)) ->
+  | NonTail(x), SetLVar(Id.L(y)) -> (* TODO *)
       let ss = stacksize () in
       Printf.fprintf oc "\taddi\t%s %s %d\n" (reg reg_sp) (reg reg_sp) ss;
       Printf.fprintf oc "\tsw\t%s %s %d\n" "r1" (reg reg_sp) 0;
@@ -163,7 +173,9 @@ and g' oc = function (* 各命令のアセンブリ生成 (caml2html: emit_gprim
     Printf.fprintf oc "\taddi\t%s %s %d\n" (reg y) (reg x) z;
     mov_typeinfo oc (reg y) (reg x)
   | NonTail(x), Sub(y, V(z)) -> Printf.fprintf oc "\tsub\t%s %s %s\n" (reg y) (reg z) (reg x)
-  | NonTail(x), Sub(y, C(z)) -> Printf.fprintf oc "\tsubi\t%s %s %d\n" (reg y) (reg x) z
+  | NonTail(x), Sub(y, C(z)) ->
+    Printf.fprintf oc "\taddi\t%s %s %d\n" (reg y) (reg x) (-z);
+    mov_typeinfo oc (reg y) (reg x)
   (*| NonTail(x), Slw(y, V(z)) -> Printf.fprintf oc "\tslw\t%s, %s, %s\n" (reg x) (reg y) (reg z)
   | NonTail(x), Slw(y, C(z)) -> Printf.fprintf oc "\tslwi\t%s, %s, %d\n" (reg x) (reg y) z*)
   | NonTail(x), Mul(y, C(z)) -> let l = small_log z in 
@@ -176,12 +188,28 @@ and g' oc = function (* 各命令のアセンブリ生成 (caml2html: emit_gprim
   | NonTail(x), Div(y, V(z)) -> Printf.fprintf oc "\tdiv\t%s %s %s\n" (reg y) (reg z) (reg x)
   (*| NonTail(x), Lwz(y, V(z)) -> Printf.fprintf oc "\tlwzx\t%s, %s, %s\n" (reg x) (reg y) (reg z)
   | NonTail(x), Lwz(y, C(z)) -> Printf.fprintf oc "\tlwz\t%s, %d(%s)\n" (reg x) z (reg y)*)
-  | NonTail(x), Ld(y, V(z)) -> Printf.fprintf oc "\tlwo\t%s %s %s\n" (reg y) (reg z) (reg x)
-  | NonTail(x), Ld(y, C(z)) -> Printf.fprintf oc "\tlw\t%s %s %d\n" (reg y) (reg x) z
+  | NonTail(x), Ld(y, V(z)) ->
+    Printf.fprintf oc "\tlwo\t%s %s %s\n" (reg y) (reg z) (reg x);
+    Printf.fprintf oc "\taddi\t%s %s %d\n" (reg z) (reg z) 4;
+    Printf.fprintf oc "\tlwo\t%s %s %s\n" (reg y) (reg z) (reg reg_typetmp);
+    store_typeinfo oc (reg x);
+    Printf.fprintf oc "\taddi\t%s %s %d\n" (reg z) (reg z) (-4)
+  | NonTail(x), Ld(y, C(z)) ->
+    Printf.fprintf oc "\tlw\t%s %s %d\n" (reg y) (reg x) z;
+    Printf.fprintf oc "\tlw\t% s%s %d\n" (reg y) (reg reg_typetmp) (z + 4);
+    store_typeinfo oc (reg x)
   (*| NonTail(_), Stw(x, y, V(z)) -> Printf.fprintf oc "\tstwx\t%s, %s, %s\n" (reg x) (reg y) (reg z)
   | NonTail(_), Stw(x, y, C(z)) -> Printf.fprintf oc "\tstw\t%s, %d(%s)\n" (reg x) z (reg y)*)
-  | NonTail(_), St(x, y, V(z)) -> Printf.fprintf oc "\tswo\t%s %s %s\n" (reg x) (reg y) (reg z)
-  | NonTail(_), St(x, y, C(z)) -> Printf.fprintf oc "\tsw\t%s %s %d\n" (reg x) (reg y) z
+  | NonTail(_), St(x, y, V(z)) ->
+    Printf.fprintf oc "\tswo\t%s %s %s\n" (reg x) (reg y) (reg z);
+    Printf.fprintf oc "\taddi\t%s %s %d\n" (reg z) (reg z) 4;
+    load_typeinfo oc (reg x);
+    Printf.fprintf oc "\tsw\t%s %s %s\n" (reg reg_typetmp) (reg y) (reg z);
+    Printf.fprintf oc "\taddi\t%s %s %d\n" (reg z) (reg z) (-4)
+  | NonTail(_), St(x, y, C(z)) ->
+    Printf.fprintf oc "\tsw\t%s %s %d\n" (reg x) (reg y) z;
+    load_typeinfo oc (reg x);
+    Printf.fprintf oc "\tsw\t%s %s %d\n" (reg x) (reg x) (z + 4)
   | NonTail(x), FMr(y) when x = y -> ()
   | NonTail(x), FMr(y) -> Printf.fprintf oc "\tmov.s\t%s %s\n" (reg y) (reg x)
   | NonTail(x), FNeg(y) -> Printf.fprintf oc "\tneg.s\t%s %s\n" (reg y) (reg x)
@@ -196,20 +224,34 @@ and g' oc = function (* 各命令のアセンブリ生成 (caml2html: emit_gprim
   | NonTail(x), Ldf(y, C(z)) -> Printf.fprintf oc "\tlwc1\t%s %s %d\n" (reg y) (reg x) z
   (*| NonTail(_), Stfd(x, y, V(z)) -> Printf.fprintf oc "\tstfdx\t%s, %s, %s\n" (reg x) (reg y) (reg z)
   | NonTail(_), Stfd(x, y, C(z)) -> Printf.fprintf oc "\tstfd\t%s, %d(%s)\n" (reg x) z (reg y)*)
-  | NonTail(_), Stf(x, y, V(z)) -> Printf.fprintf oc "\tswoc1\t%s %s %s\n" (reg x) (reg y) (reg z)
-  | NonTail(_), Stf(x, y, C(z)) -> Printf.fprintf oc "\tswc1\t%s %s %d\n" (reg x) (reg y) z
+  | NonTail(_), Stf(x, y, V(z)) ->
+    Printf.fprintf oc "\tswoc1\t%s %s %s\n" (reg x) (reg y) (reg z);
+    Printf.fprintf oc "\taddi\t%s %s %d\n" (reg z) (reg z) 4;
+    Printf.fprintf oc "\taddi\t%s %s %d\n" ("r0") (reg reg_typetmp) 2;
+    Printf.fprintf oc "\tsw\t%s %s %d\n" (reg reg_typetmp) (reg y) (reg z);
+    Printf.fprintf oc "\taddi\t%s %s %d\n" (reg z) (reg z) (-4)
+  | NonTail(_), Stf(x, y, C(z)) ->
+    Printf.fprintf oc "\tswc1\t%s %s %d\n" (reg x) (reg y) z;
+    Printf.fprintf oc "\taddi\t%s %s %d\n" ("r0") (reg reg_typetmp) 2;
+    Printf.fprintf oc "\tsw\t%s %s %d\n" (reg reg_typetmp) (reg y) (z + 4)
   | NonTail(_), Comment(s) -> Printf.fprintf oc "#\t%s\n" s
   (* 退避の仮想命令の実装 (caml2html: emit_save) *)
   | NonTail(_), Save(x, y) when List.mem x allregs && not (S.mem y !stackset) -> (* save register x, variable y if needed *)
       save y;
-      Printf.fprintf oc "\tsw\t%s %s %d\n" (reg x) (reg reg_sp) (offset y)
+      Printf.fprintf oc "\tsw\t%s %s %d\n" (reg x) (reg reg_sp) (offset y);
+      load_typeinfo oc (reg x);
+      Printf.fprintf oc "\tsw\t%s %s %d\n" (reg reg_typetmp) (reg reg_sp) ((offset y) + 4)
   | NonTail(_), Save(x, y) when List.mem x allfregs && not (S.mem y !stackset) ->
       savef y;
-      Printf.fprintf oc "\tswc1\t%s %s %d\n" (reg x) (reg reg_sp) (offset y)
+      Printf.fprintf oc "\tswc1\t%s %s %d\n" (reg x) (reg reg_sp) (offset y);
+      Printf.fprintf oc "\taddi\t%s %s %d\n" ("r0") (reg reg_typetmp) 2; 
+      Printf.fprintf oc "\tswc1\t%s %s %d\n" (reg reg_typetmp) (reg reg_sp) ((offset y) + 4)
   | NonTail(_), Save(x, y) -> assert (S.mem y !stackset); () (* already saved *)
   (* 復帰の仮想命令の実装 (caml2html: emit_restore) *)
   | NonTail(x), Restore(y) when List.mem x allregs ->
-      Printf.fprintf oc "\tlw\t%s %s %d\n" (reg reg_sp) (reg x) (offset y)
+      Printf.fprintf oc "\tlw\t%s %s %d\n" (reg reg_sp) (reg x) (offset y);
+      Printf.fprintf oc "\tlw\t%s %s %d\n" (reg reg_sp) (reg reg_typetmp) ((offset y) + 4);
+      store_typeinfo oc (reg x)
   | NonTail(x), Restore(y) ->
       assert (List.mem x allfregs);
       Printf.fprintf oc "\tlwc1\t %s %s %d\n" (reg reg_sp) (reg x) (offset y)
@@ -313,7 +355,7 @@ and g' oc = function (* 各命令のアセンブリ生成 (caml2html: emit_gprim
 
   | Tail, CallCls(x, ys, zs) ->
       g'_args oc [(x, reg_cl)] ys zs;
-	  Printf.fprintf oc "\tlw\t%s %s %d\n" (reg reg_cl) (reg reg_adr) 0;
+	  Printf.fprintf oc "\tlw\t%s %s %d\n" (reg reg_cl) (reg reg_adr) 4;
     Printf.fprintf oc "\tsll\t%s %s %d\n" (reg reg_adr) (reg reg_adr) 2;
 	  Printf.fprintf oc "\tj %s\n" (reg reg_adr)
   | Tail, CallDir(Id.L(x), ys, zs) -> (* 末尾呼び出し *)
@@ -322,12 +364,14 @@ and g' oc = function (* 各命令のアセンブリ生成 (caml2html: emit_gprim
   | NonTail(a), CallCls(x, ys, zs) ->
       g'_args oc [(x, reg_cl)] ys zs;
 	  let ss = stacksize () in
-	  Printf.fprintf oc "\tlw\t%s %s %d\n" (reg reg_cl) (reg reg_adr) 0; (* get address *)
+	  Printf.fprintf oc "\tlw\t%s %s %d\n" (reg reg_cl) (reg reg_adr) 4; (* get address *)
 	  Printf.fprintf oc "\tsw\t%s %s %d\n" (reg reg_link) (reg reg_sp) ss; (* save link register *)
-	  Printf.fprintf oc "\taddi\t%s %s %d\n" (reg reg_sp) (reg reg_sp) (ss + 4); (* update stack pointer *)
+    li_large oc (reg reg_typetmp) 0;
+    Printf.fprintf oc "\tsw\t%s %s %d\n" (reg reg_typetmp) (reg reg_sp) (ss + 4);
+	  Printf.fprintf oc "\taddi\t%s %s %d\n" (reg reg_sp) (reg reg_sp) (ss + 8); (* update stack pointer *)
     Printf.fprintf oc "\tsll %s %s %d\n" (reg reg_adr) (reg reg_adr) 2;
 	  Printf.fprintf oc "\tjal\t%s\n" (reg reg_adr); (* branch *)
-	  Printf.fprintf oc "\taddi\t%s %s %d\n" (reg reg_sp) (reg reg_sp) (-(ss + 4));
+	  Printf.fprintf oc "\taddi\t%s %s %d\n" (reg reg_sp) (reg reg_sp) (-(ss + 8));
 	  Printf.fprintf oc "\tlw\t%s %s %d\n" (reg reg_sp) (reg reg_link) ss;
       if List.mem a allregs && a <> regs.(0) then
         (Printf.fprintf oc "\tmov\t%s %s\n" (reg a) (reg regs.(0));
@@ -337,10 +381,12 @@ and g' oc = function (* 各命令のアセンブリ生成 (caml2html: emit_gprim
   | (NonTail(a), CallDir(Id.L(x), ys, zs)) ->
       let ss = stacksize () in
       Printf.fprintf oc "\tsw\t%s %s %d\n" (reg reg_link) (reg reg_sp) ss; (* save link register *)
-      Printf.fprintf oc "\taddi\t%s %s %d\n" (reg reg_sp) (reg reg_sp) (ss + 4); (* update stack pointer *)
+      li_large oc (reg reg_typetmp) 0;
+      Printf.fprintf oc "\tsw\t%s %s %d\n" (reg reg_typetmp) (reg reg_sp) (ss + 4);
+      Printf.fprintf oc "\taddi\t%s %s %d\n" (reg reg_sp) (reg reg_sp) (ss + 8); (* update stack pointer *)
       g'_args oc [] ys zs; (* set arguments to correct positions *)
       Printf.fprintf oc "\tjal\t%s\n" x; (* branch *)
-      Printf.fprintf oc "\taddi\t%s %s %d\n" (reg reg_sp) (reg reg_sp) (-(ss + 4)); (* restore stack pointer *)
+      Printf.fprintf oc "\taddi\t%s %s %d\n" (reg reg_sp) (reg reg_sp) (-(ss + 8)); (* restore stack pointer *)
       Printf.fprintf oc "\tlw\t%s %s %d\n" (reg reg_sp) (reg reg_link) ss; (* restore link register *)
       if List.mem a allregs && a <> regs.(0) then
         (Printf.fprintf oc "\tmov\t%s %s\n" (reg a) (reg regs.(0));

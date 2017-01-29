@@ -1,5 +1,7 @@
 (* translation into PowerPC assembly with infinite number of virtual registers *)
 
+(* TODO: implement StTop *)
+
 open Asm
 
 let data = ref [] (* 浮動小数点数の定数テーブル (caml2html: virtual_data) *)
@@ -29,9 +31,9 @@ let expand xts ini addf addi =
       let offset = align offset in
       (offset + 8, addf x offset acc))*)
     (fun (offset, acc) x ->
-      offset + 4, addf x offset acc)
+      offset + 8, addf x offset acc)
     (fun (offset, acc) x t ->
-      (offset + 4, addi x t offset acc))
+      (offset + 8, addi x t offset acc))
 
 let rec g env = function (* 式の仮想マシンコード生成 (caml2html: virtual_g) *)
   | Closure.Unit -> Ans(Nop)
@@ -83,15 +85,15 @@ let rec g env = function (* 式の仮想マシンコード生成 (caml2html: vir
       let offset, store_fv =
 	expand
 	  (List.map (fun y -> (y, M.find y env)) ys)
-	  (4, e2')
+	  (12, e2')
 	  (fun y offset store_fv -> seq(Stf(y, x, C(offset)), store_fv))
 	  (fun y _ offset store_fv -> seq(St(y, x, C(offset)), store_fv)) in
       Let((x, t), Mr(reg_hp), (* x <- reg_hp *)
 	  Let((reg_hp, Type.Int), Add(reg_hp, C(align offset)), (* reg_hp <- reg_hp + offset *)
 	      let z = Id.genid "l" in
 	      Let((z, Type.Int), SetL(l), (* z <- label *)
-		  seq(St(z, x, C(0)), (* M[x] = z *)
-		      store_fv))))
+		  seq(St(z, x, C(4)), (* M[x + 4] = z *)
+		      seq(StTop(x, offset - 1), store_fv))))) (* M[x] = (size, type) *)
   | Closure.AppCls(x, ys) ->
       let (int, float) = separate (List.map (fun y -> (y, M.find y env)) ys) in
       Ans(CallCls(x, int, float))
@@ -136,27 +138,33 @@ let rec g env = function (* 式の仮想マシンコード生成 (caml2html: vir
 *)
   | Closure.Get(x, y) -> (* 配列の読み出し (caml2html: virtual_get) *)
       let offset = Id.genid "o" in
+      let offset2 = Id.genid "o" in
       (match M.find x env with
       | Type.Array(Type.Unit) -> Ans(Nop)
       | Type.Array(Type.Float) ->
-        Let((offset, Type.Int), Mul(y, C(4)),
+        Let((offset, Type.Int), Mul(y, C(8)),
+          Let((offset2, Type.Int), Add(offset, C(4)),
+            Ans(Ldf(x, V(offset2)))))
 	  (*Let((offset, Type.Int), Slw(y, C(3)), float in ppc is 8-bit*)
-	      Ans(Ldf(x, V(offset))))
       | Type.Array(_) ->
-        Let((offset, Type.Int), Mul(y, C(4)),
+        Let((offset, Type.Int), Mul(y, C(8)),
+          Let((offset2, Type.Int), Add(offset, C(4)),
+            Ans(Ld(x, V(offset2)))))
 	  (*Let((offset, Type.Int), Slw(y, C(2)),*)
-	      Ans(Ld(x, V(offset))))
       | _ -> assert false)
   | Closure.Put(x, y, z) ->
       let offset = Id.genid "o" in
+      let offset2 = Id.genid "o" in
       (match M.find x env with
       | Type.Array(Type.Unit) -> Ans(Nop)
       | Type.Array(Type.Float) ->
-	  Let((offset, Type.Int), Mul(y, C(4)),
-	      Ans(Stf(z, x, V(offset))))
+	  Let((offset, Type.Int), Mul(y, C(8)),
+      Let((offset2, Type.Int), Add(offset, C(4)),
+        Ans(Stf(z, x, V(offset2)))))
       | Type.Array(_) ->
-	  Let((offset, Type.Int), Mul(y, C(4)),
-	      Ans(St(z, x, V(offset))))
+	  Let((offset, Type.Int), Mul(y, C(8)),
+      Let((offset2, Type.Int), Add(offset, C(4)),
+        Ans(St(z, x, V(offset2)))))
       | _ -> assert false)
   | Closure.ExtArray(Id.L(x)) -> Ans(SetLVar(Id.L("min_caml_load_" ^ x)))
   | Closure.ExtTuple(Id.L(x)) -> Ans(SetLVar(Id.L("min_caml_load_" ^ x)))

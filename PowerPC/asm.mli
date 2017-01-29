@@ -16,6 +16,7 @@ and exp =
   | Div of Id.t * id_or_imm (* mul and div will be converted to shift operator *)
   | Ld of Id.t * id_or_imm
   | St of Id.t * Id.t * id_or_imm
+  | StTop of Id.t * int
   | FMr of Id.t 
   | FNeg of Id.t
   | FAbs of Id.t

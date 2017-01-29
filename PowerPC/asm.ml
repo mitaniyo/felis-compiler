@@ -19,6 +19,7 @@ and exp = (* 一つ一つの命令に対応する式 (caml2html: sparcasm_exp) *
   | Div of Id.t * id_or_imm (* mul and div will be converted to shift operator *)
   | Ld of Id.t * id_or_imm
   | St of Id.t * Id.t * id_or_imm
+  | StTop of Id.t * int (* top element of heap *)
   | FMr of Id.t
   | FNeg of Id.t
   | FAbs of Id.t
@@ -91,6 +92,7 @@ let rec fv_exp = function
   | Mr(x) | Neg(x) | FMr(x) | FNeg(x) | FAbs(x) | Save(x, _) -> [x]
   | Add(x, y') | Sub(x, y') | Mul(x, y') | Div(x, y') | Ldf(x, y') | Ld(x, y') -> x :: fv_id_or_imm y'
   | St(x, y, z') | Stf(x, y, z') -> x :: y :: fv_id_or_imm z'
+  | StTop(x, _) -> [x] (* really correct? *)
   | FAdd(x, y) | FSub(x, y) | FMul(x, y) | FDiv(x, y) -> [x; y]
   | IfEq(x, y', e1, e2) | IfLE(x, y', e1, e2) | IfGE(x, y', e1, e2) ->  x :: fv_id_or_imm y' @ remove_and_uniq S.empty (fv e1 @ fv e2) (* uniq here just for efficiency *)
   | IfFEq(x, y, e1, e2) | IfFLE(x, y, e1, e2) -> x :: y :: remove_and_uniq S.empty (fv e1 @ fv e2) (* uniq here just for efficiency *)

@@ -126,6 +126,7 @@ and g' dest cont regenv = function (* 各命令のレジスタ割り当て (caml
   | Div(x, y') -> (Ans(Div(find x Type.Int regenv, find' y' regenv)), regenv)
   | Ld(x, y') -> (Ans(Ld(find x Type.Int regenv, find' y' regenv)), regenv)
   | St(x, y, z') -> (Ans(St(find x Type.Int regenv, find y Type.Int regenv, find' z' regenv)), regenv)
+  | StTop(x, y) -> (Ans(StTop(find x Type.Int regenv, y))) (* really correct? *)
   | FMr(x) -> (Ans(FMr(find x Type.Float regenv)), regenv)
   | FNeg(x) -> (Ans(FNeg(find x Type.Float regenv)), regenv)
   | FAbs(x) -> (Ans(FAbs(find x Type.Float regenv)), regenv)
