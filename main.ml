@@ -2,6 +2,10 @@ let limit = ref 1000
 let isLib = ref 0
 let hasExtvar = ref 0
 
+let max_s = ref 2097152
+let max_gl = ref 4096
+let max_hp = ref 524288
+
 let rec iter n e = (* 最適化処理をくりかえす (caml2html: main_iter) *)
   Format.eprintf "iteration %d@." n;
   if n = 0 then e else
@@ -14,7 +18,7 @@ let rec iter n e = (* 最適化処理をくりかえす (caml2html: main_iter) *
 let lexbuf outchan l = (* バッファをコンパイルしてチャンネルへ出力する (caml2html: main_lexbuf) *)
   Id.counter := 0;
   Typing.extenv := M.empty;
-  Emit.f outchan (!hasExtvar)
+  Emit.f outchan (!hasExtvar) (!max_s) (!max_gl) (!max_hp)
     (RegAlloc.f
     (Virtual.f
        (Closure.f
@@ -69,7 +73,10 @@ let () = (* ここからコンパイラの実行が開始される (caml2html: m
     [("-inline", Arg.Int(fun i -> Inline.threshold := i), "maximum size of functions inlined");
      ("-iter", Arg.Int(fun i -> limit := i), "maximum number of optimizations iterated");
      ("-lib", Arg.Int(fun i -> isLib := i), "set 1 if no function should be eliminated");
-     ("-extvar", Arg.Int(fun i -> hasExtvar := i), "set 1 if the program has ext variable (not function)")]
+     ("-extvar", Arg.Int(fun i -> hasExtvar := i), "set 1 if the program has ext variable (not function)");
+     ("-ssize", Arg.Int(fun i -> max_s := i), "max stacksize");
+     ("-gsize", Arg.Int(fun i -> max_gl := i), "max global variables size");
+     ("-hsize", Arg.Int(fun i -> max_hp := i), "max heap size, program uses hsize * 2 bytes")]
     (fun s -> files := !files @ [s])
     ("Mitou Min-Caml Compiler (C) Eijiro Sumii\n" ^
      Printf.sprintf "usage: %s [-inline m] [-iter n] ...filenames without \".ml\"..." Sys.argv.(0));

@@ -19,6 +19,14 @@ let savef x =
    if not (List.mem x !stackmap) then
     stackmap := !stackmap @ [x];
     stacktypemap := !stacktypemap @ [Type.Float]
+
+let li_large oc r v =
+  let lo = v land 65535 in
+  let hi = ((v land (65535 lsl 16)) lsr 16) in
+  if lo = 0 then (Printf.fprintf oc "\taddi %s %s %d\n" "r0" r lo) else
+  (Printf.fprintf oc "\tlui %s %d\n" r hi;
+  Printf.fprintf oc "\taddi %s %s %d\n" r r lo)
+
   (*stackset := S.add x !stackset;
   if not (List.mem x !stackmap) then
     (let pad =
@@ -411,7 +419,7 @@ let h oc { name = Id.L(x); args = _; fargs = _; body = e; ret = _ } =
   stacktypemap := [];
   g oc (Tail, e)
 
-let f oc hasextvar (Prog(data, fundefs, e)) =
+let f oc hasextvar max_s max_gl max_hp (Prog(data, fundefs, e)) =
 	Format.eprintf "generating assembly...\n";
 	(* do not use data section *)
 	List.iter (fun fundef -> h oc fundef) fundefs;
@@ -419,7 +427,8 @@ let f oc hasextvar (Prog(data, fundefs, e)) =
 	stackset := S.empty;
 	stackmap := [];
 	stacktypemap := [];
-	Printf.fprintf oc "\tlui\t%s %d\n" (reg reg_hp) 32;
+  li_large oc (reg reg_hp) max_s;
+	(*Printf.fprintf oc "\tlui\t%s %d\n" (reg reg_hp) 32;*)
   (if hasextvar = 1 then
     (Printf.fprintf oc "\tjal\tmin_caml_globals\n";
     Printf.fprintf oc "\taddi\t%s %s %d\n" "r0" "r31" 0)
