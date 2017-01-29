@@ -4,6 +4,11 @@ external gethi : float -> int32 = "gethi"
 external getlo : float -> int32 = "getlo"
 (*external getbits : float -> int32 = "getbits"*)
 
+let reg r =
+  if is_reg r
+  then String.sub r 1 (String.length r - 1)
+  else r
+
 let stackset = ref S.empty (* すでにSaveされた変数の集合 (caml2html: emit_stackset) *)
 let stackmap = ref [] (* Saveされた変数の、スタックにおける位置 (caml2html: emit_stackmap) *)
 let stacktypemap = ref [] (* type of each variabes in stackmap *)
@@ -27,6 +32,18 @@ let li_large oc r v =
   (Printf.fprintf oc "\tlui %s %d\n" r hi;
   Printf.fprintf oc "\taddi %s %s %d\n" r r lo)
 
+let mov_typeinfo oc s d =
+  let si = reg_id s in
+  let di = reg_id d in
+  if si = di then () else
+  Printf.fprintf oc "\tsrl %s %s %d\n" (reg reg_type) (reg reg_typetmp) si;
+  Printf.fprintf oc "\tandi %s %s %d\n" (reg reg_typetmp) (reg reg_typetmp) 1;
+  Printf.fprintf oc "\tsll %s %s %d\n" (reg reg_typetmp) (reg reg_typetmp) di;
+  Printf.fprintf oc "\tor %s %s %s\n" (reg reg_type) (reg reg_typetmp) (reg reg_type)
+
+let init_typeinfo oc =
+  Printf.fprintf oc "\taddi %s %s %d\n" "r0" (reg reg_type) 1;
+  Printf.fprintf oc "\tsll %s %s %d\n" (reg reg_type) (reg reg_type) (reg_id (reg reg_hp))
   (*stackset := S.add x !stackset;
   if not (List.mem x !stackmap) then
     (let pad =
@@ -61,12 +78,7 @@ let small_log x =
   | 16 -> 4
   | _ -> -1
 
-let reg r =
-  if is_reg r
-  then String.sub r 1 (String.length r - 1)
-  else r
-
-let load_label r label = (* TO BE DECIDED *)
+let load_label oc r label =
   let r' = reg r in
   Printf.eprintf "load %s to %s\n" r' label;
   Printf.sprintf "\taddi\t%s %s %s\n" "r0" r' label
@@ -98,7 +110,9 @@ let rec g oc = function (* 命令列のアセンブリ生成 (caml2html: emit_g)
 and g' oc = function (* 各命令のアセンブリ生成 (caml2html: emit_gprime) *)
   (* 末尾でなかったら計算結果をdestにセット (caml2html: emit_nontail) *)
   | NonTail(_), Nop -> ()
-  | NonTail(x), Li(i) when -32768 <= i && i < 32768 -> Printf.fprintf oc "\taddi\t%s %s %d\n" "r0" (reg x) i
+  | NonTail(x), Li(i) when -32768 <= i && i < 32768 ->
+    Printf.fprintf oc "\taddi\t%s %s %d\n" "r0" (reg x) i;
+    mov_typeinfo oc "r0" (reg x)
   | NonTail(x), Li(i) ->
       (*let n = i lsr 16 in
       let m = i lxor (n lsl 16) in
@@ -109,7 +123,8 @@ and g' oc = function (* 各命令のアセンブリ生成 (caml2html: emit_gprim
       let lo = getlo d in*)
       (*Printf.fprintf stderr "%d %d %d\n" i lo hi;*)
 	  Printf.fprintf oc "\tlui\t%s %d\n" (reg x) hi;
-	  Printf.fprintf oc "\tori %s %s %d\n" (reg x) (reg x) lo
+	  Printf.fprintf oc "\tori %s %s %d\n" (reg x) (reg x) lo;
+    mov_typeinfo oc "r0" (reg x)
       (*Printf.fprintf oc "\tlis\t%s, %d\n" r n;
       Printf.fprintf oc "\tori\t%s, %s, %d\n" r r m*)
   | NonTail(x), FLi(d) ->
@@ -122,8 +137,9 @@ and g' oc = function (* 各命令のアセンブリ生成 (caml2html: emit_gprim
       Printf.fprintf oc "\tori\t%s %s %ld\n" (reg reg_fimm) (reg reg_fimm) lo;
 	  Printf.fprintf oc "\tmtc1\t%s %s\n" (reg reg_fimm) (reg x)
   | NonTail(x), SetL(Id.L(y)) ->
-      let s = load_label x y in
-      Printf.fprintf oc "%s" s
+      let s = load_label oc x y in
+      Printf.fprintf oc "%s" s;
+      mov_typeinfo oc "r0" (reg x)
   | NonTail(x), SetLVar(Id.L(y)) ->
       let ss = stacksize () in
       Printf.fprintf oc "\taddi\t%s %s %d\n" (reg reg_sp) (reg reg_sp) ss;
@@ -131,14 +147,21 @@ and g' oc = function (* 各命令のアセンブリ生成 (caml2html: emit_gprim
       Printf.fprintf oc "\tsw\t%s %s %d\n" (reg reg_link) (reg reg_sp) 4;
       Printf.fprintf oc "\tjal\t%s\n" y;
       Printf.fprintf oc "\tmov\t%s %s\n" (reg x) "r1";
+      mov_typeinfo oc "r1" (reg x);
       (if (reg x) = "r1" then () else Printf.fprintf oc "\tlw\t%s %s %d\n" (reg reg_sp) "r1" 0);
       Printf.fprintf oc "\tlw\t%s %s %d\n" (reg reg_sp) (reg reg_link) 4;
       Printf.fprintf oc "\taddi\t%s %s %d\n" (reg reg_sp) (reg reg_sp) (-ss)
   | NonTail(x), Mr(y) when x = y -> ()
-  | NonTail(x), Mr(y) -> Printf.fprintf oc "\tmov\t%s %s\n" (reg x) (reg y)
+  | NonTail(x), Mr(y) ->
+    Printf.fprintf oc "\tmov\t%s %s\n" (reg x) (reg y);
+    mov_typeinfo oc (reg y) (reg x)
   | NonTail(x), Neg(y) -> Printf.fprintf oc "\tsub\t%s %s %s\n" ("r0") (reg y) (reg x)
-  | NonTail(x), Add(y, V(z)) -> Printf.fprintf oc "\tadd\t%s %s %s\n" (reg y) (reg z) (reg x)
-  | NonTail(x), Add(y, C(z)) -> Printf.fprintf oc "\taddi\t%s %s %d\n" (reg y) (reg x) z
+  | NonTail(x), Add(y, V(z)) ->
+    Printf.fprintf oc "\tadd\t%s %s %s\n" (reg y) (reg z) (reg x)
+    (** maybe don't have to call mov_typeinfo **)
+  | NonTail(x), Add(y, C(z)) ->
+    Printf.fprintf oc "\taddi\t%s %s %d\n" (reg y) (reg x) z;
+    mov_typeinfo oc (reg y) (reg x)
   | NonTail(x), Sub(y, V(z)) -> Printf.fprintf oc "\tsub\t%s %s %s\n" (reg y) (reg z) (reg x)
   | NonTail(x), Sub(y, C(z)) -> Printf.fprintf oc "\tsubi\t%s %s %d\n" (reg y) (reg x) z
   (*| NonTail(x), Slw(y, V(z)) -> Printf.fprintf oc "\tslw\t%s, %s, %s\n" (reg x) (reg y) (reg z)
@@ -288,14 +311,6 @@ and g' oc = function (* 各命令のアセンブリ生成 (caml2html: emit_gprim
   	  Printf.fprintf oc "\tmfc1\t%s %s\n" (reg reg_fcond) (reg reg_cond);
   	  g'_non_tail_if oc (NonTail(z)) e2 e1 "bfle_nontail" "blez"
 
-  (*| NonTail(z), IfFLE(x, y, e1, e2) ->
-      Printf.fprintf oc "\tfcmpu\tcr7, %s, %s\n" (reg x) (reg y);
-      g'_non_tail_if oc (NonTail(z)) e1 e2 "ble" "bgt"*)
-  (* 関数呼び出しの仮想命令の実装 (caml2html: emit_call) *)
-  (*| Tail, CallCls(x, ys, zs) -> (* 末尾呼び出し (caml2html: emit_tailcall) *) (* TODO *)
-      g'_args oc [(x, reg_cl)] ys zs;
-      Printf.fprintf oc "\tlwz\t%s, 0(%s)\n" (reg reg_sw) (reg reg_cl);
-      Printf.fprintf oc "\tmtctr\t%s\n\tbctr\n" (reg reg_sw);*)
   | Tail, CallCls(x, ys, zs) ->
       g'_args oc [(x, reg_cl)] ys zs;
 	  Printf.fprintf oc "\tlw\t%s %s %d\n" (reg reg_cl) (reg reg_adr) 0;
@@ -304,22 +319,6 @@ and g' oc = function (* 各命令のアセンブリ生成 (caml2html: emit_gprim
   | Tail, CallDir(Id.L(x), ys, zs) -> (* 末尾呼び出し *)
       g'_args oc [] ys zs;
       Printf.fprintf oc "\tj\t%s\n" x
-  (*| NonTail(a), CallCls(x, ys, zs) -> (* TODO *)
-      Printf.fprintf oc "\tmflr\t%s\n" (reg reg_tmp);
-      g'_args oc [(x, reg_cl)] ys zs;
-      let ss = stacksize () in
-      Printf.fprintf oc "\tstw\t%s, %d(%s)\n" (reg reg_tmp) (ss - 4) (reg reg_sp);
-      Printf.fprintf oc "\taddi\t%s, %s, %d\n" (reg reg_sp) (reg reg_sp) ss;
-      Printf.fprintf oc "\tlwz\t%s, 0(%s)\n" (reg reg_tmp) (reg reg_cl);
-      Printf.fprintf oc "\tmtctr\t%s\n" (reg reg_tmp);
-      Printf.fprintf oc "\tbctrl\n";
-      Printf.fprintf oc "\tsubi\t%s, %s, %d\n" (reg reg_sp) (reg reg_sp) ss;
-      Printf.fprintf oc "\tlwz\t%s, %d(%s)\n" (reg reg_tmp) (ss - 4) (reg reg_sp);
-      if List.mem a allregs && a <> regs.(0) then
-	Printf.fprintf oc "\tmr\t%s, %s\n" (reg a) (reg regs.(0))
-      else if List.mem a allfregs && a <> fregs.(0) then
-	Printf.fprintf oc "\tfmr\t%s, %s\n" (reg a) (reg fregs.(0));
-      Printf.fprintf oc "\tmtlr\t%s\n" (reg reg_tmp)*)
   | NonTail(a), CallCls(x, ys, zs) ->
       g'_args oc [(x, reg_cl)] ys zs;
 	  let ss = stacksize () in
@@ -331,7 +330,8 @@ and g' oc = function (* 各命令のアセンブリ生成 (caml2html: emit_gprim
 	  Printf.fprintf oc "\taddi\t%s %s %d\n" (reg reg_sp) (reg reg_sp) (-(ss + 4));
 	  Printf.fprintf oc "\tlw\t%s %s %d\n" (reg reg_sp) (reg reg_link) ss;
       if List.mem a allregs && a <> regs.(0) then
-        Printf.fprintf oc "\tmov\t%s %s\n" (reg a) (reg regs.(0))
+        (Printf.fprintf oc "\tmov\t%s %s\n" (reg a) (reg regs.(0));
+        mov_typeinfo oc (reg regs.(0)) (reg a))
       else if List.mem a allfregs && a <> fregs.(0) then
         Printf.fprintf oc "\tmov.s\t%s %s\n" (reg fregs.(0)) (reg a)
   | (NonTail(a), CallDir(Id.L(x), ys, zs)) ->
@@ -343,7 +343,8 @@ and g' oc = function (* 各命令のアセンブリ生成 (caml2html: emit_gprim
       Printf.fprintf oc "\taddi\t%s %s %d\n" (reg reg_sp) (reg reg_sp) (-(ss + 4)); (* restore stack pointer *)
       Printf.fprintf oc "\tlw\t%s %s %d\n" (reg reg_sp) (reg reg_link) ss; (* restore link register *)
       if List.mem a allregs && a <> regs.(0) then
-        Printf.fprintf oc "\tmov\t%s %s\n" (reg a) (reg regs.(0))
+        (Printf.fprintf oc "\tmov\t%s %s\n" (reg a) (reg regs.(0));
+        mov_typeinfo oc (reg regs.(0)) (reg a))
       else if List.mem a allfregs && a <> fregs.(0) then
         Printf.fprintf oc "\tmov.s\t%s %s\n" (reg fregs.(0)) (reg a)
 
@@ -401,7 +402,7 @@ and g'_args oc x_reg_cl ys zs =
       (0, x_reg_cl)
       ys in
   List.iter
-    (fun (y, r) -> Printf.fprintf oc "\tmov\t%s %s\n" (reg r) (reg y))
+    (fun (y, r) -> (Printf.fprintf oc "\tmov\t%s %s\n" (reg r) (reg y); mov_typeinfo oc (reg y) (reg r)))
     (shuffle reg_sw yrs);
   let (d, zfrs) =
     List.fold_left
@@ -427,6 +428,7 @@ let f oc hasextvar max_s max_gl max_hp (Prog(data, fundefs, e)) =
 	stackset := S.empty;
 	stackmap := [];
 	stacktypemap := [];
+  init_typeinfo oc;
   li_large oc (reg reg_hp) max_s;
 	(*Printf.fprintf oc "\tlui\t%s %d\n" (reg reg_hp) 32;*)
   (if hasextvar = 1 then

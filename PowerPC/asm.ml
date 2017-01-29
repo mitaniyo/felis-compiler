@@ -47,7 +47,7 @@ type prog = Prog of (Id.l * float) list * fundef list * t
 let fletd(x, e1, e2) = Let((x, Type.Float), e1, e2)
 let seq(e1, e2) = Let((Id.gentmp Type.Unit, Type.Unit), e1, e2)
 
-let regs = Array.append (Array.init 22 (fun i -> Printf.sprintf "%%r%d" (i + 1))) [|"%r28"; "%r29"|]
+let regs = Array.append (Array.init 20 (fun i -> Printf.sprintf "%%r%d" (i + 1))) [|"%r28"; "%r29"|]
 let fregs = Array.append (Array.init 30 (fun i -> Printf.sprintf "%%f%d" i)) [|"%f31"|]
 
 (*let fregs = Array.init 30 (fun i -> Printf.sprintf "%%f%d" i)*)
@@ -68,11 +68,15 @@ let reg_cond = "%r25"
 let reg_fimm = "%r24"
 
 let reg_adr = "%r23"
+let reg_type = "%r22"
+let reg_typetmp = "%r21"
 
 let reg_fcond = "%f30"
 
 (*let is_reg x = (x.[0] = 'r' || x.[0] = 'f')*)
 let is_reg x = (x.[0] = '%')
+
+let reg_id x = int_of_string (String.sub x 1 (String.length x - 1))
 
 (* super-tenuki *)
 let rec remove_and_uniq xs = function

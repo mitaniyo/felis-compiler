@@ -55,6 +55,9 @@ val reg_sp : Id.t
 val reg_tmp : Id.t
 val is_reg : Id.t -> bool
 
+val reg_type : Id.t
+val reg_typetmp : Id.t
+
 
 (*let reg_sp = "%r30"*)
 val reg_link : Id.t
@@ -69,6 +72,7 @@ val reg_adr : Id.t
 (*let is_reg x = (x.[0] = 'r' || x.[0] = 'f')*)
 (*let is_reg x = (x.[0] = '%')*)
 val is_reg : Id.t -> bool
+val reg_id : Id.t -> int
 
 
 val fv : t -> Id.t list
