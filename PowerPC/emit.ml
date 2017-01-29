@@ -132,7 +132,7 @@ and g' oc = function (* 各命令のアセンブリ生成 (caml2html: emit_gprim
   | NonTail(x), Add(y, V(z)) -> Printf.fprintf oc "\tadd\t%s %s %s\n" (reg y) (reg z) (reg x)
   | NonTail(x), Add(y, C(z)) -> Printf.fprintf oc "\taddi\t%s %s %d\n" (reg y) (reg x) z
   | NonTail(x), Sub(y, V(z)) -> Printf.fprintf oc "\tsub\t%s %s %s\n" (reg y) (reg z) (reg x)
-  | NonTail(x), Sub(y, C(z)) -> Printf.fprintf oc "\tsubi\t%s %s %d\n" (reg y) (reg x) z
+  | NonTail(x), Sub(y, C(z)) -> Printf.fprintf oc "\taddi\t%s %s %d\n" (reg y) (reg x) (-z)
   (*| NonTail(x), Slw(y, V(z)) -> Printf.fprintf oc "\tslw\t%s, %s, %s\n" (reg x) (reg y) (reg z)
   | NonTail(x), Slw(y, C(z)) -> Printf.fprintf oc "\tslwi\t%s, %s, %d\n" (reg x) (reg y) z*)
   | NonTail(x), Mul(y, C(z)) -> let l = small_log z in 
