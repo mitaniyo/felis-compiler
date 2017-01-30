@@ -105,18 +105,18 @@ let rec g env = function (* 式の仮想マシンコード生成 (caml2html: vir
       let (offset, store) =
 	expand
 	  (List.map (fun x -> (x, M.find x env)) xs)
-	  (0, Ans(Mr(y)))
+	  (4, Ans(Mr(y)))
 	  (fun x offset store -> seq(Stf(x, y, C(offset)), store))
 	  (fun x _ offset store -> seq(St(x, y, C(offset)), store))  in
       Let((y, Type.Tuple(List.map (fun x -> M.find x env) xs)), Mr(reg_hp),
-	  Let((reg_hp, Type.Int), Add(reg_hp, C(align offset)),
-	      store))
+        seq(StTop(reg_hp, C(offset - 1)),
+          Let((reg_hp, Type.Int), Add(reg_hp, C(offset))), store))
   | Closure.LetTuple(xts, y, e2) ->
       let s = Closure.fv e2 in
       let (offset, load) =
 	expand
 	  xts
-	  (0, g (M.add_list xts env) e2)
+	  (4, g (M.add_list xts env) e2)
 	  (fun x offset load ->
 	    if not (S.mem x s) then load else (* [XX] a little ad hoc optimization *)
 	    fletd(x, Ldf(y, C(offset)), load))
