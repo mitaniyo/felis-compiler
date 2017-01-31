@@ -51,7 +51,56 @@ j gc_next_root_loop
 
 gc_copyall:
 # r3 : from, r4 : to, r5 : sz
-addi r0 r5 4
+addi r0 r6 4
+gc_copyall_loop:
+# check type of mem[r3 + r6]
+addi r6 r6 4
+lwo r3 r6 r7
+# r7 = 0 -> int, 1 -> adr, 2 -> float
+beq r7 r0 gc_copy_int
+addi r7 r7 -1
+beq r7 r0 gc_copy_adr
+addi r7 r7 -1
+beq r7 r0 gc_copy_float
+
+gc_copyall_nextloop:
+addi r6 r6 8
+sub r6 r5 r25
+beq r25 r0 gc_copyall_return
+j gc_copyall_loop
+
+gc_copyall_return:
+jr r31
+
+gc_copy_int:
+# from r3 + r6 to r4 + r6
+lw r3 r7 0
+sw r7 r4 0
+lw r3 r7 4
+sw r7 r4 4
+j gc_copyall_nextloop
+
+gc_copy_float:
+lwc1 r3 f31 0
+swc1 f31 r4 0
+lwc1 r3 r7 4
+sc r7 r4 4
+j gc_copyall_nextloop
+
+gc_copy_adr:
+lw r3 r7 0
+# check if r7 is copied
+lw r7 r8 0
+andi r8 r9 3
+# if r9 = 0 then this address is copied
+beq r9 r0 gc_adr_copied
+# save variables and call copyall
+
+gc_adr_copied:
+sw r8 r4 0
+lw r3 r7 4
+sw r7 r4 4
+j gc_copyall_nextloop
 
 
 
