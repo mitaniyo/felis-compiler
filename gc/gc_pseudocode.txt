@@ -1,0 +1,34 @@
+for i = 0 to reg_sp
+if mem[i] is address
+if copied
+mem[i] <- mem[adr]
+else
+tmp <- reg_hp
+tmp2 <- mem[i]
+mem[i] <- reg_hp
+reg_hp += sz
+mem[tmp] <- mem[tmp2]
+mem[tmp2] <- tmp
+copyall(tmp2, tmp)
+
+copyall(from, to, sz)
+for i = 4 to 4 + sz * 8
+if mem[from + i] is not address
+	mem[to + i] <- mem[from + i]
+else
+	// mem[from + i] の指す先がコピー済みかどうか調べる
+	if mem[mem[from + i]].lsb = 00
+		// copied
+		mem[to + i] <- mem[mem[from + i]]
+	else
+		tmp <- reg_hp
+		tmp2 <- mem[from + i]
+		reg_hp += sz
+		mem[tmp] <- mem[tmp2]
+		mem[tmp2] <- tmp
+		save(i)
+		save(sz)
+		save(from)
+		save(to)
+		copyall(tmp2, tmp, new_sz)
+		restore(i, sz, from, to)
