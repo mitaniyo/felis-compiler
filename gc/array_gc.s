@@ -35,6 +35,7 @@ beq r25 r0 create_array_return
 j create_array_loop
 
 create_array_return:
+addi r27 r1 0
 add r27 r4 r27
 jr r31
 
@@ -73,5 +74,6 @@ beq r25 r0 create_float_array_return
 j create_float_array_loop
 
 create_float_array_return:
+addi r27 r1 0
 add r27 r4 r27
 jr r31
