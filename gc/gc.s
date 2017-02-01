@@ -108,27 +108,35 @@ jr r31
 
 gc_copy_int:
 # from r3 + r6 to r4 + r6
-lw r3 r7 0
-sw r7 r4 0
-lw r3 r7 4
-sw r7 r4 4
+lwo r3 r6 r7
+swo r7 r4 r6
+addi r6 r6 -4
+lwo r3 r6 r7
+swo r7 r4 r6
 j gc_copyall_nextloop
 
 gc_copy_float:
-lwc1 r3 f31 0
-swc1 f31 r4 0
-lw r3 r7 4
-sw r7 r4 4
+lwo r3 r6 r7
+swo r7 r4 r6
+addi r6 r6 -4
+lwoc1 r3 r6 f31
+swoc1 f31 r4 r6
 j gc_copyall_nextloop
 
 gc_copy_adr:
-lw r3 r7 0
+addi r6 r6 -4
+lwo r3 r6 r7
 # check if r7 is copied
 lw r7 r8 0
 andi r8 r9 3
 # if r9 = 0 then this address is copied
 beq r9 r0 gc_adr_copied
 sw r8 r27 0
+swo r27 r4 r6
+addi r0 r21 1
+addi r6 r6 4
+swo r21 r4 r6
+addi r6 r6 -4
 sw r27 r7 0
 # save variables and call copyall
 sw r3 r30 0
@@ -137,6 +145,7 @@ sw r5 r30 8
 sw r6 r30 12
 # from r7 to reg_hp
 # sz = r8 + 1
+# update reg_hp
 addi r8 r5 1
 addi r7 r3 0
 addi r27 r4 0
@@ -153,7 +162,10 @@ lw r30 r3 0
 j gc_copyall_nextloop
 
 gc_adr_copied:
-sw r8 r4 0
-lw r3 r7 4
-sw r7 r4 4
+addi r6 r6 4
+lwo r3 r6 r7
+swo r7 r4 r6
+addi r6 r6 -4
+lwo r3 r6 r7
+swo r7 r4 r6
 j gc_copyall_nextloop
