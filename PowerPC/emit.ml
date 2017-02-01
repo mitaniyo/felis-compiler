@@ -39,6 +39,12 @@ let load_typeinfo oc r =
 
 let store_typeinfo oc r =
   let ri = reg_id r in
+  if ri = 0 then () else
+  Printf.fprintf oc "\taddi %s %s %d\n" "r0" (reg reg_tmp) 1;
+  Printf.fprintf oc "\tsll %s %s %d\n" (reg reg_tmp) (reg reg_tmp) ri;
+  Printf.fprintf oc "\taddi %s %s %d\n" (reg reg_tmp) (reg reg_tmp) 1;
+  Printf.fprintf oc "\tsub %s %s %s\n" "r0" (reg reg_tmp) (reg reg_tmp);
+  Printf.fprintf oc "\tand %s %s %s\n" (reg reg_type) (reg reg_tmp) (reg reg_type);
   Printf.fprintf oc "\tsll %s %s %d\n" (reg reg_typetmp) (reg reg_typetmp) ri;
   Printf.fprintf oc "\tor %s %s %s\n" (reg reg_type) (reg reg_typetmp) (reg reg_type)
 
@@ -48,8 +54,7 @@ let mov_typeinfo oc s d =
   if si = di then () else
   Printf.fprintf oc "\tsrl %s %s %d\n" (reg reg_type) (reg reg_typetmp) si;
   Printf.fprintf oc "\tandi %s %s %d\n" (reg reg_typetmp) (reg reg_typetmp) 1;
-  Printf.fprintf oc "\tsll %s %s %d\n" (reg reg_typetmp) (reg reg_typetmp) di;
-  Printf.fprintf oc "\tor %s %s %s\n" (reg reg_type) (reg reg_typetmp) (reg reg_type)
+  store_typeinfo oc d
 
 let init_typeinfo oc =
   Printf.fprintf oc "\taddi %s %s %d\n" "r0" (reg reg_type) 1;
