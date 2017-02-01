@@ -1,31 +1,32 @@
 min_caml__gc:
-lui r2 40
+# 32-33, 33-34
+lui r2 33
 ori r2 r2 4096
 sub r27 r2 r25
 # if r25 <= 0 then smaller heap now
 blez r25 gc_smaller_heap
 # gc_larger_heap
-lui r3 48 # heap bound
+lui r3 34 # heap bound
 ori r3 r3 4096
 sub r3 r27 r4
-subi r4 r25 r1
+sub r4 r1 r25
 # if r25 < 0 need gc
 # if >= 0 do not need gc
 bgez r25 gc_notneed
-lui r25 32
-ori r25 r25 4096
+lui r27 32
+ori r27 r27 4096
 j gc_doall
 
 gc_smaller_heap:
-lui r3 40 # heap bound
+lui r3 33 # heap bound
 ori r3 r3 4096
 sub r3 r27 r4
-subi r4 r25 r1
+sub r4 r1 r25
 # if r25 < 0 need gc
 # if >= 0 do not need gc
 bgez r25 gc_notneed
-lui r25 40
-ori r25 r25 4096
+lui r27 33
+ori r27 r27 4096
 j gc_doall
 
 gc_notneed:
@@ -38,7 +39,7 @@ addi r30 r1 0
 # r1 <- reg_sp
 addi r0 r2 0
 # for r2 = 0 to reg_sp
-gc_root_loop
+gc_root_loop:
 sub r1 r2 r25
 beq r25 r0 gc_return
 # check the type of mem[r2]

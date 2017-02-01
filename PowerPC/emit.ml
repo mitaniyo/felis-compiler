@@ -179,25 +179,27 @@ and g' oc = function (* 各命令のアセンブリ生成 (caml2html: emit_gprim
   (*| NonTail(x), Slw(y, V(z)) -> Printf.fprintf oc "\tslw\t%s, %s, %s\n" (reg x) (reg y) (reg z)
   | NonTail(x), Slw(y, C(z)) -> Printf.fprintf oc "\tslwi\t%s, %s, %d\n" (reg x) (reg y) z*)
   | NonTail(x), Mul(y, C(z)) -> let l = small_log z in 
-    if l >= 0 then Printf.fprintf oc "\tsll\t%s %s %d\n" (reg y) (reg x) l
-    else Printf.fprintf oc "\tmult\t%s %s %d\n" (reg y) (reg x) z
+    (if l >= 0 then Printf.fprintf oc "\tsll\t%s %s %d\n" (reg y) (reg x) l
+    else Printf.fprintf oc "\tmult\t%s %s %d\n" (reg y) (reg x) z);
+    mov_typeinfo oc (reg y) (reg x)
   | NonTail(x), Mul(y, V(z)) -> Printf.fprintf oc "\tmult\t%s %s %s\n" (reg y) (reg z) (reg x)
   | NonTail(x), Div(y, C(z)) -> let l = small_log z in
-    if l >= 0 then Printf.fprintf oc "\tsrl\t%s %s %d\n" (reg y) (reg x) l
-    else Printf.fprintf oc "\tdiv\t%s %s %d\n" (reg y) (reg x) z
+    (if l >= 0 then Printf.fprintf oc "\tsrl\t%s %s %d\n" (reg y) (reg x) l
+    else Printf.fprintf oc "\tdiv\t%s %s %d\n" (reg y) (reg x) z);
+    mov_typeinfo oc (reg y) (reg x)
   | NonTail(x), Div(y, V(z)) -> Printf.fprintf oc "\tdiv\t%s %s %s\n" (reg y) (reg z) (reg x)
   (*| NonTail(x), Lwz(y, V(z)) -> Printf.fprintf oc "\tlwzx\t%s, %s, %s\n" (reg x) (reg y) (reg z)
   | NonTail(x), Lwz(y, C(z)) -> Printf.fprintf oc "\tlwz\t%s, %d(%s)\n" (reg x) z (reg y)*)
   | NonTail(x), Ld(y, V(z)) ->
-    Printf.fprintf oc "\tlwo\t%s %s %s\n" (reg y) (reg z) (reg x);
-    Printf.fprintf oc "\taddi\t%s %s %d\n" (reg z) (reg z) 4;
+  	Printf.fprintf oc "\taddi\t%s %s %d\n" (reg z) (reg z) 4;
     Printf.fprintf oc "\tlwo\t%s %s %s\n" (reg y) (reg z) (reg reg_typetmp);
+    Printf.fprintf oc "\taddi\t%s %s %d\n" (reg z) (reg z) (-4);
+    Printf.fprintf oc "\tlwo\t%s %s %s\n" (reg y) (reg z) (reg x);
     store_typeinfo oc (reg x);
-    Printf.fprintf oc "\taddi\t%s %s %d\n" (reg z) (reg z) (-4)
   | NonTail(x), Ld(y, C(z)) ->
-    Printf.fprintf oc "\tlw\t%s %s %d\n" (reg y) (reg x) z;
     Printf.fprintf oc "\tlw\t% s%s %d\n" (reg y) (reg reg_typetmp) (z + 4);
-    store_typeinfo oc (reg x)
+    store_typeinfo oc (reg x);
+    Printf.fprintf oc "\tlw\t%s %s %d\n" (reg y) (reg x) z;
   (*| NonTail(_), Stw(x, y, V(z)) -> Printf.fprintf oc "\tstwx\t%s, %s, %s\n" (reg x) (reg y) (reg z)
   | NonTail(_), Stw(x, y, C(z)) -> Printf.fprintf oc "\tstw\t%s, %d(%s)\n" (reg x) z (reg y)*)
   | NonTail(_), St(x, y, V(z)) ->
@@ -370,7 +372,7 @@ and g' oc = function (* 各命令のアセンブリ生成 (caml2html: emit_gprim
 	  let ss = stacksize () in
 	  Printf.fprintf oc "\tlw\t%s %s %d\n" (reg reg_cl) (reg reg_adr) 4; (* get address *)
 	  Printf.fprintf oc "\tsw\t%s %s %d\n" (reg reg_link) (reg reg_sp) ss; (* save link register *)
-    li_large oc (reg reg_typetmp) 0;
+    Printf.fprintf oc "\taddi\t%s %s %d\n" "r0" (reg reg_typetmp) 0;
     Printf.fprintf oc "\tsw\t%s %s %d\n" (reg reg_typetmp) (reg reg_sp) (ss + 4);
 	  Printf.fprintf oc "\taddi\t%s %s %d\n" (reg reg_sp) (reg reg_sp) (ss + 8); (* update stack pointer *)
     Printf.fprintf oc "\tsll %s %s %d\n" (reg reg_adr) (reg reg_adr) 2;
@@ -385,7 +387,7 @@ and g' oc = function (* 各命令のアセンブリ生成 (caml2html: emit_gprim
   | (NonTail(a), CallDir(Id.L(x), ys, zs)) ->
       let ss = stacksize () in
       Printf.fprintf oc "\tsw\t%s %s %d\n" (reg reg_link) (reg reg_sp) ss; (* save link register *)
-      li_large oc (reg reg_typetmp) 0;
+      Printf.fprintf oc "\taddi\t%s %s %d\n" "r0" (reg reg_typetmp) 0;
       Printf.fprintf oc "\tsw\t%s %s %d\n" (reg reg_typetmp) (reg reg_sp) (ss + 4);
       Printf.fprintf oc "\taddi\t%s %s %d\n" (reg reg_sp) (reg reg_sp) (ss + 8); (* update stack pointer *)
       g'_args oc [] ys zs; (* set arguments to correct positions *)
@@ -479,12 +481,13 @@ let f oc hasextvar max_s max_gl max_hp (Prog(data, fundefs, e)) =
 	stackmap := [];
 	stacktypemap := [];
   init_typeinfo oc;
-  li_large oc (reg reg_hp) max_s;
-	(*Printf.fprintf oc "\tlui\t%s %d\n" (reg reg_hp) 32;*)
+  Printf.fprintf oc "\tlui\t%s %d\n" (reg reg_hp) 32;
   (if hasextvar = 1 then
     (Printf.fprintf oc "\tjal\tmin_caml_globals\n";
     Printf.fprintf oc "\taddi\t%s %s %d\n" "r0" "r31" 0)
   else ());
+  Printf.fprintf oc "\tlui\t%s %d\n" (reg reg_hp) 32;
+  Printf.fprintf oc "\tori\t%s %s %d\n" (reg reg_hp) (reg reg_hp) 4096;
 	g oc (NonTail("r0"), e);
 	Printf.fprintf oc "halt\n"
 

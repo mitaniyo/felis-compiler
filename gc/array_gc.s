@@ -1,12 +1,23 @@
 min_caml_create_array:
 # save r2 and call gc
-sw r2 r30 0
-sw r31 r30 4
-addi r30 r30 8
+addi r0 r21 0
+sw r1 r30 0
+sw r21 r30 4
+srl r22 r21 2
+andi r21 r21 1
+sw r2 r30 8
+sw r21 r30 12
+addi r0 r21 0
+sw r31 r30 16
+sw r21 r30 20
+addi r30 r30 24
+sll r1 r1 3
+addi r1 r1 4
 jal min_caml__gc
-addi r30 r30 -8
-lw r30 r31 4
-lw r30 r2 0
+addi r30 r30 -24
+lw r30 r31 16
+lw r30 r2 8
+lw r30 r1 0
 # reg_type : r22
 andi r22 r3 1
 sll r1 r4 3
@@ -29,13 +40,23 @@ jr r31
 
 min_caml_create_float_array:
 # save f0 and call gc
-swc1 f0 r30 0
-sw r31 r30 4
-addi r30 r30 8
+sw r1 r30 0
+addi r0 r21 0
+sw r21 r30 4
+swc1 f0 r30 8
+addi r0 r21 2
+sw r21 r30 12
+sw r31 r30 16
+addi r0 r21 0
+sw r21 r30 20
+addi r30 r30 24
+sll r1 r1 3
+addi r1 r1 4
 jal min_caml__gc
-addi r30 r30 -8
-lw r30 r31 4
-lwc1 r30 f0 0
+addi r30 r30 -24
+lw r30 r31 16
+lwc1 r30 f0 8
+lw r1 r30 0
 addi r0 r3 2
 sll r1 r4 3
 addi r4 r4 3
