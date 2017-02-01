@@ -1,3 +1,7 @@
+gc(to_add)
+if reg_hp + to_add <= reg_bound
+	return
+reg_hp := new_reg_start
 for i = 0 to reg_sp
 if mem[i] is address
 if copied

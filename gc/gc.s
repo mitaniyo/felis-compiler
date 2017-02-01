@@ -1,4 +1,37 @@
 min_caml__gc:
+lui r2 40
+ori r2 r2 4096
+sub r27 r2 r25
+# if r25 <= 0 then smaller heap now
+blez r25 gc_smaller_heap
+# gc_larger_heap
+lui r3 48 # heap bound
+ori r3 r3 4096
+sub r3 r27 r4
+subi r4 r25 r1
+# if r25 < 0 need gc
+# if >= 0 do not need gc
+bgez r25 gc_notneed
+lui r25 32
+ori r25 r25 4096
+j gc_doall
+
+gc_smaller_heap:
+lui r3 40 # heap bound
+ori r3 r3 4096
+sub r3 r27 r4
+subi r4 r25 r1
+# if r25 < 0 need gc
+# if >= 0 do not need gc
+bgez r25 gc_notneed
+lui r25 40
+ori r25 r25 4096
+j gc_doall
+
+gc_notneed:
+jr r31
+
+gc_doall:
 # reg_sp = r30
 # reg_hp = r27
 addi r30 r1 0
