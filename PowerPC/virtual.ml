@@ -90,13 +90,13 @@ let rec g env = function (* 式の仮想マシンコード生成 (caml2html: vir
 	  (fun y _ offset store_fv -> seq(St(y, x, C(offset)), store_fv)) in
     (* call gc *)
     let g = Id.genid "gc" in
-    seq(Let((g, Type.Int), C(offset), CallDir(Id.L("min_caml__gc"), [g], [])),
+    Let((g, Type.Int), Li(offset), seq(CallDir(Id.L("min_caml__gc"), [g], []),
       Let((x, t), Mr(reg_hp), (* x <- reg_hp *)
 	  Let((reg_hp, Type.Int), Add(reg_hp, C(align offset)), (* reg_hp <- reg_hp + offset *)
 	      let z = Id.genid "l" in
 	      Let((z, Type.Int), SetL(l), (* z <- label *)
 		  seq(St(z, x, C(4)), (* M[x + 4] = z *)
-		      seq(StTop(x, offset - 1), store_fv)))))) (* M[x] = (size, type) *)
+		      seq(StTop(x, offset - 1), store_fv))))))) (* M[x] = (size, type) *)
   | Closure.AppCls(x, ys) ->
       let (int, float) = separate (List.map (fun y -> (y, M.find y env)) ys) in
       Ans(CallCls(x, int, float))
@@ -113,10 +113,10 @@ let rec g env = function (* 式の仮想マシンコード生成 (caml2html: vir
 	  (fun x _ offset store -> seq(St(x, y, C(offset)), store))  in
     (* call gc *)
     let g = Id.genid "gc" in
-    seq(Let((g, Type.Int), C(offset), CallDir(Id.L("min_caml__gc"), [g], [])), 
+    Let((g, Type.Int), Li(offset), seq(CallDir(Id.L("min_caml__gc"), [g], []), 
       Let((y, Type.Tuple(List.map (fun x -> M.find x env) xs)), Mr(reg_hp),
-        seq(StTop(reg_hp, C(offset - 1)),
-          Let((reg_hp, Type.Int), Add(reg_hp, C(offset))), store)))
+        seq(StTop(reg_hp, offset - 1),
+          Let((reg_hp, Type.Int), Add(reg_hp, C(offset)), store)))))
   | Closure.LetTuple(xts, y, e2) ->
       let s = Closure.fv e2 in
       let (offset, load) =
