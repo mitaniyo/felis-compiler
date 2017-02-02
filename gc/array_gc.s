@@ -19,7 +19,8 @@ lw r30 r31 16
 lw r30 r2 8
 lw r30 r1 0
 # reg_type : r22
-andi r22 r3 1
+andi r22 r3 4
+srl r3 r3 2
 sll r1 r4 3
 addi r4 r4 3
 sw r4 r27 0
@@ -37,6 +38,7 @@ j create_array_loop
 create_array_return:
 addi r27 r1 0
 add r27 r4 r27
+ori r22 r22 2
 jr r31
 
 min_caml_create_float_array:
@@ -76,4 +78,5 @@ j create_float_array_loop
 create_float_array_return:
 addi r27 r1 0
 add r27 r4 r27
+ori r22 r22 2
 jr r31

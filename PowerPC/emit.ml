@@ -211,7 +211,7 @@ and g' oc = function (* 各命令のアセンブリ生成 (caml2html: emit_gprim
     Printf.fprintf oc "\tswo\t%s %s %s\n" (reg x) (reg y) (reg z);
     Printf.fprintf oc "\taddi\t%s %s %d\n" (reg z) (reg z) 4;
     load_typeinfo oc (reg x);
-    Printf.fprintf oc "\tsw\t%s %s %s\n" (reg reg_typetmp) (reg y) (reg z);
+    Printf.fprintf oc "\tswo\t%s %s %s\n" (reg reg_typetmp) (reg y) (reg z);
     Printf.fprintf oc "\taddi\t%s %s %d\n" (reg z) (reg z) (-4)
   | NonTail(_), St(x, y, C(z)) ->
     Printf.fprintf oc "\tsw\t%s %s %d\n" (reg x) (reg y) z;

@@ -13,9 +13,9 @@ mem[i] <- reg_hp
 reg_hp += sz
 mem[tmp] <- mem[tmp2]
 mem[tmp2] <- tmp
-copyall(tmp2, tmp)
+copyall(tmp2, tmp, sz)
 
-copyall(from, to, sz)
+copyall(from, to, sz) (r3, r4, r5)
 for i = 4 to 4 + sz * 8
 if mem[from + i] is not address
 	mem[to + i] <- mem[from + i]
@@ -27,7 +27,7 @@ else
 	else
 		tmp <- reg_hp
 		tmp2 <- mem[from + i]
-		reg_hp += sz
+		reg_hp += sz // sz = mem[mem[from + i]] + 1
 		mem[tmp] <- mem[tmp2]
 		mem[tmp2] <- tmp
 		save(i)
