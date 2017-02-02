@@ -150,12 +150,12 @@ addi r6 r6 -4
 lwo r3 r6 r7
 # check if r7 is copied
 lw r7 r8 0
-andi r8 r9 3
+andi r8 r25 3
 # if r9 = 0 then this address is copied
-beq r9 r0 gc_adr_copied
+beq r25 r0 gc_adr_copied
 # address not copied call copyall
 sw r8 r27 0
-swo r27 r4 r6 # maybe wrong
+swo r27 r4 r6
 addi r0 r21 1
 addi r6 r6 4
 swo r21 r4 r6
