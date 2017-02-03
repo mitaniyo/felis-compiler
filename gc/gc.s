@@ -56,19 +56,19 @@ gc_return:
 jr r31
 
 gc_call_copyall:
-# check if mem[mem[r2]] is copied
+# r2 : stack address i
 lw r2 r3 0
+# r3 : stack contents, heap address mem[i]
 lw r3 r4 0
+# r4 : heap contents mem[mem[i]]
 andi r4 r25 3
-# if r25 = 0 then mem[r3] is copied
 beq r25 r0 restore_copied_address
 # call copyall
 # sz = r4 + 1
 addi r4 r5 1
-# tmp <- reg_hp
+# tmp : r4 <- reg_hp
 addi r27 r4 0
-# tmp2 <- mem[i]
-# already r3
+# tmp2 : r3 = already mem[i]
 # mem[i] <- reg_hp
 sw r27 r2 0
 # reg_hp += sz
@@ -78,22 +78,7 @@ lw r3 r6 0
 sw r6 r4 0
 # mem[tmp2] <- tmp
 sw r4 r3 0
-
-
-
-### addi r4 r5 1
-### add r27 r5 r27
-# wrong addi r27 r4 0
-# r3 = mem[r2]
-### sw r27 r2 0
-# size = r3 + 1
-# wrong addi r3 r5 1
-# wrong add r27 r5 r27
-# mem[tmp2] = r3
-### sw r3 r4 0
-### sw r4 r2 0
-
-# call copyall
+# link and call copyall
 sw r31 r30 0
 addi r30 r30 4
 jal gc_copyall
@@ -102,7 +87,9 @@ lw r30 r31 0
 j gc_next_root_loop
 
 restore_copied_address:
+# sw r3 r2 0
 sw r4 r2 0
+# sw r4 r3 0
 j gc_next_root_loop
 
 gc_copyall:
@@ -148,34 +135,42 @@ j gc_copyall_nextloop
 gc_copy_adr:
 addi r6 r6 -4
 lwo r3 r6 r7
+# r7 <- mem[from + i]
 # check if r7 is copied
+# r8 <- mem[mem[from + i]]
 lw r7 r8 0
 andi r8 r25 3
-# if r9 = 0 then this address is copied
+# if r25 = 0 then this address is copied
 beq r25 r0 gc_adr_copied
 # address not copied call copyall
-sw r8 r27 0
-swo r27 r4 r6
-addi r0 r21 1
-addi r6 r6 4
-swo r21 r4 r6
-addi r6 r6 -4
-sw r27 r7 0
-# save variables and call copyall
+# new_from = mem[from + i]
+# new_to = reg_hp
+# sz = mem[mem[from + i]] + 1
+# r3 : from, r4 : to, r5 : old_sz
+# r6 : i, r7 : mem[from + i], r8 : mem[mem[from + i]]
+
+# save variables
 sw r3 r30 0
 sw r4 r30 4
 sw r5 r30 8
 sw r6 r30 12
-# from r7 to reg_hp
-# sz = r8 + 1
-# update reg_hp
+
+# sz : r5 <- mem[mem[from + i]] + 1
 addi r8 r5 1
-addi r7 r3 0
+# mem[reg_hp] <- mem[mem[from + i]]
+sw r8 r27 0
+# mem[mem[from + i]] <- reg_hp
+sw r27 r7 0
+# new_to <- reg_hp
 addi r27 r4 0
+# reg_hp += sz
 add r27 r5 r27
+# set new_from
+addi r7 r3 0
+
 sw r31 r30 16
 addi r30 r30 20
-jal gc_copyall # argument wrong
+jal gc_copyall
 addi r30 r30 -20
 lw r30 r31 16
 lw r30 r6 12
@@ -183,6 +178,38 @@ lw r30 r5 8
 lw r30 r4 4
 lw r30 r3 0
 j gc_copyall_nextloop
+
+
+
+## sw r8 r27 0
+## swo r27 r4 r6
+## addi r0 r21 1
+## addi r6 r6 4
+## swo r21 r4 r6
+## addi r6 r6 -4
+## sw r27 r7 0
+# save variables and call copyall
+## sw r3 r30 0
+## sw r4 r30 4
+## sw r5 r30 8
+## sw r6 r30 12
+# from r7 to reg_hp
+# sz = r8 + 1
+# update reg_hp
+## addi r8 r5 1
+## addi r7 r3 0
+## addi r27 r4 0
+## add r27 r5 r27
+## sw r31 r30 16
+## addi r30 r30 20
+## jal gc_copyall # argument wrong
+## addi r30 r30 -20
+## lw r30 r31 16
+## lw r30 r6 12
+## lw r30 r5 8
+## lw r30 r4 4
+## lw r30 r3 0
+## j gc_copyall_nextloop
 # j gc_root_loop
 
 gc_adr_copied:
@@ -191,5 +218,7 @@ lwo r3 r6 r7
 swo r7 r4 r6
 addi r6 r6 -4
 lwo r3 r6 r7
-swo r7 r4 r6
+lw r7 r8 0
+swo r8 r4 r6
+## swo r7 r4 r6
 j gc_copyall_nextloop

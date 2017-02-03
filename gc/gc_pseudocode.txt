@@ -4,8 +4,9 @@ if reg_hp + to_add <= reg_bound
 reg_hp := new_reg_start
 for i = 0 to reg_sp
 if mem[i] is address
+copied = (mem[mem[i]].lsb = 00)
 if copied
-mem[i] <- mem[adr]
+mem[i] <- mem[mem[i]]
 else
 tmp <- reg_hp
 tmp2 <- mem[i]
@@ -25,14 +26,15 @@ else
 		// copied
 		mem[to + i] <- mem[mem[from + i]]
 	else
-		tmp <- reg_hp
-		tmp2 <- mem[from + i]
-		reg_hp += sz // sz = mem[mem[from + i]] + 1
-		mem[tmp] <- mem[tmp2]
-		mem[tmp2] <- tmp
+		mem[reg_hp] <- mem[mem[from + i]]
+		mem[mem[from + i]] <- reg_hp
+		new_to <- reg_hp
+		new_sz <- mem[mem[from + i]] + 1
+		reg_hp += new_sz
+		new_from <- mem[from + i]
 		save(i)
 		save(sz)
 		save(from)
 		save(to)
-		copyall(tmp2, tmp, new_sz)
+		copyall(new_from, new_to, new_sz)
 		restore(i, sz, from, to)
