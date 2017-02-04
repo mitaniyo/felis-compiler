@@ -202,7 +202,7 @@ and g' oc = function (* 各命令のアセンブリ生成 (caml2html: emit_gprim
     Printf.fprintf oc "\tlwo\t%s %s %s\n" (reg y) (reg z) (reg x);
     store_typeinfo oc (reg x);
   | NonTail(x), Ld(y, C(z)) ->
-    Printf.fprintf oc "\tlw\t% s%s %d\n" (reg y) (reg reg_typetmp) (z + 4);
+    Printf.fprintf oc "\tlw\t%s %s %d\n" (reg y) (reg reg_typetmp) (z + 4);
     store_typeinfo oc (reg x);
     Printf.fprintf oc "\tlw\t%s %s %d\n" (reg y) (reg x) z;
   (*| NonTail(_), Stw(x, y, V(z)) -> Printf.fprintf oc "\tstwx\t%s, %s, %s\n" (reg x) (reg y) (reg z)
@@ -216,7 +216,7 @@ and g' oc = function (* 各命令のアセンブリ生成 (caml2html: emit_gprim
   | NonTail(_), St(x, y, C(z)) ->
     Printf.fprintf oc "\tsw\t%s %s %d\n" (reg x) (reg y) z;
     load_typeinfo oc (reg x);
-    Printf.fprintf oc "\tsw\t%s %s %d\n" (reg x) (reg x) (z + 4)
+    Printf.fprintf oc "\tsw\t%s %s %d\n" (reg reg_typetmp) (reg y) (z + 4)
   | Tail, StTop(x, y) 
   | NonTail(_), StTop(x, y) ->
     Printf.fprintf oc "\taddi\t%s %s %d\n" "r0" (reg reg_typetmp) y;
@@ -256,7 +256,7 @@ and g' oc = function (* 各命令のアセンブリ生成 (caml2html: emit_gprim
       savef y;
       Printf.fprintf oc "\tswc1\t%s %s %d\n" (reg x) (reg reg_sp) (offset y);
       Printf.fprintf oc "\taddi\t%s %s %d\n" ("r0") (reg reg_typetmp) 2; 
-      Printf.fprintf oc "\tswc1\t%s %s %d\n" (reg reg_typetmp) (reg reg_sp) ((offset y) + 4)
+      Printf.fprintf oc "\tsw\t%s %s %d\n" (reg reg_typetmp) (reg reg_sp) ((offset y) + 4)
   | NonTail(_), Save(x, y) -> assert (S.mem y !stackset); () (* already saved *)
   (* 復帰の仮想命令の実装 (caml2html: emit_restore) *)
   | NonTail(x), Restore(y) when List.mem x allregs ->
