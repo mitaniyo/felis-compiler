@@ -25,7 +25,7 @@ let savef x =
     stackmap := !stackmap @ [x];
     stacktypemap := !stacktypemap @ [Type.Float]
 
-let pop_stack () =
+(*let pop_stack () =
   let pop_list l = (match l with
     | [] -> []
     | [x] -> []
@@ -36,7 +36,7 @@ let pop_stack () =
   stackset := S.remove b (!stackset);
   stackmap := pop_list (!stackmap);
   stacktypemap := pop_list (!stacktypemap)
-
+*)
 let li_large oc r v =
   let lo = v land 65535 in
   let hi = ((v land (65535 lsl 16)) lsr 16) in

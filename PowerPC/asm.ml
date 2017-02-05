@@ -89,7 +89,7 @@ let rec remove_and_uniq xs = function
 (* free variables in the order of use (for spilling) (caml2html: sparcasm_fv) *)
 let fv_id_or_imm = function V(x) -> [x] | _ -> []
 let rec fv_exp = function
-  | Nop | Li(_) | FLi(_) | SetL(_) | SetLVar(_) | Comment(_) | Restore(_) | Delete (_) -> []
+  | Nop | Li(_) | FLi(_) | SetL(_) | SetLVar(_) | Comment(_) | Restore(_) | RestoreAndDelete (_) -> []
   | Mr(x) | Neg(x) | FMr(x) | FNeg(x) | FAbs(x) | Save(x, _) -> [x]
   | Add(x, y') | Sub(x, y') | Mul(x, y') | Div(x, y') | Ldf(x, y') | Ld(x, y') -> x :: fv_id_or_imm y'
   | St(x, y, z') | Stf(x, y, z') -> x :: y :: fv_id_or_imm z'
