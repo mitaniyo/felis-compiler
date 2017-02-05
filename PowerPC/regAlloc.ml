@@ -114,10 +114,13 @@ let rec g dest cont regenv = function (* 命令列のレジスタ割り当て (c
 and g'_and_restore dest cont regenv exp = (* 使用される変数をスタックからレジスタへRestore (caml2html: regalloc_unspill) *)
   try g' dest cont regenv exp
   with NoReg(x, t) ->
-    ((* Format.eprintf "restoring %s@." x; *)
-     g dest cont regenv (Let((x, t), Restore(x), Ans(exp))))
+(*    ((* Format.eprintf "restoring %s@." x; *)
+     g dest cont regenv (Let((x, t), Restore(x), Ans(exp)))) *)
+      (let vs = fv cont in
+      if S.mem vs x then g dest cont regenv (Let((x, t), Restore(x), Ans(exp))) else
+      g dest cont regenv (Let((x, t), RestoreAndDelete(x), Ans(exp))))
 and g' dest cont regenv = function (* 各命令のレジスタ割り当て (caml2html: regalloc_gprime) *)
-  | Nop | Li _ | SetL _ | SetLVar _ | Comment _ | Restore _ | FLi _ as exp -> (Ans(exp), regenv)
+  | Nop | Li _ | SetL _ | SetLVar _ | Comment _ | Restore _ | FLi _ | RestoreAndDelete _ as exp -> (Ans(exp), regenv)
   | Mr(x) -> (Ans(Mr(find x Type.Int regenv)), regenv)
   | Neg(x) -> (Ans(Neg(find x Type.Int regenv)), regenv)
   | Add(x, y') -> (Ans(Add(find x Type.Int regenv, find' y' regenv)), regenv)

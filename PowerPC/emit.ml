@@ -25,6 +25,18 @@ let savef x =
     stackmap := !stackmap @ [x];
     stacktypemap := !stacktypemap @ [Type.Float]
 
+let pop_stack () =
+  let pop_list l = (match l with
+    | [] -> []
+    | [x] -> []
+    | a :: b -> a :: (pop_list b))
+  in
+  let a = List.length (!stackmap) in
+  let b = List.nth (!stackmap) (a - 1) in
+  stackset := S.remove b (!stackset);
+  stackmap := pop_list (!stackmap);
+  stacktypemap := pop_list (!stacktypemap)
+
 let li_large oc r v =
   let lo = v land 65535 in
   let hi = ((v land (65535 lsl 16)) lsr 16) in
@@ -266,6 +278,15 @@ and g' oc = function (* 各命令のアセンブリ生成 (caml2html: emit_gprim
   | NonTail(x), Restore(y) ->
       assert (List.mem x allfregs);
       Printf.fprintf oc "\tlwc1\t %s %s %d\n" (reg reg_sp) (reg x) (offset y)
+  | NonTail(x), RestoreAndDelete(y) when List.mem x allregs ->
+      Printf.fprintf oc "\tlw\t%s %s %d\n" (reg reg_sp) (reg x) (offset y);
+      Printf.fprintf oc "\tlw\t%s %s %d\n" (reg reg_sp) (reg reg_typetmp) ((offset y) + 4);
+      store_typeinfo oc (reg x);
+      Printf.fprintf oc "\tsw\t%s %s %d\n" "r0" (reg reg_sp) (offset y);
+      Printf.fprintf oc "\tsw\t%s %s %d\n" "r0" (reg reg_sp) ((offset y) + 4)
+  | NonTail(x), RestoreAndDelete(y) ->
+      assert (List.mem x allfregs);
+      Printf.fprintf oc "\tlwc1\t %s %s %d\n" (reg reg_sp) (reg x) (offset y)
   (* 末尾だったら計算結果を第一レジスタにセットしてリターン (caml2html: emit_tailret) *)
   | Tail, (Nop | St _ | Stf _ | Comment _ | Save _ as exp) ->
       g' oc (NonTail(Id.gentmp Type.Unit), exp);
@@ -290,6 +311,17 @@ and g' oc = function (* 各命令のアセンブリ生成 (caml2html: emit_gprim
       (*| [i; j] when i + 1 = j -> g' oc (NonTail(fregs.(0)), exp)*) (* No *)
       | _ -> assert false);
       Printf.fprintf oc "\tjr\t%s\n" (reg reg_link)*)
+  | Tail, (RestoreAndDelete(x) as exp) ->
+      let i = locate x in
+      let t = gettype i in
+      (if t = Type.Int then
+        g' oc (NonTail(regs.(0)), exp)
+      else if t = Type.Float then
+        g' oc (NonTail(fregs.(0)), exp)
+      else assert false);
+      Printf.fprintf oc "\tsw\t%s %s %d\n" "r0" (reg reg_sp) (i * 8);
+      Printf.fprintf oc "\tsw\t%s %s %d\n" "r0" (reg reg_sp) (i * 8 + 4);
+      Printf.fprintf oc "\tjr\t%s\n" (reg reg_link)
   | Tail, IfEq(x, V(y), e1, e2) ->
       Printf.fprintf oc "\tsub\t%s %s %s\n" (reg x) (reg y) (reg reg_cond);
       g'_tail_if oc e2 e1 "beq_tail" "beq" (* if equal then jump *)
@@ -399,6 +431,15 @@ and g' oc = function (* 各命令のアセンブリ生成 (caml2html: emit_gprim
       Printf.fprintf oc "\tjal\t%s\n" x; (* branch *)
       Printf.fprintf oc "\taddi\t%s %s %d\n" (reg reg_sp) (reg reg_sp) (-(ss + 8)); (* restore stack pointer *)
       Printf.fprintf oc "\tlw\t%s %s %d\n" (reg reg_sp) (reg reg_link) ss; (* restore link register *)
+(*      (
+        if x = "min_caml__gc" then
+          (let rec cleaner x = if x < 0 then () else
+            (Printf.fprintf oc "\tsw\t%s %s %d\n" ("r0") (reg reg_sp) x;
+            (if x mod 8 = 0 then pop_stack () else ());
+            cleaner (x - 4))
+          in
+          cleaner (ss + 4)) else ()
+      );*)
       if List.mem a allregs && a <> regs.(0) then
         (Printf.fprintf oc "\tmov\t%s %s\n" (reg a) (reg regs.(0));
         mov_typeinfo oc (reg regs.(0)) (reg a))
