@@ -154,8 +154,6 @@ h.27:
 	and r22 r26 r22
 	sll r21 r21 2
 	or r22 r21 r22
-	sw	r0 r30 0
-	sw	r0 r30 4
 	add	r2 r1 r1
 	jr	r31
 beq_tail_else.68:
@@ -171,7 +169,7 @@ beq_tail_else.68:
 	or r22 r21 r22
 	jr	r31
 f.17:
-	addi	r0 r2 1000
+	addi	r0 r2 10
 	srl r22 r21 0
 	andi r21 r21 1
 	addi r0 r26 1
@@ -309,8 +307,6 @@ f.17:
 	and r22 r26 r22
 	sll r21 r21 1
 	or r22 r21 r22
-	sw	r0 r30 8
-	sw	r0 r30 12
 	sw	r1 r29 12
 	srl r22 r21 1
 	andi r21 r21 1
@@ -408,8 +404,6 @@ f.17:
 	and r22 r26 r22
 	sll r21 r21 1
 	or r22 r21 r22
-	sw	r0 r30 16
-	sw	r0 r30 20
 	sw	r1 r29 12
 	srl r22 r21 1
 	andi r21 r21 1
@@ -452,8 +446,6 @@ f.17:
 	and r22 r26 r22
 	sll r21 r21 3
 	or r22 r21 r22
-	sw	r0 r30 0
-	sw	r0 r30 4
 	add	r3 r2 r2
 	sw	r1 r30 24
 	srl r22 r21 1
@@ -485,8 +477,6 @@ f.17:
 	and r22 r26 r22
 	sll r21 r21 2
 	or r22 r21 r22
-	sw	r0 r30 24
-	sw	r0 r30 28
 	add	r2 r1 r1
 	jr	r31
 beq_tail_else.69:

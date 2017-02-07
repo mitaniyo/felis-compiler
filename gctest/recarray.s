@@ -2,6 +2,11 @@ f.12:
 	addi	r0 r3 1000
 	srl r22 r21 0
 	andi r21 r21 1
+	addi r0 r26 1
+	sll r26 r26 3
+	addi r26 r26 1
+	sub r0 r26 r26
+	and r22 r26 r22
 	sll r21 r21 3
 	or r22 r21 r22
 	sub	r1 r3 r25
@@ -9,11 +14,21 @@ f.12:
 	addi	r0 r3 1000
 	srl r22 r21 0
 	andi r21 r21 1
+	addi r0 r26 1
+	sll r26 r26 3
+	addi r26 r26 1
+	sub r0 r26 r26
+	and r22 r26 r22
 	sll r21 r21 3
 	or r22 r21 r22
 	addi	r0 r4 1
 	srl r22 r21 0
 	andi r21 r21 1
+	addi r0 r26 1
+	sll r26 r26 4
+	addi r26 r26 1
+	sub r0 r26 r26
+	and r22 r26 r22
 	sll r21 r21 4
 	or r22 r21 r22
 	add	r2 r4 r4
@@ -32,11 +47,21 @@ f.12:
 	mov	r2 r4
 	srl r22 r21 4
 	andi r21 r21 1
+	addi r0 r26 1
+	sll r26 r26 2
+	addi r26 r26 1
+	sub r0 r26 r26
+	and r22 r26 r22
 	sll r21 r21 2
 	or r22 r21 r22
 	mov	r1 r3
 	srl r22 r21 3
 	andi r21 r21 1
+	addi r0 r26 1
+	sll r26 r26 1
+	addi r26 r26 1
+	sub r0 r26 r26
+	and r22 r26 r22
 	sll r21 r21 1
 	or r22 r21 r22
 	jal	min_caml_create_array
@@ -44,36 +69,71 @@ f.12:
 	lw	r30 r31 16
 	lw	r30 r2 8
 	lw	r30 r21 12
+	addi r0 r26 1
+	sll r26 r26 2
+	addi r26 r26 1
+	sub r0 r26 r26
+	and r22 r26 r22
 	sll r21 r21 2
 	or r22 r21 r22
 	sll	r2 r3 3
 	srl r22 r21 2
 	andi r21 r21 1
+	addi r0 r26 1
+	sll r26 r26 3
+	addi r26 r26 1
+	sub r0 r26 r26
+	and r22 r26 r22
 	sll r21 r21 3
 	or r22 r21 r22
 	addi	r3 r3 4
 	andi r21 r21 1
+	addi r0 r26 1
+	sll r26 r26 3
+	addi r26 r26 1
+	sub r0 r26 r26
+	and r22 r26 r22
 	sll r21 r21 3
 	or r22 r21 r22
 	addi	r3 r3 4
 	lwo	r1 r3 r21
 	addi	r3 r3 -4
 	lwo	r1 r3 r1
+	addi r0 r26 1
+	sll r26 r26 1
+	addi r26 r26 1
+	sub r0 r26 r26
+	and r22 r26 r22
 	sll r21 r21 1
 	or r22 r21 r22
 	addi	r0 r3 1
 	srl r22 r21 0
 	andi r21 r21 1
+	addi r0 r26 1
+	sll r26 r26 3
+	addi r26 r26 1
+	sub r0 r26 r26
+	and r22 r26 r22
 	sll r21 r21 3
 	or r22 r21 r22
 	add	r2 r3 r2
 	addi	r0 r3 1
 	srl r22 r21 0
 	andi r21 r21 1
+	addi r0 r26 1
+	sll r26 r26 3
+	addi r26 r26 1
+	sub r0 r26 r26
+	and r22 r26 r22
 	sll r21 r21 3
 	or r22 r21 r22
 	lw	r30 r4 0
 	lw	r30 r21 4
+	addi r0 r26 1
+	sll r26 r26 4
+	addi r26 r26 1
+	sub r0 r26 r26
+	and r22 r26 r22
 	sll r21 r21 4
 	or r22 r21 r22
 	add	r4 r3 r3
@@ -88,11 +148,21 @@ f.12:
 	mov	r1 r2
 	srl r22 r21 2
 	andi r21 r21 1
+	addi r0 r26 1
+	sll r26 r26 1
+	addi r26 r26 1
+	sub r0 r26 r26
+	and r22 r26 r22
 	sll r21 r21 1
 	or r22 r21 r22
 	mov	r2 r3
 	srl r22 r21 3
 	andi r21 r21 1
+	addi r0 r26 1
+	sll r26 r26 2
+	addi r26 r26 1
+	sub r0 r26 r26
+	and r22 r26 r22
 	sll r21 r21 2
 	or r22 r21 r22
 	jal	f.12
@@ -100,6 +170,11 @@ f.12:
 	lw	r30 r31 24
 	lw	r30 r2 16
 	lw	r30 r21 20
+	addi r0 r26 1
+	sll r26 r26 2
+	addi r26 r26 1
+	sub r0 r26 r26
+	and r22 r26 r22
 	sll r21 r21 2
 	or r22 r21 r22
 	add	r2 r1 r1
@@ -108,6 +183,11 @@ beq_tail_else.36:
 	addi	r0 r1 0
 	srl r22 r21 0
 	andi r21 r21 1
+	addi r0 r26 1
+	sll r26 r26 1
+	addi r26 r26 1
+	sub r0 r26 r26
+	and r22 r26 r22
 	sll r21 r21 1
 	or r22 r21 r22
 	jr	r31
@@ -120,11 +200,21 @@ _min_caml_start:
 	addi	r0 r1 0
 	srl r22 r21 0
 	andi r21 r21 1
+	addi r0 r26 1
+	sll r26 r26 1
+	addi r26 r26 1
+	sub r0 r26 r26
+	and r22 r26 r22
 	sll r21 r21 1
 	or r22 r21 r22
 	addi	r0 r2 0
 	srl r22 r21 0
 	andi r21 r21 1
+	addi r0 r26 1
+	sll r26 r26 2
+	addi r26 r26 1
+	sub r0 r26 r26
+	and r22 r26 r22
 	sll r21 r21 2
 	or r22 r21 r22
 	sw	r31 r30 0

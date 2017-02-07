@@ -116,9 +116,11 @@ and g'_and_restore dest cont regenv exp = (* 使用される変数をスタッ�
   with NoReg(x, t) ->
 (*    ((* Format.eprintf "restoring %s@." x; *)
      g dest cont regenv (Let((x, t), Restore(x), Ans(exp)))) *)
-      (let vs = fv cont in
-      if List.mem x vs then g dest cont regenv (Let((x, t), Restore(x), Ans(exp))) else
-      g dest cont regenv (Let((x, t), RestoreAndDelete(x), Ans(exp))))
+      (*(let vs = fv cont in let vs2 = fv (Ans(exp)) in
+      if ((List.mem x vs) || (List.mem x vs2)) then g dest cont regenv (Let((x, t), Restore(x), Ans(exp))) else
+      (Format.eprintf "delete %s\n" x;
+      g dest cont regenv (Let((x, t), RestoreAndDelete(x), Ans(exp)))))*)
+      g dest cont regenv (Let((x, t), Restore(x), Ans(exp)))
 and g' dest cont regenv = function (* 各命令のレジスタ割り当て (caml2html: regalloc_gprime) *)
   | Nop | Li _ | SetL _ | SetLVar _ | Comment _ | Restore _ | FLi _ | RestoreAndDelete _ as exp -> (Ans(exp), regenv)
   | Mr(x) -> (Ans(Mr(find x Type.Int regenv)), regenv)
