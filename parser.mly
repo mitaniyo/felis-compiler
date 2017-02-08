@@ -48,6 +48,10 @@ let addtyp x = (x, Type.gentyp ())
 %token FSQR
 %token FNEG
 %token FABS
+%token SQRT
+%token SIN
+%token COS
+%token ATAN
 
 /* (* 優先順位とassociativityの定義（低い方から高い方へ） (caml2html: parser_prior) *) */
 %right prec_let
@@ -136,6 +140,14 @@ exp: /* (* 一般の式 (caml2html: parser_exp) *) */
     { FNeg($2) }
 | FABS simple_exp
     { FAbs($2) }
+| SQRT simple_exp
+    { Sqrt($2) }
+| SIN simple_exp
+    { Sin($2) }
+| COS simple_exp
+    { Cos($2) }
+| ATAN simple_exp
+    { Atan($2) }
 | exp PLUS_DOT exp
     { FAdd($1, $3) }
 | exp MINUS_DOT exp

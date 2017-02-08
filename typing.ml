@@ -33,6 +33,10 @@ let rec deref_term = function
   | LE(e1, e2) -> LE(deref_term e1, deref_term e2)
   | FNeg(e) -> FNeg(deref_term e)
   | FAbs(e) -> FAbs(deref_term e)
+  | Sqrt(e) -> Sqrt(deref_term e)
+  | Sin(e) -> Sin(deref_term e)
+  | Cos(e) -> Cos(deref_term e)
+  | Atan(e) -> Atan(deref_term e)
   | FAdd(e1, e2) -> FAdd(deref_term e1, deref_term e2)
   | FSub(e1, e2) -> FSub(deref_term e1, deref_term e2)
   | FMul(e1, e2) -> FMul(deref_term e1, deref_term e2)
@@ -103,7 +107,7 @@ let rec g env e = (* 型推論ルーチン (caml2html: typing_g) *)
     | FNeg(e) ->
   unify Type.Float (g env e);
   Type.Float
-    | FAbs(e) ->
+    | FAbs(e) | Sqrt(e) | Sin(e) | Cos(e) | Atan(e) ->
   unify Type.Float (g env e);
   Type.Float
     | FAdd(e1, e2) | FSub(e1, e2) | FMul(e1, e2) | FDiv(e1, e2) ->

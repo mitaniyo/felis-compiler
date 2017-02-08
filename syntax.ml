@@ -15,6 +15,10 @@ type t = (* MinCamlの構文を表現するデータ型 (caml2html: syntax_t) *)
   | FMul of t * t
   | FDiv of t * t
   | FAbs of t
+  | Sqrt of t
+  | Sin of t
+  | Cos of t
+  | Atan of t
   | Eq of t * t
   | LE of t * t
   | If of t * t * t

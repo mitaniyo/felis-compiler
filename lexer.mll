@@ -90,6 +90,14 @@ rule token = parse
     { FNEG }
 | "fabs"
     { FABS }
+| "sqrt"
+    { SQRT }
+| "sin"
+    { SIN }
+| "cos"
+    { COS }
+| "atan"
+    { ATAN }
 | ','
     { COMMA }
 | '_'
