@@ -17,12 +17,12 @@ let rec target' src (dest, t) = function
       let c2, rs2 = target src (dest, t) e2 in
       c1 && c2, rs1 @ rs2
   | CallCls(x, ys, zs) ->
-      true, (target_args src regs 0 ys @
-	     target_args src fregs 0 zs @
+      true, (target_args src (!regs) 0 ys @
+	     target_args src (!fregs) 0 zs @
              if x = src then [reg_cl] else [])
   | CallDir(_, ys, zs) ->
-      true, (target_args src regs 0 ys @
-	     target_args src fregs 0 zs)
+      true, (target_args src (!regs) 0 ys @
+	     target_args src (!fregs) 0 zs)
   | _ -> false, []
 and target src dest = function (* register targeting (caml2html: regalloc_target) *)
   | Ans(exp) -> target' src dest exp
@@ -45,8 +45,8 @@ let rec alloc dest cont regenv x t =
   let all =
     match t with
     | Type.Unit -> ["%r0"] (* dummy *)
-    | Type.Float -> allfregs
-    | _ -> allregs in
+    | Type.Float -> (!allfregs)
+    | _ -> (!allregs) in
   if all = ["%r0"] then Alloc("%r0") else (* [XX] ad hoc optimization *)
   if is_reg x then Alloc(x) else
   let free = fv cont in
@@ -145,12 +145,12 @@ and g' dest cont regenv = function (* 各命令のレジスタ割り当て (caml
   | IfFEq(x, y, e1, e2) as exp -> g'_if dest cont regenv exp (fun e1' e2' -> IfFEq(find x Type.Float regenv, find y Type.Float regenv, e1', e2')) e1 e2
   | IfFLE(x, y, e1, e2) as exp -> g'_if dest cont regenv exp (fun e1' e2' -> IfFLE(find x Type.Float regenv, find y Type.Float regenv, e1', e2')) e1 e2
   | CallCls(x, ys, zs) as exp ->
-      if List.length ys > Array.length regs - 2 || List.length zs > Array.length fregs - 1 then
+      if List.length ys > Array.length (!regs) - 2 || List.length zs > Array.length (!fregs) - 1 then
 	failwith (Format.sprintf "cannot allocate registers for arugments to %s" x)
       else
 	g'_call dest cont regenv exp (fun ys zs -> CallCls(find x Type.Int regenv, ys, zs)) ys zs
   | CallDir(Id.L(x), ys, zs) as exp ->
-      if List.length ys > Array.length regs - 1 || List.length zs > Array.length fregs - 1 then
+      if List.length ys > Array.length (!regs) - 1 || List.length zs > Array.length (!fregs) - 1 then
 	failwith (Format.sprintf "cannot allocate registers for arugments to %s" x)
       else
 	g'_call dest cont regenv exp (fun ys zs -> CallDir(Id.L(x), ys, zs)) ys zs
@@ -193,7 +193,7 @@ let h { name = Id.L(x); args = ys; fargs = zs; body = e; ret = t } = (* 関数�
   let (i, arg_regs, regenv) =
     List.fold_left
       (fun (i, arg_regs, regenv) y ->
-        let r = regs.(i) in
+        let r = (!regs).(i) in
         (i + 1,
 	 arg_regs @ [r],
 	 (assert (not (is_reg y));
@@ -203,7 +203,7 @@ let h { name = Id.L(x); args = ys; fargs = zs; body = e; ret = t } = (* 関数�
   let (d, farg_regs, regenv) =
     List.fold_left
       (fun (d, farg_regs, regenv) z ->
-        let fr = fregs.(d) in
+        let fr = (!fregs).(d) in
         (d + 1,
 	 farg_regs @ [fr],
 	 (assert (not (is_reg z));
@@ -213,8 +213,8 @@ let h { name = Id.L(x); args = ys; fargs = zs; body = e; ret = t } = (* 関数�
   let a =
     match t with
     | Type.Unit -> Id.gentmp Type.Unit
-    | Type.Float -> fregs.(0)
-    | _ -> regs.(0) in
+    | Type.Float -> (!fregs).(0)
+    | _ -> (!regs).(0) in
   let (e', regenv') = g (a, t) (Ans(Mr(a))) regenv e in
   { name = Id.L(x); args = arg_regs; fargs = farg_regs; body = e'; ret = t }
 
