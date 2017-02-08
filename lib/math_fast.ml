@@ -10,7 +10,7 @@ let rec sqrt_sub x n l r f =
 	sqrt_sub x (n + 1) m r f
 in
 
-let rec sqrt x =
+let rec sqrtlib x =
 	if x > 1.0 then sqrt_sub (1.0 /. x) 0 0.0 1.0 1 else
 	if x = 1.0 then x else
 	if x > 0.0 then sqrt_sub x 0 0.0 1.0 0 else
@@ -73,15 +73,15 @@ let sin3 x s =
 	sin2 x s
 in
 
-let rec sin x =
+let rec sinlib x =
 	let pi = 3.14159265358979323846264 in
 	let pi2 = 6.28318530718 in
 	let i = x /. pi2 in
 	let fi = floor i in
-	if fi < (-2.0) then sin (x -. (fi *. pi2)) else
-	if fi > 2.0 then sin (x -. fi *. pi2) else
-	if x < (-. pi) then sin (x +. pi2) else
-	if x >= pi then sin (x -. pi2) else
+	if fi < (-2.0) then sinlib (x -. (fi *. pi2)) else
+	if fi > 2.0 then sinlib (x -. fi *. pi2) else
+	if x < (-. pi) then sinlib (x +. pi2) else
+	if x >= pi then sinlib (x -. pi2) else
 	if x < 0.0 then sin3 (-. x) (-1.0) else
 	sin3 x 1.0
 
@@ -95,14 +95,14 @@ let rec cos3 x s =
 	cos2 x s
 in
 
-let rec cos x =
-	if x < 0.0 then cos (-.x) else
+let rec coslib x =
+	if x < 0.0 then coslib (-.x) else
 	let pi = 3.14159265358979323846264 in
 	let pi2 = 6.28318530718 in
 	let i = x /. pi2 in
 	let fi = floor i in
-	if fi > 2.0 then cos (x -. fi *. pi2) else
-	if x > pi then cos (x -. pi2) else
+	if fi > 2.0 then coslib (x -. fi *. pi2) else
+	if x > pi then coslib (x -. pi2) else
 	(* 0 <= x <= pi *)
 	let pih = 1.57079632679 in
 	if x > pih then cos3 (pi -. x) (-1.0) else
@@ -162,7 +162,7 @@ let rec atan2 x s =
 	atan3 x s 0
 in
 
-let rec atan x = if x < 0.0 then atan2 x (-1.0) else atan2 x (1.0)
+let rec atanlib x = if x < 0.0 then atan2 x (-1.0) else atan2 x (1.0)
 in
 
 let x = (int_of_float 3.0) + 1 in
