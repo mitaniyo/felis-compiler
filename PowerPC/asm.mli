@@ -19,6 +19,10 @@ and exp =
   | FMr of Id.t 
   | FNeg of Id.t
   | FAbs of Id.t
+  | Sqrt of Id.t
+  | Sin of Id.t
+  | Cos of Id.t
+  | Atan of Id.t
   | FAdd of Id.t * Id.t
   | FSub of Id.t * Id.t
   | FMul of Id.t * Id.t
@@ -43,13 +47,27 @@ type prog = Prog of (Id.l * float) list * fundef list * t
 val fletd : Id.t * exp * t -> t (* shorthand of Let for float *)
 val seq : exp * t -> t (* shorthand of Let for unit *)
 
-val regs : Id.t array
+(*val regs : Id.t array
 val fregs : Id.t array
 val allregs : Id.t list
-val allfregs : Id.t list
+val allfregs : Id.t list*)
+val regs : ref (Id.t array)
+val fregs : ref (Id.t array)
+val allregs : ref (Id.t list)
+val allfregs : ref (Id.t list)
+
+val regs_cand : (Id.t array) list
+val fregs_cand : (Id.t array) list
+
 val reg_cl : Id.t
-val reg_sw : Id.t
-val reg_fsw : Id.t
+(*val reg_sw : Id.t
+val reg_fsw : Id.t*)
+val reg_sw_cand : Id.t list
+val reg_fsw_cand : Id.t list
+
+val reg_sw : ref Id.t
+val reg_fsw : ref Id.t
+
 val reg_hp : Id.t
 val reg_sp : Id.t
 val reg_tmp : Id.t
