@@ -22,6 +22,10 @@ and exp = (* 一つ一つの命令に対応する式 (caml2html: sparcasm_exp) *
   | FMr of Id.t
   | FNeg of Id.t
   | FAbs of Id.t
+  | Sqrt of Id.t
+  | Sin of Id.t
+  | Cos of Id.t
+  | Atan of Id.t
   | FAdd of Id.t * Id.t
   | FSub of Id.t * Id.t
   | FMul of Id.t * Id.t
@@ -47,19 +51,43 @@ type prog = Prog of (Id.l * float) list * fundef list * t
 let fletd(x, e1, e2) = Let((x, Type.Float), e1, e2)
 let seq(e1, e2) = Let((Id.gentmp Type.Unit, Type.Unit), e1, e2)
 
-let regs = Array.append (Array.init 22 (fun i -> Printf.sprintf "%%r%d" (i + 1))) [|"%r28"; "%r29"|]
+(*let regs = Array.append (Array.init 22 (fun i -> Printf.sprintf "%%r%d" (i + 1))) [|"%r28"; "%r29"|]
 let fregs = Array.append (Array.init 30 (fun i -> Printf.sprintf "%%f%d" i)) [|"%f31"|]
 
 (*let fregs = Array.init 30 (fun i -> Printf.sprintf "%%f%d" i)*)
 let allregs = Array.to_list regs
 let allfregs = Array.to_list fregs
+*)
 
+let regs = ref [| |]
+let fregs = ref [| |]
+let allregs = ref []
+let allfregs = ref []
+
+let regs_cand = 
+  [
+  (Array.append(Array.init 15 (fun i -> Printf.sprintf "%%r%d" (i + 1))) [|"%r28"; "%r29"|]);
+  Array.init 7 (fun i -> Printf.sprintf "%%r%d" (i + 16))
+  ]
+let fregs_cand =
+  [
+  (Array.append (Array.init 20 (fun i -> Printf.sprintf "%%f%d" i)) [| "%f31" |]);
+  Array.init 11 (fun i -> Printf.sprintf "%%f%d" (i + 19)
+  ]
+(* r23, ... are used *)
+(* f30 is used *)
 let reg_sp = "%r30"
 let reg_link = "%r31"
 
 let reg_cl = "%r29"
-let reg_sw = "%r28"
+(*let reg_sw = "%r28"
 let reg_fsw = "%f31"
+*)
+
+let reg_sw_cand = [ "%r28"; "%r22" ]
+let reg_fsw_cand = [ "%f31"; "%f29" ]
+let reg_sw = ref ""
+let reg_fsw = ref ""
 
 let reg_hp = "%r27"
 let reg_tmp = "%r26"
@@ -84,7 +112,7 @@ let rec remove_and_uniq xs = function
 let fv_id_or_imm = function V(x) -> [x] | _ -> []
 let rec fv_exp = function
   | Nop | Li(_) | FLi(_) | SetL(_) | SetLVar(_) | Comment(_) | Restore(_) -> []
-  | Mr(x) | Neg(x) | FMr(x) | FNeg(x) | FAbs(x) | Save(x, _) -> [x]
+  | Mr(x) | Neg(x) | FMr(x) | FNeg(x) | FAbs(x) | Sqrt(x) | Sin(x) | Cos(x) | Atan(x) | Save(x, _) -> [x]
   | Add(x, y') | Sub(x, y') | Mul(x, y') | Div(x, y') | Ldf(x, y') | Ld(x, y') -> x :: fv_id_or_imm y'
   | St(x, y, z') | Stf(x, y, z') -> x :: y :: fv_id_or_imm z'
   | FAdd(x, y) | FSub(x, y) | FMul(x, y) | FDiv(x, y) -> [x; y]

@@ -137,11 +137,11 @@ and g' oc = function (* 各命令のアセンブリ生成 (caml2html: emit_gprim
   | NonTail(x), Slw(y, C(z)) -> Printf.fprintf oc "\tslwi\t%s, %s, %d\n" (reg x) (reg y) z*)
   | NonTail(x), Mul(y, C(z)) -> let l = small_log z in 
     if l >= 0 then Printf.fprintf oc "\tsll\t%s %s %d\n" (reg y) (reg x) l
-    else Printf.fprintf oc "\tmult\t%s %s %d\n" (reg y) (reg x) z
+    else Printf.fprintf oc "\tmulti\t%s %s %d\n" (reg y) (reg x) z
   | NonTail(x), Mul(y, V(z)) -> Printf.fprintf oc "\tmult\t%s %s %s\n" (reg y) (reg z) (reg x)
   | NonTail(x), Div(y, C(z)) -> let l = small_log z in
     if l >= 0 then Printf.fprintf oc "\tsrl\t%s %s %d\n" (reg y) (reg x) l
-    else Printf.fprintf oc "\tdiv\t%s %s %d\n" (reg y) (reg x) z
+    else Printf.fprintf oc "\tdivi\t%s %s %d\n" (reg y) (reg x) z
   | NonTail(x), Div(y, V(z)) -> Printf.fprintf oc "\tdiv\t%s %s %s\n" (reg y) (reg z) (reg x)
   (*| NonTail(x), Lwz(y, V(z)) -> Printf.fprintf oc "\tlwzx\t%s, %s, %s\n" (reg x) (reg y) (reg z)
   | NonTail(x), Lwz(y, C(z)) -> Printf.fprintf oc "\tlwz\t%s, %d(%s)\n" (reg x) z (reg y)*)
@@ -411,8 +411,9 @@ let h oc { name = Id.L(x); args = _; fargs = _; body = e; ret = _ } =
   stacktypemap := [];
   g oc (Tail, e)
 
-let f oc hasextvar (Prog(data, fundefs, e)) =
+let f oc hasextvar isLib (Prog(data, fundefs, e)) =
 	Format.eprintf "generating assembly...\n";
+  (* set allregs, regs, allfregs, fregs, reg_sw, reg_fsw *)
 	(* do not use data section *)
 	List.iter (fun fundef -> h oc fundef) fundefs;
 	Printf.fprintf oc "_min_caml_start:\n";

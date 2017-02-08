@@ -14,8 +14,8 @@ let rec iter n e = (* 最適化処理をくりかえす (caml2html: main_iter) *
 let lexbuf outchan l = (* バッファをコンパイルしてチャンネルへ出力する (caml2html: main_lexbuf) *)
   Id.counter := 0;
   Typing.extenv := M.empty;
-  Emit.f outchan (!hasExtvar)
-    (RegAlloc.f
+  Emit.f outchan (!hasExtvar) (!isLib)
+    (RegAlloc.f (!isLib)
     (Virtual.f
        (Closure.f
     (iter !limit

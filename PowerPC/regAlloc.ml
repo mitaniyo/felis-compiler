@@ -218,7 +218,14 @@ let h { name = Id.L(x); args = ys; fargs = zs; body = e; ret = t } = (* 関数�
   let (e', regenv') = g (a, t) (Ans(Mr(a))) regenv e in
   { name = Id.L(x); args = arg_regs; fargs = farg_regs; body = e'; ret = t }
 
-let f (Prog(data, fundefs, e)) = (* プログラム全体のレジスタ割り当て (caml2html: regalloc_f) *)
+let f (isLib) (Prog(data, fundefs, e)) = (* プログラム全体のレジスタ割り当て (caml2html: regalloc_f) *)
+  (* set regs, allregs, fregs, allfregs, reg_sw, reg_fsw *)
+  regs := List.nth regs_cand isLib;
+  allregs := Array.to_list (!regs);
+  fregs := List.nth fregs_cand isLib;
+  allfregs := Array.to_list (!fregs);
+  reg_sw := List.nth reg_sw_cand isLib;
+  reg_fsw := List.nth reg_fsw_cand isLib;
   Format.eprintf "register allocation: may take some time (up to a few minutes, depending on the size of functions)@.";
   let fundefs' = List.map h fundefs in
   let e', regenv' = g (Id.gentmp Type.Unit, Type.Unit) (Ans(Nop)) M.empty e in
