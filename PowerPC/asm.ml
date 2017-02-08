@@ -67,12 +67,12 @@ let allfregs = ref []
 let regs_cand = 
   [
   (Array.append(Array.init 15 (fun i -> Printf.sprintf "%%r%d" (i + 1))) [|"%r28"; "%r29"|]);
-  Array.init 7 (fun i -> Printf.sprintf "%%r%d" (i + 16))
+  (Array.init 7 (fun i -> Printf.sprintf "%%r%d" (i + 16)))
   ]
 let fregs_cand =
   [
   (Array.append (Array.init 20 (fun i -> Printf.sprintf "%%f%d" i)) [| "%f31" |]);
-  Array.init 11 (fun i -> Printf.sprintf "%%f%d" (i + 19)
+  (Array.init 11 (fun i -> Printf.sprintf "%%f%d" (i + 19)))
   ]
 (* r23, ... are used *)
 (* f30 is used *)

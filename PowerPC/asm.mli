@@ -51,10 +51,10 @@ val seq : exp * t -> t (* shorthand of Let for unit *)
 val fregs : Id.t array
 val allregs : Id.t list
 val allfregs : Id.t list*)
-val regs : ref (Id.t array)
-val fregs : ref (Id.t array)
-val allregs : ref (Id.t list)
-val allfregs : ref (Id.t list)
+val regs : (Id.t array) ref
+val fregs : (Id.t array) ref
+val allregs : (Id.t list) ref
+val allfregs : (Id.t list) ref
 
 val regs_cand : (Id.t array) list
 val fregs_cand : (Id.t array) list
@@ -65,8 +65,8 @@ val reg_fsw : Id.t*)
 val reg_sw_cand : Id.t list
 val reg_fsw_cand : Id.t list
 
-val reg_sw : ref Id.t
-val reg_fsw : ref Id.t
+val reg_sw : Id.t ref
+val reg_fsw : Id.t ref
 
 val reg_hp : Id.t
 val reg_sp : Id.t
