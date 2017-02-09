@@ -24,6 +24,9 @@ min-caml.opt
 /mathverify/*
 !/mathverify/*.ml
 !/mathverify/*.cpp
+/lib_fast/mathverify/*
+!/lib_fast/mathverify/*.ml
+!/lib_fast/mathverify/*.cpp
 /rt/raytracer/out
 /rt/raytracer/test
 /gctest
