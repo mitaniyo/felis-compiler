@@ -18,12 +18,12 @@ let rec sqrtlib x =
 	x
 in
 
-let rec int_of_float x =
+(*let rec int_of_float x =
 	let f = floor (x +. 0.5) in
 	floor_retint f
 
 in
-
+*)
 (*
 taylor
 *)
@@ -165,8 +165,10 @@ in
 let rec atanlib x = if x < 0.0 then atan2 x (-1.0) else atan2 x (1.0)
 in
 
-let x = (int_of_float 3.0) + 1 in
+(*let x = (int_of_float 3.0) + 1 in
 let y = (floor_retint 3.0) + 1 in
-let z = (floor 3.0) +. 1.0 in
+let z = (floor 3.0) +. 1.0 in*)
+
+let x = 1.0 in
 
 ()
