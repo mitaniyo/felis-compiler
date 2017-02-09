@@ -160,7 +160,7 @@ and g' oc = function (* 各命令のアセンブリ生成 (caml2html: emit_gprim
     let ss = stacksize () in
     Printf.fprintf oc "\tmov.s %s %s\n" (reg y) (reg fl1);
     Printf.fprintf oc "\tsw %s %s %d\n" (reg reg_link) (reg reg_sp) ss;
-    Printf.fprintf oc "\tjal min_caml_sqrtlib";
+    Printf.fprintf oc "\tjal min_caml_sqrtlib\n";
     Printf.fprintf oc "\tlw %s %s %d\n" (reg reg_sp) (reg reg_link) ss;
     Printf.fprintf oc "\tmov.s %s %s\n" (reg fl1) (reg y)
   | NonTail(x), Sin(y) ->
@@ -168,7 +168,7 @@ and g' oc = function (* 各命令のアセンブリ生成 (caml2html: emit_gprim
     let ss = stacksize () in
     Printf.fprintf oc "\tmov.s %s %s\n" (reg y) (reg fl1);
     Printf.fprintf oc "\tsw %s %s %d\n" (reg reg_link) (reg reg_sp) ss;
-    Printf.fprintf oc "\tjal min_caml_sinlib";
+    Printf.fprintf oc "\tjal min_caml_sinlib\n";
     Printf.fprintf oc "\tlw %s %s %d\n" (reg reg_sp) (reg reg_link) ss;
     Printf.fprintf oc "\tmov.s %s %s\n" (reg fl1) (reg y)
   | NonTail(x), Cos(y) ->
@@ -176,7 +176,7 @@ and g' oc = function (* 各命令のアセンブリ生成 (caml2html: emit_gprim
     let ss = stacksize () in
     Printf.fprintf oc "\tmov.s %s %s\n" (reg y) (reg fl1);
     Printf.fprintf oc "\tsw %s %s %d\n" (reg reg_link) (reg reg_sp) ss;
-    Printf.fprintf oc "\tjal min_caml_coslib";
+    Printf.fprintf oc "\tjal min_caml_coslib\n";
     Printf.fprintf oc "\tlw %s %s %d\n" (reg reg_sp) (reg reg_link) ss;
     Printf.fprintf oc "\tmov.s %s %s\n" (reg fl1) (reg y)
   | NonTail(x), Atan(y) ->
@@ -184,7 +184,7 @@ and g' oc = function (* 各命令のアセンブリ生成 (caml2html: emit_gprim
     let ss = stacksize () in
     Printf.fprintf oc "\tmov.s %s %s\n" (reg y) (reg fl1);
     Printf.fprintf oc "\tsw %s %s %d\n" (reg reg_link) (reg reg_sp) ss;
-    Printf.fprintf oc "\tjal min_caml_atanlib";
+    Printf.fprintf oc "\tjal min_caml_atanlib\n";
     Printf.fprintf oc "\tlw %s %s %d\n" (reg reg_sp) (reg reg_link) ss;
     Printf.fprintf oc "\tmov.s %s %s\n" (reg fl1) (reg y)
   | NonTail(x), FAdd(y, z) -> Printf.fprintf oc "\tadd.s\t%s %s %s\n" (reg y) (reg z) (reg x)
