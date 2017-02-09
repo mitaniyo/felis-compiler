@@ -24,6 +24,10 @@ min-caml.opt
 /mathverify/*
 !/mathverify/*.ml
 !/mathverify/*.cpp
+/lib_fast/*
+!/lib_fast/*.cpp
+!/lib_fast/*.ml
+!/lib_fast/*.s
 /lib_fast/mathverify/*
 !/lib_fast/mathverify/*.ml
 !/lib_fast/mathverify/*.cpp
