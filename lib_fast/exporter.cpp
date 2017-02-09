@@ -13,10 +13,10 @@ string strs[] = {
 };
 
 string strs2[] ={
-	"min_caml_sin:",
-	"min_caml_cos:",
-	"min_caml_atan:",
-	"min_caml_sqrt:"
+	"min_caml_sinlib:",
+	"min_caml_coslib:",
+	"min_caml_atanlib:",
+	"min_caml_sqrtlib:"
 };
 
 int main(){

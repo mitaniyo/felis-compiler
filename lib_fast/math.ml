@@ -109,11 +109,11 @@ let rec coslib x =
 	cos3 x 1.0
 in
 
-let rec atan4 le ri n x s f =
+let rec atan4 le ri n x sg f =
 	if n = 30 then
-		let pih = 1.57079632679 in
-		let res = (if f = 0 then x else (pih -. x)) in
-		res *. s
+		(let pih = 1.57079632679 in
+		let res = (if f = 0 then le else (pih -. le)) in
+		res *. sg)
 	else
 	let mid = (le +. ri) /. 2.0 in
 	let c = (
@@ -146,8 +146,8 @@ let rec atan4 le ri n x s f =
 		res1 *. mid
 	) in
 	let t = s /. c in
-	if t > x then (* le mid *) atan4 le mid (n + 1) x s f else
-	atan4 mid ri (n + 1) x s f
+	if t > x then (* le mid *) atan4 le mid (n + 1) x sg f else
+	atan4 mid ri (n + 1) x sg f
 in
 
 let rec atan3 x s f =
@@ -158,17 +158,16 @@ in
 
 let rec atan2 x s =
 	if x > 1.0 then atan3 (1.0 /. x) s 1 else
-	if x = 1.0 then 0.78539816339 else
+	if x = 1.0 then s *. 0.78539816339 else
 	atan3 x s 0
 in
 
-let rec atanlib x = if x < 0.0 then atan2 x (-1.0) else atan2 x (1.0)
+let rec atanlib x = if x < 0.0 then atan2 (-.x) (-1.0) else atan2 x (1.0)
 in
 
 (*let x = (int_of_float 3.0) + 1 in
 let y = (floor_retint 3.0) + 1 in
 let z = (floor 3.0) +. 1.0 in*)
 
-let x = 1.0 in
-
+let x = atanlib 2.0 in
 ()
