@@ -61,7 +61,7 @@ let rec cos2 x s =
 
 in
 
-let sin3 x s =
+let rec sin3 x s =
 	(* sin x * s *)
 	(* 0 <= x <= pi *)
 	let pi = 3.14159265358979323846264 in
