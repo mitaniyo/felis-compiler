@@ -162,7 +162,7 @@ and g' oc = function (* 各命令のアセンブリ生成 (caml2html: emit_gprim
     Printf.fprintf oc "\tsw %s %s %d\n" (reg reg_link) (reg reg_sp) ss;
     Printf.fprintf oc "\tjal min_caml_sqrtlib\n";
     Printf.fprintf oc "\tlw %s %s %d\n" (reg reg_sp) (reg reg_link) ss;
-    Printf.fprintf oc "\tmov.s %s %s\n" (reg fl1) (reg y)
+    Printf.fprintf oc "\tmov.s %s %s\n" (reg fl1) (reg x)
   | NonTail(x), Sin(y) ->
     let fl1 = (List.nth fregs_cand 1).(0) in
     let ss = stacksize () in
@@ -170,7 +170,7 @@ and g' oc = function (* 各命令のアセンブリ生成 (caml2html: emit_gprim
     Printf.fprintf oc "\tsw %s %s %d\n" (reg reg_link) (reg reg_sp) ss;
     Printf.fprintf oc "\tjal min_caml_sinlib\n";
     Printf.fprintf oc "\tlw %s %s %d\n" (reg reg_sp) (reg reg_link) ss;
-    Printf.fprintf oc "\tmov.s %s %s\n" (reg fl1) (reg y)
+    Printf.fprintf oc "\tmov.s %s %s\n" (reg fl1) (reg x)
   | NonTail(x), Cos(y) ->
     let fl1 = (List.nth fregs_cand 1).(0) in
     let ss = stacksize () in
@@ -178,7 +178,7 @@ and g' oc = function (* 各命令のアセンブリ生成 (caml2html: emit_gprim
     Printf.fprintf oc "\tsw %s %s %d\n" (reg reg_link) (reg reg_sp) ss;
     Printf.fprintf oc "\tjal min_caml_coslib\n";
     Printf.fprintf oc "\tlw %s %s %d\n" (reg reg_sp) (reg reg_link) ss;
-    Printf.fprintf oc "\tmov.s %s %s\n" (reg fl1) (reg y)
+    Printf.fprintf oc "\tmov.s %s %s\n" (reg fl1) (reg x)
   | NonTail(x), Atan(y) ->
     let fl1 = (List.nth fregs_cand 1).(0) in
     let ss = stacksize () in
@@ -186,7 +186,7 @@ and g' oc = function (* 各命令のアセンブリ生成 (caml2html: emit_gprim
     Printf.fprintf oc "\tsw %s %s %d\n" (reg reg_link) (reg reg_sp) ss;
     Printf.fprintf oc "\tjal min_caml_atanlib\n";
     Printf.fprintf oc "\tlw %s %s %d\n" (reg reg_sp) (reg reg_link) ss;
-    Printf.fprintf oc "\tmov.s %s %s\n" (reg fl1) (reg y)
+    Printf.fprintf oc "\tmov.s %s %s\n" (reg fl1) (reg x)
   | NonTail(x), FAdd(y, z) -> Printf.fprintf oc "\tadd.s\t%s %s %s\n" (reg y) (reg z) (reg x)
   | NonTail(x), FSub(y, z) -> Printf.fprintf oc "\tsub.s\t%s %s %s\n" (reg y) (reg z) (reg x)
   | NonTail(x), FMul(y, z) -> Printf.fprintf oc "\tmul.s\t%s %s %s\n" (reg y) (reg z) (reg x)
