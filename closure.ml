@@ -14,6 +14,7 @@ type t = (* クロージャ変換後の式 (caml2html: closure_t) *)
   | Sin of Id.t
   | Cos of Id.t
   | Atan of Id.t
+  | Floor of Id.t
   | FAdd of Id.t * Id.t
   | FSub of Id.t * Id.t
   | FMul of Id.t * Id.t
@@ -39,7 +40,7 @@ type prog = Prog of fundef list * t
 
 let rec fv = function
   | Unit | Int(_) | Float(_) | ExtArray(_) | ExtTuple(_) -> S.empty
-  | Neg(x) | FNeg(x) | FAbs(x) | Sqrt(x) | Sin(x) | Cos(x) | Atan(x) -> S.singleton x
+  | Neg(x) | FNeg(x) | FAbs(x) | Sqrt(x) | Sin(x) | Cos(x) | Atan(x) | Floor(x) -> S.singleton x
   | Add(x, y) | Sub(x, y) | Mul(x, y) | Div(x, y) | FAdd(x, y) | FSub(x, y) | FMul(x, y) | FDiv(x, y) | Get(x, y) -> S.of_list [x; y]
   | IfEq(x, y, e1, e2)| IfLE(x, y, e1, e2) -> S.add x (S.add y (S.union (fv e1) (fv e2)))
   | Let((x, t), e1, e2) -> S.union (fv e1) (S.remove x (fv e2))
@@ -67,6 +68,7 @@ let rec g env known = function (* クロージャ変換ルーチン本体 (caml2
   | KNormal.Sin(x) -> Sin(x)
   | KNormal.Cos(x) -> Cos(x)
   | KNormal.Atan(x) -> Atan(x)
+  | KNormal.Floor(x) -> Floor(x)
   | KNormal.FAdd(x, y) -> FAdd(x, y)
   | KNormal.FSub(x, y) -> FSub(x, y)
   | KNormal.FMul(x, y) -> FMul(x, y)

@@ -19,6 +19,7 @@ type t = (* MinCamlの構文を表現するデータ型 (caml2html: syntax_t) *)
   | Sin of t
   | Cos of t
   | Atan of t
+  | Floor of t
   | Eq of t * t
   | LE of t * t
   | If of t * t * t

@@ -23,6 +23,7 @@ and exp =
   | Sin of Id.t
   | Cos of Id.t
   | Atan of Id.t
+  | Floor of Id.t
   | FAdd of Id.t * Id.t
   | FSub of Id.t * Id.t
   | FMul of Id.t * Id.t

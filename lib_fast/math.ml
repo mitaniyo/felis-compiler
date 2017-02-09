@@ -91,7 +91,7 @@ let rec cos3 x s =
 	(* 0 <= x <= pi / 2 *)
 	let pih = 1.57079632679 in
 	let piq = 0.78539816339 in
-	if x > piq then sin2 (pih - x) s else
+	if x > piq then sin2 (pih -. x) s else
 	cos2 x s
 in
 
@@ -157,7 +157,7 @@ let rec atan3 x s f =
 in
 
 let rec atan2 x s =
-	if x > 1.0 then atan3 (1.0 / x) s 1 else
+	if x > 1.0 then atan3 (1.0 /. x) s 1 else
 	if x = 1.0 then 0.78539816339 else
 	atan3 x s 0
 in

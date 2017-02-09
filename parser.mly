@@ -52,6 +52,7 @@ let addtyp x = (x, Type.gentyp ())
 %token SIN
 %token COS
 %token ATAN
+%token FLOOR
 
 /* (* 優先順位とassociativityの定義（低い方から高い方へ） (caml2html: parser_prior) *) */
 %right prec_let
@@ -148,6 +149,8 @@ exp: /* (* 一般の式 (caml2html: parser_exp) *) */
     { Cos($2) }
 | ATAN simple_exp
     { Atan($2) }
+| FLOOR simple_exp
+    { Floor($2) }
 | exp PLUS_DOT exp
     { FAdd($1, $3) }
 | exp MINUS_DOT exp

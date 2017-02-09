@@ -98,6 +98,8 @@ rule token = parse
     { COS }
 | "atan"
     { ATAN }
+| "floor"
+    { FLOOR }
 | ','
     { COMMA }
 | '_'

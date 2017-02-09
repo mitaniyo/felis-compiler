@@ -187,6 +187,9 @@ and g' oc = function (* 各命令のアセンブリ生成 (caml2html: emit_gprim
     Printf.fprintf oc "\tjal min_caml_atanlib\n";
     Printf.fprintf oc "\tlw %s %s %d\n" (reg reg_sp) (reg reg_link) ss;
     Printf.fprintf oc "\tmov.s %s %s\n" (reg fl1) (reg x)
+  | NonTail(x), Floor(y) ->
+    Printf.fprintf oc "\tcvt.w.s %s %s\n" (reg y) (reg x);
+    Printf.fprintf oc "\tcvt.s.w %s %s\n" (reg x) (reg x)
   | NonTail(x), FAdd(y, z) -> Printf.fprintf oc "\tadd.s\t%s %s %s\n" (reg y) (reg z) (reg x)
   | NonTail(x), FSub(y, z) -> Printf.fprintf oc "\tsub.s\t%s %s %s\n" (reg y) (reg z) (reg x)
   | NonTail(x), FMul(y, z) -> Printf.fprintf oc "\tmul.s\t%s %s %s\n" (reg y) (reg z) (reg x)
@@ -221,7 +224,7 @@ and g' oc = function (* 各命令のアセンブリ生成 (caml2html: emit_gprim
   | Tail, (Li _ | SetL _ | SetLVar _ | Mr _ | Neg _ | Add _ | Sub _ | Mul _ | Div _ | Ld _ as exp) ->
       g' oc (NonTail((!regs).(0)), exp);
       Printf.fprintf oc "\tjr\t%s\n" (reg reg_link)
-  | Tail, (FLi _ | FMr _ | FNeg _ | FAbs _ | Sqrt _ | Sin _ | Cos _ | Atan _ | FAdd _ | FSub _ | FMul _ | FDiv _ | Ldf _ as exp) ->
+  | Tail, (FLi _ | FMr _ | FNeg _ | FAbs _ | Sqrt _ | Sin _ | Cos _ | Atan _ | Floor _ | FAdd _ | FSub _ | FMul _ | FDiv _ | Ldf _ as exp) ->
       g' oc (NonTail((!fregs).(0)), exp);
       Printf.fprintf oc "\tjr\t%s\n" (reg reg_link)
   | Tail, (Restore(x) as exp) ->

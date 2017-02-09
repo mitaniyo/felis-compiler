@@ -58,6 +58,7 @@ let rec g env = function (* 式の仮想マシンコード生成 (caml2html: vir
   | Closure.Sin(x) -> Ans(Sin(x))
   | Closure.Cos(x) -> Ans(Cos(x))
   | Closure.Atan(x) -> Ans(Atan(x))
+  | Closure.Floor(x) -> Ans(Floor(x))
   | Closure.FAdd(x, y) -> Ans(FAdd(x, y))
   | Closure.FSub(x, y) -> Ans(FSub(x, y))
   | Closure.FMul(x, y) -> Ans(FMul(x, y))

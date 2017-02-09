@@ -27,6 +27,7 @@ let rec g env = function (* 定数畳み込みルーチン本体 (caml2html: con
   | Sin(x) when memf x env -> Float(sin(findf x env))
   | Cos(x) when memf x env -> Float(cos(findf x env))
   | Atan(x) when memf x env -> Float(atan(findf x env))
+  | Floor(x) when memf x env -> Float(floor(findf x env))
   | FAdd(x, y) when memf x env && memf y env -> Float(findf x env +. findf y env)
   | FSub(x, y) when memf x env && memf y env -> Float(findf x env -. findf y env)
   | FMul(x, y) when memf x env && memf y env -> Float(findf x env *. findf y env)
