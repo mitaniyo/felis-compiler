@@ -122,7 +122,7 @@ and g' oc = function (* 各命令のアセンブリ生成 (caml2html: emit_gprim
       Printf.fprintf oc "\tsw\t%s %s %d\n" "r1" (reg reg_sp) 0;
       Printf.fprintf oc "\tsw\t%s %s %d\n" (reg reg_link) (reg reg_sp) 4;
       Printf.fprintf oc "\tjal\t%s\n" y;
-      Printf.fprintf oc "\tmov\t%s %s\n" (reg x) "r1";
+      (if x = "%r1" then () else Printf.fprintf oc "\tmov\t%s %s\n" (reg x) "r1");
       (if (reg x) = "r1" then () else Printf.fprintf oc "\tlw\t%s %s %d\n" (reg reg_sp) "r1" 0);
       Printf.fprintf oc "\tlw\t%s %s %d\n" (reg reg_sp) (reg reg_link) 4;
       Printf.fprintf oc "\taddi\t%s %s %d\n" (reg reg_sp) (reg reg_sp) (-ss)
@@ -425,7 +425,7 @@ and g'_args oc x_reg_cl ys zs =
       (0, x_reg_cl)
       ys in
   List.iter
-    (fun (y, r) -> Printf.fprintf oc "\tmov\t%s %s\n" (reg r) (reg y))
+    (fun (y, r) -> (if r = y then () else Printf.fprintf oc "\tmov\t%s %s\n" (reg r) (reg y)))
     (shuffle (!reg_sw) yrs);
   let (d, zfrs) =
     List.fold_left
@@ -433,7 +433,7 @@ and g'_args oc x_reg_cl ys zs =
       (0, [])
       zs in
   List.iter
-    (fun (z, fr) -> Printf.fprintf oc "\tmov.s\t%s %s\n" (reg z) (reg fr))
+    (fun (z, fr) -> (if z = fr then () else Printf.fprintf oc "\tmov.s\t%s %s\n" (reg z) (reg fr)))
     (shuffle (!reg_fsw) zfrs)
 
 let h oc { name = Id.L(x); args = _; fargs = _; body = e; ret = _ } =
