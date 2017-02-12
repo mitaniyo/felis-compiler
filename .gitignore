@@ -18,6 +18,7 @@ min-caml.opt
 !/lib/mathlib.s
 !/lib/*.cpp
 /lib/.*
+/lib_fast
 /globals_compiler/*
 !/globals_compiler/*.cpp
 !/globals_compiler/*.in
