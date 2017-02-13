@@ -3,9 +3,9 @@ let rec write_header _ =
   print_byte 80;                (* P *)
   print_byte (48+3);            (* +6 if binary *)
   print_byte 10;                (* new line *)
-  print_int 100;
+  print_int 32;
   print_byte 32;                (* space *)
-  print_int 100;
+  print_int 32;
   print_byte 32;                (* space *)
   print_int 255;                (* 0~255 *)
   print_byte 10                 (* new line *)
@@ -47,13 +47,13 @@ let rec write_rgb x =
   print_char 10
 in
 let rec yloop y =
-  if y >= 100 then () else
+  if y >= 32 then () else
     let rec xloop x y =
-      if x >= 100 then () else
+      if x >= 32 then () else
         let fx = float_of_int x in
         let fy = float_of_int y in
-        let cr = fx /. 50.0 -. 1.5 in
-        let ci = fy /. 50.0 -. 1.0 in
+        let cr = fx /. 16.0 -. 1.5 in
+        let ci = fy /. 16.0 -. 1.0 in
         let rec iloop i zr zi cr ci=
           if i >= 256 then write_rgb 256 else
             let nr = zr *. zr -. zi *. zi +. cr in

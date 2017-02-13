@@ -17,7 +17,7 @@ write_header.195:
 	jal	min_caml_print_char
 	addi	r30 r30 -4
 	lw	r30 r31 0
-	addi	r0 r1 100
+	addi	r0 r1 32
 	sw	r31 r30 0
 	addi	r30 r30 4
 	jal	min_caml_print_int
@@ -29,7 +29,7 @@ write_header.195:
 	jal	min_caml_print_char
 	addi	r30 r30 -4
 	lw	r30 r31 0
-	addi	r0 r1 100
+	addi	r0 r1 32
 	sw	r31 r30 0
 	addi	r30 r30 4
 	jal	min_caml_print_int
@@ -371,7 +371,7 @@ ble_tail_else.504:
 	j r23
 xloop.206:
 	lw	r29 r3 4
-	addi	r0 r4 100
+	addi	r0 r4 32
 	sub	r4 r1 r25
 	blez	r25 ble_tail_else.506
 	sw	r29 r30 0
@@ -390,7 +390,7 @@ xloop.206:
 	jal	min_caml_float_of_int
 	addi	r30 r30 -24
 	lw	r30 r31 20
-	lui	r24 16968
+	lui	r24 16768
 	ori	r24 r24 0
 	mtc1	r24 f1
 	lwc1	 r30 f2 16
@@ -399,7 +399,7 @@ xloop.206:
 	ori	r24 r24 0
 	mtc1	r24 f2
 	sub.s	f1 f2 f2
-	lui	r24 16968
+	lui	r24 16768
 	ori	r24 r24 0
 	mtc1	r24 f1
 	div.s	f0 f1 f0
@@ -439,7 +439,7 @@ ble_tail_else.506:
 	jr	r31
 yloop.200:
 	lw	r29 r2 4
-	addi	r0 r3 100
+	addi	r0 r3 32
 	sub	r3 r1 r25
 	blez	r25 ble_tail_else.508
 	mov	r3 r27
