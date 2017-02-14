@@ -510,7 +510,7 @@ read_nth_object.2879:
 	lw	r30 r31 4
 	addi	r0 r2 -1
 	sub	r1 r2 r25
-	beq	r25 r0 beq_tail_else.28590
+	beq	r25 r0 beq_tail_else.28480
 	sw	r1 r30 4
 	sw	r31 r30 8
 	addi	r30 r30 12
@@ -629,12 +629,12 @@ read_nth_object.2879:
 	lwc1	 r30 f1 52
 	sub.s	f1 f0 f30
 	mfc1	f30 r25
-	blez	r25 bfle_nontail_else.28591
+	blez	r25 bfle_nontail_else.28481
 	addi	r0 r1 1
-	j	bfle_nontail_cont.28592
-bfle_nontail_else.28591:
+	j	bfle_nontail_cont.28482
+bfle_nontail_else.28481:
 	addi	r0 r1 0
-bfle_nontail_cont.28592:
+bfle_nontail_cont.28482:
 	addi	r0 r2 2
 	lui	r24 0
 	ori	r24 r24 0
@@ -725,7 +725,7 @@ bfle_nontail_cont.28592:
 	lw	r30 r3 16
 	sw	r1 r30 88
 	sub	r3 r2 r25
-	beq	r25 r0 beq_else.28593
+	beq	r25 r0 beq_else.28483
 	addi	r0 r2 0
 	sw	r2 r30 92
 	sw	r31 r30 96
@@ -771,18 +771,18 @@ bfle_nontail_cont.28592:
 	sll	r1 r1 2
 	lw	r30 r2 88
 	swoc1	f0 r2 r1
-	j	beq_cont.28594
-beq_else.28593:
-beq_cont.28594:
+	j	beq_cont.28484
+beq_else.28483:
+beq_cont.28484:
 	addi	r0 r1 2
 	lw	r30 r2 8
 	sub	r2 r1 r25
-	beq	r25 r0 beq_else.28595
+	beq	r25 r0 beq_else.28485
 	lw	r30 r1 56
-	j	beq_cont.28596
-beq_else.28595:
+	j	beq_cont.28486
+beq_else.28485:
 	addi	r0 r1 1
-beq_cont.28596:
+beq_cont.28486:
 	addi	r0 r3 4
 	lui	r24 0
 	ori	r24 r24 0
@@ -830,21 +830,21 @@ beq_cont.28596:
 	swo	r2 r6 r7
 	addi	r0 r2 3
 	sub	r5 r2 r25
-	beq	r25 r0 beq_else.28597
+	beq	r25 r0 beq_else.28487
 	addi	r0 r2 2
 	sub	r5 r2 r25
-	beq	r25 r0 beq_else.28599
-	j	beq_cont.28600
-beq_else.28599:
+	beq	r25 r0 beq_else.28489
+	j	beq_cont.28490
+beq_else.28489:
 	addi	r0 r2 0
 	lw	r30 r5 56
 	sub	r5 r2 r25
-	beq	r25 r0 beq_else.28601
+	beq	r25 r0 beq_else.28491
 	addi	r0 r2 0
-	j	beq_cont.28602
-beq_else.28601:
+	j	beq_cont.28492
+beq_else.28491:
 	addi	r0 r2 1
-beq_cont.28602:
+beq_cont.28492:
 	addi	r0 r5 0
 	sll	r5 r5 2
 	lwoc1	r3 r5 f0
@@ -868,73 +868,66 @@ beq_cont.28602:
 	lwoc1	r3 r5 f2
 	mul.s	f1 f2 f1
 	add.s	f0 f1 f0
-	sw	r2 r30 108
-	sw	r31 r30 112
-	addi	r30 r30 116
-	jal	min_caml_sqrt
-	addi	r30 r30 -116
-	lw	r30 r31 112
+	sqrt.s	f0 f0
 	lui	r24 0
 	ori	r24 r24 0
 	mtc1	r24 f1
 	sub.s	f0 f1 f30
 	mfc1	f30 r25
 	sll	r25 r25 1
-	beq	r25 r0 bfeq_nontail_else.28603
-	addi	r0 r1 0
-	j	bfeq_nontail_cont.28604
-bfeq_nontail_else.28603:
-	addi	r0 r1 1
-bfeq_nontail_cont.28604:
-	addi	r0 r2 0
-	sub	r1 r2 r25
-	beq	r25 r0 beq_else.28605
+	beq	r25 r0 bfeq_nontail_else.28493
+	addi	r0 r5 0
+	j	bfeq_nontail_cont.28494
+bfeq_nontail_else.28493:
+	addi	r0 r5 1
+bfeq_nontail_cont.28494:
+	addi	r0 r6 0
+	sub	r5 r6 r25
+	beq	r25 r0 beq_else.28495
 	lui	r24 16256
 	ori	r24 r24 0
 	mtc1	r24 f0
-	j	beq_cont.28606
-beq_else.28605:
-	addi	r0 r1 0
-	lw	r30 r2 108
-	sub	r2 r1 r25
-	beq	r25 r0 beq_else.28607
+	j	beq_cont.28496
+beq_else.28495:
+	addi	r0 r5 0
+	sub	r2 r5 r25
+	beq	r25 r0 beq_else.28497
 	lui	r24 49024
 	ori	r24 r24 0
 	mtc1	r24 f1
 	div.s	f1 f0 f0
-	j	beq_cont.28608
-beq_else.28607:
+	j	beq_cont.28498
+beq_else.28497:
 	lui	r24 16256
 	ori	r24 r24 0
 	mtc1	r24 f1
 	div.s	f1 f0 f0
-beq_cont.28608:
-beq_cont.28606:
-	addi	r0 r1 0
+beq_cont.28498:
+beq_cont.28496:
 	addi	r0 r2 0
-	sll	r2 r2 2
-	lw	r30 r3 20
-	lwoc1	r3 r2 f1
+	addi	r0 r5 0
+	sll	r5 r5 2
+	lwoc1	r3 r5 f1
 	mul.s	f1 f0 f1
-	sll	r1 r1 2
-	swoc1	f1 r3 r1
-	addi	r0 r1 1
+	sll	r2 r2 2
+	swoc1	f1 r3 r2
 	addi	r0 r2 1
-	sll	r2 r2 2
-	lwoc1	r3 r2 f1
+	addi	r0 r5 1
+	sll	r5 r5 2
+	lwoc1	r3 r5 f1
 	mul.s	f1 f0 f1
-	sll	r1 r1 2
-	swoc1	f1 r3 r1
-	addi	r0 r1 2
-	addi	r0 r2 2
 	sll	r2 r2 2
-	lwoc1	r3 r2 f1
+	swoc1	f1 r3 r2
+	addi	r0 r2 2
+	addi	r0 r5 2
+	sll	r5 r5 2
+	lwoc1	r3 r5 f1
 	mul.s	f1 f0 f0
-	sll	r1 r1 2
-	swoc1	f0 r3 r1
-beq_cont.28600:
-	j	beq_cont.28598
-beq_else.28597:
+	sll	r2 r2 2
+	swoc1	f0 r3 r2
+beq_cont.28490:
+	j	beq_cont.28488
+beq_else.28487:
 	addi	r0 r2 0
 	sll	r2 r2 2
 	lwoc1	r3 r2 f0
@@ -945,67 +938,67 @@ beq_else.28597:
 	sub.s	f0 f1 f30
 	mfc1	f30 r25
 	sll	r25 r25 1
-	beq	r25 r0 bfeq_nontail_else.28609
+	beq	r25 r0 bfeq_nontail_else.28499
 	addi	r0 r5 0
-	j	bfeq_nontail_cont.28610
-bfeq_nontail_else.28609:
+	j	bfeq_nontail_cont.28500
+bfeq_nontail_else.28499:
 	addi	r0 r5 1
-bfeq_nontail_cont.28610:
+bfeq_nontail_cont.28500:
 	addi	r0 r6 0
 	sub	r5 r6 r25
-	beq	r25 r0 beq_else.28611
+	beq	r25 r0 beq_else.28501
 	lui	r24 0
 	ori	r24 r24 0
 	mtc1	r24 f0
-	j	beq_cont.28612
-beq_else.28611:
+	j	beq_cont.28502
+beq_else.28501:
 	lui	r24 0
 	ori	r24 r24 0
 	mtc1	r24 f1
 	sub.s	f0 f1 f30
 	mfc1	f30 r25
 	sll	r25 r25 1
-	beq	r25 r0 bfeq_nontail_else.28613
+	beq	r25 r0 bfeq_nontail_else.28503
 	addi	r0 r5 0
-	j	bfeq_nontail_cont.28614
-bfeq_nontail_else.28613:
+	j	bfeq_nontail_cont.28504
+bfeq_nontail_else.28503:
 	addi	r0 r5 1
-bfeq_nontail_cont.28614:
+bfeq_nontail_cont.28504:
 	addi	r0 r6 0
 	sub	r5 r6 r25
-	beq	r25 r0 beq_else.28615
+	beq	r25 r0 beq_else.28505
 	lui	r24 0
 	ori	r24 r24 0
 	mtc1	r24 f1
-	j	beq_cont.28616
-beq_else.28615:
+	j	beq_cont.28506
+beq_else.28505:
 	lui	r24 0
 	ori	r24 r24 0
 	mtc1	r24 f1
 	sub.s	f0 f1 f30
 	mfc1	f30 r25
-	blez	r25 bfle_nontail_else.28617
+	blez	r25 bfle_nontail_else.28507
 	addi	r0 r5 1
-	j	bfle_nontail_cont.28618
-bfle_nontail_else.28617:
+	j	bfle_nontail_cont.28508
+bfle_nontail_else.28507:
 	addi	r0 r5 0
-bfle_nontail_cont.28618:
+bfle_nontail_cont.28508:
 	addi	r0 r6 0
 	sub	r5 r6 r25
-	beq	r25 r0 beq_else.28619
+	beq	r25 r0 beq_else.28509
 	lui	r24 16256
 	ori	r24 r24 0
 	mtc1	r24 f1
-	j	beq_cont.28620
-beq_else.28619:
+	j	beq_cont.28510
+beq_else.28509:
 	lui	r24 49024
 	ori	r24 r24 0
 	mtc1	r24 f1
-beq_cont.28620:
-beq_cont.28616:
+beq_cont.28510:
+beq_cont.28506:
 	mul.s	f0 f0 f0
 	div.s	f1 f0 f0
-beq_cont.28612:
+beq_cont.28502:
 	sll	r2 r2 2
 	swoc1	f0 r3 r2
 	addi	r0 r2 1
@@ -1018,67 +1011,67 @@ beq_cont.28612:
 	sub.s	f0 f1 f30
 	mfc1	f30 r25
 	sll	r25 r25 1
-	beq	r25 r0 bfeq_nontail_else.28621
+	beq	r25 r0 bfeq_nontail_else.28511
 	addi	r0 r5 0
-	j	bfeq_nontail_cont.28622
-bfeq_nontail_else.28621:
+	j	bfeq_nontail_cont.28512
+bfeq_nontail_else.28511:
 	addi	r0 r5 1
-bfeq_nontail_cont.28622:
+bfeq_nontail_cont.28512:
 	addi	r0 r6 0
 	sub	r5 r6 r25
-	beq	r25 r0 beq_else.28623
+	beq	r25 r0 beq_else.28513
 	lui	r24 0
 	ori	r24 r24 0
 	mtc1	r24 f0
-	j	beq_cont.28624
-beq_else.28623:
+	j	beq_cont.28514
+beq_else.28513:
 	lui	r24 0
 	ori	r24 r24 0
 	mtc1	r24 f1
 	sub.s	f0 f1 f30
 	mfc1	f30 r25
 	sll	r25 r25 1
-	beq	r25 r0 bfeq_nontail_else.28625
+	beq	r25 r0 bfeq_nontail_else.28515
 	addi	r0 r5 0
-	j	bfeq_nontail_cont.28626
-bfeq_nontail_else.28625:
+	j	bfeq_nontail_cont.28516
+bfeq_nontail_else.28515:
 	addi	r0 r5 1
-bfeq_nontail_cont.28626:
+bfeq_nontail_cont.28516:
 	addi	r0 r6 0
 	sub	r5 r6 r25
-	beq	r25 r0 beq_else.28627
+	beq	r25 r0 beq_else.28517
 	lui	r24 0
 	ori	r24 r24 0
 	mtc1	r24 f1
-	j	beq_cont.28628
-beq_else.28627:
+	j	beq_cont.28518
+beq_else.28517:
 	lui	r24 0
 	ori	r24 r24 0
 	mtc1	r24 f1
 	sub.s	f0 f1 f30
 	mfc1	f30 r25
-	blez	r25 bfle_nontail_else.28629
+	blez	r25 bfle_nontail_else.28519
 	addi	r0 r5 1
-	j	bfle_nontail_cont.28630
-bfle_nontail_else.28629:
+	j	bfle_nontail_cont.28520
+bfle_nontail_else.28519:
 	addi	r0 r5 0
-bfle_nontail_cont.28630:
+bfle_nontail_cont.28520:
 	addi	r0 r6 0
 	sub	r5 r6 r25
-	beq	r25 r0 beq_else.28631
+	beq	r25 r0 beq_else.28521
 	lui	r24 16256
 	ori	r24 r24 0
 	mtc1	r24 f1
-	j	beq_cont.28632
-beq_else.28631:
+	j	beq_cont.28522
+beq_else.28521:
 	lui	r24 49024
 	ori	r24 r24 0
 	mtc1	r24 f1
-beq_cont.28632:
-beq_cont.28628:
+beq_cont.28522:
+beq_cont.28518:
 	mul.s	f0 f0 f0
 	div.s	f1 f0 f0
-beq_cont.28624:
+beq_cont.28514:
 	sll	r2 r2 2
 	swoc1	f0 r3 r2
 	addi	r0 r2 2
@@ -1091,93 +1084,92 @@ beq_cont.28624:
 	sub.s	f0 f1 f30
 	mfc1	f30 r25
 	sll	r25 r25 1
-	beq	r25 r0 bfeq_nontail_else.28633
+	beq	r25 r0 bfeq_nontail_else.28523
 	addi	r0 r5 0
-	j	bfeq_nontail_cont.28634
-bfeq_nontail_else.28633:
+	j	bfeq_nontail_cont.28524
+bfeq_nontail_else.28523:
 	addi	r0 r5 1
-bfeq_nontail_cont.28634:
+bfeq_nontail_cont.28524:
 	addi	r0 r6 0
 	sub	r5 r6 r25
-	beq	r25 r0 beq_else.28635
+	beq	r25 r0 beq_else.28525
 	lui	r24 0
 	ori	r24 r24 0
 	mtc1	r24 f0
-	j	beq_cont.28636
-beq_else.28635:
+	j	beq_cont.28526
+beq_else.28525:
 	lui	r24 0
 	ori	r24 r24 0
 	mtc1	r24 f1
 	sub.s	f0 f1 f30
 	mfc1	f30 r25
 	sll	r25 r25 1
-	beq	r25 r0 bfeq_nontail_else.28637
+	beq	r25 r0 bfeq_nontail_else.28527
 	addi	r0 r5 0
-	j	bfeq_nontail_cont.28638
-bfeq_nontail_else.28637:
+	j	bfeq_nontail_cont.28528
+bfeq_nontail_else.28527:
 	addi	r0 r5 1
-bfeq_nontail_cont.28638:
+bfeq_nontail_cont.28528:
 	addi	r0 r6 0
 	sub	r5 r6 r25
-	beq	r25 r0 beq_else.28639
+	beq	r25 r0 beq_else.28529
 	lui	r24 0
 	ori	r24 r24 0
 	mtc1	r24 f1
-	j	beq_cont.28640
-beq_else.28639:
+	j	beq_cont.28530
+beq_else.28529:
 	lui	r24 0
 	ori	r24 r24 0
 	mtc1	r24 f1
 	sub.s	f0 f1 f30
 	mfc1	f30 r25
-	blez	r25 bfle_nontail_else.28641
+	blez	r25 bfle_nontail_else.28531
 	addi	r0 r5 1
-	j	bfle_nontail_cont.28642
-bfle_nontail_else.28641:
+	j	bfle_nontail_cont.28532
+bfle_nontail_else.28531:
 	addi	r0 r5 0
-bfle_nontail_cont.28642:
+bfle_nontail_cont.28532:
 	addi	r0 r6 0
 	sub	r5 r6 r25
-	beq	r25 r0 beq_else.28643
+	beq	r25 r0 beq_else.28533
 	lui	r24 16256
 	ori	r24 r24 0
 	mtc1	r24 f1
-	j	beq_cont.28644
-beq_else.28643:
+	j	beq_cont.28534
+beq_else.28533:
 	lui	r24 49024
 	ori	r24 r24 0
 	mtc1	r24 f1
-beq_cont.28644:
-beq_cont.28640:
+beq_cont.28534:
+beq_cont.28530:
 	mul.s	f0 f0 f0
 	div.s	f1 f0 f0
-beq_cont.28636:
+beq_cont.28526:
 	sll	r2 r2 2
 	swoc1	f0 r3 r2
-beq_cont.28598:
-	addi	r0 r1 0
-	lw	r30 r2 16
-	sub	r2 r1 r25
-	beq	r25 r0 beq_else.28645
-	lw	r30 r2 88
-	sw	r31 r30 112
-	addi	r30 r30 116
+beq_cont.28488:
+	addi	r0 r2 0
+	sub	r4 r2 r25
+	beq	r25 r0 beq_else.28535
+	sw	r31 r30 108
+	addi	r30 r30 112
+	mov	r2 r1
 	mov	r1 r3
 	jal	rotate_quadratic_matrix.2876
-	addi	r30 r30 -116
-	lw	r30 r31 112
-	j	beq_cont.28646
-beq_else.28645:
-beq_cont.28646:
+	addi	r30 r30 -112
+	lw	r30 r31 108
+	j	beq_cont.28536
+beq_else.28535:
+beq_cont.28536:
 	addi	r0 r1 1
 	jr	r31
-beq_tail_else.28590:
+beq_tail_else.28480:
 	addi	r0 r1 0
 	jr	r31
 read_object.2881:
 	addi	r0 r2 60
 	sub	r2 r1 r25
-	blez	r25 ble_tail_else.28647
+	blez	r25 ble_tail_else.28537
 	sw	r1 r30 0
 	sw	r31 r30 4
 	addi	r30 r30 8
@@ -1186,13 +1178,13 @@ read_object.2881:
 	lw	r30 r31 4
 	addi	r0 r2 0
 	sub	r1 r2 r25
-	beq	r25 r0 beq_tail_else.28648
+	beq	r25 r0 beq_tail_else.28538
 	addi	r0 r1 1
 	lw	r30 r2 0
 	add	r2 r1 r1
 	addi	r0 r2 60
 	sub	r2 r1 r25
-	blez	r25 ble_tail_else.28649
+	blez	r25 ble_tail_else.28539
 	sw	r1 r30 4
 	sw	r31 r30 8
 	addi	r30 r30 12
@@ -1201,13 +1193,13 @@ read_object.2881:
 	lw	r30 r31 8
 	addi	r0 r2 0
 	sub	r1 r2 r25
-	beq	r25 r0 beq_tail_else.28650
+	beq	r25 r0 beq_tail_else.28540
 	addi	r0 r1 1
 	lw	r30 r2 4
 	add	r2 r1 r1
 	addi	r0 r2 60
 	sub	r2 r1 r25
-	blez	r25 ble_tail_else.28651
+	blez	r25 ble_tail_else.28541
 	sw	r1 r30 8
 	sw	r31 r30 12
 	addi	r30 r30 16
@@ -1216,13 +1208,13 @@ read_object.2881:
 	lw	r30 r31 12
 	addi	r0 r2 0
 	sub	r1 r2 r25
-	beq	r25 r0 beq_tail_else.28652
+	beq	r25 r0 beq_tail_else.28542
 	addi	r0 r1 1
 	lw	r30 r2 8
 	add	r2 r1 r1
 	addi	r0 r2 60
 	sub	r2 r1 r25
-	blez	r25 ble_tail_else.28653
+	blez	r25 ble_tail_else.28543
 	sw	r1 r30 12
 	sw	r31 r30 16
 	addi	r30 r30 20
@@ -1231,13 +1223,13 @@ read_object.2881:
 	lw	r30 r31 16
 	addi	r0 r2 0
 	sub	r1 r2 r25
-	beq	r25 r0 beq_tail_else.28654
+	beq	r25 r0 beq_tail_else.28544
 	addi	r0 r1 1
 	lw	r30 r2 12
 	add	r2 r1 r1
 	addi	r0 r2 60
 	sub	r2 r1 r25
-	blez	r25 ble_tail_else.28655
+	blez	r25 ble_tail_else.28545
 	sw	r1 r30 16
 	sw	r31 r30 20
 	addi	r30 r30 24
@@ -1246,13 +1238,13 @@ read_object.2881:
 	lw	r30 r31 20
 	addi	r0 r2 0
 	sub	r1 r2 r25
-	beq	r25 r0 beq_tail_else.28656
+	beq	r25 r0 beq_tail_else.28546
 	addi	r0 r1 1
 	lw	r30 r2 16
 	add	r2 r1 r1
 	addi	r0 r2 60
 	sub	r2 r1 r25
-	blez	r25 ble_tail_else.28657
+	blez	r25 ble_tail_else.28547
 	sw	r1 r30 20
 	sw	r31 r30 24
 	addi	r30 r30 28
@@ -1261,13 +1253,13 @@ read_object.2881:
 	lw	r30 r31 24
 	addi	r0 r2 0
 	sub	r1 r2 r25
-	beq	r25 r0 beq_tail_else.28658
+	beq	r25 r0 beq_tail_else.28548
 	addi	r0 r1 1
 	lw	r30 r2 20
 	add	r2 r1 r1
 	addi	r0 r2 60
 	sub	r2 r1 r25
-	blez	r25 ble_tail_else.28659
+	blez	r25 ble_tail_else.28549
 	sw	r1 r30 24
 	sw	r31 r30 28
 	addi	r30 r30 32
@@ -1276,13 +1268,13 @@ read_object.2881:
 	lw	r30 r31 28
 	addi	r0 r2 0
 	sub	r1 r2 r25
-	beq	r25 r0 beq_tail_else.28660
+	beq	r25 r0 beq_tail_else.28550
 	addi	r0 r1 1
 	lw	r30 r2 24
 	add	r2 r1 r1
 	addi	r0 r2 60
 	sub	r2 r1 r25
-	blez	r25 ble_tail_else.28661
+	blez	r25 ble_tail_else.28551
 	sw	r1 r30 28
 	sw	r31 r30 32
 	addi	r30 r30 36
@@ -1291,12 +1283,12 @@ read_object.2881:
 	lw	r30 r31 32
 	addi	r0 r2 0
 	sub	r1 r2 r25
-	beq	r25 r0 beq_tail_else.28662
+	beq	r25 r0 beq_tail_else.28552
 	addi	r0 r1 1
 	lw	r30 r2 28
 	add	r2 r1 r1
 	j	read_object.2881
-beq_tail_else.28662:
+beq_tail_else.28552:
 	addi	r30 r30 32
 	sw	r1 r30 0
 	sw	r31 r30 4
@@ -1309,9 +1301,9 @@ beq_tail_else.28662:
 	lw	r30 r3 28
 	swo	r3 r1 r2
 	jr	r31
-ble_tail_else.28661:
+ble_tail_else.28551:
 	jr	r31
-beq_tail_else.28660:
+beq_tail_else.28550:
 	addi	r30 r30 32
 	sw	r1 r30 0
 	sw	r31 r30 4
@@ -1324,9 +1316,9 @@ beq_tail_else.28660:
 	lw	r30 r3 24
 	swo	r3 r1 r2
 	jr	r31
-ble_tail_else.28659:
+ble_tail_else.28549:
 	jr	r31
-beq_tail_else.28658:
+beq_tail_else.28548:
 	addi	r30 r30 32
 	sw	r1 r30 0
 	sw	r31 r30 4
@@ -1339,9 +1331,9 @@ beq_tail_else.28658:
 	lw	r30 r3 20
 	swo	r3 r1 r2
 	jr	r31
-ble_tail_else.28657:
+ble_tail_else.28547:
 	jr	r31
-beq_tail_else.28656:
+beq_tail_else.28546:
 	addi	r30 r30 32
 	sw	r1 r30 0
 	sw	r31 r30 4
@@ -1354,9 +1346,9 @@ beq_tail_else.28656:
 	lw	r30 r3 16
 	swo	r3 r1 r2
 	jr	r31
-ble_tail_else.28655:
+ble_tail_else.28545:
 	jr	r31
-beq_tail_else.28654:
+beq_tail_else.28544:
 	addi	r30 r30 32
 	sw	r1 r30 0
 	sw	r31 r30 4
@@ -1369,9 +1361,9 @@ beq_tail_else.28654:
 	lw	r30 r3 12
 	swo	r3 r1 r2
 	jr	r31
-ble_tail_else.28653:
+ble_tail_else.28543:
 	jr	r31
-beq_tail_else.28652:
+beq_tail_else.28542:
 	addi	r30 r30 32
 	sw	r1 r30 0
 	sw	r31 r30 4
@@ -1384,9 +1376,9 @@ beq_tail_else.28652:
 	lw	r30 r3 8
 	swo	r3 r1 r2
 	jr	r31
-ble_tail_else.28651:
+ble_tail_else.28541:
 	jr	r31
-beq_tail_else.28650:
+beq_tail_else.28540:
 	addi	r30 r30 32
 	sw	r1 r30 0
 	sw	r31 r30 4
@@ -1399,9 +1391,9 @@ beq_tail_else.28650:
 	lw	r30 r3 4
 	swo	r3 r1 r2
 	jr	r31
-ble_tail_else.28649:
+ble_tail_else.28539:
 	jr	r31
-beq_tail_else.28648:
+beq_tail_else.28538:
 	addi	r30 r30 32
 	sw	r1 r30 0
 	sw	r31 r30 4
@@ -1414,7 +1406,7 @@ beq_tail_else.28648:
 	lw	r30 r3 0
 	swo	r3 r1 r2
 	jr	r31
-ble_tail_else.28647:
+ble_tail_else.28537:
 	jr	r31
 read_net_item.2885:
 	sw	r1 r30 0
@@ -1425,7 +1417,7 @@ read_net_item.2885:
 	lw	r30 r31 4
 	addi	r0 r2 -1
 	sub	r1 r2 r25
-	beq	r25 r0 beq_tail_else.28679
+	beq	r25 r0 beq_tail_else.28569
 	addi	r0 r2 1
 	lw	r30 r3 0
 	add	r3 r2 r2
@@ -1438,7 +1430,7 @@ read_net_item.2885:
 	lw	r30 r31 12
 	addi	r0 r2 -1
 	sub	r1 r2 r25
-	beq	r25 r0 beq_else.28680
+	beq	r25 r0 beq_else.28570
 	addi	r0 r2 1
 	lw	r30 r3 8
 	add	r3 r2 r2
@@ -1451,7 +1443,7 @@ read_net_item.2885:
 	lw	r30 r31 20
 	addi	r0 r2 -1
 	sub	r1 r2 r25
-	beq	r25 r0 beq_else.28682
+	beq	r25 r0 beq_else.28572
 	addi	r0 r2 1
 	lw	r30 r3 16
 	add	r3 r2 r2
@@ -1464,7 +1456,7 @@ read_net_item.2885:
 	lw	r30 r31 28
 	addi	r0 r2 -1
 	sub	r1 r2 r25
-	beq	r25 r0 beq_else.28684
+	beq	r25 r0 beq_else.28574
 	addi	r0 r2 1
 	lw	r30 r3 24
 	add	r3 r2 r2
@@ -1477,7 +1469,7 @@ read_net_item.2885:
 	lw	r30 r31 36
 	addi	r0 r2 -1
 	sub	r1 r2 r25
-	beq	r25 r0 beq_else.28686
+	beq	r25 r0 beq_else.28576
 	addi	r0 r2 1
 	lw	r30 r3 32
 	add	r3 r2 r2
@@ -1490,7 +1482,7 @@ read_net_item.2885:
 	lw	r30 r31 44
 	addi	r0 r2 -1
 	sub	r1 r2 r25
-	beq	r25 r0 beq_else.28688
+	beq	r25 r0 beq_else.28578
 	addi	r0 r2 1
 	lw	r30 r3 40
 	add	r3 r2 r2
@@ -1503,7 +1495,7 @@ read_net_item.2885:
 	lw	r30 r31 52
 	addi	r0 r2 -1
 	sub	r1 r2 r25
-	beq	r25 r0 beq_else.28690
+	beq	r25 r0 beq_else.28580
 	addi	r0 r2 1
 	lw	r30 r3 48
 	add	r3 r2 r2
@@ -1516,7 +1508,7 @@ read_net_item.2885:
 	lw	r30 r31 60
 	addi	r0 r2 -1
 	sub	r1 r2 r25
-	beq	r25 r0 beq_else.28692
+	beq	r25 r0 beq_else.28582
 	addi	r0 r2 1
 	lw	r30 r3 56
 	add	r3 r2 r2
@@ -1531,8 +1523,8 @@ read_net_item.2885:
 	sll	r2 r2 2
 	lw	r30 r3 60
 	swo	r3 r1 r2
-	j	beq_cont.28693
-beq_else.28692:
+	j	beq_cont.28583
+beq_else.28582:
 	addi	r0 r1 1
 	lw	r30 r2 56
 	add	r2 r1 r1
@@ -1542,13 +1534,13 @@ beq_else.28692:
 	jal	min_caml_create_array
 	addi	r30 r30 -68
 	lw	r30 r31 64
-beq_cont.28693:
+beq_cont.28583:
 	lw	r30 r2 48
 	sll	r2 r2 2
 	lw	r30 r3 52
 	swo	r3 r1 r2
-	j	beq_cont.28691
-beq_else.28690:
+	j	beq_cont.28581
+beq_else.28580:
 	addi	r0 r1 1
 	lw	r30 r2 48
 	add	r2 r1 r1
@@ -1558,13 +1550,13 @@ beq_else.28690:
 	jal	min_caml_create_array
 	addi	r30 r30 -68
 	lw	r30 r31 64
-beq_cont.28691:
+beq_cont.28581:
 	lw	r30 r2 40
 	sll	r2 r2 2
 	lw	r30 r3 44
 	swo	r3 r1 r2
-	j	beq_cont.28689
-beq_else.28688:
+	j	beq_cont.28579
+beq_else.28578:
 	addi	r0 r1 1
 	lw	r30 r2 40
 	add	r2 r1 r1
@@ -1574,13 +1566,13 @@ beq_else.28688:
 	jal	min_caml_create_array
 	addi	r30 r30 -68
 	lw	r30 r31 64
-beq_cont.28689:
+beq_cont.28579:
 	lw	r30 r2 32
 	sll	r2 r2 2
 	lw	r30 r3 36
 	swo	r3 r1 r2
-	j	beq_cont.28687
-beq_else.28686:
+	j	beq_cont.28577
+beq_else.28576:
 	addi	r0 r1 1
 	lw	r30 r2 32
 	add	r2 r1 r1
@@ -1590,13 +1582,13 @@ beq_else.28686:
 	jal	min_caml_create_array
 	addi	r30 r30 -68
 	lw	r30 r31 64
-beq_cont.28687:
+beq_cont.28577:
 	lw	r30 r2 24
 	sll	r2 r2 2
 	lw	r30 r3 28
 	swo	r3 r1 r2
-	j	beq_cont.28685
-beq_else.28684:
+	j	beq_cont.28575
+beq_else.28574:
 	addi	r0 r1 1
 	lw	r30 r2 24
 	add	r2 r1 r1
@@ -1606,13 +1598,13 @@ beq_else.28684:
 	jal	min_caml_create_array
 	addi	r30 r30 -68
 	lw	r30 r31 64
-beq_cont.28685:
+beq_cont.28575:
 	lw	r30 r2 16
 	sll	r2 r2 2
 	lw	r30 r3 20
 	swo	r3 r1 r2
-	j	beq_cont.28683
-beq_else.28682:
+	j	beq_cont.28573
+beq_else.28572:
 	addi	r0 r1 1
 	lw	r30 r2 16
 	add	r2 r1 r1
@@ -1622,13 +1614,13 @@ beq_else.28682:
 	jal	min_caml_create_array
 	addi	r30 r30 -68
 	lw	r30 r31 64
-beq_cont.28683:
+beq_cont.28573:
 	lw	r30 r2 8
 	sll	r2 r2 2
 	lw	r30 r3 12
 	swo	r3 r1 r2
-	j	beq_cont.28681
-beq_else.28680:
+	j	beq_cont.28571
+beq_else.28570:
 	addi	r0 r1 1
 	lw	r30 r2 8
 	add	r2 r1 r1
@@ -1638,13 +1630,13 @@ beq_else.28680:
 	jal	min_caml_create_array
 	addi	r30 r30 -68
 	lw	r30 r31 64
-beq_cont.28681:
+beq_cont.28571:
 	lw	r30 r2 0
 	sll	r2 r2 2
 	lw	r30 r3 4
 	swo	r3 r1 r2
 	jr	r31
-beq_tail_else.28679:
+beq_tail_else.28569:
 	addi	r0 r1 1
 	lw	r30 r2 0
 	add	r2 r1 r1
@@ -1661,7 +1653,7 @@ read_or_network.2887:
 	lw	r30 r31 8
 	addi	r0 r2 -1
 	sub	r1 r2 r25
-	beq	r25 r0 beq_else.28694
+	beq	r25 r0 beq_else.28584
 	addi	r0 r2 1
 	sw	r1 r30 8
 	sw	r2 r30 12
@@ -1672,7 +1664,7 @@ read_or_network.2887:
 	lw	r30 r31 16
 	addi	r0 r2 -1
 	sub	r1 r2 r25
-	beq	r25 r0 beq_else.28696
+	beq	r25 r0 beq_else.28586
 	addi	r0 r2 2
 	sw	r1 r30 16
 	sw	r2 r30 20
@@ -1683,7 +1675,7 @@ read_or_network.2887:
 	lw	r30 r31 24
 	addi	r0 r2 -1
 	sub	r1 r2 r25
-	beq	r25 r0 beq_else.28698
+	beq	r25 r0 beq_else.28588
 	addi	r0 r2 3
 	sw	r1 r30 24
 	sw	r2 r30 28
@@ -1694,7 +1686,7 @@ read_or_network.2887:
 	lw	r30 r31 32
 	addi	r0 r2 -1
 	sub	r1 r2 r25
-	beq	r25 r0 beq_else.28700
+	beq	r25 r0 beq_else.28590
 	addi	r0 r2 4
 	sw	r1 r30 32
 	sw	r2 r30 36
@@ -1705,7 +1697,7 @@ read_or_network.2887:
 	lw	r30 r31 40
 	addi	r0 r2 -1
 	sub	r1 r2 r25
-	beq	r25 r0 beq_else.28702
+	beq	r25 r0 beq_else.28592
 	addi	r0 r2 5
 	sw	r1 r30 40
 	sw	r2 r30 44
@@ -1716,7 +1708,7 @@ read_or_network.2887:
 	lw	r30 r31 48
 	addi	r0 r2 -1
 	sub	r1 r2 r25
-	beq	r25 r0 beq_else.28704
+	beq	r25 r0 beq_else.28594
 	addi	r0 r2 6
 	sw	r1 r30 48
 	sw	r2 r30 52
@@ -1727,7 +1719,7 @@ read_or_network.2887:
 	lw	r30 r31 56
 	addi	r0 r2 -1
 	sub	r1 r2 r25
-	beq	r25 r0 beq_else.28706
+	beq	r25 r0 beq_else.28596
 	addi	r0 r2 7
 	sw	r1 r30 56
 	sw	r31 r30 60
@@ -1740,8 +1732,8 @@ read_or_network.2887:
 	sll	r2 r2 2
 	lw	r30 r3 56
 	swo	r3 r1 r2
-	j	beq_cont.28707
-beq_else.28706:
+	j	beq_cont.28597
+beq_else.28596:
 	addi	r0 r1 7
 	addi	r0 r2 -1
 	sw	r31 r30 60
@@ -1749,13 +1741,13 @@ beq_else.28706:
 	jal	min_caml_create_array
 	addi	r30 r30 -64
 	lw	r30 r31 60
-beq_cont.28707:
+beq_cont.28597:
 	lw	r30 r2 44
 	sll	r2 r2 2
 	lw	r30 r3 48
 	swo	r3 r1 r2
-	j	beq_cont.28705
-beq_else.28704:
+	j	beq_cont.28595
+beq_else.28594:
 	addi	r0 r1 6
 	addi	r0 r2 -1
 	sw	r31 r30 60
@@ -1763,13 +1755,13 @@ beq_else.28704:
 	jal	min_caml_create_array
 	addi	r30 r30 -64
 	lw	r30 r31 60
-beq_cont.28705:
+beq_cont.28595:
 	lw	r30 r2 36
 	sll	r2 r2 2
 	lw	r30 r3 40
 	swo	r3 r1 r2
-	j	beq_cont.28703
-beq_else.28702:
+	j	beq_cont.28593
+beq_else.28592:
 	addi	r0 r1 5
 	addi	r0 r2 -1
 	sw	r31 r30 60
@@ -1777,13 +1769,13 @@ beq_else.28702:
 	jal	min_caml_create_array
 	addi	r30 r30 -64
 	lw	r30 r31 60
-beq_cont.28703:
+beq_cont.28593:
 	lw	r30 r2 28
 	sll	r2 r2 2
 	lw	r30 r3 32
 	swo	r3 r1 r2
-	j	beq_cont.28701
-beq_else.28700:
+	j	beq_cont.28591
+beq_else.28590:
 	addi	r0 r1 4
 	addi	r0 r2 -1
 	sw	r31 r30 60
@@ -1791,13 +1783,13 @@ beq_else.28700:
 	jal	min_caml_create_array
 	addi	r30 r30 -64
 	lw	r30 r31 60
-beq_cont.28701:
+beq_cont.28591:
 	lw	r30 r2 20
 	sll	r2 r2 2
 	lw	r30 r3 24
 	swo	r3 r1 r2
-	j	beq_cont.28699
-beq_else.28698:
+	j	beq_cont.28589
+beq_else.28588:
 	addi	r0 r1 3
 	addi	r0 r2 -1
 	sw	r31 r30 60
@@ -1805,13 +1797,13 @@ beq_else.28698:
 	jal	min_caml_create_array
 	addi	r30 r30 -64
 	lw	r30 r31 60
-beq_cont.28699:
+beq_cont.28589:
 	lw	r30 r2 12
 	sll	r2 r2 2
 	lw	r30 r3 16
 	swo	r3 r1 r2
-	j	beq_cont.28697
-beq_else.28696:
+	j	beq_cont.28587
+beq_else.28586:
 	addi	r0 r1 2
 	addi	r0 r2 -1
 	sw	r31 r30 60
@@ -1819,14 +1811,14 @@ beq_else.28696:
 	jal	min_caml_create_array
 	addi	r30 r30 -64
 	lw	r30 r31 60
-beq_cont.28697:
+beq_cont.28587:
 	lw	r30 r2 4
 	sll	r2 r2 2
 	lw	r30 r3 8
 	swo	r3 r1 r2
 	mov	r2 r1
-	j	beq_cont.28695
-beq_else.28694:
+	j	beq_cont.28585
+beq_else.28584:
 	addi	r0 r1 1
 	addi	r0 r2 -1
 	sw	r31 r30 60
@@ -1835,13 +1827,13 @@ beq_else.28694:
 	addi	r30 r30 -64
 	lw	r30 r31 60
 	mov	r2 r1
-beq_cont.28695:
+beq_cont.28585:
 	addi	r0 r1 0
 	sll	r1 r1 2
 	lwo	r2 r1 r1
 	addi	r0 r3 -1
 	sub	r1 r3 r25
-	beq	r25 r0 beq_tail_else.28708
+	beq	r25 r0 beq_tail_else.28598
 	addi	r0 r1 1
 	lw	r30 r3 0
 	add	r3 r1 r1
@@ -1856,7 +1848,7 @@ beq_cont.28695:
 	lw	r30 r31 72
 	addi	r0 r2 -1
 	sub	r1 r2 r25
-	beq	r25 r0 beq_else.28709
+	beq	r25 r0 beq_else.28599
 	addi	r0 r2 1
 	sw	r1 r30 72
 	sw	r2 r30 76
@@ -1867,7 +1859,7 @@ beq_cont.28695:
 	lw	r30 r31 80
 	addi	r0 r2 -1
 	sub	r1 r2 r25
-	beq	r25 r0 beq_else.28711
+	beq	r25 r0 beq_else.28601
 	addi	r0 r2 2
 	sw	r1 r30 80
 	sw	r2 r30 84
@@ -1878,7 +1870,7 @@ beq_cont.28695:
 	lw	r30 r31 88
 	addi	r0 r2 -1
 	sub	r1 r2 r25
-	beq	r25 r0 beq_else.28713
+	beq	r25 r0 beq_else.28603
 	addi	r0 r2 3
 	sw	r1 r30 88
 	sw	r2 r30 92
@@ -1889,7 +1881,7 @@ beq_cont.28695:
 	lw	r30 r31 96
 	addi	r0 r2 -1
 	sub	r1 r2 r25
-	beq	r25 r0 beq_else.28715
+	beq	r25 r0 beq_else.28605
 	addi	r0 r2 4
 	sw	r1 r30 96
 	sw	r2 r30 100
@@ -1900,7 +1892,7 @@ beq_cont.28695:
 	lw	r30 r31 104
 	addi	r0 r2 -1
 	sub	r1 r2 r25
-	beq	r25 r0 beq_else.28717
+	beq	r25 r0 beq_else.28607
 	addi	r0 r2 5
 	sw	r1 r30 104
 	sw	r2 r30 108
@@ -1911,7 +1903,7 @@ beq_cont.28695:
 	lw	r30 r31 112
 	addi	r0 r2 -1
 	sub	r1 r2 r25
-	beq	r25 r0 beq_else.28719
+	beq	r25 r0 beq_else.28609
 	addi	r0 r2 6
 	sw	r1 r30 112
 	sw	r31 r30 116
@@ -1924,8 +1916,8 @@ beq_cont.28695:
 	sll	r2 r2 2
 	lw	r30 r3 112
 	swo	r3 r1 r2
-	j	beq_cont.28720
-beq_else.28719:
+	j	beq_cont.28610
+beq_else.28609:
 	addi	r0 r1 6
 	addi	r0 r2 -1
 	sw	r31 r30 116
@@ -1933,13 +1925,13 @@ beq_else.28719:
 	jal	min_caml_create_array
 	addi	r30 r30 -120
 	lw	r30 r31 116
-beq_cont.28720:
+beq_cont.28610:
 	lw	r30 r2 100
 	sll	r2 r2 2
 	lw	r30 r3 104
 	swo	r3 r1 r2
-	j	beq_cont.28718
-beq_else.28717:
+	j	beq_cont.28608
+beq_else.28607:
 	addi	r0 r1 5
 	addi	r0 r2 -1
 	sw	r31 r30 116
@@ -1947,13 +1939,13 @@ beq_else.28717:
 	jal	min_caml_create_array
 	addi	r30 r30 -120
 	lw	r30 r31 116
-beq_cont.28718:
+beq_cont.28608:
 	lw	r30 r2 92
 	sll	r2 r2 2
 	lw	r30 r3 96
 	swo	r3 r1 r2
-	j	beq_cont.28716
-beq_else.28715:
+	j	beq_cont.28606
+beq_else.28605:
 	addi	r0 r1 4
 	addi	r0 r2 -1
 	sw	r31 r30 116
@@ -1961,13 +1953,13 @@ beq_else.28715:
 	jal	min_caml_create_array
 	addi	r30 r30 -120
 	lw	r30 r31 116
-beq_cont.28716:
+beq_cont.28606:
 	lw	r30 r2 84
 	sll	r2 r2 2
 	lw	r30 r3 88
 	swo	r3 r1 r2
-	j	beq_cont.28714
-beq_else.28713:
+	j	beq_cont.28604
+beq_else.28603:
 	addi	r0 r1 3
 	addi	r0 r2 -1
 	sw	r31 r30 116
@@ -1975,13 +1967,13 @@ beq_else.28713:
 	jal	min_caml_create_array
 	addi	r30 r30 -120
 	lw	r30 r31 116
-beq_cont.28714:
+beq_cont.28604:
 	lw	r30 r2 76
 	sll	r2 r2 2
 	lw	r30 r3 80
 	swo	r3 r1 r2
-	j	beq_cont.28712
-beq_else.28711:
+	j	beq_cont.28602
+beq_else.28601:
 	addi	r0 r1 2
 	addi	r0 r2 -1
 	sw	r31 r30 116
@@ -1989,14 +1981,14 @@ beq_else.28711:
 	jal	min_caml_create_array
 	addi	r30 r30 -120
 	lw	r30 r31 116
-beq_cont.28712:
+beq_cont.28602:
 	lw	r30 r2 68
 	sll	r2 r2 2
 	lw	r30 r3 72
 	swo	r3 r1 r2
 	mov	r2 r1
-	j	beq_cont.28710
-beq_else.28709:
+	j	beq_cont.28600
+beq_else.28599:
 	addi	r0 r1 1
 	addi	r0 r2 -1
 	sw	r31 r30 116
@@ -2005,13 +1997,13 @@ beq_else.28709:
 	addi	r30 r30 -120
 	lw	r30 r31 116
 	mov	r2 r1
-beq_cont.28710:
+beq_cont.28600:
 	addi	r0 r1 0
 	sll	r1 r1 2
 	lwo	r2 r1 r1
 	addi	r0 r3 -1
 	sub	r1 r3 r25
-	beq	r25 r0 beq_else.28721
+	beq	r25 r0 beq_else.28611
 	addi	r0 r1 1
 	lw	r30 r3 64
 	add	r3 r1 r1
@@ -2026,7 +2018,7 @@ beq_cont.28710:
 	lw	r30 r31 128
 	addi	r0 r2 -1
 	sub	r1 r2 r25
-	beq	r25 r0 beq_else.28723
+	beq	r25 r0 beq_else.28613
 	addi	r0 r2 1
 	sw	r1 r30 128
 	sw	r2 r30 132
@@ -2037,7 +2029,7 @@ beq_cont.28710:
 	lw	r30 r31 136
 	addi	r0 r2 -1
 	sub	r1 r2 r25
-	beq	r25 r0 beq_else.28725
+	beq	r25 r0 beq_else.28615
 	addi	r0 r2 2
 	sw	r1 r30 136
 	sw	r2 r30 140
@@ -2048,7 +2040,7 @@ beq_cont.28710:
 	lw	r30 r31 144
 	addi	r0 r2 -1
 	sub	r1 r2 r25
-	beq	r25 r0 beq_else.28727
+	beq	r25 r0 beq_else.28617
 	addi	r0 r2 3
 	sw	r1 r30 144
 	sw	r2 r30 148
@@ -2059,7 +2051,7 @@ beq_cont.28710:
 	lw	r30 r31 152
 	addi	r0 r2 -1
 	sub	r1 r2 r25
-	beq	r25 r0 beq_else.28729
+	beq	r25 r0 beq_else.28619
 	addi	r0 r2 4
 	sw	r1 r30 152
 	sw	r2 r30 156
@@ -2070,7 +2062,7 @@ beq_cont.28710:
 	lw	r30 r31 160
 	addi	r0 r2 -1
 	sub	r1 r2 r25
-	beq	r25 r0 beq_else.28731
+	beq	r25 r0 beq_else.28621
 	addi	r0 r2 5
 	sw	r1 r30 160
 	sw	r31 r30 164
@@ -2083,8 +2075,8 @@ beq_cont.28710:
 	sll	r2 r2 2
 	lw	r30 r3 160
 	swo	r3 r1 r2
-	j	beq_cont.28732
-beq_else.28731:
+	j	beq_cont.28622
+beq_else.28621:
 	addi	r0 r1 5
 	addi	r0 r2 -1
 	sw	r31 r30 164
@@ -2092,13 +2084,13 @@ beq_else.28731:
 	jal	min_caml_create_array
 	addi	r30 r30 -168
 	lw	r30 r31 164
-beq_cont.28732:
+beq_cont.28622:
 	lw	r30 r2 148
 	sll	r2 r2 2
 	lw	r30 r3 152
 	swo	r3 r1 r2
-	j	beq_cont.28730
-beq_else.28729:
+	j	beq_cont.28620
+beq_else.28619:
 	addi	r0 r1 4
 	addi	r0 r2 -1
 	sw	r31 r30 164
@@ -2106,13 +2098,13 @@ beq_else.28729:
 	jal	min_caml_create_array
 	addi	r30 r30 -168
 	lw	r30 r31 164
-beq_cont.28730:
+beq_cont.28620:
 	lw	r30 r2 140
 	sll	r2 r2 2
 	lw	r30 r3 144
 	swo	r3 r1 r2
-	j	beq_cont.28728
-beq_else.28727:
+	j	beq_cont.28618
+beq_else.28617:
 	addi	r0 r1 3
 	addi	r0 r2 -1
 	sw	r31 r30 164
@@ -2120,13 +2112,13 @@ beq_else.28727:
 	jal	min_caml_create_array
 	addi	r30 r30 -168
 	lw	r30 r31 164
-beq_cont.28728:
+beq_cont.28618:
 	lw	r30 r2 132
 	sll	r2 r2 2
 	lw	r30 r3 136
 	swo	r3 r1 r2
-	j	beq_cont.28726
-beq_else.28725:
+	j	beq_cont.28616
+beq_else.28615:
 	addi	r0 r1 2
 	addi	r0 r2 -1
 	sw	r31 r30 164
@@ -2134,14 +2126,14 @@ beq_else.28725:
 	jal	min_caml_create_array
 	addi	r30 r30 -168
 	lw	r30 r31 164
-beq_cont.28726:
+beq_cont.28616:
 	lw	r30 r2 124
 	sll	r2 r2 2
 	lw	r30 r3 128
 	swo	r3 r1 r2
 	mov	r2 r1
-	j	beq_cont.28724
-beq_else.28723:
+	j	beq_cont.28614
+beq_else.28613:
 	addi	r0 r1 1
 	addi	r0 r2 -1
 	sw	r31 r30 164
@@ -2150,13 +2142,13 @@ beq_else.28723:
 	addi	r30 r30 -168
 	lw	r30 r31 164
 	mov	r2 r1
-beq_cont.28724:
+beq_cont.28614:
 	addi	r0 r1 0
 	sll	r1 r1 2
 	lwo	r2 r1 r1
 	addi	r0 r3 -1
 	sub	r1 r3 r25
-	beq	r25 r0 beq_else.28733
+	beq	r25 r0 beq_else.28623
 	addi	r0 r1 1
 	lw	r30 r3 120
 	add	r3 r1 r1
@@ -2171,7 +2163,7 @@ beq_cont.28724:
 	lw	r30 r31 176
 	addi	r0 r2 -1
 	sub	r1 r2 r25
-	beq	r25 r0 beq_else.28735
+	beq	r25 r0 beq_else.28625
 	addi	r0 r2 1
 	sw	r1 r30 176
 	sw	r2 r30 180
@@ -2182,7 +2174,7 @@ beq_cont.28724:
 	lw	r30 r31 184
 	addi	r0 r2 -1
 	sub	r1 r2 r25
-	beq	r25 r0 beq_else.28737
+	beq	r25 r0 beq_else.28627
 	addi	r0 r2 2
 	sw	r1 r30 184
 	sw	r2 r30 188
@@ -2193,7 +2185,7 @@ beq_cont.28724:
 	lw	r30 r31 192
 	addi	r0 r2 -1
 	sub	r1 r2 r25
-	beq	r25 r0 beq_else.28739
+	beq	r25 r0 beq_else.28629
 	addi	r0 r2 3
 	sw	r1 r30 192
 	sw	r2 r30 196
@@ -2204,7 +2196,7 @@ beq_cont.28724:
 	lw	r30 r31 200
 	addi	r0 r2 -1
 	sub	r1 r2 r25
-	beq	r25 r0 beq_else.28741
+	beq	r25 r0 beq_else.28631
 	addi	r0 r2 4
 	sw	r1 r30 200
 	sw	r31 r30 204
@@ -2217,8 +2209,8 @@ beq_cont.28724:
 	sll	r2 r2 2
 	lw	r30 r3 200
 	swo	r3 r1 r2
-	j	beq_cont.28742
-beq_else.28741:
+	j	beq_cont.28632
+beq_else.28631:
 	addi	r0 r1 4
 	addi	r0 r2 -1
 	sw	r31 r30 204
@@ -2226,13 +2218,13 @@ beq_else.28741:
 	jal	min_caml_create_array
 	addi	r30 r30 -208
 	lw	r30 r31 204
-beq_cont.28742:
+beq_cont.28632:
 	lw	r30 r2 188
 	sll	r2 r2 2
 	lw	r30 r3 192
 	swo	r3 r1 r2
-	j	beq_cont.28740
-beq_else.28739:
+	j	beq_cont.28630
+beq_else.28629:
 	addi	r0 r1 3
 	addi	r0 r2 -1
 	sw	r31 r30 204
@@ -2240,13 +2232,13 @@ beq_else.28739:
 	jal	min_caml_create_array
 	addi	r30 r30 -208
 	lw	r30 r31 204
-beq_cont.28740:
+beq_cont.28630:
 	lw	r30 r2 180
 	sll	r2 r2 2
 	lw	r30 r3 184
 	swo	r3 r1 r2
-	j	beq_cont.28738
-beq_else.28737:
+	j	beq_cont.28628
+beq_else.28627:
 	addi	r0 r1 2
 	addi	r0 r2 -1
 	sw	r31 r30 204
@@ -2254,14 +2246,14 @@ beq_else.28737:
 	jal	min_caml_create_array
 	addi	r30 r30 -208
 	lw	r30 r31 204
-beq_cont.28738:
+beq_cont.28628:
 	lw	r30 r2 172
 	sll	r2 r2 2
 	lw	r30 r3 176
 	swo	r3 r1 r2
 	mov	r2 r1
-	j	beq_cont.28736
-beq_else.28735:
+	j	beq_cont.28626
+beq_else.28625:
 	addi	r0 r1 1
 	addi	r0 r2 -1
 	sw	r31 r30 204
@@ -2270,13 +2262,13 @@ beq_else.28735:
 	addi	r30 r30 -208
 	lw	r30 r31 204
 	mov	r2 r1
-beq_cont.28736:
+beq_cont.28626:
 	addi	r0 r1 0
 	sll	r1 r1 2
 	lwo	r2 r1 r1
 	addi	r0 r3 -1
 	sub	r1 r3 r25
-	beq	r25 r0 beq_else.28743
+	beq	r25 r0 beq_else.28633
 	addi	r0 r1 1
 	lw	r30 r3 168
 	add	r3 r1 r1
@@ -2290,8 +2282,8 @@ beq_cont.28736:
 	sll	r2 r2 2
 	lw	r30 r3 204
 	swo	r3 r1 r2
-	j	beq_cont.28744
-beq_else.28743:
+	j	beq_cont.28634
+beq_else.28633:
 	addi	r0 r1 1
 	lw	r30 r3 168
 	add	r3 r1 r1
@@ -2300,13 +2292,13 @@ beq_else.28743:
 	jal	min_caml_create_array
 	addi	r30 r30 -212
 	lw	r30 r31 208
-beq_cont.28744:
+beq_cont.28634:
 	lw	r30 r2 120
 	sll	r2 r2 2
 	lw	r30 r3 164
 	swo	r3 r1 r2
-	j	beq_cont.28734
-beq_else.28733:
+	j	beq_cont.28624
+beq_else.28623:
 	addi	r0 r1 1
 	lw	r30 r3 120
 	add	r3 r1 r1
@@ -2315,13 +2307,13 @@ beq_else.28733:
 	jal	min_caml_create_array
 	addi	r30 r30 -212
 	lw	r30 r31 208
-beq_cont.28734:
+beq_cont.28624:
 	lw	r30 r2 64
 	sll	r2 r2 2
 	lw	r30 r3 116
 	swo	r3 r1 r2
-	j	beq_cont.28722
-beq_else.28721:
+	j	beq_cont.28612
+beq_else.28611:
 	addi	r0 r1 1
 	lw	r30 r3 64
 	add	r3 r1 r1
@@ -2330,13 +2322,13 @@ beq_else.28721:
 	jal	min_caml_create_array
 	addi	r30 r30 -212
 	lw	r30 r31 208
-beq_cont.28722:
+beq_cont.28612:
 	lw	r30 r2 0
 	sll	r2 r2 2
 	lw	r30 r3 60
 	swo	r3 r1 r2
 	jr	r31
-beq_tail_else.28708:
+beq_tail_else.28598:
 	addi	r0 r1 1
 	lw	r30 r3 0
 	add	r3 r1 r1
@@ -2352,7 +2344,7 @@ read_and_network.2889:
 	lw	r30 r31 8
 	addi	r0 r2 -1
 	sub	r1 r2 r25
-	beq	r25 r0 beq_else.28745
+	beq	r25 r0 beq_else.28635
 	addi	r0 r2 1
 	sw	r1 r30 8
 	sw	r2 r30 12
@@ -2363,7 +2355,7 @@ read_and_network.2889:
 	lw	r30 r31 16
 	addi	r0 r2 -1
 	sub	r1 r2 r25
-	beq	r25 r0 beq_else.28747
+	beq	r25 r0 beq_else.28637
 	addi	r0 r2 2
 	sw	r1 r30 16
 	sw	r2 r30 20
@@ -2374,7 +2366,7 @@ read_and_network.2889:
 	lw	r30 r31 24
 	addi	r0 r2 -1
 	sub	r1 r2 r25
-	beq	r25 r0 beq_else.28749
+	beq	r25 r0 beq_else.28639
 	addi	r0 r2 3
 	sw	r1 r30 24
 	sw	r2 r30 28
@@ -2385,7 +2377,7 @@ read_and_network.2889:
 	lw	r30 r31 32
 	addi	r0 r2 -1
 	sub	r1 r2 r25
-	beq	r25 r0 beq_else.28751
+	beq	r25 r0 beq_else.28641
 	addi	r0 r2 4
 	sw	r1 r30 32
 	sw	r2 r30 36
@@ -2396,7 +2388,7 @@ read_and_network.2889:
 	lw	r30 r31 40
 	addi	r0 r2 -1
 	sub	r1 r2 r25
-	beq	r25 r0 beq_else.28753
+	beq	r25 r0 beq_else.28643
 	addi	r0 r2 5
 	sw	r1 r30 40
 	sw	r2 r30 44
@@ -2407,7 +2399,7 @@ read_and_network.2889:
 	lw	r30 r31 48
 	addi	r0 r2 -1
 	sub	r1 r2 r25
-	beq	r25 r0 beq_else.28755
+	beq	r25 r0 beq_else.28645
 	addi	r0 r2 6
 	sw	r1 r30 48
 	sw	r2 r30 52
@@ -2418,7 +2410,7 @@ read_and_network.2889:
 	lw	r30 r31 56
 	addi	r0 r2 -1
 	sub	r1 r2 r25
-	beq	r25 r0 beq_else.28757
+	beq	r25 r0 beq_else.28647
 	addi	r0 r2 7
 	sw	r1 r30 56
 	sw	r31 r30 60
@@ -2431,8 +2423,8 @@ read_and_network.2889:
 	sll	r2 r2 2
 	lw	r30 r3 56
 	swo	r3 r1 r2
-	j	beq_cont.28758
-beq_else.28757:
+	j	beq_cont.28648
+beq_else.28647:
 	addi	r0 r1 7
 	addi	r0 r2 -1
 	sw	r31 r30 60
@@ -2440,13 +2432,13 @@ beq_else.28757:
 	jal	min_caml_create_array
 	addi	r30 r30 -64
 	lw	r30 r31 60
-beq_cont.28758:
+beq_cont.28648:
 	lw	r30 r2 44
 	sll	r2 r2 2
 	lw	r30 r3 48
 	swo	r3 r1 r2
-	j	beq_cont.28756
-beq_else.28755:
+	j	beq_cont.28646
+beq_else.28645:
 	addi	r0 r1 6
 	addi	r0 r2 -1
 	sw	r31 r30 60
@@ -2454,13 +2446,13 @@ beq_else.28755:
 	jal	min_caml_create_array
 	addi	r30 r30 -64
 	lw	r30 r31 60
-beq_cont.28756:
+beq_cont.28646:
 	lw	r30 r2 36
 	sll	r2 r2 2
 	lw	r30 r3 40
 	swo	r3 r1 r2
-	j	beq_cont.28754
-beq_else.28753:
+	j	beq_cont.28644
+beq_else.28643:
 	addi	r0 r1 5
 	addi	r0 r2 -1
 	sw	r31 r30 60
@@ -2468,13 +2460,13 @@ beq_else.28753:
 	jal	min_caml_create_array
 	addi	r30 r30 -64
 	lw	r30 r31 60
-beq_cont.28754:
+beq_cont.28644:
 	lw	r30 r2 28
 	sll	r2 r2 2
 	lw	r30 r3 32
 	swo	r3 r1 r2
-	j	beq_cont.28752
-beq_else.28751:
+	j	beq_cont.28642
+beq_else.28641:
 	addi	r0 r1 4
 	addi	r0 r2 -1
 	sw	r31 r30 60
@@ -2482,13 +2474,13 @@ beq_else.28751:
 	jal	min_caml_create_array
 	addi	r30 r30 -64
 	lw	r30 r31 60
-beq_cont.28752:
+beq_cont.28642:
 	lw	r30 r2 20
 	sll	r2 r2 2
 	lw	r30 r3 24
 	swo	r3 r1 r2
-	j	beq_cont.28750
-beq_else.28749:
+	j	beq_cont.28640
+beq_else.28639:
 	addi	r0 r1 3
 	addi	r0 r2 -1
 	sw	r31 r30 60
@@ -2496,13 +2488,13 @@ beq_else.28749:
 	jal	min_caml_create_array
 	addi	r30 r30 -64
 	lw	r30 r31 60
-beq_cont.28750:
+beq_cont.28640:
 	lw	r30 r2 12
 	sll	r2 r2 2
 	lw	r30 r3 16
 	swo	r3 r1 r2
-	j	beq_cont.28748
-beq_else.28747:
+	j	beq_cont.28638
+beq_else.28637:
 	addi	r0 r1 2
 	addi	r0 r2 -1
 	sw	r31 r30 60
@@ -2510,13 +2502,13 @@ beq_else.28747:
 	jal	min_caml_create_array
 	addi	r30 r30 -64
 	lw	r30 r31 60
-beq_cont.28748:
+beq_cont.28638:
 	lw	r30 r2 4
 	sll	r2 r2 2
 	lw	r30 r3 8
 	swo	r3 r1 r2
-	j	beq_cont.28746
-beq_else.28745:
+	j	beq_cont.28636
+beq_else.28635:
 	addi	r0 r1 1
 	addi	r0 r2 -1
 	sw	r31 r30 60
@@ -2524,13 +2516,13 @@ beq_else.28745:
 	jal	min_caml_create_array
 	addi	r30 r30 -64
 	lw	r30 r31 60
-beq_cont.28746:
+beq_cont.28636:
 	addi	r0 r2 0
 	sll	r2 r2 2
 	lwo	r1 r2 r2
 	addi	r0 r3 -1
 	sub	r2 r3 r25
-	beq	r25 r0 beq_tail_else.28759
+	beq	r25 r0 beq_tail_else.28649
 	addi	r30 r30 60
 	sw	r1 r30 0
 	sw	r31 r30 4
@@ -2554,7 +2546,7 @@ beq_cont.28746:
 	lw	r30 r31 68
 	addi	r0 r2 -1
 	sub	r1 r2 r25
-	beq	r25 r0 beq_else.28760
+	beq	r25 r0 beq_else.28650
 	addi	r0 r2 1
 	sw	r1 r30 68
 	sw	r2 r30 72
@@ -2565,7 +2557,7 @@ beq_cont.28746:
 	lw	r30 r31 76
 	addi	r0 r2 -1
 	sub	r1 r2 r25
-	beq	r25 r0 beq_else.28762
+	beq	r25 r0 beq_else.28652
 	addi	r0 r2 2
 	sw	r1 r30 76
 	sw	r2 r30 80
@@ -2576,7 +2568,7 @@ beq_cont.28746:
 	lw	r30 r31 84
 	addi	r0 r2 -1
 	sub	r1 r2 r25
-	beq	r25 r0 beq_else.28764
+	beq	r25 r0 beq_else.28654
 	addi	r0 r2 3
 	sw	r1 r30 84
 	sw	r2 r30 88
@@ -2587,7 +2579,7 @@ beq_cont.28746:
 	lw	r30 r31 92
 	addi	r0 r2 -1
 	sub	r1 r2 r25
-	beq	r25 r0 beq_else.28766
+	beq	r25 r0 beq_else.28656
 	addi	r0 r2 4
 	sw	r1 r30 92
 	sw	r2 r30 96
@@ -2598,7 +2590,7 @@ beq_cont.28746:
 	lw	r30 r31 100
 	addi	r0 r2 -1
 	sub	r1 r2 r25
-	beq	r25 r0 beq_else.28768
+	beq	r25 r0 beq_else.28658
 	addi	r0 r2 5
 	sw	r1 r30 100
 	sw	r2 r30 104
@@ -2609,7 +2601,7 @@ beq_cont.28746:
 	lw	r30 r31 108
 	addi	r0 r2 -1
 	sub	r1 r2 r25
-	beq	r25 r0 beq_else.28770
+	beq	r25 r0 beq_else.28660
 	addi	r0 r2 6
 	sw	r1 r30 108
 	sw	r31 r30 112
@@ -2622,8 +2614,8 @@ beq_cont.28746:
 	sll	r2 r2 2
 	lw	r30 r3 108
 	swo	r3 r1 r2
-	j	beq_cont.28771
-beq_else.28770:
+	j	beq_cont.28661
+beq_else.28660:
 	addi	r0 r1 6
 	addi	r0 r2 -1
 	sw	r31 r30 112
@@ -2631,13 +2623,13 @@ beq_else.28770:
 	jal	min_caml_create_array
 	addi	r30 r30 -116
 	lw	r30 r31 112
-beq_cont.28771:
+beq_cont.28661:
 	lw	r30 r2 96
 	sll	r2 r2 2
 	lw	r30 r3 100
 	swo	r3 r1 r2
-	j	beq_cont.28769
-beq_else.28768:
+	j	beq_cont.28659
+beq_else.28658:
 	addi	r0 r1 5
 	addi	r0 r2 -1
 	sw	r31 r30 112
@@ -2645,13 +2637,13 @@ beq_else.28768:
 	jal	min_caml_create_array
 	addi	r30 r30 -116
 	lw	r30 r31 112
-beq_cont.28769:
+beq_cont.28659:
 	lw	r30 r2 88
 	sll	r2 r2 2
 	lw	r30 r3 92
 	swo	r3 r1 r2
-	j	beq_cont.28767
-beq_else.28766:
+	j	beq_cont.28657
+beq_else.28656:
 	addi	r0 r1 4
 	addi	r0 r2 -1
 	sw	r31 r30 112
@@ -2659,13 +2651,13 @@ beq_else.28766:
 	jal	min_caml_create_array
 	addi	r30 r30 -116
 	lw	r30 r31 112
-beq_cont.28767:
+beq_cont.28657:
 	lw	r30 r2 80
 	sll	r2 r2 2
 	lw	r30 r3 84
 	swo	r3 r1 r2
-	j	beq_cont.28765
-beq_else.28764:
+	j	beq_cont.28655
+beq_else.28654:
 	addi	r0 r1 3
 	addi	r0 r2 -1
 	sw	r31 r30 112
@@ -2673,13 +2665,13 @@ beq_else.28764:
 	jal	min_caml_create_array
 	addi	r30 r30 -116
 	lw	r30 r31 112
-beq_cont.28765:
+beq_cont.28655:
 	lw	r30 r2 72
 	sll	r2 r2 2
 	lw	r30 r3 76
 	swo	r3 r1 r2
-	j	beq_cont.28763
-beq_else.28762:
+	j	beq_cont.28653
+beq_else.28652:
 	addi	r0 r1 2
 	addi	r0 r2 -1
 	sw	r31 r30 112
@@ -2687,13 +2679,13 @@ beq_else.28762:
 	jal	min_caml_create_array
 	addi	r30 r30 -116
 	lw	r30 r31 112
-beq_cont.28763:
+beq_cont.28653:
 	lw	r30 r2 64
 	sll	r2 r2 2
 	lw	r30 r3 68
 	swo	r3 r1 r2
-	j	beq_cont.28761
-beq_else.28760:
+	j	beq_cont.28651
+beq_else.28650:
 	addi	r0 r1 1
 	addi	r0 r2 -1
 	sw	r31 r30 112
@@ -2701,13 +2693,13 @@ beq_else.28760:
 	jal	min_caml_create_array
 	addi	r30 r30 -116
 	lw	r30 r31 112
-beq_cont.28761:
+beq_cont.28651:
 	addi	r0 r2 0
 	sll	r2 r2 2
 	lwo	r1 r2 r2
 	addi	r0 r3 -1
 	sub	r2 r3 r25
-	beq	r25 r0 beq_tail_else.28772
+	beq	r25 r0 beq_tail_else.28662
 	addi	r30 r30 112
 	sw	r1 r30 0
 	sw	r31 r30 4
@@ -2731,7 +2723,7 @@ beq_cont.28761:
 	lw	r30 r31 120
 	addi	r0 r2 -1
 	sub	r1 r2 r25
-	beq	r25 r0 beq_else.28773
+	beq	r25 r0 beq_else.28663
 	addi	r0 r2 1
 	sw	r1 r30 120
 	sw	r2 r30 124
@@ -2742,7 +2734,7 @@ beq_cont.28761:
 	lw	r30 r31 128
 	addi	r0 r2 -1
 	sub	r1 r2 r25
-	beq	r25 r0 beq_else.28775
+	beq	r25 r0 beq_else.28665
 	addi	r0 r2 2
 	sw	r1 r30 128
 	sw	r2 r30 132
@@ -2753,7 +2745,7 @@ beq_cont.28761:
 	lw	r30 r31 136
 	addi	r0 r2 -1
 	sub	r1 r2 r25
-	beq	r25 r0 beq_else.28777
+	beq	r25 r0 beq_else.28667
 	addi	r0 r2 3
 	sw	r1 r30 136
 	sw	r2 r30 140
@@ -2764,7 +2756,7 @@ beq_cont.28761:
 	lw	r30 r31 144
 	addi	r0 r2 -1
 	sub	r1 r2 r25
-	beq	r25 r0 beq_else.28779
+	beq	r25 r0 beq_else.28669
 	addi	r0 r2 4
 	sw	r1 r30 144
 	sw	r2 r30 148
@@ -2775,7 +2767,7 @@ beq_cont.28761:
 	lw	r30 r31 152
 	addi	r0 r2 -1
 	sub	r1 r2 r25
-	beq	r25 r0 beq_else.28781
+	beq	r25 r0 beq_else.28671
 	addi	r0 r2 5
 	sw	r1 r30 152
 	sw	r31 r30 156
@@ -2788,8 +2780,8 @@ beq_cont.28761:
 	sll	r2 r2 2
 	lw	r30 r3 152
 	swo	r3 r1 r2
-	j	beq_cont.28782
-beq_else.28781:
+	j	beq_cont.28672
+beq_else.28671:
 	addi	r0 r1 5
 	addi	r0 r2 -1
 	sw	r31 r30 156
@@ -2797,13 +2789,13 @@ beq_else.28781:
 	jal	min_caml_create_array
 	addi	r30 r30 -160
 	lw	r30 r31 156
-beq_cont.28782:
+beq_cont.28672:
 	lw	r30 r2 140
 	sll	r2 r2 2
 	lw	r30 r3 144
 	swo	r3 r1 r2
-	j	beq_cont.28780
-beq_else.28779:
+	j	beq_cont.28670
+beq_else.28669:
 	addi	r0 r1 4
 	addi	r0 r2 -1
 	sw	r31 r30 156
@@ -2811,13 +2803,13 @@ beq_else.28779:
 	jal	min_caml_create_array
 	addi	r30 r30 -160
 	lw	r30 r31 156
-beq_cont.28780:
+beq_cont.28670:
 	lw	r30 r2 132
 	sll	r2 r2 2
 	lw	r30 r3 136
 	swo	r3 r1 r2
-	j	beq_cont.28778
-beq_else.28777:
+	j	beq_cont.28668
+beq_else.28667:
 	addi	r0 r1 3
 	addi	r0 r2 -1
 	sw	r31 r30 156
@@ -2825,13 +2817,13 @@ beq_else.28777:
 	jal	min_caml_create_array
 	addi	r30 r30 -160
 	lw	r30 r31 156
-beq_cont.28778:
+beq_cont.28668:
 	lw	r30 r2 124
 	sll	r2 r2 2
 	lw	r30 r3 128
 	swo	r3 r1 r2
-	j	beq_cont.28776
-beq_else.28775:
+	j	beq_cont.28666
+beq_else.28665:
 	addi	r0 r1 2
 	addi	r0 r2 -1
 	sw	r31 r30 156
@@ -2839,13 +2831,13 @@ beq_else.28775:
 	jal	min_caml_create_array
 	addi	r30 r30 -160
 	lw	r30 r31 156
-beq_cont.28776:
+beq_cont.28666:
 	lw	r30 r2 116
 	sll	r2 r2 2
 	lw	r30 r3 120
 	swo	r3 r1 r2
-	j	beq_cont.28774
-beq_else.28773:
+	j	beq_cont.28664
+beq_else.28663:
 	addi	r0 r1 1
 	addi	r0 r2 -1
 	sw	r31 r30 156
@@ -2853,13 +2845,13 @@ beq_else.28773:
 	jal	min_caml_create_array
 	addi	r30 r30 -160
 	lw	r30 r31 156
-beq_cont.28774:
+beq_cont.28664:
 	addi	r0 r2 0
 	sll	r2 r2 2
 	lwo	r1 r2 r2
 	addi	r0 r3 -1
 	sub	r2 r3 r25
-	beq	r25 r0 beq_tail_else.28783
+	beq	r25 r0 beq_tail_else.28673
 	addi	r30 r30 156
 	sw	r1 r30 0
 	sw	r31 r30 4
@@ -2883,7 +2875,7 @@ beq_cont.28774:
 	lw	r30 r31 164
 	addi	r0 r2 -1
 	sub	r1 r2 r25
-	beq	r25 r0 beq_else.28784
+	beq	r25 r0 beq_else.28674
 	addi	r0 r2 1
 	sw	r1 r30 164
 	sw	r2 r30 168
@@ -2894,7 +2886,7 @@ beq_cont.28774:
 	lw	r30 r31 172
 	addi	r0 r2 -1
 	sub	r1 r2 r25
-	beq	r25 r0 beq_else.28786
+	beq	r25 r0 beq_else.28676
 	addi	r0 r2 2
 	sw	r1 r30 172
 	sw	r2 r30 176
@@ -2905,7 +2897,7 @@ beq_cont.28774:
 	lw	r30 r31 180
 	addi	r0 r2 -1
 	sub	r1 r2 r25
-	beq	r25 r0 beq_else.28788
+	beq	r25 r0 beq_else.28678
 	addi	r0 r2 3
 	sw	r1 r30 180
 	sw	r2 r30 184
@@ -2916,7 +2908,7 @@ beq_cont.28774:
 	lw	r30 r31 188
 	addi	r0 r2 -1
 	sub	r1 r2 r25
-	beq	r25 r0 beq_else.28790
+	beq	r25 r0 beq_else.28680
 	addi	r0 r2 4
 	sw	r1 r30 188
 	sw	r31 r30 192
@@ -2929,8 +2921,8 @@ beq_cont.28774:
 	sll	r2 r2 2
 	lw	r30 r3 188
 	swo	r3 r1 r2
-	j	beq_cont.28791
-beq_else.28790:
+	j	beq_cont.28681
+beq_else.28680:
 	addi	r0 r1 4
 	addi	r0 r2 -1
 	sw	r31 r30 192
@@ -2938,13 +2930,13 @@ beq_else.28790:
 	jal	min_caml_create_array
 	addi	r30 r30 -196
 	lw	r30 r31 192
-beq_cont.28791:
+beq_cont.28681:
 	lw	r30 r2 176
 	sll	r2 r2 2
 	lw	r30 r3 180
 	swo	r3 r1 r2
-	j	beq_cont.28789
-beq_else.28788:
+	j	beq_cont.28679
+beq_else.28678:
 	addi	r0 r1 3
 	addi	r0 r2 -1
 	sw	r31 r30 192
@@ -2952,13 +2944,13 @@ beq_else.28788:
 	jal	min_caml_create_array
 	addi	r30 r30 -196
 	lw	r30 r31 192
-beq_cont.28789:
+beq_cont.28679:
 	lw	r30 r2 168
 	sll	r2 r2 2
 	lw	r30 r3 172
 	swo	r3 r1 r2
-	j	beq_cont.28787
-beq_else.28786:
+	j	beq_cont.28677
+beq_else.28676:
 	addi	r0 r1 2
 	addi	r0 r2 -1
 	sw	r31 r30 192
@@ -2966,13 +2958,13 @@ beq_else.28786:
 	jal	min_caml_create_array
 	addi	r30 r30 -196
 	lw	r30 r31 192
-beq_cont.28787:
+beq_cont.28677:
 	lw	r30 r2 160
 	sll	r2 r2 2
 	lw	r30 r3 164
 	swo	r3 r1 r2
-	j	beq_cont.28785
-beq_else.28784:
+	j	beq_cont.28675
+beq_else.28674:
 	addi	r0 r1 1
 	addi	r0 r2 -1
 	sw	r31 r30 192
@@ -2980,13 +2972,13 @@ beq_else.28784:
 	jal	min_caml_create_array
 	addi	r30 r30 -196
 	lw	r30 r31 192
-beq_cont.28785:
+beq_cont.28675:
 	addi	r0 r2 0
 	sll	r2 r2 2
 	lwo	r1 r2 r2
 	addi	r0 r3 -1
 	sub	r2 r3 r25
-	beq	r25 r0 beq_tail_else.28792
+	beq	r25 r0 beq_tail_else.28682
 	addi	r30 r30 192
 	sw	r1 r30 0
 	sw	r31 r30 4
@@ -3001,13 +2993,13 @@ beq_cont.28785:
 	addi	r0 r1 1
 	add	r3 r1 r1
 	j	read_and_network.2889
-beq_tail_else.28792:
+beq_tail_else.28682:
 	jr	r31
-beq_tail_else.28783:
+beq_tail_else.28673:
 	jr	r31
-beq_tail_else.28772:
+beq_tail_else.28662:
 	jr	r31
-beq_tail_else.28759:
+beq_tail_else.28649:
 	jr	r31
 solver_rect.2902:
 	addi	r0 r3 0
@@ -3021,18 +3013,18 @@ solver_rect.2902:
 	sub.s	f3 f4 f30
 	mfc1	f30 r25
 	sll	r25 r25 1
-	beq	r25 r0 bfeq_nontail_else.28797
+	beq	r25 r0 bfeq_nontail_else.28687
 	addi	r0 r6 0
-	j	bfeq_nontail_cont.28798
-bfeq_nontail_else.28797:
+	j	bfeq_nontail_cont.28688
+bfeq_nontail_else.28687:
 	addi	r0 r6 1
-bfeq_nontail_cont.28798:
+bfeq_nontail_cont.28688:
 	addi	r0 r7 0
 	sub	r6 r7 r25
-	beq	r25 r0 beq_else.28799
+	beq	r25 r0 beq_else.28689
 	addi	r0 r3 0
-	j	beq_cont.28800
-beq_else.28799:
+	j	beq_cont.28690
+beq_else.28689:
 	lw	r1 r6 16
 	lw	r1 r7 24
 	lui	r24 0
@@ -3042,36 +3034,36 @@ beq_else.28799:
 	lwoc1	r2 r8 f4
 	sub.s	f3 f4 f30
 	mfc1	f30 r25
-	blez	r25 bfle_nontail_else.28801
+	blez	r25 bfle_nontail_else.28691
 	addi	r0 r8 1
-	j	bfle_nontail_cont.28802
-bfle_nontail_else.28801:
+	j	bfle_nontail_cont.28692
+bfle_nontail_else.28691:
 	addi	r0 r8 0
-bfle_nontail_cont.28802:
+bfle_nontail_cont.28692:
 	addi	r0 r9 0
 	sub	r7 r9 r25
-	beq	r25 r0 beq_else.28803
+	beq	r25 r0 beq_else.28693
 	addi	r0 r7 0
 	sub	r8 r7 r25
-	beq	r25 r0 beq_else.28805
+	beq	r25 r0 beq_else.28695
 	addi	r0 r7 0
-	j	beq_cont.28806
-beq_else.28805:
+	j	beq_cont.28696
+beq_else.28695:
 	addi	r0 r7 1
-beq_cont.28806:
-	j	beq_cont.28804
-beq_else.28803:
+beq_cont.28696:
+	j	beq_cont.28694
+beq_else.28693:
 	mov	r7 r8
-beq_cont.28804:
+beq_cont.28694:
 	sll	r3 r8 2
 	lwoc1	r6 r8 f3
 	addi	r0 r8 0
 	sub	r7 r8 r25
-	beq	r25 r0 beq_else.28807
-	j	beq_cont.28808
-beq_else.28807:
+	beq	r25 r0 beq_else.28697
+	j	beq_cont.28698
+beq_else.28697:
 	neg.s	f3 f3
-beq_cont.28808:
+beq_cont.28698:
 	sub.s	f3 f0 f3
 	sll	r3 r3 2
 	lwoc1	r2 r3 f4
@@ -3089,15 +3081,15 @@ beq_cont.28808:
 	mtc1	r24 f5
 	sub.s	f4 f5 f30
 	mfc1	f30 r25
-	blez	r25 bfle_nontail_else.28809
+	blez	r25 bfle_nontail_else.28699
 	addi	r0 r3 1
-	j	bfle_nontail_cont.28810
-bfle_nontail_else.28809:
+	j	bfle_nontail_cont.28700
+bfle_nontail_else.28699:
 	addi	r0 r3 0
-bfle_nontail_cont.28810:
+bfle_nontail_cont.28700:
 	addi	r0 r4 0
 	sub	r3 r4 r25
-	beq	r25 r0 beq_else.28811
+	beq	r25 r0 beq_else.28701
 	sll	r5 r3 2
 	lwoc1	r6 r3 f4
 	sll	r5 r3 2
@@ -3111,15 +3103,15 @@ bfle_nontail_cont.28810:
 	mtc1	r24 f5
 	sub.s	f4 f5 f30
 	mfc1	f30 r25
-	blez	r25 bfle_nontail_else.28813
+	blez	r25 bfle_nontail_else.28703
 	addi	r0 r3 1
-	j	bfle_nontail_cont.28814
-bfle_nontail_else.28813:
+	j	bfle_nontail_cont.28704
+bfle_nontail_else.28703:
 	addi	r0 r3 0
-bfle_nontail_cont.28814:
+bfle_nontail_cont.28704:
 	addi	r0 r4 0
 	sub	r3 r4 r25
-	beq	r25 r0 beq_else.28815
+	beq	r25 r0 beq_else.28705
 	addi	r30 r30 0
 	sw	r1 r30 0
 	sw	r31 r30 4
@@ -3132,21 +3124,21 @@ bfle_nontail_cont.28814:
 	sll	r4 r4 2
 	swoc1	f3 r3 r4
 	addi	r0 r3 1
-	j	beq_cont.28816
-beq_else.28815:
+	j	beq_cont.28706
+beq_else.28705:
 	addi	r0 r3 0
-beq_cont.28816:
-	j	beq_cont.28812
-beq_else.28811:
+beq_cont.28706:
+	j	beq_cont.28702
+beq_else.28701:
 	addi	r0 r3 0
-beq_cont.28812:
-beq_cont.28800:
+beq_cont.28702:
+beq_cont.28690:
 	addi	r0 r4 0
 	sub	r3 r4 r25
-	beq	r25 r0 beq_tail_else.28817
+	beq	r25 r0 beq_tail_else.28707
 	addi	r0 r1 1
 	jr	r31
-beq_tail_else.28817:
+beq_tail_else.28707:
 	addi	r0 r3 1
 	addi	r0 r4 2
 	addi	r0 r5 0
@@ -3158,18 +3150,18 @@ beq_tail_else.28817:
 	sub.s	f3 f4 f30
 	mfc1	f30 r25
 	sll	r25 r25 1
-	beq	r25 r0 bfeq_nontail_else.28818
+	beq	r25 r0 bfeq_nontail_else.28708
 	addi	r0 r6 0
-	j	bfeq_nontail_cont.28819
-bfeq_nontail_else.28818:
+	j	bfeq_nontail_cont.28709
+bfeq_nontail_else.28708:
 	addi	r0 r6 1
-bfeq_nontail_cont.28819:
+bfeq_nontail_cont.28709:
 	addi	r0 r7 0
 	sub	r6 r7 r25
-	beq	r25 r0 beq_else.28820
+	beq	r25 r0 beq_else.28710
 	addi	r0 r3 0
-	j	beq_cont.28821
-beq_else.28820:
+	j	beq_cont.28711
+beq_else.28710:
 	lw	r1 r6 16
 	lw	r1 r7 24
 	lui	r24 0
@@ -3179,36 +3171,36 @@ beq_else.28820:
 	lwoc1	r2 r8 f4
 	sub.s	f3 f4 f30
 	mfc1	f30 r25
-	blez	r25 bfle_nontail_else.28822
+	blez	r25 bfle_nontail_else.28712
 	addi	r0 r8 1
-	j	bfle_nontail_cont.28823
-bfle_nontail_else.28822:
+	j	bfle_nontail_cont.28713
+bfle_nontail_else.28712:
 	addi	r0 r8 0
-bfle_nontail_cont.28823:
+bfle_nontail_cont.28713:
 	addi	r0 r9 0
 	sub	r7 r9 r25
-	beq	r25 r0 beq_else.28824
+	beq	r25 r0 beq_else.28714
 	addi	r0 r7 0
 	sub	r8 r7 r25
-	beq	r25 r0 beq_else.28826
+	beq	r25 r0 beq_else.28716
 	addi	r0 r7 0
-	j	beq_cont.28827
-beq_else.28826:
+	j	beq_cont.28717
+beq_else.28716:
 	addi	r0 r7 1
-beq_cont.28827:
-	j	beq_cont.28825
-beq_else.28824:
+beq_cont.28717:
+	j	beq_cont.28715
+beq_else.28714:
 	mov	r7 r8
-beq_cont.28825:
+beq_cont.28715:
 	sll	r3 r8 2
 	lwoc1	r6 r8 f3
 	addi	r0 r8 0
 	sub	r7 r8 r25
-	beq	r25 r0 beq_else.28828
-	j	beq_cont.28829
-beq_else.28828:
+	beq	r25 r0 beq_else.28718
+	j	beq_cont.28719
+beq_else.28718:
 	neg.s	f3 f3
-beq_cont.28829:
+beq_cont.28719:
 	sub.s	f3 f1 f3
 	sll	r3 r3 2
 	lwoc1	r2 r3 f4
@@ -3226,15 +3218,15 @@ beq_cont.28829:
 	mtc1	r24 f5
 	sub.s	f4 f5 f30
 	mfc1	f30 r25
-	blez	r25 bfle_nontail_else.28830
+	blez	r25 bfle_nontail_else.28720
 	addi	r0 r3 1
-	j	bfle_nontail_cont.28831
-bfle_nontail_else.28830:
+	j	bfle_nontail_cont.28721
+bfle_nontail_else.28720:
 	addi	r0 r3 0
-bfle_nontail_cont.28831:
+bfle_nontail_cont.28721:
 	addi	r0 r4 0
 	sub	r3 r4 r25
-	beq	r25 r0 beq_else.28832
+	beq	r25 r0 beq_else.28722
 	sll	r5 r3 2
 	lwoc1	r6 r3 f4
 	sll	r5 r3 2
@@ -3248,15 +3240,15 @@ bfle_nontail_cont.28831:
 	mtc1	r24 f5
 	sub.s	f4 f5 f30
 	mfc1	f30 r25
-	blez	r25 bfle_nontail_else.28834
+	blez	r25 bfle_nontail_else.28724
 	addi	r0 r3 1
-	j	bfle_nontail_cont.28835
-bfle_nontail_else.28834:
+	j	bfle_nontail_cont.28725
+bfle_nontail_else.28724:
 	addi	r0 r3 0
-bfle_nontail_cont.28835:
+bfle_nontail_cont.28725:
 	addi	r0 r4 0
 	sub	r3 r4 r25
-	beq	r25 r0 beq_else.28836
+	beq	r25 r0 beq_else.28726
 	addi	r30 r30 0
 	sw	r1 r30 0
 	sw	r31 r30 4
@@ -3269,21 +3261,21 @@ bfle_nontail_cont.28835:
 	sll	r4 r4 2
 	swoc1	f3 r3 r4
 	addi	r0 r3 1
-	j	beq_cont.28837
-beq_else.28836:
+	j	beq_cont.28727
+beq_else.28726:
 	addi	r0 r3 0
-beq_cont.28837:
-	j	beq_cont.28833
-beq_else.28832:
+beq_cont.28727:
+	j	beq_cont.28723
+beq_else.28722:
 	addi	r0 r3 0
-beq_cont.28833:
-beq_cont.28821:
+beq_cont.28723:
+beq_cont.28711:
 	addi	r0 r4 0
 	sub	r3 r4 r25
-	beq	r25 r0 beq_tail_else.28838
+	beq	r25 r0 beq_tail_else.28728
 	addi	r0 r1 2
 	jr	r31
-beq_tail_else.28838:
+beq_tail_else.28728:
 	addi	r0 r3 2
 	addi	r0 r4 0
 	addi	r0 r5 1
@@ -3295,18 +3287,18 @@ beq_tail_else.28838:
 	sub.s	f3 f4 f30
 	mfc1	f30 r25
 	sll	r25 r25 1
-	beq	r25 r0 bfeq_nontail_else.28839
+	beq	r25 r0 bfeq_nontail_else.28729
 	addi	r0 r6 0
-	j	bfeq_nontail_cont.28840
-bfeq_nontail_else.28839:
+	j	bfeq_nontail_cont.28730
+bfeq_nontail_else.28729:
 	addi	r0 r6 1
-bfeq_nontail_cont.28840:
+bfeq_nontail_cont.28730:
 	addi	r0 r7 0
 	sub	r6 r7 r25
-	beq	r25 r0 beq_else.28841
+	beq	r25 r0 beq_else.28731
 	addi	r0 r1 0
-	j	beq_cont.28842
-beq_else.28841:
+	j	beq_cont.28732
+beq_else.28731:
 	lw	r1 r6 16
 	lw	r1 r1 24
 	lui	r24 0
@@ -3316,36 +3308,36 @@ beq_else.28841:
 	lwoc1	r2 r7 f4
 	sub.s	f3 f4 f30
 	mfc1	f30 r25
-	blez	r25 bfle_nontail_else.28843
+	blez	r25 bfle_nontail_else.28733
 	addi	r0 r7 1
-	j	bfle_nontail_cont.28844
-bfle_nontail_else.28843:
+	j	bfle_nontail_cont.28734
+bfle_nontail_else.28733:
 	addi	r0 r7 0
-bfle_nontail_cont.28844:
+bfle_nontail_cont.28734:
 	addi	r0 r8 0
 	sub	r1 r8 r25
-	beq	r25 r0 beq_else.28845
+	beq	r25 r0 beq_else.28735
 	addi	r0 r1 0
 	sub	r7 r1 r25
-	beq	r25 r0 beq_else.28847
+	beq	r25 r0 beq_else.28737
 	addi	r0 r1 0
-	j	beq_cont.28848
-beq_else.28847:
+	j	beq_cont.28738
+beq_else.28737:
 	addi	r0 r1 1
-beq_cont.28848:
-	j	beq_cont.28846
-beq_else.28845:
+beq_cont.28738:
+	j	beq_cont.28736
+beq_else.28735:
 	mov	r1 r7
-beq_cont.28846:
+beq_cont.28736:
 	sll	r3 r7 2
 	lwoc1	r6 r7 f3
 	addi	r0 r7 0
 	sub	r1 r7 r25
-	beq	r25 r0 beq_else.28849
-	j	beq_cont.28850
-beq_else.28849:
+	beq	r25 r0 beq_else.28739
+	j	beq_cont.28740
+beq_else.28739:
 	neg.s	f3 f3
-beq_cont.28850:
+beq_cont.28740:
 	sub.s	f3 f2 f2
 	sll	r3 r1 2
 	lwoc1	r2 r1 f3
@@ -3363,15 +3355,15 @@ beq_cont.28850:
 	mtc1	r24 f3
 	sub.s	f0 f3 f30
 	mfc1	f30 r25
-	blez	r25 bfle_nontail_else.28851
+	blez	r25 bfle_nontail_else.28741
 	addi	r0 r1 1
-	j	bfle_nontail_cont.28852
-bfle_nontail_else.28851:
+	j	bfle_nontail_cont.28742
+bfle_nontail_else.28741:
 	addi	r0 r1 0
-bfle_nontail_cont.28852:
+bfle_nontail_cont.28742:
 	addi	r0 r3 0
 	sub	r1 r3 r25
-	beq	r25 r0 beq_else.28853
+	beq	r25 r0 beq_else.28743
 	sll	r5 r1 2
 	lwoc1	r6 r1 f0
 	sll	r5 r1 2
@@ -3385,15 +3377,15 @@ bfle_nontail_cont.28852:
 	mtc1	r24 f1
 	sub.s	f0 f1 f30
 	mfc1	f30 r25
-	blez	r25 bfle_nontail_else.28855
+	blez	r25 bfle_nontail_else.28745
 	addi	r0 r1 1
-	j	bfle_nontail_cont.28856
-bfle_nontail_else.28855:
+	j	bfle_nontail_cont.28746
+bfle_nontail_else.28745:
 	addi	r0 r1 0
-bfle_nontail_cont.28856:
+bfle_nontail_cont.28746:
 	addi	r0 r2 0
 	sub	r1 r2 r25
-	beq	r25 r0 beq_else.28857
+	beq	r25 r0 beq_else.28747
 	addi	r30 r30 0
 	sw	r1 r30 0
 	sw	r31 r30 4
@@ -3405,21 +3397,21 @@ bfle_nontail_cont.28856:
 	sll	r2 r2 2
 	swoc1	f2 r1 r2
 	addi	r0 r1 1
-	j	beq_cont.28858
-beq_else.28857:
+	j	beq_cont.28748
+beq_else.28747:
 	addi	r0 r1 0
-beq_cont.28858:
-	j	beq_cont.28854
-beq_else.28853:
+beq_cont.28748:
+	j	beq_cont.28744
+beq_else.28743:
 	addi	r0 r1 0
-beq_cont.28854:
-beq_cont.28842:
+beq_cont.28744:
+beq_cont.28732:
 	addi	r0 r2 0
 	sub	r1 r2 r25
-	beq	r25 r0 beq_tail_else.28859
+	beq	r25 r0 beq_tail_else.28749
 	addi	r0 r1 3
 	jr	r31
-beq_tail_else.28859:
+beq_tail_else.28749:
 	addi	r0 r1 0
 	jr	r31
 solver_second.2927:
@@ -3455,7 +3447,7 @@ solver_second.2927:
 	lw	r1 r3 12
 	addi	r0 r4 0
 	sub	r3 r4 r25
-	beq	r25 r0 beq_else.28860
+	beq	r25 r0 beq_else.28750
 	mul.s	f4 f5 f7
 	lw	r1 r3 36
 	addi	r0 r4 0
@@ -3477,28 +3469,28 @@ solver_second.2927:
 	lwoc1	r3 r4 f4
 	mul.s	f3 f4 f3
 	add.s	f5 f3 f3
-	j	beq_cont.28861
-beq_else.28860:
+	j	beq_cont.28751
+beq_else.28750:
 	mov.s	f6 f3
-beq_cont.28861:
+beq_cont.28751:
 	lui	r24 0
 	ori	r24 r24 0
 	mtc1	r24 f4
 	sub.s	f3 f4 f30
 	mfc1	f30 r25
 	sll	r25 r25 1
-	beq	r25 r0 bfeq_nontail_else.28862
+	beq	r25 r0 bfeq_nontail_else.28752
 	addi	r0 r3 0
-	j	bfeq_nontail_cont.28863
-bfeq_nontail_else.28862:
+	j	bfeq_nontail_cont.28753
+bfeq_nontail_else.28752:
 	addi	r0 r3 1
-bfeq_nontail_cont.28863:
+bfeq_nontail_cont.28753:
 	addi	r0 r4 0
 	sub	r3 r4 r25
-	beq	r25 r0 beq_tail_else.28864
+	beq	r25 r0 beq_tail_else.28754
 	addi	r0 r1 0
 	jr	r31
-beq_tail_else.28864:
+beq_tail_else.28754:
 	addi	r0 r3 0
 	sll	r3 r3 2
 	lwoc1	r2 r3 f4
@@ -3531,7 +3523,7 @@ beq_tail_else.28864:
 	lw	r1 r2 12
 	addi	r0 r3 0
 	sub	r2 r3 r25
-	beq	r25 r0 beq_else.28865
+	beq	r25 r0 beq_else.28755
 	mul.s	f6 f1 f8
 	mul.s	f5 f2 f9
 	add.s	f8 f9 f8
@@ -3563,10 +3555,10 @@ beq_tail_else.28864:
 	mtc1	r24 f5
 	mul.s	f4 f5 f4
 	add.s	f7 f4 f4
-	j	beq_cont.28866
-beq_else.28865:
+	j	beq_cont.28756
+beq_else.28755:
 	mov.s	f7 f4
-beq_cont.28866:
+beq_cont.28756:
 	mul.s	f0 f0 f5
 	lw	r1 r2 16
 	addi	r0 r3 0
@@ -3590,7 +3582,7 @@ beq_cont.28866:
 	lw	r1 r2 12
 	addi	r0 r3 0
 	sub	r2 r3 r25
-	beq	r25 r0 beq_else.28867
+	beq	r25 r0 beq_else.28757
 	mul.s	f1 f2 f6
 	lw	r1 r2 36
 	addi	r0 r3 0
@@ -3612,21 +3604,21 @@ beq_cont.28866:
 	lwoc1	r2 r3 f1
 	mul.s	f0 f1 f0
 	add.s	f2 f0 f0
-	j	beq_cont.28868
-beq_else.28867:
+	j	beq_cont.28758
+beq_else.28757:
 	mov.s	f5 f0
-beq_cont.28868:
+beq_cont.28758:
 	lw	r1 r2 4
 	addi	r0 r3 3
 	sub	r2 r3 r25
-	beq	r25 r0 beq_else.28869
-	j	beq_cont.28870
-beq_else.28869:
+	beq	r25 r0 beq_else.28759
+	j	beq_cont.28760
+beq_else.28759:
 	lui	r24 16256
 	ori	r24 r24 0
 	mtc1	r24 f1
 	sub.s	f0 f1 f0
-beq_cont.28870:
+beq_cont.28760:
 	mul.s	f4 f4 f1
 	mul.s	f3 f0 f0
 	sub.s	f1 f0 f0
@@ -3635,49 +3627,39 @@ beq_cont.28870:
 	mtc1	r24 f1
 	sub.s	f0 f1 f30
 	mfc1	f30 r25
-	blez	r25 bfle_nontail_else.28871
+	blez	r25 bfle_nontail_else.28761
 	addi	r0 r2 1
-	j	bfle_nontail_cont.28872
-bfle_nontail_else.28871:
+	j	bfle_nontail_cont.28762
+bfle_nontail_else.28761:
 	addi	r0 r2 0
-bfle_nontail_cont.28872:
+bfle_nontail_cont.28762:
 	addi	r0 r3 0
 	sub	r2 r3 r25
-	beq	r25 r0 beq_tail_else.28873
-	swc1	f3 r30 0
-	swc1	f4 r30 4
-	sw	r1 r30 8
-	sw	r31 r30 12
-	addi	r30 r30 16
-	jal	min_caml_sqrt
-	addi	r30 r30 -16
-	lw	r30 r31 12
-	lw	r30 r1 8
+	beq	r25 r0 beq_tail_else.28763
+	sqrt.s	f0 f0
 	lw	r1 r1 24
 	addi	r0 r2 0
 	sub	r1 r2 r25
-	beq	r25 r0 beq_else.28874
-	j	beq_cont.28875
-beq_else.28874:
+	beq	r25 r0 beq_else.28764
+	j	beq_cont.28765
+beq_else.28764:
 	neg.s	f0 f0
-beq_cont.28875:
-	addi	r30 r30 12
+beq_cont.28765:
+	addi	r30 r30 0
 	sw	r1 r30 0
 	sw	r31 r30 4
 	jal	min_caml_load_solver_dist
 	mov	r1 r1
 	lw	r30 r31 4
-	addi	r30 r30 -12
+	addi	r30 r30 0
 	addi	r0 r2 0
-	lwc1	 r30 f1 4
-	sub.s	f0 f1 f0
-	lwc1	 r30 f1 0
-	div.s	f0 f1 f0
+	sub.s	f0 f4 f0
+	div.s	f0 f3 f0
 	sll	r2 r2 2
 	swoc1	f0 r1 r2
 	addi	r0 r1 1
 	jr	r31
-beq_tail_else.28873:
+beq_tail_else.28763:
 	addi	r0 r1 0
 	jr	r31
 solver.2933:
@@ -3718,10 +3700,10 @@ solver.2933:
 	lw	r1 r3 4
 	addi	r0 r4 1
 	sub	r3 r4 r25
-	beq	r25 r0 beq_tail_else.28876
+	beq	r25 r0 beq_tail_else.28766
 	addi	r0 r4 2
 	sub	r3 r4 r25
-	beq	r25 r0 beq_tail_else.28877
+	beq	r25 r0 beq_tail_else.28767
 	addi	r0 r3 0
 	sll	r3 r3 2
 	lwoc1	r2 r3 f3
@@ -3754,7 +3736,7 @@ solver.2933:
 	lw	r1 r3 12
 	addi	r0 r4 0
 	sub	r3 r4 r25
-	beq	r25 r0 beq_else.28878
+	beq	r25 r0 beq_else.28768
 	mul.s	f4 f5 f7
 	lw	r1 r3 36
 	addi	r0 r4 0
@@ -3776,28 +3758,28 @@ solver.2933:
 	lwoc1	r3 r4 f4
 	mul.s	f3 f4 f3
 	add.s	f5 f3 f3
-	j	beq_cont.28879
-beq_else.28878:
+	j	beq_cont.28769
+beq_else.28768:
 	mov.s	f6 f3
-beq_cont.28879:
+beq_cont.28769:
 	lui	r24 0
 	ori	r24 r24 0
 	mtc1	r24 f4
 	sub.s	f3 f4 f30
 	mfc1	f30 r25
 	sll	r25 r25 1
-	beq	r25 r0 bfeq_nontail_else.28880
+	beq	r25 r0 bfeq_nontail_else.28770
 	addi	r0 r3 0
-	j	bfeq_nontail_cont.28881
-bfeq_nontail_else.28880:
+	j	bfeq_nontail_cont.28771
+bfeq_nontail_else.28770:
 	addi	r0 r3 1
-bfeq_nontail_cont.28881:
+bfeq_nontail_cont.28771:
 	addi	r0 r4 0
 	sub	r3 r4 r25
-	beq	r25 r0 beq_tail_else.28882
+	beq	r25 r0 beq_tail_else.28772
 	addi	r0 r1 0
 	jr	r31
-beq_tail_else.28882:
+beq_tail_else.28772:
 	addi	r0 r3 0
 	sll	r3 r3 2
 	lwoc1	r2 r3 f4
@@ -3830,7 +3812,7 @@ beq_tail_else.28882:
 	lw	r1 r2 12
 	addi	r0 r3 0
 	sub	r2 r3 r25
-	beq	r25 r0 beq_else.28883
+	beq	r25 r0 beq_else.28773
 	mul.s	f6 f1 f8
 	mul.s	f5 f2 f9
 	add.s	f8 f9 f8
@@ -3862,10 +3844,10 @@ beq_tail_else.28882:
 	mtc1	r24 f5
 	mul.s	f4 f5 f4
 	add.s	f7 f4 f4
-	j	beq_cont.28884
-beq_else.28883:
+	j	beq_cont.28774
+beq_else.28773:
 	mov.s	f7 f4
-beq_cont.28884:
+beq_cont.28774:
 	mul.s	f0 f0 f5
 	lw	r1 r2 16
 	addi	r0 r3 0
@@ -3889,7 +3871,7 @@ beq_cont.28884:
 	lw	r1 r2 12
 	addi	r0 r3 0
 	sub	r2 r3 r25
-	beq	r25 r0 beq_else.28885
+	beq	r25 r0 beq_else.28775
 	mul.s	f1 f2 f6
 	lw	r1 r2 36
 	addi	r0 r3 0
@@ -3911,21 +3893,21 @@ beq_cont.28884:
 	lwoc1	r2 r3 f1
 	mul.s	f0 f1 f0
 	add.s	f2 f0 f0
-	j	beq_cont.28886
-beq_else.28885:
+	j	beq_cont.28776
+beq_else.28775:
 	mov.s	f5 f0
-beq_cont.28886:
+beq_cont.28776:
 	lw	r1 r2 4
 	addi	r0 r3 3
 	sub	r2 r3 r25
-	beq	r25 r0 beq_else.28887
-	j	beq_cont.28888
-beq_else.28887:
+	beq	r25 r0 beq_else.28777
+	j	beq_cont.28778
+beq_else.28777:
 	lui	r24 16256
 	ori	r24 r24 0
 	mtc1	r24 f1
 	sub.s	f0 f1 f0
-beq_cont.28888:
+beq_cont.28778:
 	mul.s	f4 f4 f1
 	mul.s	f3 f0 f0
 	sub.s	f1 f0 f0
@@ -3934,52 +3916,42 @@ beq_cont.28888:
 	mtc1	r24 f1
 	sub.s	f0 f1 f30
 	mfc1	f30 r25
-	blez	r25 bfle_nontail_else.28889
+	blez	r25 bfle_nontail_else.28779
 	addi	r0 r2 1
-	j	bfle_nontail_cont.28890
-bfle_nontail_else.28889:
+	j	bfle_nontail_cont.28780
+bfle_nontail_else.28779:
 	addi	r0 r2 0
-bfle_nontail_cont.28890:
+bfle_nontail_cont.28780:
 	addi	r0 r3 0
 	sub	r2 r3 r25
-	beq	r25 r0 beq_tail_else.28891
-	swc1	f3 r30 0
-	swc1	f4 r30 4
-	sw	r1 r30 8
-	sw	r31 r30 12
-	addi	r30 r30 16
-	jal	min_caml_sqrt
-	addi	r30 r30 -16
-	lw	r30 r31 12
-	lw	r30 r1 8
+	beq	r25 r0 beq_tail_else.28781
+	sqrt.s	f0 f0
 	lw	r1 r1 24
 	addi	r0 r2 0
 	sub	r1 r2 r25
-	beq	r25 r0 beq_else.28892
-	j	beq_cont.28893
-beq_else.28892:
+	beq	r25 r0 beq_else.28782
+	j	beq_cont.28783
+beq_else.28782:
 	neg.s	f0 f0
-beq_cont.28893:
-	addi	r30 r30 12
+beq_cont.28783:
+	addi	r30 r30 0
 	sw	r1 r30 0
 	sw	r31 r30 4
 	jal	min_caml_load_solver_dist
 	mov	r1 r1
 	lw	r30 r31 4
-	addi	r30 r30 -12
+	addi	r30 r30 0
 	addi	r0 r2 0
-	lwc1	 r30 f1 4
-	sub.s	f0 f1 f0
-	lwc1	 r30 f1 0
-	div.s	f0 f1 f0
+	sub.s	f0 f4 f0
+	div.s	f0 f3 f0
 	sll	r2 r2 2
 	swoc1	f0 r1 r2
 	addi	r0 r1 1
 	jr	r31
-beq_tail_else.28891:
+beq_tail_else.28781:
 	addi	r0 r1 0
 	jr	r31
-beq_tail_else.28877:
+beq_tail_else.28767:
 	lw	r1 r1 16
 	addi	r0 r3 0
 	sll	r3 r3 2
@@ -4009,23 +3981,23 @@ beq_tail_else.28877:
 	mtc1	r24 f4
 	sub.s	f3 f4 f30
 	mfc1	f30 r25
-	blez	r25 bfle_nontail_else.28894
+	blez	r25 bfle_nontail_else.28784
 	addi	r0 r2 1
-	j	bfle_nontail_cont.28895
-bfle_nontail_else.28894:
+	j	bfle_nontail_cont.28785
+bfle_nontail_else.28784:
 	addi	r0 r2 0
-bfle_nontail_cont.28895:
+bfle_nontail_cont.28785:
 	addi	r0 r3 0
 	sub	r2 r3 r25
-	beq	r25 r0 beq_tail_else.28896
-	addi	r30 r30 12
+	beq	r25 r0 beq_tail_else.28786
+	addi	r30 r30 0
 	sw	r1 r30 0
 	sw	r31 r30 4
 	jal	min_caml_load_solver_dist
 	mov	r2 r1
 	lw	r30 r1 0
 	lw	r30 r31 4
-	addi	r30 r30 -12
+	addi	r30 r30 0
 	addi	r0 r3 0
 	addi	r0 r4 0
 	sll	r4 r4 2
@@ -4047,10 +4019,10 @@ bfle_nontail_cont.28895:
 	swoc1	f0 r2 r1
 	addi	r0 r1 1
 	jr	r31
-beq_tail_else.28896:
+beq_tail_else.28786:
 	addi	r0 r1 0
 	jr	r31
-beq_tail_else.28876:
+beq_tail_else.28766:
 	addi	r0 r3 0
 	addi	r0 r4 1
 	addi	r0 r5 2
@@ -4062,18 +4034,18 @@ beq_tail_else.28876:
 	sub.s	f3 f4 f30
 	mfc1	f30 r25
 	sll	r25 r25 1
-	beq	r25 r0 bfeq_nontail_else.28897
+	beq	r25 r0 bfeq_nontail_else.28787
 	addi	r0 r6 0
-	j	bfeq_nontail_cont.28898
-bfeq_nontail_else.28897:
+	j	bfeq_nontail_cont.28788
+bfeq_nontail_else.28787:
 	addi	r0 r6 1
-bfeq_nontail_cont.28898:
+bfeq_nontail_cont.28788:
 	addi	r0 r7 0
 	sub	r6 r7 r25
-	beq	r25 r0 beq_else.28899
+	beq	r25 r0 beq_else.28789
 	addi	r0 r3 0
-	j	beq_cont.28900
-beq_else.28899:
+	j	beq_cont.28790
+beq_else.28789:
 	lw	r1 r6 16
 	lw	r1 r7 24
 	lui	r24 0
@@ -4083,36 +4055,36 @@ beq_else.28899:
 	lwoc1	r2 r8 f4
 	sub.s	f3 f4 f30
 	mfc1	f30 r25
-	blez	r25 bfle_nontail_else.28901
+	blez	r25 bfle_nontail_else.28791
 	addi	r0 r8 1
-	j	bfle_nontail_cont.28902
-bfle_nontail_else.28901:
+	j	bfle_nontail_cont.28792
+bfle_nontail_else.28791:
 	addi	r0 r8 0
-bfle_nontail_cont.28902:
+bfle_nontail_cont.28792:
 	addi	r0 r9 0
 	sub	r7 r9 r25
-	beq	r25 r0 beq_else.28903
+	beq	r25 r0 beq_else.28793
 	addi	r0 r7 0
 	sub	r8 r7 r25
-	beq	r25 r0 beq_else.28905
+	beq	r25 r0 beq_else.28795
 	addi	r0 r7 0
-	j	beq_cont.28906
-beq_else.28905:
+	j	beq_cont.28796
+beq_else.28795:
 	addi	r0 r7 1
-beq_cont.28906:
-	j	beq_cont.28904
-beq_else.28903:
+beq_cont.28796:
+	j	beq_cont.28794
+beq_else.28793:
 	mov	r7 r8
-beq_cont.28904:
+beq_cont.28794:
 	sll	r3 r8 2
 	lwoc1	r6 r8 f3
 	addi	r0 r8 0
 	sub	r7 r8 r25
-	beq	r25 r0 beq_else.28907
-	j	beq_cont.28908
-beq_else.28907:
+	beq	r25 r0 beq_else.28797
+	j	beq_cont.28798
+beq_else.28797:
 	neg.s	f3 f3
-beq_cont.28908:
+beq_cont.28798:
 	sub.s	f3 f0 f3
 	sll	r3 r3 2
 	lwoc1	r2 r3 f4
@@ -4130,15 +4102,15 @@ beq_cont.28908:
 	mtc1	r24 f5
 	sub.s	f4 f5 f30
 	mfc1	f30 r25
-	blez	r25 bfle_nontail_else.28909
+	blez	r25 bfle_nontail_else.28799
 	addi	r0 r3 1
-	j	bfle_nontail_cont.28910
-bfle_nontail_else.28909:
+	j	bfle_nontail_cont.28800
+bfle_nontail_else.28799:
 	addi	r0 r3 0
-bfle_nontail_cont.28910:
+bfle_nontail_cont.28800:
 	addi	r0 r4 0
 	sub	r3 r4 r25
-	beq	r25 r0 beq_else.28911
+	beq	r25 r0 beq_else.28801
 	sll	r5 r3 2
 	lwoc1	r6 r3 f4
 	sll	r5 r3 2
@@ -4152,42 +4124,42 @@ bfle_nontail_cont.28910:
 	mtc1	r24 f5
 	sub.s	f4 f5 f30
 	mfc1	f30 r25
-	blez	r25 bfle_nontail_else.28913
+	blez	r25 bfle_nontail_else.28803
 	addi	r0 r3 1
-	j	bfle_nontail_cont.28914
-bfle_nontail_else.28913:
+	j	bfle_nontail_cont.28804
+bfle_nontail_else.28803:
 	addi	r0 r3 0
-bfle_nontail_cont.28914:
+bfle_nontail_cont.28804:
 	addi	r0 r4 0
 	sub	r3 r4 r25
-	beq	r25 r0 beq_else.28915
-	addi	r30 r30 12
+	beq	r25 r0 beq_else.28805
+	addi	r30 r30 0
 	sw	r1 r30 0
 	sw	r31 r30 4
 	jal	min_caml_load_solver_dist
 	mov	r3 r1
 	lw	r30 r1 0
 	lw	r30 r31 4
-	addi	r30 r30 -12
+	addi	r30 r30 0
 	addi	r0 r4 0
 	sll	r4 r4 2
 	swoc1	f3 r3 r4
 	addi	r0 r3 1
-	j	beq_cont.28916
-beq_else.28915:
+	j	beq_cont.28806
+beq_else.28805:
 	addi	r0 r3 0
-beq_cont.28916:
-	j	beq_cont.28912
-beq_else.28911:
+beq_cont.28806:
+	j	beq_cont.28802
+beq_else.28801:
 	addi	r0 r3 0
-beq_cont.28912:
-beq_cont.28900:
+beq_cont.28802:
+beq_cont.28790:
 	addi	r0 r4 0
 	sub	r3 r4 r25
-	beq	r25 r0 beq_tail_else.28917
+	beq	r25 r0 beq_tail_else.28807
 	addi	r0 r1 1
 	jr	r31
-beq_tail_else.28917:
+beq_tail_else.28807:
 	addi	r0 r3 1
 	addi	r0 r4 2
 	addi	r0 r5 0
@@ -4199,18 +4171,18 @@ beq_tail_else.28917:
 	sub.s	f3 f4 f30
 	mfc1	f30 r25
 	sll	r25 r25 1
-	beq	r25 r0 bfeq_nontail_else.28918
+	beq	r25 r0 bfeq_nontail_else.28808
 	addi	r0 r6 0
-	j	bfeq_nontail_cont.28919
-bfeq_nontail_else.28918:
+	j	bfeq_nontail_cont.28809
+bfeq_nontail_else.28808:
 	addi	r0 r6 1
-bfeq_nontail_cont.28919:
+bfeq_nontail_cont.28809:
 	addi	r0 r7 0
 	sub	r6 r7 r25
-	beq	r25 r0 beq_else.28920
+	beq	r25 r0 beq_else.28810
 	addi	r0 r3 0
-	j	beq_cont.28921
-beq_else.28920:
+	j	beq_cont.28811
+beq_else.28810:
 	lw	r1 r6 16
 	lw	r1 r7 24
 	lui	r24 0
@@ -4220,36 +4192,36 @@ beq_else.28920:
 	lwoc1	r2 r8 f4
 	sub.s	f3 f4 f30
 	mfc1	f30 r25
-	blez	r25 bfle_nontail_else.28922
+	blez	r25 bfle_nontail_else.28812
 	addi	r0 r8 1
-	j	bfle_nontail_cont.28923
-bfle_nontail_else.28922:
+	j	bfle_nontail_cont.28813
+bfle_nontail_else.28812:
 	addi	r0 r8 0
-bfle_nontail_cont.28923:
+bfle_nontail_cont.28813:
 	addi	r0 r9 0
 	sub	r7 r9 r25
-	beq	r25 r0 beq_else.28924
+	beq	r25 r0 beq_else.28814
 	addi	r0 r7 0
 	sub	r8 r7 r25
-	beq	r25 r0 beq_else.28926
+	beq	r25 r0 beq_else.28816
 	addi	r0 r7 0
-	j	beq_cont.28927
-beq_else.28926:
+	j	beq_cont.28817
+beq_else.28816:
 	addi	r0 r7 1
-beq_cont.28927:
-	j	beq_cont.28925
-beq_else.28924:
+beq_cont.28817:
+	j	beq_cont.28815
+beq_else.28814:
 	mov	r7 r8
-beq_cont.28925:
+beq_cont.28815:
 	sll	r3 r8 2
 	lwoc1	r6 r8 f3
 	addi	r0 r8 0
 	sub	r7 r8 r25
-	beq	r25 r0 beq_else.28928
-	j	beq_cont.28929
-beq_else.28928:
+	beq	r25 r0 beq_else.28818
+	j	beq_cont.28819
+beq_else.28818:
 	neg.s	f3 f3
-beq_cont.28929:
+beq_cont.28819:
 	sub.s	f3 f1 f3
 	sll	r3 r3 2
 	lwoc1	r2 r3 f4
@@ -4267,15 +4239,15 @@ beq_cont.28929:
 	mtc1	r24 f5
 	sub.s	f4 f5 f30
 	mfc1	f30 r25
-	blez	r25 bfle_nontail_else.28930
+	blez	r25 bfle_nontail_else.28820
 	addi	r0 r3 1
-	j	bfle_nontail_cont.28931
-bfle_nontail_else.28930:
+	j	bfle_nontail_cont.28821
+bfle_nontail_else.28820:
 	addi	r0 r3 0
-bfle_nontail_cont.28931:
+bfle_nontail_cont.28821:
 	addi	r0 r4 0
 	sub	r3 r4 r25
-	beq	r25 r0 beq_else.28932
+	beq	r25 r0 beq_else.28822
 	sll	r5 r3 2
 	lwoc1	r6 r3 f4
 	sll	r5 r3 2
@@ -4289,42 +4261,42 @@ bfle_nontail_cont.28931:
 	mtc1	r24 f5
 	sub.s	f4 f5 f30
 	mfc1	f30 r25
-	blez	r25 bfle_nontail_else.28934
+	blez	r25 bfle_nontail_else.28824
 	addi	r0 r3 1
-	j	bfle_nontail_cont.28935
-bfle_nontail_else.28934:
+	j	bfle_nontail_cont.28825
+bfle_nontail_else.28824:
 	addi	r0 r3 0
-bfle_nontail_cont.28935:
+bfle_nontail_cont.28825:
 	addi	r0 r4 0
 	sub	r3 r4 r25
-	beq	r25 r0 beq_else.28936
-	addi	r30 r30 12
+	beq	r25 r0 beq_else.28826
+	addi	r30 r30 0
 	sw	r1 r30 0
 	sw	r31 r30 4
 	jal	min_caml_load_solver_dist
 	mov	r3 r1
 	lw	r30 r1 0
 	lw	r30 r31 4
-	addi	r30 r30 -12
+	addi	r30 r30 0
 	addi	r0 r4 0
 	sll	r4 r4 2
 	swoc1	f3 r3 r4
 	addi	r0 r3 1
-	j	beq_cont.28937
-beq_else.28936:
+	j	beq_cont.28827
+beq_else.28826:
 	addi	r0 r3 0
-beq_cont.28937:
-	j	beq_cont.28933
-beq_else.28932:
+beq_cont.28827:
+	j	beq_cont.28823
+beq_else.28822:
 	addi	r0 r3 0
-beq_cont.28933:
-beq_cont.28921:
+beq_cont.28823:
+beq_cont.28811:
 	addi	r0 r4 0
 	sub	r3 r4 r25
-	beq	r25 r0 beq_tail_else.28938
+	beq	r25 r0 beq_tail_else.28828
 	addi	r0 r1 2
 	jr	r31
-beq_tail_else.28938:
+beq_tail_else.28828:
 	addi	r0 r3 2
 	addi	r0 r4 0
 	addi	r0 r5 1
@@ -4336,18 +4308,18 @@ beq_tail_else.28938:
 	sub.s	f3 f4 f30
 	mfc1	f30 r25
 	sll	r25 r25 1
-	beq	r25 r0 bfeq_nontail_else.28939
+	beq	r25 r0 bfeq_nontail_else.28829
 	addi	r0 r6 0
-	j	bfeq_nontail_cont.28940
-bfeq_nontail_else.28939:
+	j	bfeq_nontail_cont.28830
+bfeq_nontail_else.28829:
 	addi	r0 r6 1
-bfeq_nontail_cont.28940:
+bfeq_nontail_cont.28830:
 	addi	r0 r7 0
 	sub	r6 r7 r25
-	beq	r25 r0 beq_else.28941
+	beq	r25 r0 beq_else.28831
 	addi	r0 r1 0
-	j	beq_cont.28942
-beq_else.28941:
+	j	beq_cont.28832
+beq_else.28831:
 	lw	r1 r6 16
 	lw	r1 r1 24
 	lui	r24 0
@@ -4357,36 +4329,36 @@ beq_else.28941:
 	lwoc1	r2 r7 f4
 	sub.s	f3 f4 f30
 	mfc1	f30 r25
-	blez	r25 bfle_nontail_else.28943
+	blez	r25 bfle_nontail_else.28833
 	addi	r0 r7 1
-	j	bfle_nontail_cont.28944
-bfle_nontail_else.28943:
+	j	bfle_nontail_cont.28834
+bfle_nontail_else.28833:
 	addi	r0 r7 0
-bfle_nontail_cont.28944:
+bfle_nontail_cont.28834:
 	addi	r0 r8 0
 	sub	r1 r8 r25
-	beq	r25 r0 beq_else.28945
+	beq	r25 r0 beq_else.28835
 	addi	r0 r1 0
 	sub	r7 r1 r25
-	beq	r25 r0 beq_else.28947
+	beq	r25 r0 beq_else.28837
 	addi	r0 r1 0
-	j	beq_cont.28948
-beq_else.28947:
+	j	beq_cont.28838
+beq_else.28837:
 	addi	r0 r1 1
-beq_cont.28948:
-	j	beq_cont.28946
-beq_else.28945:
+beq_cont.28838:
+	j	beq_cont.28836
+beq_else.28835:
 	mov	r1 r7
-beq_cont.28946:
+beq_cont.28836:
 	sll	r3 r7 2
 	lwoc1	r6 r7 f3
 	addi	r0 r7 0
 	sub	r1 r7 r25
-	beq	r25 r0 beq_else.28949
-	j	beq_cont.28950
-beq_else.28949:
+	beq	r25 r0 beq_else.28839
+	j	beq_cont.28840
+beq_else.28839:
 	neg.s	f3 f3
-beq_cont.28950:
+beq_cont.28840:
 	sub.s	f3 f2 f2
 	sll	r3 r1 2
 	lwoc1	r2 r1 f3
@@ -4404,15 +4376,15 @@ beq_cont.28950:
 	mtc1	r24 f3
 	sub.s	f0 f3 f30
 	mfc1	f30 r25
-	blez	r25 bfle_nontail_else.28951
+	blez	r25 bfle_nontail_else.28841
 	addi	r0 r1 1
-	j	bfle_nontail_cont.28952
-bfle_nontail_else.28951:
+	j	bfle_nontail_cont.28842
+bfle_nontail_else.28841:
 	addi	r0 r1 0
-bfle_nontail_cont.28952:
+bfle_nontail_cont.28842:
 	addi	r0 r3 0
 	sub	r1 r3 r25
-	beq	r25 r0 beq_else.28953
+	beq	r25 r0 beq_else.28843
 	sll	r5 r1 2
 	lwoc1	r6 r1 f0
 	sll	r5 r1 2
@@ -4426,41 +4398,41 @@ bfle_nontail_cont.28952:
 	mtc1	r24 f1
 	sub.s	f0 f1 f30
 	mfc1	f30 r25
-	blez	r25 bfle_nontail_else.28955
+	blez	r25 bfle_nontail_else.28845
 	addi	r0 r1 1
-	j	bfle_nontail_cont.28956
-bfle_nontail_else.28955:
+	j	bfle_nontail_cont.28846
+bfle_nontail_else.28845:
 	addi	r0 r1 0
-bfle_nontail_cont.28956:
+bfle_nontail_cont.28846:
 	addi	r0 r2 0
 	sub	r1 r2 r25
-	beq	r25 r0 beq_else.28957
-	addi	r30 r30 12
+	beq	r25 r0 beq_else.28847
+	addi	r30 r30 0
 	sw	r1 r30 0
 	sw	r31 r30 4
 	jal	min_caml_load_solver_dist
 	mov	r1 r1
 	lw	r30 r31 4
-	addi	r30 r30 -12
+	addi	r30 r30 0
 	addi	r0 r2 0
 	sll	r2 r2 2
 	swoc1	f2 r1 r2
 	addi	r0 r1 1
-	j	beq_cont.28958
-beq_else.28957:
+	j	beq_cont.28848
+beq_else.28847:
 	addi	r0 r1 0
-beq_cont.28958:
-	j	beq_cont.28954
-beq_else.28953:
+beq_cont.28848:
+	j	beq_cont.28844
+beq_else.28843:
 	addi	r0 r1 0
-beq_cont.28954:
-beq_cont.28942:
+beq_cont.28844:
+beq_cont.28832:
 	addi	r0 r2 0
 	sub	r1 r2 r25
-	beq	r25 r0 beq_tail_else.28959
+	beq	r25 r0 beq_tail_else.28849
 	addi	r0 r1 3
 	jr	r31
-beq_tail_else.28959:
+beq_tail_else.28849:
 	addi	r0 r1 0
 	jr	r31
 solver_rect_fast.2937:
@@ -4488,15 +4460,15 @@ solver_rect_fast.2937:
 	mtc1	r24 f5
 	sub.s	f4 f5 f30
 	mfc1	f30 r25
-	blez	r25 bfle_nontail_else.28960
+	blez	r25 bfle_nontail_else.28850
 	addi	r0 r4 1
-	j	bfle_nontail_cont.28961
-bfle_nontail_else.28960:
+	j	bfle_nontail_cont.28851
+bfle_nontail_else.28850:
 	addi	r0 r4 0
-bfle_nontail_cont.28961:
+bfle_nontail_cont.28851:
 	addi	r0 r5 0
 	sub	r4 r5 r25
-	beq	r25 r0 beq_else.28962
+	beq	r25 r0 beq_else.28852
 	lw	r1 r4 16
 	addi	r0 r5 2
 	sll	r5 r5 2
@@ -4513,15 +4485,15 @@ bfle_nontail_cont.28961:
 	mtc1	r24 f5
 	sub.s	f4 f5 f30
 	mfc1	f30 r25
-	blez	r25 bfle_nontail_else.28964
+	blez	r25 bfle_nontail_else.28854
 	addi	r0 r4 1
-	j	bfle_nontail_cont.28965
-bfle_nontail_else.28964:
+	j	bfle_nontail_cont.28855
+bfle_nontail_else.28854:
 	addi	r0 r4 0
-bfle_nontail_cont.28965:
+bfle_nontail_cont.28855:
 	addi	r0 r5 0
 	sub	r4 r5 r25
-	beq	r25 r0 beq_else.28966
+	beq	r25 r0 beq_else.28856
 	addi	r0 r4 1
 	sll	r4 r4 2
 	lwoc1	r3 r4 f4
@@ -4531,31 +4503,31 @@ bfle_nontail_cont.28965:
 	sub.s	f4 f5 f30
 	mfc1	f30 r25
 	sll	r25 r25 1
-	beq	r25 r0 bfeq_nontail_else.28968
+	beq	r25 r0 bfeq_nontail_else.28858
 	addi	r0 r4 0
-	j	bfeq_nontail_cont.28969
-bfeq_nontail_else.28968:
+	j	bfeq_nontail_cont.28859
+bfeq_nontail_else.28858:
 	addi	r0 r4 1
-bfeq_nontail_cont.28969:
+bfeq_nontail_cont.28859:
 	addi	r0 r5 0
 	sub	r4 r5 r25
-	beq	r25 r0 beq_else.28970
+	beq	r25 r0 beq_else.28860
 	addi	r0 r4 0
-	j	beq_cont.28971
-beq_else.28970:
+	j	beq_cont.28861
+beq_else.28860:
 	addi	r0 r4 1
-beq_cont.28971:
-	j	beq_cont.28967
-beq_else.28966:
+beq_cont.28861:
+	j	beq_cont.28857
+beq_else.28856:
 	addi	r0 r4 0
-beq_cont.28967:
-	j	beq_cont.28963
-beq_else.28962:
+beq_cont.28857:
+	j	beq_cont.28853
+beq_else.28852:
 	addi	r0 r4 0
-beq_cont.28963:
+beq_cont.28853:
 	addi	r0 r5 0
 	sub	r4 r5 r25
-	beq	r25 r0 beq_tail_else.28972
+	beq	r25 r0 beq_tail_else.28862
 	addi	r30 r30 0
 	sw	r1 r30 0
 	sw	r31 r30 4
@@ -4568,7 +4540,7 @@ beq_cont.28963:
 	swoc1	f3 r1 r2
 	addi	r0 r1 1
 	jr	r31
-beq_tail_else.28972:
+beq_tail_else.28862:
 	addi	r0 r4 2
 	sll	r4 r4 2
 	lwoc1	r3 r4 f3
@@ -4593,15 +4565,15 @@ beq_tail_else.28972:
 	mtc1	r24 f5
 	sub.s	f4 f5 f30
 	mfc1	f30 r25
-	blez	r25 bfle_nontail_else.28973
+	blez	r25 bfle_nontail_else.28863
 	addi	r0 r4 1
-	j	bfle_nontail_cont.28974
-bfle_nontail_else.28973:
+	j	bfle_nontail_cont.28864
+bfle_nontail_else.28863:
 	addi	r0 r4 0
-bfle_nontail_cont.28974:
+bfle_nontail_cont.28864:
 	addi	r0 r5 0
 	sub	r4 r5 r25
-	beq	r25 r0 beq_else.28975
+	beq	r25 r0 beq_else.28865
 	lw	r1 r4 16
 	addi	r0 r5 2
 	sll	r5 r5 2
@@ -4618,15 +4590,15 @@ bfle_nontail_cont.28974:
 	mtc1	r24 f5
 	sub.s	f4 f5 f30
 	mfc1	f30 r25
-	blez	r25 bfle_nontail_else.28977
+	blez	r25 bfle_nontail_else.28867
 	addi	r0 r4 1
-	j	bfle_nontail_cont.28978
-bfle_nontail_else.28977:
+	j	bfle_nontail_cont.28868
+bfle_nontail_else.28867:
 	addi	r0 r4 0
-bfle_nontail_cont.28978:
+bfle_nontail_cont.28868:
 	addi	r0 r5 0
 	sub	r4 r5 r25
-	beq	r25 r0 beq_else.28979
+	beq	r25 r0 beq_else.28869
 	addi	r0 r4 3
 	sll	r4 r4 2
 	lwoc1	r3 r4 f4
@@ -4636,31 +4608,31 @@ bfle_nontail_cont.28978:
 	sub.s	f4 f5 f30
 	mfc1	f30 r25
 	sll	r25 r25 1
-	beq	r25 r0 bfeq_nontail_else.28981
+	beq	r25 r0 bfeq_nontail_else.28871
 	addi	r0 r4 0
-	j	bfeq_nontail_cont.28982
-bfeq_nontail_else.28981:
+	j	bfeq_nontail_cont.28872
+bfeq_nontail_else.28871:
 	addi	r0 r4 1
-bfeq_nontail_cont.28982:
+bfeq_nontail_cont.28872:
 	addi	r0 r5 0
 	sub	r4 r5 r25
-	beq	r25 r0 beq_else.28983
+	beq	r25 r0 beq_else.28873
 	addi	r0 r4 0
-	j	beq_cont.28984
-beq_else.28983:
+	j	beq_cont.28874
+beq_else.28873:
 	addi	r0 r4 1
-beq_cont.28984:
-	j	beq_cont.28980
-beq_else.28979:
+beq_cont.28874:
+	j	beq_cont.28870
+beq_else.28869:
 	addi	r0 r4 0
-beq_cont.28980:
-	j	beq_cont.28976
-beq_else.28975:
+beq_cont.28870:
+	j	beq_cont.28866
+beq_else.28865:
 	addi	r0 r4 0
-beq_cont.28976:
+beq_cont.28866:
 	addi	r0 r5 0
 	sub	r4 r5 r25
-	beq	r25 r0 beq_tail_else.28985
+	beq	r25 r0 beq_tail_else.28875
 	addi	r30 r30 0
 	sw	r1 r30 0
 	sw	r31 r30 4
@@ -4673,7 +4645,7 @@ beq_cont.28976:
 	swoc1	f3 r1 r2
 	addi	r0 r1 2
 	jr	r31
-beq_tail_else.28985:
+beq_tail_else.28875:
 	addi	r0 r4 4
 	sll	r4 r4 2
 	lwoc1	r3 r4 f3
@@ -4698,15 +4670,15 @@ beq_tail_else.28985:
 	mtc1	r24 f3
 	sub.s	f0 f3 f30
 	mfc1	f30 r25
-	blez	r25 bfle_nontail_else.28986
+	blez	r25 bfle_nontail_else.28876
 	addi	r0 r4 1
-	j	bfle_nontail_cont.28987
-bfle_nontail_else.28986:
+	j	bfle_nontail_cont.28877
+bfle_nontail_else.28876:
 	addi	r0 r4 0
-bfle_nontail_cont.28987:
+bfle_nontail_cont.28877:
 	addi	r0 r5 0
 	sub	r4 r5 r25
-	beq	r25 r0 beq_else.28988
+	beq	r25 r0 beq_else.28878
 	lw	r1 r1 16
 	addi	r0 r4 1
 	sll	r4 r4 2
@@ -4723,15 +4695,15 @@ bfle_nontail_cont.28987:
 	mtc1	r24 f1
 	sub.s	f0 f1 f30
 	mfc1	f30 r25
-	blez	r25 bfle_nontail_else.28990
+	blez	r25 bfle_nontail_else.28880
 	addi	r0 r1 1
-	j	bfle_nontail_cont.28991
-bfle_nontail_else.28990:
+	j	bfle_nontail_cont.28881
+bfle_nontail_else.28880:
 	addi	r0 r1 0
-bfle_nontail_cont.28991:
+bfle_nontail_cont.28881:
 	addi	r0 r2 0
 	sub	r1 r2 r25
-	beq	r25 r0 beq_else.28992
+	beq	r25 r0 beq_else.28882
 	addi	r0 r1 5
 	sll	r1 r1 2
 	lwoc1	r3 r1 f0
@@ -4741,31 +4713,31 @@ bfle_nontail_cont.28991:
 	sub.s	f0 f1 f30
 	mfc1	f30 r25
 	sll	r25 r25 1
-	beq	r25 r0 bfeq_nontail_else.28994
+	beq	r25 r0 bfeq_nontail_else.28884
 	addi	r0 r1 0
-	j	bfeq_nontail_cont.28995
-bfeq_nontail_else.28994:
+	j	bfeq_nontail_cont.28885
+bfeq_nontail_else.28884:
 	addi	r0 r1 1
-bfeq_nontail_cont.28995:
+bfeq_nontail_cont.28885:
 	addi	r0 r2 0
 	sub	r1 r2 r25
-	beq	r25 r0 beq_else.28996
+	beq	r25 r0 beq_else.28886
 	addi	r0 r1 0
-	j	beq_cont.28997
-beq_else.28996:
+	j	beq_cont.28887
+beq_else.28886:
 	addi	r0 r1 1
-beq_cont.28997:
-	j	beq_cont.28993
-beq_else.28992:
+beq_cont.28887:
+	j	beq_cont.28883
+beq_else.28882:
 	addi	r0 r1 0
-beq_cont.28993:
-	j	beq_cont.28989
-beq_else.28988:
+beq_cont.28883:
+	j	beq_cont.28879
+beq_else.28878:
 	addi	r0 r1 0
-beq_cont.28989:
+beq_cont.28879:
 	addi	r0 r2 0
 	sub	r1 r2 r25
-	beq	r25 r0 beq_tail_else.28998
+	beq	r25 r0 beq_tail_else.28888
 	addi	r30 r30 0
 	sw	r1 r30 0
 	sw	r31 r30 4
@@ -4778,7 +4750,7 @@ beq_cont.28989:
 	swoc1	f2 r1 r2
 	addi	r0 r1 3
 	jr	r31
-beq_tail_else.28998:
+beq_tail_else.28888:
 	addi	r0 r1 0
 	jr	r31
 solver_second_fast.2950:
@@ -4791,18 +4763,18 @@ solver_second_fast.2950:
 	sub.s	f3 f4 f30
 	mfc1	f30 r25
 	sll	r25 r25 1
-	beq	r25 r0 bfeq_nontail_else.28999
+	beq	r25 r0 bfeq_nontail_else.28889
 	addi	r0 r3 0
-	j	bfeq_nontail_cont.29000
-bfeq_nontail_else.28999:
+	j	bfeq_nontail_cont.28890
+bfeq_nontail_else.28889:
 	addi	r0 r3 1
-bfeq_nontail_cont.29000:
+bfeq_nontail_cont.28890:
 	addi	r0 r4 0
 	sub	r3 r4 r25
-	beq	r25 r0 beq_tail_else.29001
+	beq	r25 r0 beq_tail_else.28891
 	addi	r0 r1 0
 	jr	r31
-beq_tail_else.29001:
+beq_tail_else.28891:
 	addi	r0 r3 1
 	sll	r3 r3 2
 	lwoc1	r2 r3 f4
@@ -4840,7 +4812,7 @@ beq_tail_else.29001:
 	lw	r1 r3 12
 	addi	r0 r4 0
 	sub	r3 r4 r25
-	beq	r25 r0 beq_else.29002
+	beq	r25 r0 beq_else.28892
 	mul.s	f1 f2 f6
 	lw	r1 r3 36
 	addi	r0 r4 0
@@ -4862,21 +4834,21 @@ beq_tail_else.29001:
 	lwoc1	r3 r4 f1
 	mul.s	f0 f1 f0
 	add.s	f2 f0 f0
-	j	beq_cont.29003
-beq_else.29002:
+	j	beq_cont.28893
+beq_else.28892:
 	mov.s	f5 f0
-beq_cont.29003:
+beq_cont.28893:
 	lw	r1 r3 4
 	addi	r0 r4 3
 	sub	r3 r4 r25
-	beq	r25 r0 beq_else.29004
-	j	beq_cont.29005
-beq_else.29004:
+	beq	r25 r0 beq_else.28894
+	j	beq_cont.28895
+beq_else.28894:
 	lui	r24 16256
 	ori	r24 r24 0
 	mtc1	r24 f1
 	sub.s	f0 f1 f0
-beq_cont.29005:
+beq_cont.28895:
 	mul.s	f4 f4 f1
 	mul.s	f3 f0 f0
 	sub.s	f1 f0 f0
@@ -4885,19 +4857,19 @@ beq_cont.29005:
 	mtc1	r24 f1
 	sub.s	f0 f1 f30
 	mfc1	f30 r25
-	blez	r25 bfle_nontail_else.29006
+	blez	r25 bfle_nontail_else.28896
 	addi	r0 r3 1
-	j	bfle_nontail_cont.29007
-bfle_nontail_else.29006:
+	j	bfle_nontail_cont.28897
+bfle_nontail_else.28896:
 	addi	r0 r3 0
-bfle_nontail_cont.29007:
+bfle_nontail_cont.28897:
 	addi	r0 r4 0
 	sub	r3 r4 r25
-	beq	r25 r0 beq_tail_else.29008
+	beq	r25 r0 beq_tail_else.28898
 	lw	r1 r1 24
 	addi	r0 r3 0
 	sub	r1 r3 r25
-	beq	r25 r0 beq_else.29009
+	beq	r25 r0 beq_else.28899
 	addi	r30 r30 0
 	sw	r1 r30 0
 	sw	r31 r30 4
@@ -4906,60 +4878,36 @@ bfle_nontail_cont.29007:
 	lw	r30 r31 4
 	addi	r30 r30 0
 	addi	r0 r3 0
-	sw	r1 r30 0
-	sw	r3 r30 4
-	sw	r2 r30 8
-	swc1	f4 r30 12
-	sw	r31 r30 16
-	addi	r30 r30 20
-	jal	min_caml_sqrt
-	addi	r30 r30 -20
-	lw	r30 r31 16
-	lwc1	 r30 f1 12
-	add.s	f1 f0 f0
-	addi	r0 r1 4
-	sll	r1 r1 2
-	lw	r30 r2 8
-	lwoc1	r2 r1 f1
+	sqrt.s	f0 f0
+	add.s	f4 f0 f0
+	addi	r0 r4 4
+	sll	r4 r4 2
+	lwoc1	r2 r4 f1
 	mul.s	f0 f1 f0
-	lw	r30 r1 4
-	sll	r1 r1 2
-	lw	r30 r2 0
-	swoc1	f0 r2 r1
-	j	beq_cont.29010
-beq_else.29009:
-	addi	r30 r30 16
+	sll	r3 r2 2
+	swoc1	f0 r1 r2
+	j	beq_cont.28900
+beq_else.28899:
+	addi	r30 r30 0
 	sw	r1 r30 0
 	sw	r31 r30 4
 	jal	min_caml_load_solver_dist
 	mov	r1 r1
 	lw	r30 r31 4
-	addi	r30 r30 -16
+	addi	r30 r30 0
 	addi	r0 r3 0
-	sw	r1 r30 16
-	sw	r3 r30 20
-	sw	r2 r30 8
-	swc1	f4 r30 12
-	sw	r31 r30 24
-	addi	r30 r30 28
-	jal	min_caml_sqrt
-	addi	r30 r30 -28
-	lw	r30 r31 24
-	lwc1	 r30 f1 12
-	sub.s	f1 f0 f0
-	addi	r0 r1 4
-	sll	r1 r1 2
-	lw	r30 r2 8
-	lwoc1	r2 r1 f1
+	sqrt.s	f0 f0
+	sub.s	f4 f0 f0
+	addi	r0 r4 4
+	sll	r4 r4 2
+	lwoc1	r2 r4 f1
 	mul.s	f0 f1 f0
-	lw	r30 r1 20
-	sll	r1 r1 2
-	lw	r30 r2 16
-	swoc1	f0 r2 r1
-beq_cont.29010:
+	sll	r3 r2 2
+	swoc1	f0 r1 r2
+beq_cont.28900:
 	addi	r0 r1 1
 	jr	r31
-beq_tail_else.29008:
+beq_tail_else.28898:
 	addi	r0 r1 0
 	jr	r31
 solver_fast2.2974:
@@ -4989,10 +4937,10 @@ solver_fast2.2974:
 	lw	r3 r5 4
 	addi	r0 r6 1
 	sub	r5 r6 r25
-	beq	r25 r0 beq_tail_else.29011
+	beq	r25 r0 beq_tail_else.28901
 	addi	r0 r2 2
 	sub	r5 r2 r25
-	beq	r25 r0 beq_tail_else.29012
+	beq	r25 r0 beq_tail_else.28902
 	addi	r0 r2 0
 	sll	r2 r2 2
 	lwoc1	r1 r2 f3
@@ -5002,18 +4950,18 @@ solver_fast2.2974:
 	sub.s	f3 f4 f30
 	mfc1	f30 r25
 	sll	r25 r25 1
-	beq	r25 r0 bfeq_nontail_else.29013
+	beq	r25 r0 bfeq_nontail_else.28903
 	addi	r0 r2 0
-	j	bfeq_nontail_cont.29014
-bfeq_nontail_else.29013:
+	j	bfeq_nontail_cont.28904
+bfeq_nontail_else.28903:
 	addi	r0 r2 1
-bfeq_nontail_cont.29014:
+bfeq_nontail_cont.28904:
 	addi	r0 r5 0
 	sub	r2 r5 r25
-	beq	r25 r0 beq_tail_else.29015
+	beq	r25 r0 beq_tail_else.28905
 	addi	r0 r1 0
 	jr	r31
-beq_tail_else.29015:
+beq_tail_else.28905:
 	addi	r0 r2 1
 	sll	r2 r2 2
 	lwoc1	r1 r2 f4
@@ -5039,19 +4987,19 @@ beq_tail_else.29015:
 	mtc1	r24 f2
 	sub.s	f1 f2 f30
 	mfc1	f30 r25
-	blez	r25 bfle_nontail_else.29016
+	blez	r25 bfle_nontail_else.28906
 	addi	r0 r2 1
-	j	bfle_nontail_cont.29017
-bfle_nontail_else.29016:
+	j	bfle_nontail_cont.28907
+bfle_nontail_else.28906:
 	addi	r0 r2 0
-bfle_nontail_cont.29017:
+bfle_nontail_cont.28907:
 	addi	r0 r4 0
 	sub	r2 r4 r25
-	beq	r25 r0 beq_tail_else.29018
+	beq	r25 r0 beq_tail_else.28908
 	lw	r3 r2 24
 	addi	r0 r3 0
 	sub	r2 r3 r25
-	beq	r25 r0 beq_else.29019
+	beq	r25 r0 beq_else.28909
 	addi	r30 r30 0
 	sw	r1 r30 0
 	sw	r31 r30 4
@@ -5061,66 +5009,40 @@ bfle_nontail_cont.29017:
 	lw	r30 r31 4
 	addi	r30 r30 0
 	addi	r0 r3 0
-	sw	r2 r30 0
-	sw	r3 r30 4
-	sw	r1 r30 8
-	swc1	f0 r30 12
-	sw	r31 r30 16
-	addi	r30 r30 20
-	mov.s	f1 f0
-	jal	min_caml_sqrt
-	addi	r30 r30 -20
-	lw	r30 r31 16
-	lwc1	 r30 f1 12
-	add.s	f1 f0 f0
-	addi	r0 r1 4
-	sll	r1 r1 2
-	lw	r30 r2 8
-	lwoc1	r2 r1 f1
+	sqrt.s	f1 f1
+	add.s	f0 f1 f0
+	addi	r0 r4 4
+	sll	r4 r4 2
+	lwoc1	r1 r4 f1
 	mul.s	f0 f1 f0
-	lw	r30 r1 4
-	sll	r1 r1 2
-	lw	r30 r2 0
+	sll	r3 r1 2
 	swoc1	f0 r2 r1
-	j	beq_cont.29020
-beq_else.29019:
-	addi	r30 r30 16
+	j	beq_cont.28910
+beq_else.28909:
+	addi	r30 r30 0
 	sw	r1 r30 0
 	sw	r31 r30 4
 	jal	min_caml_load_solver_dist
 	mov	r2 r1
 	lw	r30 r1 0
 	lw	r30 r31 4
-	addi	r30 r30 -16
+	addi	r30 r30 0
 	addi	r0 r3 0
-	sw	r2 r30 16
-	sw	r3 r30 20
-	sw	r1 r30 8
-	swc1	f0 r30 12
-	sw	r31 r30 24
-	addi	r30 r30 28
-	mov.s	f1 f0
-	jal	min_caml_sqrt
-	addi	r30 r30 -28
-	lw	r30 r31 24
-	lwc1	 r30 f1 12
-	sub.s	f1 f0 f0
-	addi	r0 r1 4
-	sll	r1 r1 2
-	lw	r30 r2 8
-	lwoc1	r2 r1 f1
+	sqrt.s	f1 f1
+	sub.s	f0 f1 f0
+	addi	r0 r4 4
+	sll	r4 r4 2
+	lwoc1	r1 r4 f1
 	mul.s	f0 f1 f0
-	lw	r30 r1 20
-	sll	r1 r1 2
-	lw	r30 r2 16
+	sll	r3 r1 2
 	swoc1	f0 r2 r1
-beq_cont.29020:
+beq_cont.28910:
 	addi	r0 r1 1
 	jr	r31
-beq_tail_else.29018:
+beq_tail_else.28908:
 	addi	r0 r1 0
 	jr	r31
-beq_tail_else.29012:
+beq_tail_else.28902:
 	lui	r24 0
 	ori	r24 r24 0
 	mtc1	r24 f0
@@ -5129,23 +5051,23 @@ beq_tail_else.29012:
 	lwoc1	r1 r2 f1
 	sub.s	f0 f1 f30
 	mfc1	f30 r25
-	blez	r25 bfle_nontail_else.29021
+	blez	r25 bfle_nontail_else.28911
 	addi	r0 r2 1
-	j	bfle_nontail_cont.29022
-bfle_nontail_else.29021:
+	j	bfle_nontail_cont.28912
+bfle_nontail_else.28911:
 	addi	r0 r2 0
-bfle_nontail_cont.29022:
+bfle_nontail_cont.28912:
 	addi	r0 r3 0
 	sub	r2 r3 r25
-	beq	r25 r0 beq_tail_else.29023
-	addi	r30 r30 24
+	beq	r25 r0 beq_tail_else.28913
+	addi	r30 r30 0
 	sw	r1 r30 0
 	sw	r31 r30 4
 	jal	min_caml_load_solver_dist
 	mov	r2 r1
 	lw	r30 r1 0
 	lw	r30 r31 4
-	addi	r30 r30 -24
+	addi	r30 r30 0
 	addi	r0 r3 0
 	addi	r0 r5 0
 	sll	r5 r5 2
@@ -5158,10 +5080,10 @@ bfle_nontail_cont.29022:
 	swoc1	f0 r2 r1
 	addi	r0 r1 1
 	jr	r31
-beq_tail_else.29023:
+beq_tail_else.28913:
 	addi	r0 r1 0
 	jr	r31
-beq_tail_else.29011:
+beq_tail_else.28901:
 	lw	r2 r2 0
 	mov	r28 r3
 	mov	r3 r1
@@ -5190,23 +5112,23 @@ setup_rect_table.2977:
 	sub.s	f0 f1 f30
 	mfc1	f30 r25
 	sll	r25 r25 1
-	beq	r25 r0 bfeq_nontail_else.29024
+	beq	r25 r0 bfeq_nontail_else.28914
 	addi	r0 r2 0
-	j	bfeq_nontail_cont.29025
-bfeq_nontail_else.29024:
+	j	bfeq_nontail_cont.28915
+bfeq_nontail_else.28914:
 	addi	r0 r2 1
-bfeq_nontail_cont.29025:
+bfeq_nontail_cont.28915:
 	addi	r0 r4 0
 	sub	r2 r4 r25
-	beq	r25 r0 beq_else.29026
+	beq	r25 r0 beq_else.28916
 	addi	r0 r2 1
 	lui	r24 0
 	ori	r24 r24 0
 	mtc1	r24 f0
 	sll	r2 r2 2
 	swoc1	f0 r1 r2
-	j	beq_cont.29027
-beq_else.29026:
+	j	beq_cont.28917
+beq_else.28916:
 	addi	r0 r2 0
 	lw	r30 r4 0
 	lw	r4 r5 24
@@ -5218,38 +5140,38 @@ beq_else.29026:
 	lwoc1	r3 r6 f1
 	sub.s	f0 f1 f30
 	mfc1	f30 r25
-	blez	r25 bfle_nontail_else.29028
+	blez	r25 bfle_nontail_else.28918
 	addi	r0 r6 1
-	j	bfle_nontail_cont.29029
-bfle_nontail_else.29028:
+	j	bfle_nontail_cont.28919
+bfle_nontail_else.28918:
 	addi	r0 r6 0
-bfle_nontail_cont.29029:
+bfle_nontail_cont.28919:
 	addi	r0 r7 0
 	sub	r5 r7 r25
-	beq	r25 r0 beq_else.29030
+	beq	r25 r0 beq_else.28920
 	addi	r0 r5 0
 	sub	r6 r5 r25
-	beq	r25 r0 beq_else.29032
+	beq	r25 r0 beq_else.28922
 	addi	r0 r5 0
-	j	beq_cont.29033
-beq_else.29032:
+	j	beq_cont.28923
+beq_else.28922:
 	addi	r0 r5 1
-beq_cont.29033:
-	j	beq_cont.29031
-beq_else.29030:
+beq_cont.28923:
+	j	beq_cont.28921
+beq_else.28920:
 	mov	r5 r6
-beq_cont.29031:
+beq_cont.28921:
 	lw	r4 r6 16
 	addi	r0 r7 0
 	sll	r7 r7 2
 	lwoc1	r6 r7 f0
 	addi	r0 r6 0
 	sub	r5 r6 r25
-	beq	r25 r0 beq_else.29034
-	j	beq_cont.29035
-beq_else.29034:
+	beq	r25 r0 beq_else.28924
+	j	beq_cont.28925
+beq_else.28924:
 	neg.s	f0 f0
-beq_cont.29035:
+beq_cont.28925:
 	sll	r2 r2 2
 	swoc1	f0 r1 r2
 	addi	r0 r2 1
@@ -5262,7 +5184,7 @@ beq_cont.29035:
 	div.s	f0 f1 f0
 	sll	r2 r2 2
 	swoc1	f0 r1 r2
-beq_cont.29027:
+beq_cont.28917:
 	addi	r0 r2 1
 	sll	r2 r2 2
 	lwoc1	r3 r2 f0
@@ -5272,23 +5194,23 @@ beq_cont.29027:
 	sub.s	f0 f1 f30
 	mfc1	f30 r25
 	sll	r25 r25 1
-	beq	r25 r0 bfeq_nontail_else.29036
+	beq	r25 r0 bfeq_nontail_else.28926
 	addi	r0 r2 0
-	j	bfeq_nontail_cont.29037
-bfeq_nontail_else.29036:
+	j	bfeq_nontail_cont.28927
+bfeq_nontail_else.28926:
 	addi	r0 r2 1
-bfeq_nontail_cont.29037:
+bfeq_nontail_cont.28927:
 	addi	r0 r4 0
 	sub	r2 r4 r25
-	beq	r25 r0 beq_else.29038
+	beq	r25 r0 beq_else.28928
 	addi	r0 r2 3
 	lui	r24 0
 	ori	r24 r24 0
 	mtc1	r24 f0
 	sll	r2 r2 2
 	swoc1	f0 r1 r2
-	j	beq_cont.29039
-beq_else.29038:
+	j	beq_cont.28929
+beq_else.28928:
 	addi	r0 r2 2
 	lw	r30 r4 0
 	lw	r4 r5 24
@@ -5300,38 +5222,38 @@ beq_else.29038:
 	lwoc1	r3 r6 f1
 	sub.s	f0 f1 f30
 	mfc1	f30 r25
-	blez	r25 bfle_nontail_else.29040
+	blez	r25 bfle_nontail_else.28930
 	addi	r0 r6 1
-	j	bfle_nontail_cont.29041
-bfle_nontail_else.29040:
+	j	bfle_nontail_cont.28931
+bfle_nontail_else.28930:
 	addi	r0 r6 0
-bfle_nontail_cont.29041:
+bfle_nontail_cont.28931:
 	addi	r0 r7 0
 	sub	r5 r7 r25
-	beq	r25 r0 beq_else.29042
+	beq	r25 r0 beq_else.28932
 	addi	r0 r5 0
 	sub	r6 r5 r25
-	beq	r25 r0 beq_else.29044
+	beq	r25 r0 beq_else.28934
 	addi	r0 r5 0
-	j	beq_cont.29045
-beq_else.29044:
+	j	beq_cont.28935
+beq_else.28934:
 	addi	r0 r5 1
-beq_cont.29045:
-	j	beq_cont.29043
-beq_else.29042:
+beq_cont.28935:
+	j	beq_cont.28933
+beq_else.28932:
 	mov	r5 r6
-beq_cont.29043:
+beq_cont.28933:
 	lw	r4 r6 16
 	addi	r0 r7 1
 	sll	r7 r7 2
 	lwoc1	r6 r7 f0
 	addi	r0 r6 0
 	sub	r5 r6 r25
-	beq	r25 r0 beq_else.29046
-	j	beq_cont.29047
-beq_else.29046:
+	beq	r25 r0 beq_else.28936
+	j	beq_cont.28937
+beq_else.28936:
 	neg.s	f0 f0
-beq_cont.29047:
+beq_cont.28937:
 	sll	r2 r2 2
 	swoc1	f0 r1 r2
 	addi	r0 r2 3
@@ -5344,7 +5266,7 @@ beq_cont.29047:
 	div.s	f0 f1 f0
 	sll	r2 r2 2
 	swoc1	f0 r1 r2
-beq_cont.29039:
+beq_cont.28929:
 	addi	r0 r2 2
 	sll	r2 r2 2
 	lwoc1	r3 r2 f0
@@ -5354,23 +5276,23 @@ beq_cont.29039:
 	sub.s	f0 f1 f30
 	mfc1	f30 r25
 	sll	r25 r25 1
-	beq	r25 r0 bfeq_nontail_else.29048
+	beq	r25 r0 bfeq_nontail_else.28938
 	addi	r0 r2 0
-	j	bfeq_nontail_cont.29049
-bfeq_nontail_else.29048:
+	j	bfeq_nontail_cont.28939
+bfeq_nontail_else.28938:
 	addi	r0 r2 1
-bfeq_nontail_cont.29049:
+bfeq_nontail_cont.28939:
 	addi	r0 r4 0
 	sub	r2 r4 r25
-	beq	r25 r0 beq_else.29050
+	beq	r25 r0 beq_else.28940
 	addi	r0 r2 5
 	lui	r24 0
 	ori	r24 r24 0
 	mtc1	r24 f0
 	sll	r2 r2 2
 	swoc1	f0 r1 r2
-	j	beq_cont.29051
-beq_else.29050:
+	j	beq_cont.28941
+beq_else.28940:
 	addi	r0 r2 4
 	lw	r30 r4 0
 	lw	r4 r5 24
@@ -5382,38 +5304,38 @@ beq_else.29050:
 	lwoc1	r3 r6 f1
 	sub.s	f0 f1 f30
 	mfc1	f30 r25
-	blez	r25 bfle_nontail_else.29052
+	blez	r25 bfle_nontail_else.28942
 	addi	r0 r6 1
-	j	bfle_nontail_cont.29053
-bfle_nontail_else.29052:
+	j	bfle_nontail_cont.28943
+bfle_nontail_else.28942:
 	addi	r0 r6 0
-bfle_nontail_cont.29053:
+bfle_nontail_cont.28943:
 	addi	r0 r7 0
 	sub	r5 r7 r25
-	beq	r25 r0 beq_else.29054
+	beq	r25 r0 beq_else.28944
 	addi	r0 r5 0
 	sub	r6 r5 r25
-	beq	r25 r0 beq_else.29056
+	beq	r25 r0 beq_else.28946
 	addi	r0 r5 0
-	j	beq_cont.29057
-beq_else.29056:
+	j	beq_cont.28947
+beq_else.28946:
 	addi	r0 r5 1
-beq_cont.29057:
-	j	beq_cont.29055
-beq_else.29054:
+beq_cont.28947:
+	j	beq_cont.28945
+beq_else.28944:
 	mov	r5 r6
-beq_cont.29055:
+beq_cont.28945:
 	lw	r4 r4 16
 	addi	r0 r6 2
 	sll	r6 r6 2
 	lwoc1	r4 r6 f0
 	addi	r0 r4 0
 	sub	r5 r4 r25
-	beq	r25 r0 beq_else.29058
-	j	beq_cont.29059
-beq_else.29058:
+	beq	r25 r0 beq_else.28948
+	j	beq_cont.28949
+beq_else.28948:
 	neg.s	f0 f0
-beq_cont.29059:
+beq_cont.28949:
 	sll	r2 r2 2
 	swoc1	f0 r1 r2
 	addi	r0 r2 5
@@ -5426,7 +5348,7 @@ beq_cont.29059:
 	div.s	f0 f1 f0
 	sll	r2 r2 2
 	swoc1	f0 r1 r2
-beq_cont.29051:
+beq_cont.28941:
 	jr	r31
 setup_surface_table.2980:
 	addi	r0 r3 4
@@ -5474,15 +5396,15 @@ setup_surface_table.2980:
 	mtc1	r24 f1
 	sub.s	f0 f1 f30
 	mfc1	f30 r25
-	blez	r25 bfle_nontail_else.29060
+	blez	r25 bfle_nontail_else.28950
 	addi	r0 r3 1
-	j	bfle_nontail_cont.29061
-bfle_nontail_else.29060:
+	j	bfle_nontail_cont.28951
+bfle_nontail_else.28950:
 	addi	r0 r3 0
-bfle_nontail_cont.29061:
+bfle_nontail_cont.28951:
 	addi	r0 r4 0
 	sub	r3 r4 r25
-	beq	r25 r0 beq_else.29062
+	beq	r25 r0 beq_else.28952
 	addi	r0 r3 0
 	lui	r24 49024
 	ori	r24 r24 0
@@ -5517,15 +5439,15 @@ bfle_nontail_cont.29061:
 	neg.s	f0 f0
 	sll	r3 r2 2
 	swoc1	f0 r1 r2
-	j	beq_cont.29063
-beq_else.29062:
+	j	beq_cont.28953
+beq_else.28952:
 	addi	r0 r2 0
 	lui	r24 0
 	ori	r24 r24 0
 	mtc1	r24 f0
 	sll	r2 r2 2
 	swoc1	f0 r1 r2
-beq_cont.29063:
+beq_cont.28953:
 	jr	r31
 setup_second_table.2983:
 	addi	r0 r3 5
@@ -5574,7 +5496,7 @@ setup_second_table.2983:
 	lw	r2 r4 12
 	addi	r0 r5 0
 	sub	r4 r5 r25
-	beq	r25 r0 beq_else.29064
+	beq	r25 r0 beq_else.28954
 	mul.s	f1 f2 f4
 	lw	r2 r4 36
 	addi	r0 r5 0
@@ -5596,10 +5518,10 @@ setup_second_table.2983:
 	lwoc1	r4 r5 f1
 	mul.s	f0 f1 f0
 	add.s	f2 f0 f0
-	j	beq_cont.29065
-beq_else.29064:
+	j	beq_cont.28955
+beq_else.28954:
 	mov.s	f3 f0
-beq_cont.29065:
+beq_cont.28955:
 	addi	r0 r4 0
 	sll	r4 r4 2
 	lwoc1	r3 r4 f1
@@ -5633,7 +5555,7 @@ beq_cont.29065:
 	lw	r2 r4 12
 	addi	r0 r5 0
 	sub	r4 r5 r25
-	beq	r25 r0 beq_else.29066
+	beq	r25 r0 beq_else.28956
 	addi	r0 r4 1
 	addi	r0 r5 2
 	sll	r5 r5 2
@@ -5709,8 +5631,8 @@ beq_cont.29065:
 	sub.s	f3 f1 f1
 	sll	r4 r2 2
 	swoc1	f1 r1 r2
-	j	beq_cont.29067
-beq_else.29066:
+	j	beq_cont.28957
+beq_else.28956:
 	addi	r0 r2 1
 	sll	r2 r2 2
 	swoc1	f1 r1 r2
@@ -5720,24 +5642,24 @@ beq_else.29066:
 	addi	r0 r2 3
 	sll	r2 r2 2
 	swoc1	f3 r1 r2
-beq_cont.29067:
+beq_cont.28957:
 	lui	r24 0
 	ori	r24 r24 0
 	mtc1	r24 f1
 	sub.s	f0 f1 f30
 	mfc1	f30 r25
 	sll	r25 r25 1
-	beq	r25 r0 bfeq_nontail_else.29068
+	beq	r25 r0 bfeq_nontail_else.28958
 	addi	r0 r2 0
-	j	bfeq_nontail_cont.29069
-bfeq_nontail_else.29068:
+	j	bfeq_nontail_cont.28959
+bfeq_nontail_else.28958:
 	addi	r0 r2 1
-bfeq_nontail_cont.29069:
+bfeq_nontail_cont.28959:
 	addi	r0 r3 0
 	sub	r2 r3 r25
-	beq	r25 r0 beq_else.29070
-	j	beq_cont.29071
-beq_else.29070:
+	beq	r25 r0 beq_else.28960
+	j	beq_cont.28961
+beq_else.28960:
 	addi	r0 r2 4
 	lui	r24 16256
 	ori	r24 r24 0
@@ -5745,14 +5667,14 @@ beq_else.29070:
 	div.s	f1 f0 f0
 	sll	r2 r2 2
 	swoc1	f0 r1 r2
-beq_cont.29071:
+beq_cont.28961:
 	jr	r31
 iter_setup_dirvec_constants.2986:
 	addi	r0 r3 0
 	sub	r3 r2 r25
-	blez	r25 ble_tail_else.29072
+	blez	r25 ble_tail_else.28962
 	jr	r31
-ble_tail_else.29072:
+ble_tail_else.28962:
 	addi	r30 r30 0
 	sw	r1 r30 0
 	sw	r31 r30 4
@@ -5769,10 +5691,10 @@ ble_tail_else.29072:
 	addi	r0 r7 1
 	sw	r1 r30 0
 	sub	r6 r7 r25
-	beq	r25 r0 beq_else.29074
+	beq	r25 r0 beq_else.28964
 	addi	r0 r7 2
 	sub	r6 r7 r25
-	beq	r25 r0 beq_else.29076
+	beq	r25 r0 beq_else.28966
 	sw	r4 r30 4
 	sw	r2 r30 8
 	sw	r31 r30 12
@@ -5786,8 +5708,8 @@ ble_tail_else.29072:
 	sll	r2 r3 2
 	lw	r30 r4 4
 	swo	r1 r4 r3
-	j	beq_cont.29077
-beq_else.29076:
+	j	beq_cont.28967
+beq_else.28966:
 	addi	r0 r6 4
 	lui	r24 0
 	ori	r24 r24 0
@@ -5835,15 +5757,15 @@ beq_else.29076:
 	mtc1	r24 f1
 	sub.s	f0 f1 f30
 	mfc1	f30 r25
-	blez	r25 bfle_nontail_else.29078
+	blez	r25 bfle_nontail_else.28968
 	addi	r0 r3 1
-	j	bfle_nontail_cont.29079
-bfle_nontail_else.29078:
+	j	bfle_nontail_cont.28969
+bfle_nontail_else.28968:
 	addi	r0 r3 0
-bfle_nontail_cont.29079:
+bfle_nontail_cont.28969:
 	addi	r0 r4 0
 	sub	r3 r4 r25
-	beq	r25 r0 beq_else.29080
+	beq	r25 r0 beq_else.28970
 	addi	r0 r3 0
 	lui	r24 49024
 	ori	r24 r24 0
@@ -5878,22 +5800,22 @@ bfle_nontail_cont.29079:
 	neg.s	f0 f0
 	sll	r3 r2 2
 	swoc1	f0 r1 r2
-	j	beq_cont.29081
-beq_else.29080:
+	j	beq_cont.28971
+beq_else.28970:
 	addi	r0 r2 0
 	lui	r24 0
 	ori	r24 r24 0
 	mtc1	r24 f0
 	sll	r2 r2 2
 	swoc1	f0 r1 r2
-beq_cont.29081:
+beq_cont.28971:
 	lw	r30 r2 8
 	sll	r2 r3 2
 	lw	r30 r4 4
 	swo	r1 r4 r3
-beq_cont.29077:
-	j	beq_cont.29075
-beq_else.29074:
+beq_cont.28967:
+	j	beq_cont.28965
+beq_else.28964:
 	sw	r4 r30 4
 	sw	r2 r30 8
 	sw	r31 r30 20
@@ -5907,14 +5829,14 @@ beq_else.29074:
 	sll	r2 r3 2
 	lw	r30 r4 4
 	swo	r1 r4 r3
-beq_cont.29075:
+beq_cont.28965:
 	addi	r0 r1 1
 	sub	r2 r1 r1
 	addi	r0 r2 0
 	sub	r2 r1 r25
-	blez	r25 ble_tail_else.29082
+	blez	r25 ble_tail_else.28972
 	jr	r31
-ble_tail_else.29082:
+ble_tail_else.28972:
 	addi	r30 r30 20
 	sw	r1 r30 0
 	sw	r31 r30 4
@@ -5931,10 +5853,10 @@ ble_tail_else.29082:
 	lw	r2 r6 4
 	addi	r0 r7 1
 	sub	r6 r7 r25
-	beq	r25 r0 beq_else.29084
+	beq	r25 r0 beq_else.28974
 	addi	r0 r7 2
 	sub	r6 r7 r25
-	beq	r25 r0 beq_else.29086
+	beq	r25 r0 beq_else.28976
 	sw	r4 r30 20
 	sw	r1 r30 24
 	sw	r31 r30 28
@@ -5947,8 +5869,8 @@ ble_tail_else.29082:
 	sll	r2 r3 2
 	lw	r30 r4 20
 	swo	r1 r4 r3
-	j	beq_cont.29087
-beq_else.29086:
+	j	beq_cont.28977
+beq_else.28976:
 	sw	r4 r30 20
 	sw	r1 r30 24
 	sw	r31 r30 28
@@ -5961,9 +5883,9 @@ beq_else.29086:
 	sll	r2 r3 2
 	lw	r30 r4 20
 	swo	r1 r4 r3
-beq_cont.29087:
-	j	beq_cont.29085
-beq_else.29084:
+beq_cont.28977:
+	j	beq_cont.28975
+beq_else.28974:
 	sw	r4 r30 20
 	sw	r1 r30 24
 	sw	r31 r30 28
@@ -5976,7 +5898,7 @@ beq_else.29084:
 	sll	r2 r3 2
 	lw	r30 r4 20
 	swo	r1 r4 r3
-beq_cont.29085:
+beq_cont.28975:
 	addi	r0 r1 1
 	sub	r2 r1 r2
 	lw	r30 r1 0
@@ -5984,9 +5906,9 @@ beq_cont.29085:
 setup_startp_constants.2991:
 	addi	r0 r3 0
 	sub	r3 r2 r25
-	blez	r25 ble_tail_else.29088
+	blez	r25 ble_tail_else.28978
 	jr	r31
-ble_tail_else.29088:
+ble_tail_else.28978:
 	addi	r30 r30 0
 	sw	r1 r30 0
 	sw	r31 r30 4
@@ -6034,10 +5956,10 @@ ble_tail_else.29088:
 	swoc1	f0 r4 r6
 	addi	r0 r6 2
 	sub	r5 r6 r25
-	beq	r25 r0 beq_else.29090
+	beq	r25 r0 beq_else.28980
 	addi	r0 r6 2
 	sub	r5 r6 r25
-	blez	r25 ble_nontail_else.29092
+	blez	r25 ble_nontail_else.28982
 	addi	r0 r6 0
 	sll	r6 r6 2
 	lwoc1	r4 r6 f0
@@ -6070,7 +5992,7 @@ ble_tail_else.29088:
 	lw	r3 r6 12
 	addi	r0 r7 0
 	sub	r6 r7 r25
-	beq	r25 r0 beq_else.29094
+	beq	r25 r0 beq_else.28984
 	mul.s	f1 f2 f4
 	lw	r3 r6 36
 	addi	r0 r7 0
@@ -6092,28 +6014,28 @@ ble_tail_else.29088:
 	lwoc1	r3 r6 f1
 	mul.s	f0 f1 f0
 	add.s	f2 f0 f0
-	j	beq_cont.29095
-beq_else.29094:
+	j	beq_cont.28985
+beq_else.28984:
 	mov.s	f3 f0
-beq_cont.29095:
+beq_cont.28985:
 	addi	r0 r3 3
 	addi	r0 r6 3
 	sub	r5 r6 r25
-	beq	r25 r0 beq_else.29096
-	j	beq_cont.29097
-beq_else.29096:
+	beq	r25 r0 beq_else.28986
+	j	beq_cont.28987
+beq_else.28986:
 	lui	r24 16256
 	ori	r24 r24 0
 	mtc1	r24 f1
 	sub.s	f0 f1 f0
-beq_cont.29097:
+beq_cont.28987:
 	sll	r3 r3 2
 	swoc1	f0 r4 r3
-	j	ble_nontail_cont.29093
-ble_nontail_else.29092:
-ble_nontail_cont.29093:
-	j	beq_cont.29091
-beq_else.29090:
+	j	ble_nontail_cont.28983
+ble_nontail_else.28982:
+ble_nontail_cont.28983:
+	j	beq_cont.28981
+beq_else.28980:
 	addi	r0 r5 3
 	lw	r3 r3 16
 	addi	r0 r6 0
@@ -6141,7 +6063,7 @@ beq_else.29090:
 	add.s	f0 f1 f0
 	sll	r5 r3 2
 	swoc1	f0 r4 r3
-beq_cont.29091:
+beq_cont.28981:
 	addi	r0 r3 1
 	sub	r2 r3 r2
 	j	setup_startp_constants.2991
@@ -6164,10 +6086,10 @@ is_outside.3011:
 	lw	r1 r2 4
 	addi	r0 r3 1
 	sub	r2 r3 r25
-	beq	r25 r0 beq_tail_else.29098
+	beq	r25 r0 beq_tail_else.28988
 	addi	r0 r3 2
 	sub	r2 r3 r25
-	beq	r25 r0 beq_tail_else.29099
+	beq	r25 r0 beq_tail_else.28989
 	mul.s	f0 f0 f3
 	lw	r1 r2 16
 	addi	r0 r3 0
@@ -6191,7 +6113,7 @@ is_outside.3011:
 	lw	r1 r2 12
 	addi	r0 r3 0
 	sub	r2 r3 r25
-	beq	r25 r0 beq_else.29100
+	beq	r25 r0 beq_else.28990
 	mul.s	f1 f2 f4
 	lw	r1 r2 36
 	addi	r0 r3 0
@@ -6213,57 +6135,57 @@ is_outside.3011:
 	lwoc1	r2 r3 f1
 	mul.s	f0 f1 f0
 	add.s	f2 f0 f0
-	j	beq_cont.29101
-beq_else.29100:
+	j	beq_cont.28991
+beq_else.28990:
 	mov.s	f3 f0
-beq_cont.29101:
+beq_cont.28991:
 	lw	r1 r2 4
 	addi	r0 r3 3
 	sub	r2 r3 r25
-	beq	r25 r0 beq_else.29102
-	j	beq_cont.29103
-beq_else.29102:
+	beq	r25 r0 beq_else.28992
+	j	beq_cont.28993
+beq_else.28992:
 	lui	r24 16256
 	ori	r24 r24 0
 	mtc1	r24 f1
 	sub.s	f0 f1 f0
-beq_cont.29103:
+beq_cont.28993:
 	lw	r1 r1 24
 	lui	r24 0
 	ori	r24 r24 0
 	mtc1	r24 f1
 	sub.s	f1 f0 f30
 	mfc1	f30 r25
-	blez	r25 bfle_nontail_else.29104
+	blez	r25 bfle_nontail_else.28994
 	addi	r0 r2 1
-	j	bfle_nontail_cont.29105
-bfle_nontail_else.29104:
+	j	bfle_nontail_cont.28995
+bfle_nontail_else.28994:
 	addi	r0 r2 0
-bfle_nontail_cont.29105:
+bfle_nontail_cont.28995:
 	addi	r0 r3 0
 	sub	r1 r3 r25
-	beq	r25 r0 beq_else.29106
+	beq	r25 r0 beq_else.28996
 	addi	r0 r1 0
 	sub	r2 r1 r25
-	beq	r25 r0 beq_else.29108
+	beq	r25 r0 beq_else.28998
 	addi	r0 r1 0
-	j	beq_cont.29109
-beq_else.29108:
+	j	beq_cont.28999
+beq_else.28998:
 	addi	r0 r1 1
-beq_cont.29109:
-	j	beq_cont.29107
-beq_else.29106:
+beq_cont.28999:
+	j	beq_cont.28997
+beq_else.28996:
 	mov	r1 r2
-beq_cont.29107:
+beq_cont.28997:
 	addi	r0 r2 0
 	sub	r1 r2 r25
-	beq	r25 r0 beq_tail_else.29110
+	beq	r25 r0 beq_tail_else.29000
 	addi	r0 r1 0
 	jr	r31
-beq_tail_else.29110:
+beq_tail_else.29000:
 	addi	r0 r1 1
 	jr	r31
-beq_tail_else.29099:
+beq_tail_else.28989:
 	lw	r1 r2 16
 	addi	r0 r3 0
 	sll	r3 r3 2
@@ -6285,36 +6207,36 @@ beq_tail_else.29099:
 	mtc1	r24 f1
 	sub.s	f1 f0 f30
 	mfc1	f30 r25
-	blez	r25 bfle_nontail_else.29111
+	blez	r25 bfle_nontail_else.29001
 	addi	r0 r2 1
-	j	bfle_nontail_cont.29112
-bfle_nontail_else.29111:
+	j	bfle_nontail_cont.29002
+bfle_nontail_else.29001:
 	addi	r0 r2 0
-bfle_nontail_cont.29112:
+bfle_nontail_cont.29002:
 	addi	r0 r3 0
 	sub	r1 r3 r25
-	beq	r25 r0 beq_else.29113
+	beq	r25 r0 beq_else.29003
 	addi	r0 r1 0
 	sub	r2 r1 r25
-	beq	r25 r0 beq_else.29115
+	beq	r25 r0 beq_else.29005
 	addi	r0 r1 0
-	j	beq_cont.29116
-beq_else.29115:
+	j	beq_cont.29006
+beq_else.29005:
 	addi	r0 r1 1
-beq_cont.29116:
-	j	beq_cont.29114
-beq_else.29113:
+beq_cont.29006:
+	j	beq_cont.29004
+beq_else.29003:
 	mov	r1 r2
-beq_cont.29114:
+beq_cont.29004:
 	addi	r0 r2 0
 	sub	r1 r2 r25
-	beq	r25 r0 beq_tail_else.29117
+	beq	r25 r0 beq_tail_else.29007
 	addi	r0 r1 0
 	jr	r31
-beq_tail_else.29117:
+beq_tail_else.29007:
 	addi	r0 r1 1
 	jr	r31
-beq_tail_else.29098:
+beq_tail_else.28988:
 	lw	r1 r2 16
 	addi	r0 r3 0
 	sll	r3 r3 2
@@ -6326,15 +6248,15 @@ beq_tail_else.29098:
 	mtc1	r24 f3
 	sub.s	f0 f3 f30
 	mfc1	f30 r25
-	blez	r25 bfle_nontail_else.29118
+	blez	r25 bfle_nontail_else.29008
 	addi	r0 r2 1
-	j	bfle_nontail_cont.29119
-bfle_nontail_else.29118:
+	j	bfle_nontail_cont.29009
+bfle_nontail_else.29008:
 	addi	r0 r2 0
-bfle_nontail_cont.29119:
+bfle_nontail_cont.29009:
 	addi	r0 r3 0
 	sub	r2 r3 r25
-	beq	r25 r0 beq_else.29120
+	beq	r25 r0 beq_else.29010
 	lw	r1 r2 16
 	addi	r0 r3 1
 	sll	r3 r3 2
@@ -6346,15 +6268,15 @@ bfle_nontail_cont.29119:
 	mtc1	r24 f1
 	sub.s	f0 f1 f30
 	mfc1	f30 r25
-	blez	r25 bfle_nontail_else.29122
+	blez	r25 bfle_nontail_else.29012
 	addi	r0 r2 1
-	j	bfle_nontail_cont.29123
-bfle_nontail_else.29122:
+	j	bfle_nontail_cont.29013
+bfle_nontail_else.29012:
 	addi	r0 r2 0
-bfle_nontail_cont.29123:
+bfle_nontail_cont.29013:
 	addi	r0 r3 0
 	sub	r2 r3 r25
-	beq	r25 r0 beq_else.29124
+	beq	r25 r0 beq_else.29014
 	lw	r1 r2 16
 	addi	r0 r3 2
 	sll	r3 r3 2
@@ -6366,33 +6288,33 @@ bfle_nontail_cont.29123:
 	mtc1	r24 f1
 	sub.s	f0 f1 f30
 	mfc1	f30 r25
-	blez	r25 bfle_nontail_else.29126
+	blez	r25 bfle_nontail_else.29016
 	addi	r0 r2 1
-	j	bfle_nontail_cont.29127
-bfle_nontail_else.29126:
+	j	bfle_nontail_cont.29017
+bfle_nontail_else.29016:
 	addi	r0 r2 0
-bfle_nontail_cont.29127:
-	j	beq_cont.29125
-beq_else.29124:
+bfle_nontail_cont.29017:
+	j	beq_cont.29015
+beq_else.29014:
 	addi	r0 r2 0
-beq_cont.29125:
-	j	beq_cont.29121
-beq_else.29120:
+beq_cont.29015:
+	j	beq_cont.29011
+beq_else.29010:
 	addi	r0 r2 0
-beq_cont.29121:
+beq_cont.29011:
 	addi	r0 r3 0
 	sub	r2 r3 r25
-	beq	r25 r0 beq_tail_else.29128
+	beq	r25 r0 beq_tail_else.29018
 	lw	r1 r1 24
 	jr	r31
-beq_tail_else.29128:
+beq_tail_else.29018:
 	lw	r1 r1 24
 	addi	r0 r2 0
 	sub	r1 r2 r25
-	beq	r25 r0 beq_tail_else.29129
+	beq	r25 r0 beq_tail_else.29019
 	addi	r0 r1 0
 	jr	r31
-beq_tail_else.29129:
+beq_tail_else.29019:
 	addi	r0 r1 1
 	jr	r31
 check_all_inside.3016:
@@ -6400,7 +6322,7 @@ check_all_inside.3016:
 	lwo	r2 r3 r3
 	addi	r0 r4 -1
 	sub	r3 r4 r25
-	beq	r25 r0 beq_tail_else.29130
+	beq	r25 r0 beq_tail_else.29020
 	addi	r30 r30 0
 	sw	r1 r30 0
 	sw	r31 r30 4
@@ -6429,10 +6351,10 @@ check_all_inside.3016:
 	lw	r3 r4 4
 	addi	r0 r5 1
 	sub	r4 r5 r25
-	beq	r25 r0 beq_else.29131
+	beq	r25 r0 beq_else.29021
 	addi	r0 r5 2
 	sub	r4 r5 r25
-	beq	r25 r0 beq_else.29133
+	beq	r25 r0 beq_else.29023
 	mul.s	f3 f3 f6
 	lw	r3 r4 16
 	addi	r0 r5 0
@@ -6456,7 +6378,7 @@ check_all_inside.3016:
 	lw	r3 r4 12
 	addi	r0 r5 0
 	sub	r4 r5 r25
-	beq	r25 r0 beq_else.29135
+	beq	r25 r0 beq_else.29025
 	mul.s	f4 f5 f7
 	lw	r3 r4 36
 	addi	r0 r5 0
@@ -6478,58 +6400,58 @@ check_all_inside.3016:
 	lwoc1	r4 r5 f4
 	mul.s	f3 f4 f3
 	add.s	f5 f3 f3
-	j	beq_cont.29136
-beq_else.29135:
+	j	beq_cont.29026
+beq_else.29025:
 	mov.s	f6 f3
-beq_cont.29136:
+beq_cont.29026:
 	lw	r3 r4 4
 	addi	r0 r5 3
 	sub	r4 r5 r25
-	beq	r25 r0 beq_else.29137
-	j	beq_cont.29138
-beq_else.29137:
+	beq	r25 r0 beq_else.29027
+	j	beq_cont.29028
+beq_else.29027:
 	lui	r24 16256
 	ori	r24 r24 0
 	mtc1	r24 f4
 	sub.s	f3 f4 f3
-beq_cont.29138:
+beq_cont.29028:
 	lw	r3 r3 24
 	lui	r24 0
 	ori	r24 r24 0
 	mtc1	r24 f4
 	sub.s	f4 f3 f30
 	mfc1	f30 r25
-	blez	r25 bfle_nontail_else.29139
+	blez	r25 bfle_nontail_else.29029
 	addi	r0 r4 1
-	j	bfle_nontail_cont.29140
-bfle_nontail_else.29139:
+	j	bfle_nontail_cont.29030
+bfle_nontail_else.29029:
 	addi	r0 r4 0
-bfle_nontail_cont.29140:
+bfle_nontail_cont.29030:
 	addi	r0 r5 0
 	sub	r3 r5 r25
-	beq	r25 r0 beq_else.29141
+	beq	r25 r0 beq_else.29031
 	addi	r0 r3 0
 	sub	r4 r3 r25
-	beq	r25 r0 beq_else.29143
+	beq	r25 r0 beq_else.29033
 	addi	r0 r3 0
-	j	beq_cont.29144
-beq_else.29143:
+	j	beq_cont.29034
+beq_else.29033:
 	addi	r0 r3 1
-beq_cont.29144:
-	j	beq_cont.29142
-beq_else.29141:
+beq_cont.29034:
+	j	beq_cont.29032
+beq_else.29031:
 	mov	r3 r4
-beq_cont.29142:
+beq_cont.29032:
 	addi	r0 r4 0
 	sub	r3 r4 r25
-	beq	r25 r0 beq_else.29145
+	beq	r25 r0 beq_else.29035
 	addi	r0 r3 0
-	j	beq_cont.29146
-beq_else.29145:
+	j	beq_cont.29036
+beq_else.29035:
 	addi	r0 r3 1
-beq_cont.29146:
-	j	beq_cont.29134
-beq_else.29133:
+beq_cont.29036:
+	j	beq_cont.29024
+beq_else.29023:
 	lw	r3 r4 16
 	addi	r0 r5 0
 	sll	r5 r5 2
@@ -6551,38 +6473,38 @@ beq_else.29133:
 	mtc1	r24 f4
 	sub.s	f4 f3 f30
 	mfc1	f30 r25
-	blez	r25 bfle_nontail_else.29147
+	blez	r25 bfle_nontail_else.29037
 	addi	r0 r4 1
-	j	bfle_nontail_cont.29148
-bfle_nontail_else.29147:
+	j	bfle_nontail_cont.29038
+bfle_nontail_else.29037:
 	addi	r0 r4 0
-bfle_nontail_cont.29148:
+bfle_nontail_cont.29038:
 	addi	r0 r5 0
 	sub	r3 r5 r25
-	beq	r25 r0 beq_else.29149
+	beq	r25 r0 beq_else.29039
 	addi	r0 r3 0
 	sub	r4 r3 r25
-	beq	r25 r0 beq_else.29151
+	beq	r25 r0 beq_else.29041
 	addi	r0 r3 0
-	j	beq_cont.29152
-beq_else.29151:
+	j	beq_cont.29042
+beq_else.29041:
 	addi	r0 r3 1
-beq_cont.29152:
-	j	beq_cont.29150
-beq_else.29149:
+beq_cont.29042:
+	j	beq_cont.29040
+beq_else.29039:
 	mov	r3 r4
-beq_cont.29150:
+beq_cont.29040:
 	addi	r0 r4 0
 	sub	r3 r4 r25
-	beq	r25 r0 beq_else.29153
+	beq	r25 r0 beq_else.29043
 	addi	r0 r3 0
-	j	beq_cont.29154
-beq_else.29153:
+	j	beq_cont.29044
+beq_else.29043:
 	addi	r0 r3 1
-beq_cont.29154:
-beq_cont.29134:
-	j	beq_cont.29132
-beq_else.29131:
+beq_cont.29044:
+beq_cont.29024:
+	j	beq_cont.29022
+beq_else.29021:
 	lw	r3 r4 16
 	addi	r0 r5 0
 	sll	r5 r5 2
@@ -6594,15 +6516,15 @@ beq_else.29131:
 	mtc1	r24 f6
 	sub.s	f3 f6 f30
 	mfc1	f30 r25
-	blez	r25 bfle_nontail_else.29155
+	blez	r25 bfle_nontail_else.29045
 	addi	r0 r4 1
-	j	bfle_nontail_cont.29156
-bfle_nontail_else.29155:
+	j	bfle_nontail_cont.29046
+bfle_nontail_else.29045:
 	addi	r0 r4 0
-bfle_nontail_cont.29156:
+bfle_nontail_cont.29046:
 	addi	r0 r5 0
 	sub	r4 r5 r25
-	beq	r25 r0 beq_else.29157
+	beq	r25 r0 beq_else.29047
 	lw	r3 r4 16
 	addi	r0 r5 1
 	sll	r5 r5 2
@@ -6614,15 +6536,15 @@ bfle_nontail_cont.29156:
 	mtc1	r24 f4
 	sub.s	f3 f4 f30
 	mfc1	f30 r25
-	blez	r25 bfle_nontail_else.29159
+	blez	r25 bfle_nontail_else.29049
 	addi	r0 r4 1
-	j	bfle_nontail_cont.29160
-bfle_nontail_else.29159:
+	j	bfle_nontail_cont.29050
+bfle_nontail_else.29049:
 	addi	r0 r4 0
-bfle_nontail_cont.29160:
+bfle_nontail_cont.29050:
 	addi	r0 r5 0
 	sub	r4 r5 r25
-	beq	r25 r0 beq_else.29161
+	beq	r25 r0 beq_else.29051
 	lw	r3 r4 16
 	addi	r0 r5 2
 	sll	r5 r5 2
@@ -6634,50 +6556,50 @@ bfle_nontail_cont.29160:
 	mtc1	r24 f4
 	sub.s	f3 f4 f30
 	mfc1	f30 r25
-	blez	r25 bfle_nontail_else.29163
+	blez	r25 bfle_nontail_else.29053
 	addi	r0 r4 1
-	j	bfle_nontail_cont.29164
-bfle_nontail_else.29163:
+	j	bfle_nontail_cont.29054
+bfle_nontail_else.29053:
 	addi	r0 r4 0
-bfle_nontail_cont.29164:
-	j	beq_cont.29162
-beq_else.29161:
+bfle_nontail_cont.29054:
+	j	beq_cont.29052
+beq_else.29051:
 	addi	r0 r4 0
-beq_cont.29162:
-	j	beq_cont.29158
-beq_else.29157:
+beq_cont.29052:
+	j	beq_cont.29048
+beq_else.29047:
 	addi	r0 r4 0
-beq_cont.29158:
+beq_cont.29048:
 	addi	r0 r5 0
 	sub	r4 r5 r25
-	beq	r25 r0 beq_else.29165
+	beq	r25 r0 beq_else.29055
 	lw	r3 r3 24
-	j	beq_cont.29166
-beq_else.29165:
+	j	beq_cont.29056
+beq_else.29055:
 	lw	r3 r3 24
 	addi	r0 r4 0
 	sub	r3 r4 r25
-	beq	r25 r0 beq_else.29167
+	beq	r25 r0 beq_else.29057
 	addi	r0 r3 0
-	j	beq_cont.29168
-beq_else.29167:
+	j	beq_cont.29058
+beq_else.29057:
 	addi	r0 r3 1
-beq_cont.29168:
-beq_cont.29166:
-beq_cont.29132:
+beq_cont.29058:
+beq_cont.29056:
+beq_cont.29022:
 	addi	r0 r4 0
 	sub	r3 r4 r25
-	beq	r25 r0 beq_tail_else.29169
+	beq	r25 r0 beq_tail_else.29059
 	addi	r0 r1 0
 	jr	r31
-beq_tail_else.29169:
+beq_tail_else.29059:
 	addi	r0 r3 1
 	add	r1 r3 r1
 	sll	r1 r3 2
 	lwo	r2 r3 r3
 	addi	r0 r4 -1
 	sub	r3 r4 r25
-	beq	r25 r0 beq_tail_else.29170
+	beq	r25 r0 beq_tail_else.29060
 	addi	r30 r30 0
 	sw	r1 r30 0
 	sw	r31 r30 4
@@ -6701,10 +6623,10 @@ beq_tail_else.29169:
 	lw	r30 r31 20
 	addi	r0 r2 0
 	sub	r1 r2 r25
-	beq	r25 r0 beq_tail_else.29171
+	beq	r25 r0 beq_tail_else.29061
 	addi	r0 r1 0
 	jr	r31
-beq_tail_else.29171:
+beq_tail_else.29061:
 	addi	r0 r1 1
 	lw	r30 r2 16
 	add	r2 r1 r1
@@ -6713,7 +6635,7 @@ beq_tail_else.29171:
 	lwo	r3 r2 r2
 	addi	r0 r4 -1
 	sub	r2 r4 r25
-	beq	r25 r0 beq_tail_else.29172
+	beq	r25 r0 beq_tail_else.29062
 	addi	r30 r30 20
 	sw	r1 r30 0
 	sw	r31 r30 4
@@ -6745,10 +6667,10 @@ beq_tail_else.29171:
 	lw	r2 r4 4
 	addi	r0 r5 1
 	sub	r4 r5 r25
-	beq	r25 r0 beq_else.29173
+	beq	r25 r0 beq_else.29063
 	addi	r0 r5 2
 	sub	r4 r5 r25
-	beq	r25 r0 beq_else.29175
+	beq	r25 r0 beq_else.29065
 	mul.s	f0 f0 f6
 	lw	r2 r4 16
 	addi	r0 r5 0
@@ -6772,7 +6694,7 @@ beq_tail_else.29171:
 	lw	r2 r4 12
 	addi	r0 r5 0
 	sub	r4 r5 r25
-	beq	r25 r0 beq_else.29177
+	beq	r25 r0 beq_else.29067
 	mul.s	f2 f4 f7
 	lw	r2 r4 36
 	addi	r0 r5 0
@@ -6794,58 +6716,58 @@ beq_tail_else.29171:
 	lwoc1	r4 r5 f2
 	mul.s	f0 f2 f0
 	add.s	f4 f0 f0
-	j	beq_cont.29178
-beq_else.29177:
+	j	beq_cont.29068
+beq_else.29067:
 	mov.s	f6 f0
-beq_cont.29178:
+beq_cont.29068:
 	lw	r2 r4 4
 	addi	r0 r5 3
 	sub	r4 r5 r25
-	beq	r25 r0 beq_else.29179
-	j	beq_cont.29180
-beq_else.29179:
+	beq	r25 r0 beq_else.29069
+	j	beq_cont.29070
+beq_else.29069:
 	lui	r24 16256
 	ori	r24 r24 0
 	mtc1	r24 f2
 	sub.s	f0 f2 f0
-beq_cont.29180:
+beq_cont.29070:
 	lw	r2 r2 24
 	lui	r24 0
 	ori	r24 r24 0
 	mtc1	r24 f2
 	sub.s	f2 f0 f30
 	mfc1	f30 r25
-	blez	r25 bfle_nontail_else.29181
+	blez	r25 bfle_nontail_else.29071
 	addi	r0 r4 1
-	j	bfle_nontail_cont.29182
-bfle_nontail_else.29181:
+	j	bfle_nontail_cont.29072
+bfle_nontail_else.29071:
 	addi	r0 r4 0
-bfle_nontail_cont.29182:
+bfle_nontail_cont.29072:
 	addi	r0 r5 0
 	sub	r2 r5 r25
-	beq	r25 r0 beq_else.29183
+	beq	r25 r0 beq_else.29073
 	addi	r0 r2 0
 	sub	r4 r2 r25
-	beq	r25 r0 beq_else.29185
+	beq	r25 r0 beq_else.29075
 	addi	r0 r2 0
-	j	beq_cont.29186
-beq_else.29185:
+	j	beq_cont.29076
+beq_else.29075:
 	addi	r0 r2 1
-beq_cont.29186:
-	j	beq_cont.29184
-beq_else.29183:
+beq_cont.29076:
+	j	beq_cont.29074
+beq_else.29073:
 	mov	r2 r4
-beq_cont.29184:
+beq_cont.29074:
 	addi	r0 r4 0
 	sub	r2 r4 r25
-	beq	r25 r0 beq_else.29187
+	beq	r25 r0 beq_else.29077
 	addi	r0 r2 0
-	j	beq_cont.29188
-beq_else.29187:
+	j	beq_cont.29078
+beq_else.29077:
 	addi	r0 r2 1
-beq_cont.29188:
-	j	beq_cont.29176
-beq_else.29175:
+beq_cont.29078:
+	j	beq_cont.29066
+beq_else.29065:
 	lw	r2 r4 16
 	addi	r0 r5 0
 	sll	r5 r5 2
@@ -6867,38 +6789,38 @@ beq_else.29175:
 	mtc1	r24 f2
 	sub.s	f2 f0 f30
 	mfc1	f30 r25
-	blez	r25 bfle_nontail_else.29189
+	blez	r25 bfle_nontail_else.29079
 	addi	r0 r4 1
-	j	bfle_nontail_cont.29190
-bfle_nontail_else.29189:
+	j	bfle_nontail_cont.29080
+bfle_nontail_else.29079:
 	addi	r0 r4 0
-bfle_nontail_cont.29190:
+bfle_nontail_cont.29080:
 	addi	r0 r5 0
 	sub	r2 r5 r25
-	beq	r25 r0 beq_else.29191
+	beq	r25 r0 beq_else.29081
 	addi	r0 r2 0
 	sub	r4 r2 r25
-	beq	r25 r0 beq_else.29193
+	beq	r25 r0 beq_else.29083
 	addi	r0 r2 0
-	j	beq_cont.29194
-beq_else.29193:
+	j	beq_cont.29084
+beq_else.29083:
 	addi	r0 r2 1
-beq_cont.29194:
-	j	beq_cont.29192
-beq_else.29191:
+beq_cont.29084:
+	j	beq_cont.29082
+beq_else.29081:
 	mov	r2 r4
-beq_cont.29192:
+beq_cont.29082:
 	addi	r0 r4 0
 	sub	r2 r4 r25
-	beq	r25 r0 beq_else.29195
+	beq	r25 r0 beq_else.29085
 	addi	r0 r2 0
-	j	beq_cont.29196
-beq_else.29195:
+	j	beq_cont.29086
+beq_else.29085:
 	addi	r0 r2 1
-beq_cont.29196:
-beq_cont.29176:
-	j	beq_cont.29174
-beq_else.29173:
+beq_cont.29086:
+beq_cont.29066:
+	j	beq_cont.29064
+beq_else.29063:
 	lw	r2 r4 16
 	addi	r0 r5 0
 	sll	r5 r5 2
@@ -6910,15 +6832,15 @@ beq_else.29173:
 	mtc1	r24 f6
 	sub.s	f0 f6 f30
 	mfc1	f30 r25
-	blez	r25 bfle_nontail_else.29197
+	blez	r25 bfle_nontail_else.29087
 	addi	r0 r4 1
-	j	bfle_nontail_cont.29198
-bfle_nontail_else.29197:
+	j	bfle_nontail_cont.29088
+bfle_nontail_else.29087:
 	addi	r0 r4 0
-bfle_nontail_cont.29198:
+bfle_nontail_cont.29088:
 	addi	r0 r5 0
 	sub	r4 r5 r25
-	beq	r25 r0 beq_else.29199
+	beq	r25 r0 beq_else.29089
 	lw	r2 r4 16
 	addi	r0 r5 1
 	sll	r5 r5 2
@@ -6930,15 +6852,15 @@ bfle_nontail_cont.29198:
 	mtc1	r24 f2
 	sub.s	f0 f2 f30
 	mfc1	f30 r25
-	blez	r25 bfle_nontail_else.29201
+	blez	r25 bfle_nontail_else.29091
 	addi	r0 r4 1
-	j	bfle_nontail_cont.29202
-bfle_nontail_else.29201:
+	j	bfle_nontail_cont.29092
+bfle_nontail_else.29091:
 	addi	r0 r4 0
-bfle_nontail_cont.29202:
+bfle_nontail_cont.29092:
 	addi	r0 r5 0
 	sub	r4 r5 r25
-	beq	r25 r0 beq_else.29203
+	beq	r25 r0 beq_else.29093
 	lw	r2 r4 16
 	addi	r0 r5 2
 	sll	r5 r5 2
@@ -6950,50 +6872,50 @@ bfle_nontail_cont.29202:
 	mtc1	r24 f2
 	sub.s	f0 f2 f30
 	mfc1	f30 r25
-	blez	r25 bfle_nontail_else.29205
+	blez	r25 bfle_nontail_else.29095
 	addi	r0 r4 1
-	j	bfle_nontail_cont.29206
-bfle_nontail_else.29205:
+	j	bfle_nontail_cont.29096
+bfle_nontail_else.29095:
 	addi	r0 r4 0
-bfle_nontail_cont.29206:
-	j	beq_cont.29204
-beq_else.29203:
+bfle_nontail_cont.29096:
+	j	beq_cont.29094
+beq_else.29093:
 	addi	r0 r4 0
-beq_cont.29204:
-	j	beq_cont.29200
-beq_else.29199:
+beq_cont.29094:
+	j	beq_cont.29090
+beq_else.29089:
 	addi	r0 r4 0
-beq_cont.29200:
+beq_cont.29090:
 	addi	r0 r5 0
 	sub	r4 r5 r25
-	beq	r25 r0 beq_else.29207
+	beq	r25 r0 beq_else.29097
 	lw	r2 r2 24
-	j	beq_cont.29208
-beq_else.29207:
+	j	beq_cont.29098
+beq_else.29097:
 	lw	r2 r2 24
 	addi	r0 r4 0
 	sub	r2 r4 r25
-	beq	r25 r0 beq_else.29209
+	beq	r25 r0 beq_else.29099
 	addi	r0 r2 0
-	j	beq_cont.29210
-beq_else.29209:
+	j	beq_cont.29100
+beq_else.29099:
 	addi	r0 r2 1
-beq_cont.29210:
-beq_cont.29208:
-beq_cont.29174:
+beq_cont.29100:
+beq_cont.29098:
+beq_cont.29064:
 	addi	r0 r4 0
 	sub	r2 r4 r25
-	beq	r25 r0 beq_tail_else.29211
+	beq	r25 r0 beq_tail_else.29101
 	addi	r0 r1 0
 	jr	r31
-beq_tail_else.29211:
+beq_tail_else.29101:
 	addi	r0 r2 1
 	add	r1 r2 r1
 	sll	r1 r2 2
 	lwo	r3 r2 r2
 	addi	r0 r4 -1
 	sub	r2 r4 r25
-	beq	r25 r0 beq_tail_else.29212
+	beq	r25 r0 beq_tail_else.29102
 	addi	r30 r30 20
 	sw	r1 r30 0
 	sw	r31 r30 4
@@ -7016,10 +6938,10 @@ beq_tail_else.29211:
 	lw	r30 r31 24
 	addi	r0 r2 0
 	sub	r1 r2 r25
-	beq	r25 r0 beq_tail_else.29213
+	beq	r25 r0 beq_tail_else.29103
 	addi	r0 r1 0
 	jr	r31
-beq_tail_else.29213:
+beq_tail_else.29103:
 	addi	r0 r1 1
 	lw	r30 r2 20
 	add	r2 r1 r1
@@ -7028,16 +6950,16 @@ beq_tail_else.29213:
 	lwc1	 r30 f2 0
 	lw	r30 r2 12
 	j	check_all_inside.3016
-beq_tail_else.29212:
+beq_tail_else.29102:
 	addi	r0 r1 1
 	jr	r31
-beq_tail_else.29172:
+beq_tail_else.29062:
 	addi	r0 r1 1
 	jr	r31
-beq_tail_else.29170:
+beq_tail_else.29060:
 	addi	r0 r1 1
 	jr	r31
-beq_tail_else.29130:
+beq_tail_else.29020:
 	addi	r0 r1 1
 	jr	r31
 shadow_check_and_group.3022:
@@ -7045,7 +6967,7 @@ shadow_check_and_group.3022:
 	lwo	r2 r3 r3
 	addi	r0 r4 -1
 	sub	r3 r4 r25
-	beq	r25 r0 beq_tail_else.29214
+	beq	r25 r0 beq_tail_else.29104
 	sll	r1 r3 2
 	lwo	r2 r3 r3
 	addi	r30 r30 0
@@ -7107,10 +7029,10 @@ shadow_check_and_group.3022:
 	sw	r1 r30 4
 	sw	r3 r30 8
 	sub	r7 r8 r25
-	beq	r25 r0 beq_else.29215
+	beq	r25 r0 beq_else.29105
 	addi	r0 r4 2
 	sub	r7 r4 r25
-	beq	r25 r0 beq_else.29217
+	beq	r25 r0 beq_else.29107
 	sw	r31 r30 12
 	addi	r30 r30 16
 	mov	r2 r5
@@ -7118,8 +7040,8 @@ shadow_check_and_group.3022:
 	jal	solver_second_fast.2950
 	addi	r30 r30 -16
 	lw	r30 r31 12
-	j	beq_cont.29218
-beq_else.29217:
+	j	beq_cont.29108
+beq_else.29107:
 	lui	r24 0
 	ori	r24 r24 0
 	mtc1	r24 f3
@@ -7128,15 +7050,15 @@ beq_else.29217:
 	lwoc1	r5 r4 f4
 	sub.s	f3 f4 f30
 	mfc1	f30 r25
-	blez	r25 bfle_nontail_else.29219
+	blez	r25 bfle_nontail_else.29109
 	addi	r0 r4 1
-	j	bfle_nontail_cont.29220
-bfle_nontail_else.29219:
+	j	bfle_nontail_cont.29110
+bfle_nontail_else.29109:
 	addi	r0 r4 0
-bfle_nontail_cont.29220:
+bfle_nontail_cont.29110:
 	addi	r0 r6 0
 	sub	r4 r6 r25
-	beq	r25 r0 beq_else.29221
+	beq	r25 r0 beq_else.29111
 	addi	r30 r30 12
 	sw	r1 r30 0
 	sw	r31 r30 4
@@ -7163,13 +7085,13 @@ bfle_nontail_cont.29220:
 	sll	r6 r5 2
 	swoc1	f0 r4 r5
 	addi	r0 r1 1
-	j	beq_cont.29222
-beq_else.29221:
+	j	beq_cont.29112
+beq_else.29111:
 	addi	r0 r1 0
-beq_cont.29222:
-beq_cont.29218:
-	j	beq_cont.29216
-beq_else.29215:
+beq_cont.29112:
+beq_cont.29108:
+	j	beq_cont.29106
+beq_else.29105:
 	lw	r4 r4 0
 	sw	r31 r30 12
 	addi	r30 r30 16
@@ -7179,7 +7101,7 @@ beq_else.29215:
 	jal	solver_rect_fast.2937
 	addi	r30 r30 -16
 	lw	r30 r31 12
-beq_cont.29216:
+beq_cont.29106:
 	addi	r30 r30 12
 	sw	r1 r30 0
 	sw	r31 r30 4
@@ -7193,7 +7115,7 @@ beq_cont.29216:
 	lwoc1	r2 r3 f0
 	addi	r0 r2 0
 	sub	r1 r2 r25
-	beq	r25 r0 beq_else.29223
+	beq	r25 r0 beq_else.29113
 	lui	r24 48716
 	ori	r24 r24 52429
 	mtc1	r24 f1
@@ -7203,19 +7125,19 @@ beq_cont.29216:
 	mtc1	r24 f2
 	sub.s	f1 f2 f30
 	mfc1	f30 r25
-	blez	r25 bfle_nontail_else.29225
+	blez	r25 bfle_nontail_else.29115
 	addi	r0 r1 1
-	j	bfle_nontail_cont.29226
-bfle_nontail_else.29225:
+	j	bfle_nontail_cont.29116
+bfle_nontail_else.29115:
 	addi	r0 r1 0
-bfle_nontail_cont.29226:
-	j	beq_cont.29224
-beq_else.29223:
+bfle_nontail_cont.29116:
+	j	beq_cont.29114
+beq_else.29113:
 	addi	r0 r1 0
-beq_cont.29224:
+beq_cont.29114:
 	addi	r0 r2 0
 	sub	r1 r2 r25
-	beq	r25 r0 beq_tail_else.29227
+	beq	r25 r0 beq_tail_else.29117
 	lui	r24 15395
 	ori	r24 r24 55050
 	mtc1	r24 f1
@@ -7292,7 +7214,7 @@ beq_cont.29224:
 	lwo	r2 r1 r1
 	addi	r0 r3 -1
 	sub	r1 r3 r25
-	beq	r25 r0 beq_else.29228
+	beq	r25 r0 beq_else.29118
 	addi	r30 r30 12
 	sw	r1 r30 0
 	sw	r31 r30 4
@@ -7317,17 +7239,17 @@ beq_cont.29224:
 	lw	r30 r31 24
 	addi	r0 r2 0
 	sub	r1 r2 r25
-	beq	r25 r0 beq_else.29230
+	beq	r25 r0 beq_else.29120
 	addi	r0 r1 0
-	j	beq_cont.29231
-beq_else.29230:
+	j	beq_cont.29121
+beq_else.29120:
 	addi	r0 r1 1
 	sll	r1 r1 2
 	lw	r30 r2 0
 	lwo	r2 r1 r1
 	addi	r0 r3 -1
 	sub	r1 r3 r25
-	beq	r25 r0 beq_else.29232
+	beq	r25 r0 beq_else.29122
 	addi	r30 r30 24
 	sw	r1 r30 0
 	sw	r31 r30 4
@@ -7359,10 +7281,10 @@ beq_else.29230:
 	lw	r1 r3 4
 	addi	r0 r4 1
 	sub	r3 r4 r25
-	beq	r25 r0 beq_else.29234
+	beq	r25 r0 beq_else.29124
 	addi	r0 r4 2
 	sub	r3 r4 r25
-	beq	r25 r0 beq_else.29236
+	beq	r25 r0 beq_else.29126
 	mul.s	f0 f0 f6
 	lw	r1 r3 16
 	addi	r0 r4 0
@@ -7386,7 +7308,7 @@ beq_else.29230:
 	lw	r1 r3 12
 	addi	r0 r4 0
 	sub	r3 r4 r25
-	beq	r25 r0 beq_else.29238
+	beq	r25 r0 beq_else.29128
 	mul.s	f2 f4 f7
 	lw	r1 r3 36
 	addi	r0 r4 0
@@ -7408,58 +7330,58 @@ beq_else.29230:
 	lwoc1	r3 r4 f2
 	mul.s	f0 f2 f0
 	add.s	f4 f0 f0
-	j	beq_cont.29239
-beq_else.29238:
+	j	beq_cont.29129
+beq_else.29128:
 	mov.s	f6 f0
-beq_cont.29239:
+beq_cont.29129:
 	lw	r1 r3 4
 	addi	r0 r4 3
 	sub	r3 r4 r25
-	beq	r25 r0 beq_else.29240
-	j	beq_cont.29241
-beq_else.29240:
+	beq	r25 r0 beq_else.29130
+	j	beq_cont.29131
+beq_else.29130:
 	lui	r24 16256
 	ori	r24 r24 0
 	mtc1	r24 f2
 	sub.s	f0 f2 f0
-beq_cont.29241:
+beq_cont.29131:
 	lw	r1 r1 24
 	lui	r24 0
 	ori	r24 r24 0
 	mtc1	r24 f2
 	sub.s	f2 f0 f30
 	mfc1	f30 r25
-	blez	r25 bfle_nontail_else.29242
+	blez	r25 bfle_nontail_else.29132
 	addi	r0 r3 1
-	j	bfle_nontail_cont.29243
-bfle_nontail_else.29242:
+	j	bfle_nontail_cont.29133
+bfle_nontail_else.29132:
 	addi	r0 r3 0
-bfle_nontail_cont.29243:
+bfle_nontail_cont.29133:
 	addi	r0 r4 0
 	sub	r1 r4 r25
-	beq	r25 r0 beq_else.29244
+	beq	r25 r0 beq_else.29134
 	addi	r0 r1 0
 	sub	r3 r1 r25
-	beq	r25 r0 beq_else.29246
+	beq	r25 r0 beq_else.29136
 	addi	r0 r1 0
-	j	beq_cont.29247
-beq_else.29246:
+	j	beq_cont.29137
+beq_else.29136:
 	addi	r0 r1 1
-beq_cont.29247:
-	j	beq_cont.29245
-beq_else.29244:
+beq_cont.29137:
+	j	beq_cont.29135
+beq_else.29134:
 	mov	r1 r3
-beq_cont.29245:
+beq_cont.29135:
 	addi	r0 r3 0
 	sub	r1 r3 r25
-	beq	r25 r0 beq_else.29248
+	beq	r25 r0 beq_else.29138
 	addi	r0 r1 0
-	j	beq_cont.29249
-beq_else.29248:
+	j	beq_cont.29139
+beq_else.29138:
 	addi	r0 r1 1
-beq_cont.29249:
-	j	beq_cont.29237
-beq_else.29236:
+beq_cont.29139:
+	j	beq_cont.29127
+beq_else.29126:
 	lw	r1 r3 16
 	addi	r0 r4 0
 	sll	r4 r4 2
@@ -7481,38 +7403,38 @@ beq_else.29236:
 	mtc1	r24 f2
 	sub.s	f2 f0 f30
 	mfc1	f30 r25
-	blez	r25 bfle_nontail_else.29250
+	blez	r25 bfle_nontail_else.29140
 	addi	r0 r3 1
-	j	bfle_nontail_cont.29251
-bfle_nontail_else.29250:
+	j	bfle_nontail_cont.29141
+bfle_nontail_else.29140:
 	addi	r0 r3 0
-bfle_nontail_cont.29251:
+bfle_nontail_cont.29141:
 	addi	r0 r4 0
 	sub	r1 r4 r25
-	beq	r25 r0 beq_else.29252
+	beq	r25 r0 beq_else.29142
 	addi	r0 r1 0
 	sub	r3 r1 r25
-	beq	r25 r0 beq_else.29254
+	beq	r25 r0 beq_else.29144
 	addi	r0 r1 0
-	j	beq_cont.29255
-beq_else.29254:
+	j	beq_cont.29145
+beq_else.29144:
 	addi	r0 r1 1
-beq_cont.29255:
-	j	beq_cont.29253
-beq_else.29252:
+beq_cont.29145:
+	j	beq_cont.29143
+beq_else.29142:
 	mov	r1 r3
-beq_cont.29253:
+beq_cont.29143:
 	addi	r0 r3 0
 	sub	r1 r3 r25
-	beq	r25 r0 beq_else.29256
+	beq	r25 r0 beq_else.29146
 	addi	r0 r1 0
-	j	beq_cont.29257
-beq_else.29256:
+	j	beq_cont.29147
+beq_else.29146:
 	addi	r0 r1 1
-beq_cont.29257:
-beq_cont.29237:
-	j	beq_cont.29235
-beq_else.29234:
+beq_cont.29147:
+beq_cont.29127:
+	j	beq_cont.29125
+beq_else.29124:
 	lw	r1 r3 16
 	addi	r0 r4 0
 	sll	r4 r4 2
@@ -7524,15 +7446,15 @@ beq_else.29234:
 	mtc1	r24 f6
 	sub.s	f0 f6 f30
 	mfc1	f30 r25
-	blez	r25 bfle_nontail_else.29258
+	blez	r25 bfle_nontail_else.29148
 	addi	r0 r3 1
-	j	bfle_nontail_cont.29259
-bfle_nontail_else.29258:
+	j	bfle_nontail_cont.29149
+bfle_nontail_else.29148:
 	addi	r0 r3 0
-bfle_nontail_cont.29259:
+bfle_nontail_cont.29149:
 	addi	r0 r4 0
 	sub	r3 r4 r25
-	beq	r25 r0 beq_else.29260
+	beq	r25 r0 beq_else.29150
 	lw	r1 r3 16
 	addi	r0 r4 1
 	sll	r4 r4 2
@@ -7544,15 +7466,15 @@ bfle_nontail_cont.29259:
 	mtc1	r24 f2
 	sub.s	f0 f2 f30
 	mfc1	f30 r25
-	blez	r25 bfle_nontail_else.29262
+	blez	r25 bfle_nontail_else.29152
 	addi	r0 r3 1
-	j	bfle_nontail_cont.29263
-bfle_nontail_else.29262:
+	j	bfle_nontail_cont.29153
+bfle_nontail_else.29152:
 	addi	r0 r3 0
-bfle_nontail_cont.29263:
+bfle_nontail_cont.29153:
 	addi	r0 r4 0
 	sub	r3 r4 r25
-	beq	r25 r0 beq_else.29264
+	beq	r25 r0 beq_else.29154
 	lw	r1 r3 16
 	addi	r0 r4 2
 	sll	r4 r4 2
@@ -7564,49 +7486,49 @@ bfle_nontail_cont.29263:
 	mtc1	r24 f2
 	sub.s	f0 f2 f30
 	mfc1	f30 r25
-	blez	r25 bfle_nontail_else.29266
+	blez	r25 bfle_nontail_else.29156
 	addi	r0 r3 1
-	j	bfle_nontail_cont.29267
-bfle_nontail_else.29266:
+	j	bfle_nontail_cont.29157
+bfle_nontail_else.29156:
 	addi	r0 r3 0
-bfle_nontail_cont.29267:
-	j	beq_cont.29265
-beq_else.29264:
+bfle_nontail_cont.29157:
+	j	beq_cont.29155
+beq_else.29154:
 	addi	r0 r3 0
-beq_cont.29265:
-	j	beq_cont.29261
-beq_else.29260:
+beq_cont.29155:
+	j	beq_cont.29151
+beq_else.29150:
 	addi	r0 r3 0
-beq_cont.29261:
+beq_cont.29151:
 	addi	r0 r4 0
 	sub	r3 r4 r25
-	beq	r25 r0 beq_else.29268
+	beq	r25 r0 beq_else.29158
 	lw	r1 r1 24
-	j	beq_cont.29269
-beq_else.29268:
+	j	beq_cont.29159
+beq_else.29158:
 	lw	r1 r1 24
 	addi	r0 r3 0
 	sub	r1 r3 r25
-	beq	r25 r0 beq_else.29270
+	beq	r25 r0 beq_else.29160
 	addi	r0 r1 0
-	j	beq_cont.29271
-beq_else.29270:
+	j	beq_cont.29161
+beq_else.29160:
 	addi	r0 r1 1
-beq_cont.29271:
-beq_cont.29269:
-beq_cont.29235:
+beq_cont.29161:
+beq_cont.29159:
+beq_cont.29125:
 	addi	r0 r3 0
 	sub	r1 r3 r25
-	beq	r25 r0 beq_else.29272
+	beq	r25 r0 beq_else.29162
 	addi	r0 r1 0
-	j	beq_cont.29273
-beq_else.29272:
+	j	beq_cont.29163
+beq_else.29162:
 	addi	r0 r1 2
 	sll	r1 r1 2
 	lwo	r2 r1 r1
 	addi	r0 r3 -1
 	sub	r1 r3 r25
-	beq	r25 r0 beq_else.29274
+	beq	r25 r0 beq_else.29164
 	addi	r30 r30 24
 	sw	r1 r30 0
 	sw	r31 r30 4
@@ -7627,10 +7549,10 @@ beq_else.29272:
 	lw	r30 r31 24
 	addi	r0 r2 0
 	sub	r1 r2 r25
-	beq	r25 r0 beq_else.29276
+	beq	r25 r0 beq_else.29166
 	addi	r0 r1 0
-	j	beq_cont.29277
-beq_else.29276:
+	j	beq_cont.29167
+beq_else.29166:
 	addi	r0 r1 3
 	lwc1	 r30 f0 20
 	lwc1	 r30 f1 16
@@ -7641,33 +7563,33 @@ beq_else.29276:
 	jal	check_all_inside.3016
 	addi	r30 r30 -28
 	lw	r30 r31 24
-beq_cont.29277:
-	j	beq_cont.29275
-beq_else.29274:
+beq_cont.29167:
+	j	beq_cont.29165
+beq_else.29164:
 	addi	r0 r1 1
-beq_cont.29275:
-beq_cont.29273:
-	j	beq_cont.29233
-beq_else.29232:
+beq_cont.29165:
+beq_cont.29163:
+	j	beq_cont.29123
+beq_else.29122:
 	addi	r0 r1 1
-beq_cont.29233:
-beq_cont.29231:
-	j	beq_cont.29229
-beq_else.29228:
+beq_cont.29123:
+beq_cont.29121:
+	j	beq_cont.29119
+beq_else.29118:
 	addi	r0 r1 1
-beq_cont.29229:
+beq_cont.29119:
 	addi	r0 r2 0
 	sub	r1 r2 r25
-	beq	r25 r0 beq_tail_else.29278
+	beq	r25 r0 beq_tail_else.29168
 	addi	r0 r1 1
 	jr	r31
-beq_tail_else.29278:
+beq_tail_else.29168:
 	addi	r0 r1 1
 	lw	r30 r2 4
 	add	r2 r1 r1
 	lw	r30 r2 0
 	j	shadow_check_and_group.3022
-beq_tail_else.29227:
+beq_tail_else.29117:
 	addi	r30 r30 24
 	sw	r1 r30 0
 	sw	r31 r30 4
@@ -7681,16 +7603,16 @@ beq_tail_else.29227:
 	lw	r1 r1 24
 	addi	r0 r2 0
 	sub	r1 r2 r25
-	beq	r25 r0 beq_tail_else.29279
+	beq	r25 r0 beq_tail_else.29169
 	addi	r0 r1 1
 	lw	r30 r2 4
 	add	r2 r1 r1
 	lw	r30 r2 0
 	j	shadow_check_and_group.3022
-beq_tail_else.29279:
+beq_tail_else.29169:
 	addi	r0 r1 0
 	jr	r31
-beq_tail_else.29214:
+beq_tail_else.29104:
 	addi	r0 r1 0
 	jr	r31
 shadow_check_one_or_group.3025:
@@ -7698,7 +7620,7 @@ shadow_check_one_or_group.3025:
 	lwo	r2 r3 r3
 	addi	r0 r4 -1
 	sub	r3 r4 r25
-	beq	r25 r0 beq_tail_else.29280
+	beq	r25 r0 beq_tail_else.29170
 	addi	r30 r30 0
 	sw	r1 r30 0
 	sw	r31 r30 4
@@ -7721,10 +7643,10 @@ shadow_check_one_or_group.3025:
 	lw	r30 r31 8
 	addi	r0 r2 0
 	sub	r1 r2 r25
-	beq	r25 r0 beq_tail_else.29281
+	beq	r25 r0 beq_tail_else.29171
 	addi	r0 r1 1
 	jr	r31
-beq_tail_else.29281:
+beq_tail_else.29171:
 	addi	r0 r1 1
 	lw	r30 r2 4
 	add	r2 r1 r1
@@ -7733,7 +7655,7 @@ beq_tail_else.29281:
 	lwo	r3 r2 r2
 	addi	r0 r4 -1
 	sub	r2 r4 r25
-	beq	r25 r0 beq_tail_else.29282
+	beq	r25 r0 beq_tail_else.29172
 	addi	r30 r30 8
 	sw	r1 r30 0
 	sw	r31 r30 4
@@ -7754,10 +7676,10 @@ beq_tail_else.29281:
 	lw	r30 r31 12
 	addi	r0 r2 0
 	sub	r1 r2 r25
-	beq	r25 r0 beq_tail_else.29283
+	beq	r25 r0 beq_tail_else.29173
 	addi	r0 r1 1
 	jr	r31
-beq_tail_else.29283:
+beq_tail_else.29173:
 	addi	r0 r1 1
 	lw	r30 r2 8
 	add	r2 r1 r1
@@ -7766,7 +7688,7 @@ beq_tail_else.29283:
 	lwo	r3 r2 r2
 	addi	r0 r4 -1
 	sub	r2 r4 r25
-	beq	r25 r0 beq_tail_else.29284
+	beq	r25 r0 beq_tail_else.29174
 	addi	r30 r30 12
 	sw	r1 r30 0
 	sw	r31 r30 4
@@ -7787,10 +7709,10 @@ beq_tail_else.29283:
 	lw	r30 r31 16
 	addi	r0 r2 0
 	sub	r1 r2 r25
-	beq	r25 r0 beq_tail_else.29285
+	beq	r25 r0 beq_tail_else.29175
 	addi	r0 r1 1
 	jr	r31
-beq_tail_else.29285:
+beq_tail_else.29175:
 	addi	r0 r1 1
 	lw	r30 r2 12
 	add	r2 r1 r1
@@ -7799,7 +7721,7 @@ beq_tail_else.29285:
 	lwo	r3 r2 r2
 	addi	r0 r4 -1
 	sub	r2 r4 r25
-	beq	r25 r0 beq_tail_else.29286
+	beq	r25 r0 beq_tail_else.29176
 	addi	r30 r30 16
 	sw	r1 r30 0
 	sw	r31 r30 4
@@ -7820,10 +7742,10 @@ beq_tail_else.29285:
 	lw	r30 r31 20
 	addi	r0 r2 0
 	sub	r1 r2 r25
-	beq	r25 r0 beq_tail_else.29287
+	beq	r25 r0 beq_tail_else.29177
 	addi	r0 r1 1
 	jr	r31
-beq_tail_else.29287:
+beq_tail_else.29177:
 	addi	r0 r1 1
 	lw	r30 r2 16
 	add	r2 r1 r1
@@ -7832,7 +7754,7 @@ beq_tail_else.29287:
 	lwo	r3 r2 r2
 	addi	r0 r4 -1
 	sub	r2 r4 r25
-	beq	r25 r0 beq_tail_else.29288
+	beq	r25 r0 beq_tail_else.29178
 	addi	r30 r30 20
 	sw	r1 r30 0
 	sw	r31 r30 4
@@ -7853,10 +7775,10 @@ beq_tail_else.29287:
 	lw	r30 r31 24
 	addi	r0 r2 0
 	sub	r1 r2 r25
-	beq	r25 r0 beq_tail_else.29289
+	beq	r25 r0 beq_tail_else.29179
 	addi	r0 r1 1
 	jr	r31
-beq_tail_else.29289:
+beq_tail_else.29179:
 	addi	r0 r1 1
 	lw	r30 r2 20
 	add	r2 r1 r1
@@ -7865,7 +7787,7 @@ beq_tail_else.29289:
 	lwo	r3 r2 r2
 	addi	r0 r4 -1
 	sub	r2 r4 r25
-	beq	r25 r0 beq_tail_else.29290
+	beq	r25 r0 beq_tail_else.29180
 	addi	r30 r30 24
 	sw	r1 r30 0
 	sw	r31 r30 4
@@ -7886,10 +7808,10 @@ beq_tail_else.29289:
 	lw	r30 r31 28
 	addi	r0 r2 0
 	sub	r1 r2 r25
-	beq	r25 r0 beq_tail_else.29291
+	beq	r25 r0 beq_tail_else.29181
 	addi	r0 r1 1
 	jr	r31
-beq_tail_else.29291:
+beq_tail_else.29181:
 	addi	r0 r1 1
 	lw	r30 r2 24
 	add	r2 r1 r1
@@ -7898,7 +7820,7 @@ beq_tail_else.29291:
 	lwo	r3 r2 r2
 	addi	r0 r4 -1
 	sub	r2 r4 r25
-	beq	r25 r0 beq_tail_else.29292
+	beq	r25 r0 beq_tail_else.29182
 	addi	r30 r30 28
 	sw	r1 r30 0
 	sw	r31 r30 4
@@ -7919,10 +7841,10 @@ beq_tail_else.29291:
 	lw	r30 r31 32
 	addi	r0 r2 0
 	sub	r1 r2 r25
-	beq	r25 r0 beq_tail_else.29293
+	beq	r25 r0 beq_tail_else.29183
 	addi	r0 r1 1
 	jr	r31
-beq_tail_else.29293:
+beq_tail_else.29183:
 	addi	r0 r1 1
 	lw	r30 r2 28
 	add	r2 r1 r1
@@ -7931,7 +7853,7 @@ beq_tail_else.29293:
 	lwo	r3 r2 r2
 	addi	r0 r4 -1
 	sub	r2 r4 r25
-	beq	r25 r0 beq_tail_else.29294
+	beq	r25 r0 beq_tail_else.29184
 	addi	r30 r30 32
 	sw	r1 r30 0
 	sw	r31 r30 4
@@ -7952,37 +7874,37 @@ beq_tail_else.29293:
 	lw	r30 r31 36
 	addi	r0 r2 0
 	sub	r1 r2 r25
-	beq	r25 r0 beq_tail_else.29295
+	beq	r25 r0 beq_tail_else.29185
 	addi	r0 r1 1
 	jr	r31
-beq_tail_else.29295:
+beq_tail_else.29185:
 	addi	r0 r1 1
 	lw	r30 r2 32
 	add	r2 r1 r1
 	lw	r30 r2 0
 	j	shadow_check_one_or_group.3025
-beq_tail_else.29294:
+beq_tail_else.29184:
 	addi	r0 r1 0
 	jr	r31
-beq_tail_else.29292:
+beq_tail_else.29182:
 	addi	r0 r1 0
 	jr	r31
-beq_tail_else.29290:
+beq_tail_else.29180:
 	addi	r0 r1 0
 	jr	r31
-beq_tail_else.29288:
+beq_tail_else.29178:
 	addi	r0 r1 0
 	jr	r31
-beq_tail_else.29286:
+beq_tail_else.29176:
 	addi	r0 r1 0
 	jr	r31
-beq_tail_else.29284:
+beq_tail_else.29174:
 	addi	r0 r1 0
 	jr	r31
-beq_tail_else.29282:
+beq_tail_else.29172:
 	addi	r0 r1 0
 	jr	r31
-beq_tail_else.29280:
+beq_tail_else.29170:
 	addi	r0 r1 0
 	jr	r31
 shadow_check_one_or_matrix.3028:
@@ -7993,13 +7915,13 @@ shadow_check_one_or_matrix.3028:
 	lwo	r3 r4 r4
 	addi	r0 r5 -1
 	sub	r4 r5 r25
-	beq	r25 r0 beq_tail_else.29296
+	beq	r25 r0 beq_tail_else.29186
 	addi	r0 r5 99
 	sw	r3 r30 0
 	sw	r2 r30 4
 	sw	r1 r30 8
 	sub	r4 r5 r25
-	beq	r25 r0 beq_else.29297
+	beq	r25 r0 beq_else.29187
 	addi	r30 r30 12
 	sw	r1 r30 0
 	sw	r31 r30 4
@@ -8056,10 +7978,10 @@ shadow_check_one_or_matrix.3028:
 	lw	r7 r6 4
 	addi	r0 r8 1
 	sub	r6 r8 r25
-	beq	r25 r0 beq_else.29299
+	beq	r25 r0 beq_else.29189
 	addi	r0 r5 2
 	sub	r6 r5 r25
-	beq	r25 r0 beq_else.29301
+	beq	r25 r0 beq_else.29191
 	sw	r31 r30 12
 	addi	r30 r30 16
 	mov	r2 r4
@@ -8067,8 +7989,8 @@ shadow_check_one_or_matrix.3028:
 	jal	solver_second_fast.2950
 	addi	r30 r30 -16
 	lw	r30 r31 12
-	j	beq_cont.29302
-beq_else.29301:
+	j	beq_cont.29192
+beq_else.29191:
 	lui	r24 0
 	ori	r24 r24 0
 	mtc1	r24 f3
@@ -8077,15 +7999,15 @@ beq_else.29301:
 	lwoc1	r4 r5 f4
 	sub.s	f3 f4 f30
 	mfc1	f30 r25
-	blez	r25 bfle_nontail_else.29303
+	blez	r25 bfle_nontail_else.29193
 	addi	r0 r5 1
-	j	bfle_nontail_cont.29304
-bfle_nontail_else.29303:
+	j	bfle_nontail_cont.29194
+bfle_nontail_else.29193:
 	addi	r0 r5 0
-bfle_nontail_cont.29304:
+bfle_nontail_cont.29194:
 	addi	r0 r6 0
 	sub	r5 r6 r25
-	beq	r25 r0 beq_else.29305
+	beq	r25 r0 beq_else.29195
 	addi	r30 r30 12
 	sw	r1 r30 0
 	sw	r31 r30 4
@@ -8112,13 +8034,13 @@ bfle_nontail_cont.29304:
 	sll	r6 r4 2
 	swoc1	f0 r5 r4
 	addi	r0 r1 1
-	j	beq_cont.29306
-beq_else.29305:
+	j	beq_cont.29196
+beq_else.29195:
 	addi	r0 r1 0
-beq_cont.29306:
-beq_cont.29302:
-	j	beq_cont.29300
-beq_else.29299:
+beq_cont.29196:
+beq_cont.29192:
+	j	beq_cont.29190
+beq_else.29189:
 	lw	r5 r5 0
 	sw	r31 r30 12
 	addi	r30 r30 16
@@ -8128,10 +8050,10 @@ beq_else.29299:
 	jal	solver_rect_fast.2937
 	addi	r30 r30 -16
 	lw	r30 r31 12
-beq_cont.29300:
+beq_cont.29190:
 	addi	r0 r2 0
 	sub	r1 r2 r25
-	beq	r25 r0 beq_else.29307
+	beq	r25 r0 beq_else.29197
 	lui	r24 48588
 	ori	r24 r24 52429
 	mtc1	r24 f0
@@ -8151,22 +8073,22 @@ beq_cont.29300:
 	mtc1	r24 f1
 	sub.s	f0 f1 f30
 	mfc1	f30 r25
-	blez	r25 bfle_nontail_else.29309
+	blez	r25 bfle_nontail_else.29199
 	addi	r0 r1 1
-	j	bfle_nontail_cont.29310
-bfle_nontail_else.29309:
+	j	bfle_nontail_cont.29200
+bfle_nontail_else.29199:
 	addi	r0 r1 0
-bfle_nontail_cont.29310:
+bfle_nontail_cont.29200:
 	addi	r0 r2 0
 	sub	r1 r2 r25
-	beq	r25 r0 beq_else.29311
+	beq	r25 r0 beq_else.29201
 	addi	r0 r1 1
 	sll	r1 r1 2
 	lw	r30 r2 0
 	lwo	r2 r1 r1
 	addi	r0 r3 -1
 	sub	r1 r3 r25
-	beq	r25 r0 beq_else.29313
+	beq	r25 r0 beq_else.29203
 	addi	r30 r30 12
 	sw	r1 r30 0
 	sw	r31 r30 4
@@ -8187,17 +8109,17 @@ bfle_nontail_cont.29310:
 	lw	r30 r31 12
 	addi	r0 r2 0
 	sub	r1 r2 r25
-	beq	r25 r0 beq_else.29315
+	beq	r25 r0 beq_else.29205
 	addi	r0 r1 1
-	j	beq_cont.29316
-beq_else.29315:
+	j	beq_cont.29206
+beq_else.29205:
 	addi	r0 r1 2
 	sll	r1 r1 2
 	lw	r30 r2 0
 	lwo	r2 r1 r1
 	addi	r0 r3 -1
 	sub	r1 r3 r25
-	beq	r25 r0 beq_else.29317
+	beq	r25 r0 beq_else.29207
 	addi	r30 r30 12
 	sw	r1 r30 0
 	sw	r31 r30 4
@@ -8218,17 +8140,17 @@ beq_else.29315:
 	lw	r30 r31 12
 	addi	r0 r2 0
 	sub	r1 r2 r25
-	beq	r25 r0 beq_else.29319
+	beq	r25 r0 beq_else.29209
 	addi	r0 r1 1
-	j	beq_cont.29320
-beq_else.29319:
+	j	beq_cont.29210
+beq_else.29209:
 	addi	r0 r1 3
 	sll	r1 r1 2
 	lw	r30 r2 0
 	lwo	r2 r1 r1
 	addi	r0 r3 -1
 	sub	r1 r3 r25
-	beq	r25 r0 beq_else.29321
+	beq	r25 r0 beq_else.29211
 	addi	r30 r30 12
 	sw	r1 r30 0
 	sw	r31 r30 4
@@ -8249,17 +8171,17 @@ beq_else.29319:
 	lw	r30 r31 12
 	addi	r0 r2 0
 	sub	r1 r2 r25
-	beq	r25 r0 beq_else.29323
+	beq	r25 r0 beq_else.29213
 	addi	r0 r1 1
-	j	beq_cont.29324
-beq_else.29323:
+	j	beq_cont.29214
+beq_else.29213:
 	addi	r0 r1 4
 	sll	r1 r1 2
 	lw	r30 r2 0
 	lwo	r2 r1 r1
 	addi	r0 r3 -1
 	sub	r1 r3 r25
-	beq	r25 r0 beq_else.29325
+	beq	r25 r0 beq_else.29215
 	addi	r30 r30 12
 	sw	r1 r30 0
 	sw	r31 r30 4
@@ -8280,17 +8202,17 @@ beq_else.29323:
 	lw	r30 r31 12
 	addi	r0 r2 0
 	sub	r1 r2 r25
-	beq	r25 r0 beq_else.29327
+	beq	r25 r0 beq_else.29217
 	addi	r0 r1 1
-	j	beq_cont.29328
-beq_else.29327:
+	j	beq_cont.29218
+beq_else.29217:
 	addi	r0 r1 5
 	sll	r1 r1 2
 	lw	r30 r2 0
 	lwo	r2 r1 r1
 	addi	r0 r3 -1
 	sub	r1 r3 r25
-	beq	r25 r0 beq_else.29329
+	beq	r25 r0 beq_else.29219
 	addi	r30 r30 12
 	sw	r1 r30 0
 	sw	r31 r30 4
@@ -8311,17 +8233,17 @@ beq_else.29327:
 	lw	r30 r31 12
 	addi	r0 r2 0
 	sub	r1 r2 r25
-	beq	r25 r0 beq_else.29331
+	beq	r25 r0 beq_else.29221
 	addi	r0 r1 1
-	j	beq_cont.29332
-beq_else.29331:
+	j	beq_cont.29222
+beq_else.29221:
 	addi	r0 r1 6
 	sll	r1 r1 2
 	lw	r30 r2 0
 	lwo	r2 r1 r1
 	addi	r0 r3 -1
 	sub	r1 r3 r25
-	beq	r25 r0 beq_else.29333
+	beq	r25 r0 beq_else.29223
 	addi	r30 r30 12
 	sw	r1 r30 0
 	sw	r31 r30 4
@@ -8342,17 +8264,17 @@ beq_else.29331:
 	lw	r30 r31 12
 	addi	r0 r2 0
 	sub	r1 r2 r25
-	beq	r25 r0 beq_else.29335
+	beq	r25 r0 beq_else.29225
 	addi	r0 r1 1
-	j	beq_cont.29336
-beq_else.29335:
+	j	beq_cont.29226
+beq_else.29225:
 	addi	r0 r1 7
 	sll	r1 r1 2
 	lw	r30 r2 0
 	lwo	r2 r1 r1
 	addi	r0 r3 -1
 	sub	r1 r3 r25
-	beq	r25 r0 beq_else.29337
+	beq	r25 r0 beq_else.29227
 	addi	r30 r30 12
 	sw	r1 r30 0
 	sw	r31 r30 4
@@ -8373,10 +8295,10 @@ beq_else.29335:
 	lw	r30 r31 12
 	addi	r0 r2 0
 	sub	r1 r2 r25
-	beq	r25 r0 beq_else.29339
+	beq	r25 r0 beq_else.29229
 	addi	r0 r1 1
-	j	beq_cont.29340
-beq_else.29339:
+	j	beq_cont.29230
+beq_else.29229:
 	addi	r0 r1 8
 	lw	r30 r2 0
 	sw	r31 r30 12
@@ -8384,488 +8306,1155 @@ beq_else.29339:
 	jal	shadow_check_one_or_group.3025
 	addi	r30 r30 -16
 	lw	r30 r31 12
-beq_cont.29340:
-	j	beq_cont.29338
-beq_else.29337:
+beq_cont.29230:
+	j	beq_cont.29228
+beq_else.29227:
 	addi	r0 r1 0
-beq_cont.29338:
-beq_cont.29336:
-	j	beq_cont.29334
-beq_else.29333:
+beq_cont.29228:
+beq_cont.29226:
+	j	beq_cont.29224
+beq_else.29223:
 	addi	r0 r1 0
-beq_cont.29334:
-beq_cont.29332:
-	j	beq_cont.29330
-beq_else.29329:
+beq_cont.29224:
+beq_cont.29222:
+	j	beq_cont.29220
+beq_else.29219:
 	addi	r0 r1 0
-beq_cont.29330:
-beq_cont.29328:
-	j	beq_cont.29326
-beq_else.29325:
+beq_cont.29220:
+beq_cont.29218:
+	j	beq_cont.29216
+beq_else.29215:
 	addi	r0 r1 0
-beq_cont.29326:
-beq_cont.29324:
-	j	beq_cont.29322
-beq_else.29321:
+beq_cont.29216:
+beq_cont.29214:
+	j	beq_cont.29212
+beq_else.29211:
 	addi	r0 r1 0
-beq_cont.29322:
-beq_cont.29320:
-	j	beq_cont.29318
-beq_else.29317:
+beq_cont.29212:
+beq_cont.29210:
+	j	beq_cont.29208
+beq_else.29207:
 	addi	r0 r1 0
-beq_cont.29318:
-beq_cont.29316:
-	j	beq_cont.29314
-beq_else.29313:
+beq_cont.29208:
+beq_cont.29206:
+	j	beq_cont.29204
+beq_else.29203:
 	addi	r0 r1 0
-beq_cont.29314:
+beq_cont.29204:
 	addi	r0 r2 0
 	sub	r1 r2 r25
+	beq	r25 r0 beq_else.29231
+	addi	r0 r1 1
+	j	beq_cont.29232
+beq_else.29231:
+	addi	r0 r1 0
+beq_cont.29232:
+	j	beq_cont.29202
+beq_else.29201:
+	addi	r0 r1 0
+beq_cont.29202:
+	j	beq_cont.29198
+beq_else.29197:
+	addi	r0 r1 0
+beq_cont.29198:
+	j	beq_cont.29188
+beq_else.29187:
+	addi	r0 r1 1
+beq_cont.29188:
+	addi	r0 r2 0
+	sub	r1 r2 r25
+	beq	r25 r0 beq_tail_else.29233
+	addi	r0 r1 1
+	sll	r1 r1 2
+	lw	r30 r2 0
+	lwo	r2 r1 r1
+	addi	r0 r3 -1
+	sub	r1 r3 r25
+	beq	r25 r0 beq_else.29234
+	addi	r30 r30 12
+	sw	r1 r30 0
+	sw	r31 r30 4
+	jal	min_caml_load_and_net
+	mov	r3 r1
+	lw	r30 r1 0
+	lw	r30 r31 4
+	addi	r30 r30 -12
+	sll	r1 r1 2
+	lwo	r3 r1 r1
+	addi	r0 r3 0
+	sw	r31 r30 12
+	addi	r30 r30 16
+	mov	r2 r1
+	mov	r1 r3
+	jal	shadow_check_and_group.3022
+	addi	r30 r30 -16
+	lw	r30 r31 12
+	addi	r0 r2 0
+	sub	r1 r2 r25
+	beq	r25 r0 beq_else.29236
+	addi	r0 r1 1
+	j	beq_cont.29237
+beq_else.29236:
+	addi	r0 r1 2
+	sll	r1 r1 2
+	lw	r30 r2 0
+	lwo	r2 r1 r1
+	addi	r0 r3 -1
+	sub	r1 r3 r25
+	beq	r25 r0 beq_else.29238
+	addi	r30 r30 12
+	sw	r1 r30 0
+	sw	r31 r30 4
+	jal	min_caml_load_and_net
+	mov	r3 r1
+	lw	r30 r1 0
+	lw	r30 r31 4
+	addi	r30 r30 -12
+	sll	r1 r1 2
+	lwo	r3 r1 r1
+	addi	r0 r3 0
+	sw	r31 r30 12
+	addi	r30 r30 16
+	mov	r2 r1
+	mov	r1 r3
+	jal	shadow_check_and_group.3022
+	addi	r30 r30 -16
+	lw	r30 r31 12
+	addi	r0 r2 0
+	sub	r1 r2 r25
+	beq	r25 r0 beq_else.29240
+	addi	r0 r1 1
+	j	beq_cont.29241
+beq_else.29240:
+	addi	r0 r1 3
+	sll	r1 r1 2
+	lw	r30 r2 0
+	lwo	r2 r1 r1
+	addi	r0 r3 -1
+	sub	r1 r3 r25
+	beq	r25 r0 beq_else.29242
+	addi	r30 r30 12
+	sw	r1 r30 0
+	sw	r31 r30 4
+	jal	min_caml_load_and_net
+	mov	r3 r1
+	lw	r30 r1 0
+	lw	r30 r31 4
+	addi	r30 r30 -12
+	sll	r1 r1 2
+	lwo	r3 r1 r1
+	addi	r0 r3 0
+	sw	r31 r30 12
+	addi	r30 r30 16
+	mov	r2 r1
+	mov	r1 r3
+	jal	shadow_check_and_group.3022
+	addi	r30 r30 -16
+	lw	r30 r31 12
+	addi	r0 r2 0
+	sub	r1 r2 r25
+	beq	r25 r0 beq_else.29244
+	addi	r0 r1 1
+	j	beq_cont.29245
+beq_else.29244:
+	addi	r0 r1 4
+	sll	r1 r1 2
+	lw	r30 r2 0
+	lwo	r2 r1 r1
+	addi	r0 r3 -1
+	sub	r1 r3 r25
+	beq	r25 r0 beq_else.29246
+	addi	r30 r30 12
+	sw	r1 r30 0
+	sw	r31 r30 4
+	jal	min_caml_load_and_net
+	mov	r3 r1
+	lw	r30 r1 0
+	lw	r30 r31 4
+	addi	r30 r30 -12
+	sll	r1 r1 2
+	lwo	r3 r1 r1
+	addi	r0 r3 0
+	sw	r31 r30 12
+	addi	r30 r30 16
+	mov	r2 r1
+	mov	r1 r3
+	jal	shadow_check_and_group.3022
+	addi	r30 r30 -16
+	lw	r30 r31 12
+	addi	r0 r2 0
+	sub	r1 r2 r25
+	beq	r25 r0 beq_else.29248
+	addi	r0 r1 1
+	j	beq_cont.29249
+beq_else.29248:
+	addi	r0 r1 5
+	sll	r1 r1 2
+	lw	r30 r2 0
+	lwo	r2 r1 r1
+	addi	r0 r3 -1
+	sub	r1 r3 r25
+	beq	r25 r0 beq_else.29250
+	addi	r30 r30 12
+	sw	r1 r30 0
+	sw	r31 r30 4
+	jal	min_caml_load_and_net
+	mov	r3 r1
+	lw	r30 r1 0
+	lw	r30 r31 4
+	addi	r30 r30 -12
+	sll	r1 r1 2
+	lwo	r3 r1 r1
+	addi	r0 r3 0
+	sw	r31 r30 12
+	addi	r30 r30 16
+	mov	r2 r1
+	mov	r1 r3
+	jal	shadow_check_and_group.3022
+	addi	r30 r30 -16
+	lw	r30 r31 12
+	addi	r0 r2 0
+	sub	r1 r2 r25
+	beq	r25 r0 beq_else.29252
+	addi	r0 r1 1
+	j	beq_cont.29253
+beq_else.29252:
+	addi	r0 r1 6
+	sll	r1 r1 2
+	lw	r30 r2 0
+	lwo	r2 r1 r1
+	addi	r0 r3 -1
+	sub	r1 r3 r25
+	beq	r25 r0 beq_else.29254
+	addi	r30 r30 12
+	sw	r1 r30 0
+	sw	r31 r30 4
+	jal	min_caml_load_and_net
+	mov	r3 r1
+	lw	r30 r1 0
+	lw	r30 r31 4
+	addi	r30 r30 -12
+	sll	r1 r1 2
+	lwo	r3 r1 r1
+	addi	r0 r3 0
+	sw	r31 r30 12
+	addi	r30 r30 16
+	mov	r2 r1
+	mov	r1 r3
+	jal	shadow_check_and_group.3022
+	addi	r30 r30 -16
+	lw	r30 r31 12
+	addi	r0 r2 0
+	sub	r1 r2 r25
+	beq	r25 r0 beq_else.29256
+	addi	r0 r1 1
+	j	beq_cont.29257
+beq_else.29256:
+	addi	r0 r1 7
+	sll	r1 r1 2
+	lw	r30 r2 0
+	lwo	r2 r1 r1
+	addi	r0 r3 -1
+	sub	r1 r3 r25
+	beq	r25 r0 beq_else.29258
+	addi	r30 r30 12
+	sw	r1 r30 0
+	sw	r31 r30 4
+	jal	min_caml_load_and_net
+	mov	r3 r1
+	lw	r30 r1 0
+	lw	r30 r31 4
+	addi	r30 r30 -12
+	sll	r1 r1 2
+	lwo	r3 r1 r1
+	addi	r0 r3 0
+	sw	r31 r30 12
+	addi	r30 r30 16
+	mov	r2 r1
+	mov	r1 r3
+	jal	shadow_check_and_group.3022
+	addi	r30 r30 -16
+	lw	r30 r31 12
+	addi	r0 r2 0
+	sub	r1 r2 r25
+	beq	r25 r0 beq_else.29260
+	addi	r0 r1 1
+	j	beq_cont.29261
+beq_else.29260:
+	addi	r0 r1 8
+	lw	r30 r2 0
+	sw	r31 r30 12
+	addi	r30 r30 16
+	jal	shadow_check_one_or_group.3025
+	addi	r30 r30 -16
+	lw	r30 r31 12
+beq_cont.29261:
+	j	beq_cont.29259
+beq_else.29258:
+	addi	r0 r1 0
+beq_cont.29259:
+beq_cont.29257:
+	j	beq_cont.29255
+beq_else.29254:
+	addi	r0 r1 0
+beq_cont.29255:
+beq_cont.29253:
+	j	beq_cont.29251
+beq_else.29250:
+	addi	r0 r1 0
+beq_cont.29251:
+beq_cont.29249:
+	j	beq_cont.29247
+beq_else.29246:
+	addi	r0 r1 0
+beq_cont.29247:
+beq_cont.29245:
+	j	beq_cont.29243
+beq_else.29242:
+	addi	r0 r1 0
+beq_cont.29243:
+beq_cont.29241:
+	j	beq_cont.29239
+beq_else.29238:
+	addi	r0 r1 0
+beq_cont.29239:
+beq_cont.29237:
+	j	beq_cont.29235
+beq_else.29234:
+	addi	r0 r1 0
+beq_cont.29235:
+	addi	r0 r2 0
+	sub	r1 r2 r25
+	beq	r25 r0 beq_tail_else.29262
+	addi	r0 r1 1
+	jr	r31
+beq_tail_else.29262:
+	addi	r0 r1 1
+	lw	r30 r2 8
+	add	r2 r1 r1
+	sll	r1 r2 2
+	lw	r30 r3 4
+	lwo	r3 r2 r2
+	addi	r0 r4 0
+	sll	r4 r4 2
+	lwo	r2 r4 r4
+	addi	r0 r5 -1
+	sub	r4 r5 r25
+	beq	r25 r0 beq_tail_else.29263
+	addi	r0 r5 99
+	sw	r2 r30 12
+	sw	r1 r30 16
+	sub	r4 r5 r25
+	beq	r25 r0 beq_else.29264
+	addi	r30 r30 20
+	sw	r1 r30 0
+	sw	r31 r30 4
+	jal	min_caml_load_light_dirvec
+	mov	r5 r1
+	lw	r30 r1 0
+	lw	r30 r31 4
+	addi	r30 r30 -20
+	addi	r30 r30 20
+	sw	r1 r30 0
+	sw	r31 r30 4
+	jal	min_caml_load_intersection_point
+	mov	r6 r1
+	lw	r30 r1 0
+	lw	r30 r31 4
+	addi	r30 r30 -20
+	addi	r30 r30 20
+	sw	r1 r30 0
+	sw	r31 r30 4
+	jal	min_caml_load_objects
+	mov	r7 r1
+	lw	r30 r1 0
+	lw	r30 r31 4
+	addi	r30 r30 -20
+	sll	r4 r8 2
+	lwo	r7 r8 r7
+	addi	r0 r8 0
+	sll	r8 r8 2
+	lwoc1	r6 r8 f0
+	lw	r7 r8 20
+	addi	r0 r9 0
+	sll	r9 r9 2
+	lwoc1	r8 r9 f1
+	sub.s	f0 f1 f0
+	addi	r0 r8 1
+	sll	r8 r8 2
+	lwoc1	r6 r8 f1
+	lw	r7 r8 20
+	addi	r0 r9 1
+	sll	r9 r9 2
+	lwoc1	r8 r9 f2
+	sub.s	f1 f2 f1
+	addi	r0 r8 2
+	sll	r8 r8 2
+	lwoc1	r6 r8 f2
+	lw	r7 r6 20
+	addi	r0 r8 2
+	sll	r8 r8 2
+	lwoc1	r6 r8 f3
+	sub.s	f2 f3 f2
+	lw	r5 r6 4
+	sll	r4 r4 2
+	lwo	r6 r4 r4
+	lw	r7 r6 4
+	addi	r0 r8 1
+	sub	r6 r8 r25
+	beq	r25 r0 beq_else.29266
+	addi	r0 r5 2
+	sub	r6 r5 r25
+	beq	r25 r0 beq_else.29268
+	sw	r31 r30 20
+	addi	r30 r30 24
+	mov	r2 r4
+	mov	r1 r7
+	jal	solver_second_fast.2950
+	addi	r30 r30 -24
+	lw	r30 r31 20
+	j	beq_cont.29269
+beq_else.29268:
+	lui	r24 0
+	ori	r24 r24 0
+	mtc1	r24 f3
+	addi	r0 r5 0
+	sll	r5 r5 2
+	lwoc1	r4 r5 f4
+	sub.s	f3 f4 f30
+	mfc1	f30 r25
+	blez	r25 bfle_nontail_else.29270
+	addi	r0 r5 1
+	j	bfle_nontail_cont.29271
+bfle_nontail_else.29270:
+	addi	r0 r5 0
+bfle_nontail_cont.29271:
+	addi	r0 r6 0
+	sub	r5 r6 r25
+	beq	r25 r0 beq_else.29272
+	addi	r30 r30 20
+	sw	r1 r30 0
+	sw	r31 r30 4
+	jal	min_caml_load_solver_dist
+	mov	r5 r1
+	lw	r30 r1 0
+	lw	r30 r31 4
+	addi	r30 r30 -20
+	addi	r0 r6 0
+	addi	r0 r7 1
+	sll	r7 r7 2
+	lwoc1	r4 r7 f3
+	mul.s	f3 f0 f0
+	addi	r0 r7 2
+	sll	r7 r7 2
+	lwoc1	r4 r7 f3
+	mul.s	f3 f1 f1
+	add.s	f0 f1 f0
+	addi	r0 r7 3
+	sll	r7 r7 2
+	lwoc1	r4 r7 f1
+	mul.s	f1 f2 f1
+	add.s	f0 f1 f0
+	sll	r6 r4 2
+	swoc1	f0 r5 r4
+	addi	r0 r1 1
+	j	beq_cont.29273
+beq_else.29272:
+	addi	r0 r1 0
+beq_cont.29273:
+beq_cont.29269:
+	j	beq_cont.29267
+beq_else.29266:
+	lw	r5 r5 0
+	sw	r31 r30 20
+	addi	r30 r30 24
+	mov	r3 r4
+	mov	r2 r5
+	mov	r1 r7
+	jal	solver_rect_fast.2937
+	addi	r30 r30 -24
+	lw	r30 r31 20
+beq_cont.29267:
+	addi	r0 r2 0
+	sub	r1 r2 r25
+	beq	r25 r0 beq_else.29274
+	lui	r24 48588
+	ori	r24 r24 52429
+	mtc1	r24 f0
+	addi	r30 r30 20
+	sw	r1 r30 0
+	sw	r31 r30 4
+	jal	min_caml_load_solver_dist
+	mov	r1 r1
+	lw	r30 r31 4
+	addi	r30 r30 -20
+	addi	r0 r2 0
+	sll	r2 r2 2
+	lwoc1	r1 r2 f1
+	sub.s	f0 f1 f0
+	lui	r24 0
+	ori	r24 r24 0
+	mtc1	r24 f1
+	sub.s	f0 f1 f30
+	mfc1	f30 r25
+	blez	r25 bfle_nontail_else.29276
+	addi	r0 r1 1
+	j	bfle_nontail_cont.29277
+bfle_nontail_else.29276:
+	addi	r0 r1 0
+bfle_nontail_cont.29277:
+	addi	r0 r2 0
+	sub	r1 r2 r25
+	beq	r25 r0 beq_else.29278
+	addi	r0 r1 1
+	sll	r1 r1 2
+	lw	r30 r2 12
+	lwo	r2 r1 r1
+	addi	r0 r3 -1
+	sub	r1 r3 r25
+	beq	r25 r0 beq_else.29280
+	addi	r30 r30 20
+	sw	r1 r30 0
+	sw	r31 r30 4
+	jal	min_caml_load_and_net
+	mov	r3 r1
+	lw	r30 r1 0
+	lw	r30 r31 4
+	addi	r30 r30 -20
+	sll	r1 r1 2
+	lwo	r3 r1 r1
+	addi	r0 r3 0
+	sw	r31 r30 20
+	addi	r30 r30 24
+	mov	r2 r1
+	mov	r1 r3
+	jal	shadow_check_and_group.3022
+	addi	r30 r30 -24
+	lw	r30 r31 20
+	addi	r0 r2 0
+	sub	r1 r2 r25
+	beq	r25 r0 beq_else.29282
+	addi	r0 r1 1
+	j	beq_cont.29283
+beq_else.29282:
+	addi	r0 r1 2
+	sll	r1 r1 2
+	lw	r30 r2 12
+	lwo	r2 r1 r1
+	addi	r0 r3 -1
+	sub	r1 r3 r25
+	beq	r25 r0 beq_else.29284
+	addi	r30 r30 20
+	sw	r1 r30 0
+	sw	r31 r30 4
+	jal	min_caml_load_and_net
+	mov	r3 r1
+	lw	r30 r1 0
+	lw	r30 r31 4
+	addi	r30 r30 -20
+	sll	r1 r1 2
+	lwo	r3 r1 r1
+	addi	r0 r3 0
+	sw	r31 r30 20
+	addi	r30 r30 24
+	mov	r2 r1
+	mov	r1 r3
+	jal	shadow_check_and_group.3022
+	addi	r30 r30 -24
+	lw	r30 r31 20
+	addi	r0 r2 0
+	sub	r1 r2 r25
+	beq	r25 r0 beq_else.29286
+	addi	r0 r1 1
+	j	beq_cont.29287
+beq_else.29286:
+	addi	r0 r1 3
+	sll	r1 r1 2
+	lw	r30 r2 12
+	lwo	r2 r1 r1
+	addi	r0 r3 -1
+	sub	r1 r3 r25
+	beq	r25 r0 beq_else.29288
+	addi	r30 r30 20
+	sw	r1 r30 0
+	sw	r31 r30 4
+	jal	min_caml_load_and_net
+	mov	r3 r1
+	lw	r30 r1 0
+	lw	r30 r31 4
+	addi	r30 r30 -20
+	sll	r1 r1 2
+	lwo	r3 r1 r1
+	addi	r0 r3 0
+	sw	r31 r30 20
+	addi	r30 r30 24
+	mov	r2 r1
+	mov	r1 r3
+	jal	shadow_check_and_group.3022
+	addi	r30 r30 -24
+	lw	r30 r31 20
+	addi	r0 r2 0
+	sub	r1 r2 r25
+	beq	r25 r0 beq_else.29290
+	addi	r0 r1 1
+	j	beq_cont.29291
+beq_else.29290:
+	addi	r0 r1 4
+	sll	r1 r1 2
+	lw	r30 r2 12
+	lwo	r2 r1 r1
+	addi	r0 r3 -1
+	sub	r1 r3 r25
+	beq	r25 r0 beq_else.29292
+	addi	r30 r30 20
+	sw	r1 r30 0
+	sw	r31 r30 4
+	jal	min_caml_load_and_net
+	mov	r3 r1
+	lw	r30 r1 0
+	lw	r30 r31 4
+	addi	r30 r30 -20
+	sll	r1 r1 2
+	lwo	r3 r1 r1
+	addi	r0 r3 0
+	sw	r31 r30 20
+	addi	r30 r30 24
+	mov	r2 r1
+	mov	r1 r3
+	jal	shadow_check_and_group.3022
+	addi	r30 r30 -24
+	lw	r30 r31 20
+	addi	r0 r2 0
+	sub	r1 r2 r25
+	beq	r25 r0 beq_else.29294
+	addi	r0 r1 1
+	j	beq_cont.29295
+beq_else.29294:
+	addi	r0 r1 5
+	sll	r1 r1 2
+	lw	r30 r2 12
+	lwo	r2 r1 r1
+	addi	r0 r3 -1
+	sub	r1 r3 r25
+	beq	r25 r0 beq_else.29296
+	addi	r30 r30 20
+	sw	r1 r30 0
+	sw	r31 r30 4
+	jal	min_caml_load_and_net
+	mov	r3 r1
+	lw	r30 r1 0
+	lw	r30 r31 4
+	addi	r30 r30 -20
+	sll	r1 r1 2
+	lwo	r3 r1 r1
+	addi	r0 r3 0
+	sw	r31 r30 20
+	addi	r30 r30 24
+	mov	r2 r1
+	mov	r1 r3
+	jal	shadow_check_and_group.3022
+	addi	r30 r30 -24
+	lw	r30 r31 20
+	addi	r0 r2 0
+	sub	r1 r2 r25
+	beq	r25 r0 beq_else.29298
+	addi	r0 r1 1
+	j	beq_cont.29299
+beq_else.29298:
+	addi	r0 r1 6
+	sll	r1 r1 2
+	lw	r30 r2 12
+	lwo	r2 r1 r1
+	addi	r0 r3 -1
+	sub	r1 r3 r25
+	beq	r25 r0 beq_else.29300
+	addi	r30 r30 20
+	sw	r1 r30 0
+	sw	r31 r30 4
+	jal	min_caml_load_and_net
+	mov	r3 r1
+	lw	r30 r1 0
+	lw	r30 r31 4
+	addi	r30 r30 -20
+	sll	r1 r1 2
+	lwo	r3 r1 r1
+	addi	r0 r3 0
+	sw	r31 r30 20
+	addi	r30 r30 24
+	mov	r2 r1
+	mov	r1 r3
+	jal	shadow_check_and_group.3022
+	addi	r30 r30 -24
+	lw	r30 r31 20
+	addi	r0 r2 0
+	sub	r1 r2 r25
+	beq	r25 r0 beq_else.29302
+	addi	r0 r1 1
+	j	beq_cont.29303
+beq_else.29302:
+	addi	r0 r1 7
+	lw	r30 r2 12
+	sw	r31 r30 20
+	addi	r30 r30 24
+	jal	shadow_check_one_or_group.3025
+	addi	r30 r30 -24
+	lw	r30 r31 20
+beq_cont.29303:
+	j	beq_cont.29301
+beq_else.29300:
+	addi	r0 r1 0
+beq_cont.29301:
+beq_cont.29299:
+	j	beq_cont.29297
+beq_else.29296:
+	addi	r0 r1 0
+beq_cont.29297:
+beq_cont.29295:
+	j	beq_cont.29293
+beq_else.29292:
+	addi	r0 r1 0
+beq_cont.29293:
+beq_cont.29291:
+	j	beq_cont.29289
+beq_else.29288:
+	addi	r0 r1 0
+beq_cont.29289:
+beq_cont.29287:
+	j	beq_cont.29285
+beq_else.29284:
+	addi	r0 r1 0
+beq_cont.29285:
+beq_cont.29283:
+	j	beq_cont.29281
+beq_else.29280:
+	addi	r0 r1 0
+beq_cont.29281:
+	addi	r0 r2 0
+	sub	r1 r2 r25
+	beq	r25 r0 beq_else.29304
+	addi	r0 r1 1
+	j	beq_cont.29305
+beq_else.29304:
+	addi	r0 r1 0
+beq_cont.29305:
+	j	beq_cont.29279
+beq_else.29278:
+	addi	r0 r1 0
+beq_cont.29279:
+	j	beq_cont.29275
+beq_else.29274:
+	addi	r0 r1 0
+beq_cont.29275:
+	j	beq_cont.29265
+beq_else.29264:
+	addi	r0 r1 1
+beq_cont.29265:
+	addi	r0 r2 0
+	sub	r1 r2 r25
+	beq	r25 r0 beq_tail_else.29306
+	addi	r0 r1 1
+	sll	r1 r1 2
+	lw	r30 r2 12
+	lwo	r2 r1 r1
+	addi	r0 r3 -1
+	sub	r1 r3 r25
+	beq	r25 r0 beq_else.29307
+	addi	r30 r30 20
+	sw	r1 r30 0
+	sw	r31 r30 4
+	jal	min_caml_load_and_net
+	mov	r3 r1
+	lw	r30 r1 0
+	lw	r30 r31 4
+	addi	r30 r30 -20
+	sll	r1 r1 2
+	lwo	r3 r1 r1
+	addi	r0 r3 0
+	sw	r31 r30 20
+	addi	r30 r30 24
+	mov	r2 r1
+	mov	r1 r3
+	jal	shadow_check_and_group.3022
+	addi	r30 r30 -24
+	lw	r30 r31 20
+	addi	r0 r2 0
+	sub	r1 r2 r25
+	beq	r25 r0 beq_else.29309
+	addi	r0 r1 1
+	j	beq_cont.29310
+beq_else.29309:
+	addi	r0 r1 2
+	sll	r1 r1 2
+	lw	r30 r2 12
+	lwo	r2 r1 r1
+	addi	r0 r3 -1
+	sub	r1 r3 r25
+	beq	r25 r0 beq_else.29311
+	addi	r30 r30 20
+	sw	r1 r30 0
+	sw	r31 r30 4
+	jal	min_caml_load_and_net
+	mov	r3 r1
+	lw	r30 r1 0
+	lw	r30 r31 4
+	addi	r30 r30 -20
+	sll	r1 r1 2
+	lwo	r3 r1 r1
+	addi	r0 r3 0
+	sw	r31 r30 20
+	addi	r30 r30 24
+	mov	r2 r1
+	mov	r1 r3
+	jal	shadow_check_and_group.3022
+	addi	r30 r30 -24
+	lw	r30 r31 20
+	addi	r0 r2 0
+	sub	r1 r2 r25
+	beq	r25 r0 beq_else.29313
+	addi	r0 r1 1
+	j	beq_cont.29314
+beq_else.29313:
+	addi	r0 r1 3
+	sll	r1 r1 2
+	lw	r30 r2 12
+	lwo	r2 r1 r1
+	addi	r0 r3 -1
+	sub	r1 r3 r25
+	beq	r25 r0 beq_else.29315
+	addi	r30 r30 20
+	sw	r1 r30 0
+	sw	r31 r30 4
+	jal	min_caml_load_and_net
+	mov	r3 r1
+	lw	r30 r1 0
+	lw	r30 r31 4
+	addi	r30 r30 -20
+	sll	r1 r1 2
+	lwo	r3 r1 r1
+	addi	r0 r3 0
+	sw	r31 r30 20
+	addi	r30 r30 24
+	mov	r2 r1
+	mov	r1 r3
+	jal	shadow_check_and_group.3022
+	addi	r30 r30 -24
+	lw	r30 r31 20
+	addi	r0 r2 0
+	sub	r1 r2 r25
+	beq	r25 r0 beq_else.29317
+	addi	r0 r1 1
+	j	beq_cont.29318
+beq_else.29317:
+	addi	r0 r1 4
+	sll	r1 r1 2
+	lw	r30 r2 12
+	lwo	r2 r1 r1
+	addi	r0 r3 -1
+	sub	r1 r3 r25
+	beq	r25 r0 beq_else.29319
+	addi	r30 r30 20
+	sw	r1 r30 0
+	sw	r31 r30 4
+	jal	min_caml_load_and_net
+	mov	r3 r1
+	lw	r30 r1 0
+	lw	r30 r31 4
+	addi	r30 r30 -20
+	sll	r1 r1 2
+	lwo	r3 r1 r1
+	addi	r0 r3 0
+	sw	r31 r30 20
+	addi	r30 r30 24
+	mov	r2 r1
+	mov	r1 r3
+	jal	shadow_check_and_group.3022
+	addi	r30 r30 -24
+	lw	r30 r31 20
+	addi	r0 r2 0
+	sub	r1 r2 r25
+	beq	r25 r0 beq_else.29321
+	addi	r0 r1 1
+	j	beq_cont.29322
+beq_else.29321:
+	addi	r0 r1 5
+	sll	r1 r1 2
+	lw	r30 r2 12
+	lwo	r2 r1 r1
+	addi	r0 r3 -1
+	sub	r1 r3 r25
+	beq	r25 r0 beq_else.29323
+	addi	r30 r30 20
+	sw	r1 r30 0
+	sw	r31 r30 4
+	jal	min_caml_load_and_net
+	mov	r3 r1
+	lw	r30 r1 0
+	lw	r30 r31 4
+	addi	r30 r30 -20
+	sll	r1 r1 2
+	lwo	r3 r1 r1
+	addi	r0 r3 0
+	sw	r31 r30 20
+	addi	r30 r30 24
+	mov	r2 r1
+	mov	r1 r3
+	jal	shadow_check_and_group.3022
+	addi	r30 r30 -24
+	lw	r30 r31 20
+	addi	r0 r2 0
+	sub	r1 r2 r25
+	beq	r25 r0 beq_else.29325
+	addi	r0 r1 1
+	j	beq_cont.29326
+beq_else.29325:
+	addi	r0 r1 6
+	sll	r1 r1 2
+	lw	r30 r2 12
+	lwo	r2 r1 r1
+	addi	r0 r3 -1
+	sub	r1 r3 r25
+	beq	r25 r0 beq_else.29327
+	addi	r30 r30 20
+	sw	r1 r30 0
+	sw	r31 r30 4
+	jal	min_caml_load_and_net
+	mov	r3 r1
+	lw	r30 r1 0
+	lw	r30 r31 4
+	addi	r30 r30 -20
+	sll	r1 r1 2
+	lwo	r3 r1 r1
+	addi	r0 r3 0
+	sw	r31 r30 20
+	addi	r30 r30 24
+	mov	r2 r1
+	mov	r1 r3
+	jal	shadow_check_and_group.3022
+	addi	r30 r30 -24
+	lw	r30 r31 20
+	addi	r0 r2 0
+	sub	r1 r2 r25
+	beq	r25 r0 beq_else.29329
+	addi	r0 r1 1
+	j	beq_cont.29330
+beq_else.29329:
+	addi	r0 r1 7
+	lw	r30 r2 12
+	sw	r31 r30 20
+	addi	r30 r30 24
+	jal	shadow_check_one_or_group.3025
+	addi	r30 r30 -24
+	lw	r30 r31 20
+beq_cont.29330:
+	j	beq_cont.29328
+beq_else.29327:
+	addi	r0 r1 0
+beq_cont.29328:
+beq_cont.29326:
+	j	beq_cont.29324
+beq_else.29323:
+	addi	r0 r1 0
+beq_cont.29324:
+beq_cont.29322:
+	j	beq_cont.29320
+beq_else.29319:
+	addi	r0 r1 0
+beq_cont.29320:
+beq_cont.29318:
+	j	beq_cont.29316
+beq_else.29315:
+	addi	r0 r1 0
+beq_cont.29316:
+beq_cont.29314:
+	j	beq_cont.29312
+beq_else.29311:
+	addi	r0 r1 0
+beq_cont.29312:
+beq_cont.29310:
+	j	beq_cont.29308
+beq_else.29307:
+	addi	r0 r1 0
+beq_cont.29308:
+	addi	r0 r2 0
+	sub	r1 r2 r25
+	beq	r25 r0 beq_tail_else.29331
+	addi	r0 r1 1
+	jr	r31
+beq_tail_else.29331:
+	addi	r0 r1 1
+	lw	r30 r2 16
+	add	r2 r1 r1
+	lw	r30 r2 4
+	j	shadow_check_one_or_matrix.3028
+beq_tail_else.29306:
+	addi	r0 r1 1
+	lw	r30 r2 16
+	add	r2 r1 r1
+	lw	r30 r2 4
+	j	shadow_check_one_or_matrix.3028
+beq_tail_else.29263:
+	addi	r0 r1 0
+	jr	r31
+beq_tail_else.29233:
+	addi	r0 r1 1
+	lw	r30 r2 8
+	add	r2 r1 r1
+	sll	r1 r2 2
+	lw	r30 r3 4
+	lwo	r3 r2 r2
+	addi	r0 r4 0
+	sll	r4 r4 2
+	lwo	r2 r4 r4
+	addi	r0 r5 -1
+	sub	r4 r5 r25
+	beq	r25 r0 beq_tail_else.29332
+	addi	r0 r5 99
+	sw	r2 r30 20
+	sw	r1 r30 24
+	sub	r4 r5 r25
+	beq	r25 r0 beq_else.29333
+	addi	r30 r30 28
+	sw	r1 r30 0
+	sw	r31 r30 4
+	jal	min_caml_load_light_dirvec
+	mov	r5 r1
+	lw	r30 r1 0
+	lw	r30 r31 4
+	addi	r30 r30 -28
+	addi	r30 r30 28
+	sw	r1 r30 0
+	sw	r31 r30 4
+	jal	min_caml_load_intersection_point
+	mov	r6 r1
+	lw	r30 r1 0
+	lw	r30 r31 4
+	addi	r30 r30 -28
+	addi	r30 r30 28
+	sw	r1 r30 0
+	sw	r31 r30 4
+	jal	min_caml_load_objects
+	mov	r7 r1
+	lw	r30 r1 0
+	lw	r30 r31 4
+	addi	r30 r30 -28
+	sll	r4 r8 2
+	lwo	r7 r8 r7
+	addi	r0 r8 0
+	sll	r8 r8 2
+	lwoc1	r6 r8 f0
+	lw	r7 r8 20
+	addi	r0 r9 0
+	sll	r9 r9 2
+	lwoc1	r8 r9 f1
+	sub.s	f0 f1 f0
+	addi	r0 r8 1
+	sll	r8 r8 2
+	lwoc1	r6 r8 f1
+	lw	r7 r8 20
+	addi	r0 r9 1
+	sll	r9 r9 2
+	lwoc1	r8 r9 f2
+	sub.s	f1 f2 f1
+	addi	r0 r8 2
+	sll	r8 r8 2
+	lwoc1	r6 r8 f2
+	lw	r7 r6 20
+	addi	r0 r8 2
+	sll	r8 r8 2
+	lwoc1	r6 r8 f3
+	sub.s	f2 f3 f2
+	lw	r5 r6 4
+	sll	r4 r4 2
+	lwo	r6 r4 r4
+	lw	r7 r6 4
+	addi	r0 r8 1
+	sub	r6 r8 r25
+	beq	r25 r0 beq_else.29335
+	addi	r0 r5 2
+	sub	r6 r5 r25
+	beq	r25 r0 beq_else.29337
+	sw	r31 r30 28
+	addi	r30 r30 32
+	mov	r2 r4
+	mov	r1 r7
+	jal	solver_second_fast.2950
+	addi	r30 r30 -32
+	lw	r30 r31 28
+	j	beq_cont.29338
+beq_else.29337:
+	lui	r24 0
+	ori	r24 r24 0
+	mtc1	r24 f3
+	addi	r0 r5 0
+	sll	r5 r5 2
+	lwoc1	r4 r5 f4
+	sub.s	f3 f4 f30
+	mfc1	f30 r25
+	blez	r25 bfle_nontail_else.29339
+	addi	r0 r5 1
+	j	bfle_nontail_cont.29340
+bfle_nontail_else.29339:
+	addi	r0 r5 0
+bfle_nontail_cont.29340:
+	addi	r0 r6 0
+	sub	r5 r6 r25
 	beq	r25 r0 beq_else.29341
+	addi	r30 r30 28
+	sw	r1 r30 0
+	sw	r31 r30 4
+	jal	min_caml_load_solver_dist
+	mov	r5 r1
+	lw	r30 r1 0
+	lw	r30 r31 4
+	addi	r30 r30 -28
+	addi	r0 r6 0
+	addi	r0 r7 1
+	sll	r7 r7 2
+	lwoc1	r4 r7 f3
+	mul.s	f3 f0 f0
+	addi	r0 r7 2
+	sll	r7 r7 2
+	lwoc1	r4 r7 f3
+	mul.s	f3 f1 f1
+	add.s	f0 f1 f0
+	addi	r0 r7 3
+	sll	r7 r7 2
+	lwoc1	r4 r7 f1
+	mul.s	f1 f2 f1
+	add.s	f0 f1 f0
+	sll	r6 r4 2
+	swoc1	f0 r5 r4
 	addi	r0 r1 1
 	j	beq_cont.29342
 beq_else.29341:
 	addi	r0 r1 0
 beq_cont.29342:
-	j	beq_cont.29312
-beq_else.29311:
-	addi	r0 r1 0
-beq_cont.29312:
-	j	beq_cont.29308
-beq_else.29307:
-	addi	r0 r1 0
-beq_cont.29308:
-	j	beq_cont.29298
-beq_else.29297:
-	addi	r0 r1 1
-beq_cont.29298:
-	addi	r0 r2 0
-	sub	r1 r2 r25
-	beq	r25 r0 beq_tail_else.29343
-	addi	r0 r1 1
-	sll	r1 r1 2
-	lw	r30 r2 0
-	lwo	r2 r1 r1
-	addi	r0 r3 -1
-	sub	r1 r3 r25
-	beq	r25 r0 beq_else.29344
-	addi	r30 r30 12
-	sw	r1 r30 0
-	sw	r31 r30 4
-	jal	min_caml_load_and_net
-	mov	r3 r1
-	lw	r30 r1 0
-	lw	r30 r31 4
-	addi	r30 r30 -12
-	sll	r1 r1 2
-	lwo	r3 r1 r1
-	addi	r0 r3 0
-	sw	r31 r30 12
-	addi	r30 r30 16
-	mov	r2 r1
-	mov	r1 r3
-	jal	shadow_check_and_group.3022
-	addi	r30 r30 -16
-	lw	r30 r31 12
-	addi	r0 r2 0
-	sub	r1 r2 r25
-	beq	r25 r0 beq_else.29346
-	addi	r0 r1 1
-	j	beq_cont.29347
-beq_else.29346:
-	addi	r0 r1 2
-	sll	r1 r1 2
-	lw	r30 r2 0
-	lwo	r2 r1 r1
-	addi	r0 r3 -1
-	sub	r1 r3 r25
-	beq	r25 r0 beq_else.29348
-	addi	r30 r30 12
-	sw	r1 r30 0
-	sw	r31 r30 4
-	jal	min_caml_load_and_net
-	mov	r3 r1
-	lw	r30 r1 0
-	lw	r30 r31 4
-	addi	r30 r30 -12
-	sll	r1 r1 2
-	lwo	r3 r1 r1
-	addi	r0 r3 0
-	sw	r31 r30 12
-	addi	r30 r30 16
-	mov	r2 r1
-	mov	r1 r3
-	jal	shadow_check_and_group.3022
-	addi	r30 r30 -16
-	lw	r30 r31 12
-	addi	r0 r2 0
-	sub	r1 r2 r25
-	beq	r25 r0 beq_else.29350
-	addi	r0 r1 1
-	j	beq_cont.29351
-beq_else.29350:
-	addi	r0 r1 3
-	sll	r1 r1 2
-	lw	r30 r2 0
-	lwo	r2 r1 r1
-	addi	r0 r3 -1
-	sub	r1 r3 r25
-	beq	r25 r0 beq_else.29352
-	addi	r30 r30 12
-	sw	r1 r30 0
-	sw	r31 r30 4
-	jal	min_caml_load_and_net
-	mov	r3 r1
-	lw	r30 r1 0
-	lw	r30 r31 4
-	addi	r30 r30 -12
-	sll	r1 r1 2
-	lwo	r3 r1 r1
-	addi	r0 r3 0
-	sw	r31 r30 12
-	addi	r30 r30 16
-	mov	r2 r1
-	mov	r1 r3
-	jal	shadow_check_and_group.3022
-	addi	r30 r30 -16
-	lw	r30 r31 12
-	addi	r0 r2 0
-	sub	r1 r2 r25
-	beq	r25 r0 beq_else.29354
-	addi	r0 r1 1
-	j	beq_cont.29355
-beq_else.29354:
-	addi	r0 r1 4
-	sll	r1 r1 2
-	lw	r30 r2 0
-	lwo	r2 r1 r1
-	addi	r0 r3 -1
-	sub	r1 r3 r25
-	beq	r25 r0 beq_else.29356
-	addi	r30 r30 12
-	sw	r1 r30 0
-	sw	r31 r30 4
-	jal	min_caml_load_and_net
-	mov	r3 r1
-	lw	r30 r1 0
-	lw	r30 r31 4
-	addi	r30 r30 -12
-	sll	r1 r1 2
-	lwo	r3 r1 r1
-	addi	r0 r3 0
-	sw	r31 r30 12
-	addi	r30 r30 16
-	mov	r2 r1
-	mov	r1 r3
-	jal	shadow_check_and_group.3022
-	addi	r30 r30 -16
-	lw	r30 r31 12
-	addi	r0 r2 0
-	sub	r1 r2 r25
-	beq	r25 r0 beq_else.29358
-	addi	r0 r1 1
-	j	beq_cont.29359
-beq_else.29358:
-	addi	r0 r1 5
-	sll	r1 r1 2
-	lw	r30 r2 0
-	lwo	r2 r1 r1
-	addi	r0 r3 -1
-	sub	r1 r3 r25
-	beq	r25 r0 beq_else.29360
-	addi	r30 r30 12
-	sw	r1 r30 0
-	sw	r31 r30 4
-	jal	min_caml_load_and_net
-	mov	r3 r1
-	lw	r30 r1 0
-	lw	r30 r31 4
-	addi	r30 r30 -12
-	sll	r1 r1 2
-	lwo	r3 r1 r1
-	addi	r0 r3 0
-	sw	r31 r30 12
-	addi	r30 r30 16
-	mov	r2 r1
-	mov	r1 r3
-	jal	shadow_check_and_group.3022
-	addi	r30 r30 -16
-	lw	r30 r31 12
-	addi	r0 r2 0
-	sub	r1 r2 r25
-	beq	r25 r0 beq_else.29362
-	addi	r0 r1 1
-	j	beq_cont.29363
-beq_else.29362:
-	addi	r0 r1 6
-	sll	r1 r1 2
-	lw	r30 r2 0
-	lwo	r2 r1 r1
-	addi	r0 r3 -1
-	sub	r1 r3 r25
-	beq	r25 r0 beq_else.29364
-	addi	r30 r30 12
-	sw	r1 r30 0
-	sw	r31 r30 4
-	jal	min_caml_load_and_net
-	mov	r3 r1
-	lw	r30 r1 0
-	lw	r30 r31 4
-	addi	r30 r30 -12
-	sll	r1 r1 2
-	lwo	r3 r1 r1
-	addi	r0 r3 0
-	sw	r31 r30 12
-	addi	r30 r30 16
-	mov	r2 r1
-	mov	r1 r3
-	jal	shadow_check_and_group.3022
-	addi	r30 r30 -16
-	lw	r30 r31 12
-	addi	r0 r2 0
-	sub	r1 r2 r25
-	beq	r25 r0 beq_else.29366
-	addi	r0 r1 1
-	j	beq_cont.29367
-beq_else.29366:
-	addi	r0 r1 7
-	sll	r1 r1 2
-	lw	r30 r2 0
-	lwo	r2 r1 r1
-	addi	r0 r3 -1
-	sub	r1 r3 r25
-	beq	r25 r0 beq_else.29368
-	addi	r30 r30 12
-	sw	r1 r30 0
-	sw	r31 r30 4
-	jal	min_caml_load_and_net
-	mov	r3 r1
-	lw	r30 r1 0
-	lw	r30 r31 4
-	addi	r30 r30 -12
-	sll	r1 r1 2
-	lwo	r3 r1 r1
-	addi	r0 r3 0
-	sw	r31 r30 12
-	addi	r30 r30 16
-	mov	r2 r1
-	mov	r1 r3
-	jal	shadow_check_and_group.3022
-	addi	r30 r30 -16
-	lw	r30 r31 12
-	addi	r0 r2 0
-	sub	r1 r2 r25
-	beq	r25 r0 beq_else.29370
-	addi	r0 r1 1
-	j	beq_cont.29371
-beq_else.29370:
-	addi	r0 r1 8
-	lw	r30 r2 0
-	sw	r31 r30 12
-	addi	r30 r30 16
-	jal	shadow_check_one_or_group.3025
-	addi	r30 r30 -16
-	lw	r30 r31 12
-beq_cont.29371:
-	j	beq_cont.29369
-beq_else.29368:
-	addi	r0 r1 0
-beq_cont.29369:
-beq_cont.29367:
-	j	beq_cont.29365
-beq_else.29364:
-	addi	r0 r1 0
-beq_cont.29365:
-beq_cont.29363:
-	j	beq_cont.29361
-beq_else.29360:
-	addi	r0 r1 0
-beq_cont.29361:
-beq_cont.29359:
-	j	beq_cont.29357
-beq_else.29356:
-	addi	r0 r1 0
-beq_cont.29357:
-beq_cont.29355:
-	j	beq_cont.29353
-beq_else.29352:
-	addi	r0 r1 0
-beq_cont.29353:
-beq_cont.29351:
-	j	beq_cont.29349
-beq_else.29348:
-	addi	r0 r1 0
-beq_cont.29349:
-beq_cont.29347:
-	j	beq_cont.29345
-beq_else.29344:
-	addi	r0 r1 0
-beq_cont.29345:
-	addi	r0 r2 0
-	sub	r1 r2 r25
-	beq	r25 r0 beq_tail_else.29372
-	addi	r0 r1 1
-	jr	r31
-beq_tail_else.29372:
-	addi	r0 r1 1
-	lw	r30 r2 8
-	add	r2 r1 r1
-	sll	r1 r2 2
-	lw	r30 r3 4
-	lwo	r3 r2 r2
-	addi	r0 r4 0
-	sll	r4 r4 2
-	lwo	r2 r4 r4
-	addi	r0 r5 -1
-	sub	r4 r5 r25
-	beq	r25 r0 beq_tail_else.29373
-	addi	r0 r5 99
-	sw	r2 r30 12
-	sw	r1 r30 16
-	sub	r4 r5 r25
-	beq	r25 r0 beq_else.29374
-	addi	r30 r30 20
-	sw	r1 r30 0
-	sw	r31 r30 4
-	jal	min_caml_load_light_dirvec
-	mov	r5 r1
-	lw	r30 r1 0
-	lw	r30 r31 4
-	addi	r30 r30 -20
-	addi	r30 r30 20
-	sw	r1 r30 0
-	sw	r31 r30 4
-	jal	min_caml_load_intersection_point
-	mov	r6 r1
-	lw	r30 r1 0
-	lw	r30 r31 4
-	addi	r30 r30 -20
-	addi	r30 r30 20
-	sw	r1 r30 0
-	sw	r31 r30 4
-	jal	min_caml_load_objects
-	mov	r7 r1
-	lw	r30 r1 0
-	lw	r30 r31 4
-	addi	r30 r30 -20
-	sll	r4 r8 2
-	lwo	r7 r8 r7
-	addi	r0 r8 0
-	sll	r8 r8 2
-	lwoc1	r6 r8 f0
-	lw	r7 r8 20
-	addi	r0 r9 0
-	sll	r9 r9 2
-	lwoc1	r8 r9 f1
-	sub.s	f0 f1 f0
-	addi	r0 r8 1
-	sll	r8 r8 2
-	lwoc1	r6 r8 f1
-	lw	r7 r8 20
-	addi	r0 r9 1
-	sll	r9 r9 2
-	lwoc1	r8 r9 f2
-	sub.s	f1 f2 f1
-	addi	r0 r8 2
-	sll	r8 r8 2
-	lwoc1	r6 r8 f2
-	lw	r7 r6 20
-	addi	r0 r8 2
-	sll	r8 r8 2
-	lwoc1	r6 r8 f3
-	sub.s	f2 f3 f2
-	lw	r5 r6 4
-	sll	r4 r4 2
-	lwo	r6 r4 r4
-	lw	r7 r6 4
-	addi	r0 r8 1
-	sub	r6 r8 r25
-	beq	r25 r0 beq_else.29376
-	addi	r0 r5 2
-	sub	r6 r5 r25
-	beq	r25 r0 beq_else.29378
-	sw	r31 r30 20
-	addi	r30 r30 24
-	mov	r2 r4
-	mov	r1 r7
-	jal	solver_second_fast.2950
-	addi	r30 r30 -24
-	lw	r30 r31 20
-	j	beq_cont.29379
-beq_else.29378:
-	lui	r24 0
-	ori	r24 r24 0
-	mtc1	r24 f3
-	addi	r0 r5 0
-	sll	r5 r5 2
-	lwoc1	r4 r5 f4
-	sub.s	f3 f4 f30
-	mfc1	f30 r25
-	blez	r25 bfle_nontail_else.29380
-	addi	r0 r5 1
-	j	bfle_nontail_cont.29381
-bfle_nontail_else.29380:
-	addi	r0 r5 0
-bfle_nontail_cont.29381:
-	addi	r0 r6 0
-	sub	r5 r6 r25
-	beq	r25 r0 beq_else.29382
-	addi	r30 r30 20
-	sw	r1 r30 0
-	sw	r31 r30 4
-	jal	min_caml_load_solver_dist
-	mov	r5 r1
-	lw	r30 r1 0
-	lw	r30 r31 4
-	addi	r30 r30 -20
-	addi	r0 r6 0
-	addi	r0 r7 1
-	sll	r7 r7 2
-	lwoc1	r4 r7 f3
-	mul.s	f3 f0 f0
-	addi	r0 r7 2
-	sll	r7 r7 2
-	lwoc1	r4 r7 f3
-	mul.s	f3 f1 f1
-	add.s	f0 f1 f0
-	addi	r0 r7 3
-	sll	r7 r7 2
-	lwoc1	r4 r7 f1
-	mul.s	f1 f2 f1
-	add.s	f0 f1 f0
-	sll	r6 r4 2
-	swoc1	f0 r5 r4
-	addi	r0 r1 1
-	j	beq_cont.29383
-beq_else.29382:
-	addi	r0 r1 0
-beq_cont.29383:
-beq_cont.29379:
-	j	beq_cont.29377
-beq_else.29376:
+beq_cont.29338:
+	j	beq_cont.29336
+beq_else.29335:
 	lw	r5 r5 0
-	sw	r31 r30 20
-	addi	r30 r30 24
+	sw	r31 r30 28
+	addi	r30 r30 32
 	mov	r3 r4
 	mov	r2 r5
 	mov	r1 r7
 	jal	solver_rect_fast.2937
-	addi	r30 r30 -24
-	lw	r30 r31 20
-beq_cont.29377:
+	addi	r30 r30 -32
+	lw	r30 r31 28
+beq_cont.29336:
 	addi	r0 r2 0
 	sub	r1 r2 r25
-	beq	r25 r0 beq_else.29384
+	beq	r25 r0 beq_else.29343
 	lui	r24 48588
 	ori	r24 r24 52429
 	mtc1	r24 f0
-	addi	r30 r30 20
+	addi	r30 r30 28
 	sw	r1 r30 0
 	sw	r31 r30 4
 	jal	min_caml_load_solver_dist
 	mov	r1 r1
 	lw	r30 r31 4
-	addi	r30 r30 -20
+	addi	r30 r30 -28
 	addi	r0 r2 0
 	sll	r2 r2 2
 	lwoc1	r1 r2 f1
@@ -8875,1172 +9464,505 @@ beq_cont.29377:
 	mtc1	r24 f1
 	sub.s	f0 f1 f30
 	mfc1	f30 r25
-	blez	r25 bfle_nontail_else.29386
+	blez	r25 bfle_nontail_else.29345
 	addi	r0 r1 1
-	j	bfle_nontail_cont.29387
-bfle_nontail_else.29386:
+	j	bfle_nontail_cont.29346
+bfle_nontail_else.29345:
 	addi	r0 r1 0
-bfle_nontail_cont.29387:
+bfle_nontail_cont.29346:
 	addi	r0 r2 0
 	sub	r1 r2 r25
-	beq	r25 r0 beq_else.29388
+	beq	r25 r0 beq_else.29347
 	addi	r0 r1 1
 	sll	r1 r1 2
-	lw	r30 r2 12
+	lw	r30 r2 20
 	lwo	r2 r1 r1
 	addi	r0 r3 -1
 	sub	r1 r3 r25
-	beq	r25 r0 beq_else.29390
-	addi	r30 r30 20
+	beq	r25 r0 beq_else.29349
+	addi	r30 r30 28
 	sw	r1 r30 0
 	sw	r31 r30 4
 	jal	min_caml_load_and_net
 	mov	r3 r1
 	lw	r30 r1 0
 	lw	r30 r31 4
-	addi	r30 r30 -20
+	addi	r30 r30 -28
 	sll	r1 r1 2
 	lwo	r3 r1 r1
 	addi	r0 r3 0
-	sw	r31 r30 20
-	addi	r30 r30 24
+	sw	r31 r30 28
+	addi	r30 r30 32
 	mov	r2 r1
 	mov	r1 r3
 	jal	shadow_check_and_group.3022
-	addi	r30 r30 -24
-	lw	r30 r31 20
+	addi	r30 r30 -32
+	lw	r30 r31 28
 	addi	r0 r2 0
 	sub	r1 r2 r25
-	beq	r25 r0 beq_else.29392
+	beq	r25 r0 beq_else.29351
 	addi	r0 r1 1
-	j	beq_cont.29393
-beq_else.29392:
+	j	beq_cont.29352
+beq_else.29351:
 	addi	r0 r1 2
 	sll	r1 r1 2
-	lw	r30 r2 12
+	lw	r30 r2 20
 	lwo	r2 r1 r1
 	addi	r0 r3 -1
 	sub	r1 r3 r25
-	beq	r25 r0 beq_else.29394
-	addi	r30 r30 20
+	beq	r25 r0 beq_else.29353
+	addi	r30 r30 28
 	sw	r1 r30 0
 	sw	r31 r30 4
 	jal	min_caml_load_and_net
 	mov	r3 r1
 	lw	r30 r1 0
 	lw	r30 r31 4
-	addi	r30 r30 -20
+	addi	r30 r30 -28
 	sll	r1 r1 2
 	lwo	r3 r1 r1
 	addi	r0 r3 0
-	sw	r31 r30 20
-	addi	r30 r30 24
+	sw	r31 r30 28
+	addi	r30 r30 32
 	mov	r2 r1
 	mov	r1 r3
 	jal	shadow_check_and_group.3022
-	addi	r30 r30 -24
-	lw	r30 r31 20
+	addi	r30 r30 -32
+	lw	r30 r31 28
 	addi	r0 r2 0
 	sub	r1 r2 r25
-	beq	r25 r0 beq_else.29396
+	beq	r25 r0 beq_else.29355
 	addi	r0 r1 1
-	j	beq_cont.29397
-beq_else.29396:
+	j	beq_cont.29356
+beq_else.29355:
 	addi	r0 r1 3
 	sll	r1 r1 2
-	lw	r30 r2 12
+	lw	r30 r2 20
 	lwo	r2 r1 r1
 	addi	r0 r3 -1
 	sub	r1 r3 r25
-	beq	r25 r0 beq_else.29398
-	addi	r30 r30 20
+	beq	r25 r0 beq_else.29357
+	addi	r30 r30 28
 	sw	r1 r30 0
 	sw	r31 r30 4
 	jal	min_caml_load_and_net
 	mov	r3 r1
 	lw	r30 r1 0
 	lw	r30 r31 4
-	addi	r30 r30 -20
+	addi	r30 r30 -28
 	sll	r1 r1 2
 	lwo	r3 r1 r1
 	addi	r0 r3 0
-	sw	r31 r30 20
-	addi	r30 r30 24
+	sw	r31 r30 28
+	addi	r30 r30 32
 	mov	r2 r1
 	mov	r1 r3
 	jal	shadow_check_and_group.3022
-	addi	r30 r30 -24
-	lw	r30 r31 20
+	addi	r30 r30 -32
+	lw	r30 r31 28
 	addi	r0 r2 0
 	sub	r1 r2 r25
-	beq	r25 r0 beq_else.29400
+	beq	r25 r0 beq_else.29359
 	addi	r0 r1 1
-	j	beq_cont.29401
-beq_else.29400:
+	j	beq_cont.29360
+beq_else.29359:
 	addi	r0 r1 4
 	sll	r1 r1 2
-	lw	r30 r2 12
+	lw	r30 r2 20
 	lwo	r2 r1 r1
 	addi	r0 r3 -1
 	sub	r1 r3 r25
-	beq	r25 r0 beq_else.29402
-	addi	r30 r30 20
+	beq	r25 r0 beq_else.29361
+	addi	r30 r30 28
 	sw	r1 r30 0
 	sw	r31 r30 4
 	jal	min_caml_load_and_net
 	mov	r3 r1
 	lw	r30 r1 0
 	lw	r30 r31 4
-	addi	r30 r30 -20
+	addi	r30 r30 -28
 	sll	r1 r1 2
 	lwo	r3 r1 r1
 	addi	r0 r3 0
-	sw	r31 r30 20
-	addi	r30 r30 24
+	sw	r31 r30 28
+	addi	r30 r30 32
 	mov	r2 r1
 	mov	r1 r3
 	jal	shadow_check_and_group.3022
-	addi	r30 r30 -24
-	lw	r30 r31 20
+	addi	r30 r30 -32
+	lw	r30 r31 28
 	addi	r0 r2 0
 	sub	r1 r2 r25
-	beq	r25 r0 beq_else.29404
+	beq	r25 r0 beq_else.29363
 	addi	r0 r1 1
-	j	beq_cont.29405
-beq_else.29404:
+	j	beq_cont.29364
+beq_else.29363:
 	addi	r0 r1 5
 	sll	r1 r1 2
-	lw	r30 r2 12
+	lw	r30 r2 20
 	lwo	r2 r1 r1
 	addi	r0 r3 -1
 	sub	r1 r3 r25
-	beq	r25 r0 beq_else.29406
-	addi	r30 r30 20
+	beq	r25 r0 beq_else.29365
+	addi	r30 r30 28
 	sw	r1 r30 0
 	sw	r31 r30 4
 	jal	min_caml_load_and_net
 	mov	r3 r1
 	lw	r30 r1 0
 	lw	r30 r31 4
-	addi	r30 r30 -20
+	addi	r30 r30 -28
 	sll	r1 r1 2
 	lwo	r3 r1 r1
 	addi	r0 r3 0
-	sw	r31 r30 20
-	addi	r30 r30 24
+	sw	r31 r30 28
+	addi	r30 r30 32
 	mov	r2 r1
 	mov	r1 r3
 	jal	shadow_check_and_group.3022
-	addi	r30 r30 -24
-	lw	r30 r31 20
+	addi	r30 r30 -32
+	lw	r30 r31 28
 	addi	r0 r2 0
 	sub	r1 r2 r25
-	beq	r25 r0 beq_else.29408
+	beq	r25 r0 beq_else.29367
 	addi	r0 r1 1
-	j	beq_cont.29409
-beq_else.29408:
+	j	beq_cont.29368
+beq_else.29367:
 	addi	r0 r1 6
 	sll	r1 r1 2
-	lw	r30 r2 12
+	lw	r30 r2 20
 	lwo	r2 r1 r1
 	addi	r0 r3 -1
 	sub	r1 r3 r25
-	beq	r25 r0 beq_else.29410
-	addi	r30 r30 20
+	beq	r25 r0 beq_else.29369
+	addi	r30 r30 28
 	sw	r1 r30 0
 	sw	r31 r30 4
 	jal	min_caml_load_and_net
 	mov	r3 r1
 	lw	r30 r1 0
 	lw	r30 r31 4
-	addi	r30 r30 -20
+	addi	r30 r30 -28
 	sll	r1 r1 2
 	lwo	r3 r1 r1
 	addi	r0 r3 0
-	sw	r31 r30 20
-	addi	r30 r30 24
+	sw	r31 r30 28
+	addi	r30 r30 32
 	mov	r2 r1
 	mov	r1 r3
 	jal	shadow_check_and_group.3022
-	addi	r30 r30 -24
-	lw	r30 r31 20
+	addi	r30 r30 -32
+	lw	r30 r31 28
 	addi	r0 r2 0
 	sub	r1 r2 r25
-	beq	r25 r0 beq_else.29412
+	beq	r25 r0 beq_else.29371
 	addi	r0 r1 1
-	j	beq_cont.29413
-beq_else.29412:
+	j	beq_cont.29372
+beq_else.29371:
 	addi	r0 r1 7
-	lw	r30 r2 12
-	sw	r31 r30 20
-	addi	r30 r30 24
+	lw	r30 r2 20
+	sw	r31 r30 28
+	addi	r30 r30 32
 	jal	shadow_check_one_or_group.3025
-	addi	r30 r30 -24
-	lw	r30 r31 20
-beq_cont.29413:
-	j	beq_cont.29411
-beq_else.29410:
+	addi	r30 r30 -32
+	lw	r30 r31 28
+beq_cont.29372:
+	j	beq_cont.29370
+beq_else.29369:
 	addi	r0 r1 0
-beq_cont.29411:
-beq_cont.29409:
-	j	beq_cont.29407
-beq_else.29406:
+beq_cont.29370:
+beq_cont.29368:
+	j	beq_cont.29366
+beq_else.29365:
 	addi	r0 r1 0
-beq_cont.29407:
-beq_cont.29405:
-	j	beq_cont.29403
-beq_else.29402:
+beq_cont.29366:
+beq_cont.29364:
+	j	beq_cont.29362
+beq_else.29361:
 	addi	r0 r1 0
-beq_cont.29403:
-beq_cont.29401:
-	j	beq_cont.29399
-beq_else.29398:
+beq_cont.29362:
+beq_cont.29360:
+	j	beq_cont.29358
+beq_else.29357:
 	addi	r0 r1 0
-beq_cont.29399:
-beq_cont.29397:
-	j	beq_cont.29395
-beq_else.29394:
+beq_cont.29358:
+beq_cont.29356:
+	j	beq_cont.29354
+beq_else.29353:
 	addi	r0 r1 0
-beq_cont.29395:
-beq_cont.29393:
+beq_cont.29354:
+beq_cont.29352:
+	j	beq_cont.29350
+beq_else.29349:
+	addi	r0 r1 0
+beq_cont.29350:
+	addi	r0 r2 0
+	sub	r1 r2 r25
+	beq	r25 r0 beq_else.29373
+	addi	r0 r1 1
+	j	beq_cont.29374
+beq_else.29373:
+	addi	r0 r1 0
+beq_cont.29374:
+	j	beq_cont.29348
+beq_else.29347:
+	addi	r0 r1 0
+beq_cont.29348:
+	j	beq_cont.29344
+beq_else.29343:
+	addi	r0 r1 0
+beq_cont.29344:
+	j	beq_cont.29334
+beq_else.29333:
+	addi	r0 r1 1
+beq_cont.29334:
+	addi	r0 r2 0
+	sub	r1 r2 r25
+	beq	r25 r0 beq_tail_else.29375
+	addi	r0 r1 1
+	sll	r1 r1 2
+	lw	r30 r2 20
+	lwo	r2 r1 r1
+	addi	r0 r3 -1
+	sub	r1 r3 r25
+	beq	r25 r0 beq_else.29376
+	addi	r30 r30 28
+	sw	r1 r30 0
+	sw	r31 r30 4
+	jal	min_caml_load_and_net
+	mov	r3 r1
+	lw	r30 r1 0
+	lw	r30 r31 4
+	addi	r30 r30 -28
+	sll	r1 r1 2
+	lwo	r3 r1 r1
+	addi	r0 r3 0
+	sw	r31 r30 28
+	addi	r30 r30 32
+	mov	r2 r1
+	mov	r1 r3
+	jal	shadow_check_and_group.3022
+	addi	r30 r30 -32
+	lw	r30 r31 28
+	addi	r0 r2 0
+	sub	r1 r2 r25
+	beq	r25 r0 beq_else.29378
+	addi	r0 r1 1
+	j	beq_cont.29379
+beq_else.29378:
+	addi	r0 r1 2
+	sll	r1 r1 2
+	lw	r30 r2 20
+	lwo	r2 r1 r1
+	addi	r0 r3 -1
+	sub	r1 r3 r25
+	beq	r25 r0 beq_else.29380
+	addi	r30 r30 28
+	sw	r1 r30 0
+	sw	r31 r30 4
+	jal	min_caml_load_and_net
+	mov	r3 r1
+	lw	r30 r1 0
+	lw	r30 r31 4
+	addi	r30 r30 -28
+	sll	r1 r1 2
+	lwo	r3 r1 r1
+	addi	r0 r3 0
+	sw	r31 r30 28
+	addi	r30 r30 32
+	mov	r2 r1
+	mov	r1 r3
+	jal	shadow_check_and_group.3022
+	addi	r30 r30 -32
+	lw	r30 r31 28
+	addi	r0 r2 0
+	sub	r1 r2 r25
+	beq	r25 r0 beq_else.29382
+	addi	r0 r1 1
+	j	beq_cont.29383
+beq_else.29382:
+	addi	r0 r1 3
+	sll	r1 r1 2
+	lw	r30 r2 20
+	lwo	r2 r1 r1
+	addi	r0 r3 -1
+	sub	r1 r3 r25
+	beq	r25 r0 beq_else.29384
+	addi	r30 r30 28
+	sw	r1 r30 0
+	sw	r31 r30 4
+	jal	min_caml_load_and_net
+	mov	r3 r1
+	lw	r30 r1 0
+	lw	r30 r31 4
+	addi	r30 r30 -28
+	sll	r1 r1 2
+	lwo	r3 r1 r1
+	addi	r0 r3 0
+	sw	r31 r30 28
+	addi	r30 r30 32
+	mov	r2 r1
+	mov	r1 r3
+	jal	shadow_check_and_group.3022
+	addi	r30 r30 -32
+	lw	r30 r31 28
+	addi	r0 r2 0
+	sub	r1 r2 r25
+	beq	r25 r0 beq_else.29386
+	addi	r0 r1 1
+	j	beq_cont.29387
+beq_else.29386:
+	addi	r0 r1 4
+	sll	r1 r1 2
+	lw	r30 r2 20
+	lwo	r2 r1 r1
+	addi	r0 r3 -1
+	sub	r1 r3 r25
+	beq	r25 r0 beq_else.29388
+	addi	r30 r30 28
+	sw	r1 r30 0
+	sw	r31 r30 4
+	jal	min_caml_load_and_net
+	mov	r3 r1
+	lw	r30 r1 0
+	lw	r30 r31 4
+	addi	r30 r30 -28
+	sll	r1 r1 2
+	lwo	r3 r1 r1
+	addi	r0 r3 0
+	sw	r31 r30 28
+	addi	r30 r30 32
+	mov	r2 r1
+	mov	r1 r3
+	jal	shadow_check_and_group.3022
+	addi	r30 r30 -32
+	lw	r30 r31 28
+	addi	r0 r2 0
+	sub	r1 r2 r25
+	beq	r25 r0 beq_else.29390
+	addi	r0 r1 1
 	j	beq_cont.29391
 beq_else.29390:
-	addi	r0 r1 0
-beq_cont.29391:
+	addi	r0 r1 5
+	sll	r1 r1 2
+	lw	r30 r2 20
+	lwo	r2 r1 r1
+	addi	r0 r3 -1
+	sub	r1 r3 r25
+	beq	r25 r0 beq_else.29392
+	addi	r30 r30 28
+	sw	r1 r30 0
+	sw	r31 r30 4
+	jal	min_caml_load_and_net
+	mov	r3 r1
+	lw	r30 r1 0
+	lw	r30 r31 4
+	addi	r30 r30 -28
+	sll	r1 r1 2
+	lwo	r3 r1 r1
+	addi	r0 r3 0
+	sw	r31 r30 28
+	addi	r30 r30 32
+	mov	r2 r1
+	mov	r1 r3
+	jal	shadow_check_and_group.3022
+	addi	r30 r30 -32
+	lw	r30 r31 28
 	addi	r0 r2 0
 	sub	r1 r2 r25
-	beq	r25 r0 beq_else.29414
+	beq	r25 r0 beq_else.29394
 	addi	r0 r1 1
-	j	beq_cont.29415
-beq_else.29414:
+	j	beq_cont.29395
+beq_else.29394:
+	addi	r0 r1 6
+	sll	r1 r1 2
+	lw	r30 r2 20
+	lwo	r2 r1 r1
+	addi	r0 r3 -1
+	sub	r1 r3 r25
+	beq	r25 r0 beq_else.29396
+	addi	r30 r30 28
+	sw	r1 r30 0
+	sw	r31 r30 4
+	jal	min_caml_load_and_net
+	mov	r3 r1
+	lw	r30 r1 0
+	lw	r30 r31 4
+	addi	r30 r30 -28
+	sll	r1 r1 2
+	lwo	r3 r1 r1
+	addi	r0 r3 0
+	sw	r31 r30 28
+	addi	r30 r30 32
+	mov	r2 r1
+	mov	r1 r3
+	jal	shadow_check_and_group.3022
+	addi	r30 r30 -32
+	lw	r30 r31 28
+	addi	r0 r2 0
+	sub	r1 r2 r25
+	beq	r25 r0 beq_else.29398
+	addi	r0 r1 1
+	j	beq_cont.29399
+beq_else.29398:
+	addi	r0 r1 7
+	lw	r30 r2 20
+	sw	r31 r30 28
+	addi	r30 r30 32
+	jal	shadow_check_one_or_group.3025
+	addi	r30 r30 -32
+	lw	r30 r31 28
+beq_cont.29399:
+	j	beq_cont.29397
+beq_else.29396:
 	addi	r0 r1 0
-beq_cont.29415:
+beq_cont.29397:
+beq_cont.29395:
+	j	beq_cont.29393
+beq_else.29392:
+	addi	r0 r1 0
+beq_cont.29393:
+beq_cont.29391:
 	j	beq_cont.29389
 beq_else.29388:
 	addi	r0 r1 0
 beq_cont.29389:
+beq_cont.29387:
 	j	beq_cont.29385
 beq_else.29384:
 	addi	r0 r1 0
 beq_cont.29385:
-	j	beq_cont.29375
-beq_else.29374:
-	addi	r0 r1 1
-beq_cont.29375:
-	addi	r0 r2 0
-	sub	r1 r2 r25
-	beq	r25 r0 beq_tail_else.29416
-	addi	r0 r1 1
-	sll	r1 r1 2
-	lw	r30 r2 12
-	lwo	r2 r1 r1
-	addi	r0 r3 -1
-	sub	r1 r3 r25
-	beq	r25 r0 beq_else.29417
-	addi	r30 r30 20
-	sw	r1 r30 0
-	sw	r31 r30 4
-	jal	min_caml_load_and_net
-	mov	r3 r1
-	lw	r30 r1 0
-	lw	r30 r31 4
-	addi	r30 r30 -20
-	sll	r1 r1 2
-	lwo	r3 r1 r1
-	addi	r0 r3 0
-	sw	r31 r30 20
-	addi	r30 r30 24
-	mov	r2 r1
-	mov	r1 r3
-	jal	shadow_check_and_group.3022
-	addi	r30 r30 -24
-	lw	r30 r31 20
-	addi	r0 r2 0
-	sub	r1 r2 r25
-	beq	r25 r0 beq_else.29419
-	addi	r0 r1 1
-	j	beq_cont.29420
-beq_else.29419:
-	addi	r0 r1 2
-	sll	r1 r1 2
-	lw	r30 r2 12
-	lwo	r2 r1 r1
-	addi	r0 r3 -1
-	sub	r1 r3 r25
-	beq	r25 r0 beq_else.29421
-	addi	r30 r30 20
-	sw	r1 r30 0
-	sw	r31 r30 4
-	jal	min_caml_load_and_net
-	mov	r3 r1
-	lw	r30 r1 0
-	lw	r30 r31 4
-	addi	r30 r30 -20
-	sll	r1 r1 2
-	lwo	r3 r1 r1
-	addi	r0 r3 0
-	sw	r31 r30 20
-	addi	r30 r30 24
-	mov	r2 r1
-	mov	r1 r3
-	jal	shadow_check_and_group.3022
-	addi	r30 r30 -24
-	lw	r30 r31 20
-	addi	r0 r2 0
-	sub	r1 r2 r25
-	beq	r25 r0 beq_else.29423
-	addi	r0 r1 1
-	j	beq_cont.29424
-beq_else.29423:
-	addi	r0 r1 3
-	sll	r1 r1 2
-	lw	r30 r2 12
-	lwo	r2 r1 r1
-	addi	r0 r3 -1
-	sub	r1 r3 r25
-	beq	r25 r0 beq_else.29425
-	addi	r30 r30 20
-	sw	r1 r30 0
-	sw	r31 r30 4
-	jal	min_caml_load_and_net
-	mov	r3 r1
-	lw	r30 r1 0
-	lw	r30 r31 4
-	addi	r30 r30 -20
-	sll	r1 r1 2
-	lwo	r3 r1 r1
-	addi	r0 r3 0
-	sw	r31 r30 20
-	addi	r30 r30 24
-	mov	r2 r1
-	mov	r1 r3
-	jal	shadow_check_and_group.3022
-	addi	r30 r30 -24
-	lw	r30 r31 20
-	addi	r0 r2 0
-	sub	r1 r2 r25
-	beq	r25 r0 beq_else.29427
-	addi	r0 r1 1
-	j	beq_cont.29428
-beq_else.29427:
-	addi	r0 r1 4
-	sll	r1 r1 2
-	lw	r30 r2 12
-	lwo	r2 r1 r1
-	addi	r0 r3 -1
-	sub	r1 r3 r25
-	beq	r25 r0 beq_else.29429
-	addi	r30 r30 20
-	sw	r1 r30 0
-	sw	r31 r30 4
-	jal	min_caml_load_and_net
-	mov	r3 r1
-	lw	r30 r1 0
-	lw	r30 r31 4
-	addi	r30 r30 -20
-	sll	r1 r1 2
-	lwo	r3 r1 r1
-	addi	r0 r3 0
-	sw	r31 r30 20
-	addi	r30 r30 24
-	mov	r2 r1
-	mov	r1 r3
-	jal	shadow_check_and_group.3022
-	addi	r30 r30 -24
-	lw	r30 r31 20
-	addi	r0 r2 0
-	sub	r1 r2 r25
-	beq	r25 r0 beq_else.29431
-	addi	r0 r1 1
-	j	beq_cont.29432
-beq_else.29431:
-	addi	r0 r1 5
-	sll	r1 r1 2
-	lw	r30 r2 12
-	lwo	r2 r1 r1
-	addi	r0 r3 -1
-	sub	r1 r3 r25
-	beq	r25 r0 beq_else.29433
-	addi	r30 r30 20
-	sw	r1 r30 0
-	sw	r31 r30 4
-	jal	min_caml_load_and_net
-	mov	r3 r1
-	lw	r30 r1 0
-	lw	r30 r31 4
-	addi	r30 r30 -20
-	sll	r1 r1 2
-	lwo	r3 r1 r1
-	addi	r0 r3 0
-	sw	r31 r30 20
-	addi	r30 r30 24
-	mov	r2 r1
-	mov	r1 r3
-	jal	shadow_check_and_group.3022
-	addi	r30 r30 -24
-	lw	r30 r31 20
-	addi	r0 r2 0
-	sub	r1 r2 r25
-	beq	r25 r0 beq_else.29435
-	addi	r0 r1 1
-	j	beq_cont.29436
-beq_else.29435:
-	addi	r0 r1 6
-	sll	r1 r1 2
-	lw	r30 r2 12
-	lwo	r2 r1 r1
-	addi	r0 r3 -1
-	sub	r1 r3 r25
-	beq	r25 r0 beq_else.29437
-	addi	r30 r30 20
-	sw	r1 r30 0
-	sw	r31 r30 4
-	jal	min_caml_load_and_net
-	mov	r3 r1
-	lw	r30 r1 0
-	lw	r30 r31 4
-	addi	r30 r30 -20
-	sll	r1 r1 2
-	lwo	r3 r1 r1
-	addi	r0 r3 0
-	sw	r31 r30 20
-	addi	r30 r30 24
-	mov	r2 r1
-	mov	r1 r3
-	jal	shadow_check_and_group.3022
-	addi	r30 r30 -24
-	lw	r30 r31 20
-	addi	r0 r2 0
-	sub	r1 r2 r25
-	beq	r25 r0 beq_else.29439
-	addi	r0 r1 1
-	j	beq_cont.29440
-beq_else.29439:
-	addi	r0 r1 7
-	lw	r30 r2 12
-	sw	r31 r30 20
-	addi	r30 r30 24
-	jal	shadow_check_one_or_group.3025
-	addi	r30 r30 -24
-	lw	r30 r31 20
-beq_cont.29440:
-	j	beq_cont.29438
-beq_else.29437:
+beq_cont.29383:
+	j	beq_cont.29381
+beq_else.29380:
 	addi	r0 r1 0
-beq_cont.29438:
-beq_cont.29436:
-	j	beq_cont.29434
-beq_else.29433:
+beq_cont.29381:
+beq_cont.29379:
+	j	beq_cont.29377
+beq_else.29376:
 	addi	r0 r1 0
-beq_cont.29434:
-beq_cont.29432:
-	j	beq_cont.29430
-beq_else.29429:
-	addi	r0 r1 0
-beq_cont.29430:
-beq_cont.29428:
-	j	beq_cont.29426
-beq_else.29425:
-	addi	r0 r1 0
-beq_cont.29426:
-beq_cont.29424:
-	j	beq_cont.29422
-beq_else.29421:
-	addi	r0 r1 0
-beq_cont.29422:
-beq_cont.29420:
-	j	beq_cont.29418
-beq_else.29417:
-	addi	r0 r1 0
-beq_cont.29418:
+beq_cont.29377:
 	addi	r0 r2 0
 	sub	r1 r2 r25
-	beq	r25 r0 beq_tail_else.29441
+	beq	r25 r0 beq_tail_else.29400
 	addi	r0 r1 1
 	jr	r31
-beq_tail_else.29441:
-	addi	r0 r1 1
-	lw	r30 r2 16
-	add	r2 r1 r1
-	lw	r30 r2 4
-	j	shadow_check_one_or_matrix.3028
-beq_tail_else.29416:
-	addi	r0 r1 1
-	lw	r30 r2 16
-	add	r2 r1 r1
-	lw	r30 r2 4
-	j	shadow_check_one_or_matrix.3028
-beq_tail_else.29373:
-	addi	r0 r1 0
-	jr	r31
-beq_tail_else.29343:
-	addi	r0 r1 1
-	lw	r30 r2 8
-	add	r2 r1 r1
-	sll	r1 r2 2
-	lw	r30 r3 4
-	lwo	r3 r2 r2
-	addi	r0 r4 0
-	sll	r4 r4 2
-	lwo	r2 r4 r4
-	addi	r0 r5 -1
-	sub	r4 r5 r25
-	beq	r25 r0 beq_tail_else.29442
-	addi	r0 r5 99
-	sw	r2 r30 20
-	sw	r1 r30 24
-	sub	r4 r5 r25
-	beq	r25 r0 beq_else.29443
-	addi	r30 r30 28
-	sw	r1 r30 0
-	sw	r31 r30 4
-	jal	min_caml_load_light_dirvec
-	mov	r5 r1
-	lw	r30 r1 0
-	lw	r30 r31 4
-	addi	r30 r30 -28
-	addi	r30 r30 28
-	sw	r1 r30 0
-	sw	r31 r30 4
-	jal	min_caml_load_intersection_point
-	mov	r6 r1
-	lw	r30 r1 0
-	lw	r30 r31 4
-	addi	r30 r30 -28
-	addi	r30 r30 28
-	sw	r1 r30 0
-	sw	r31 r30 4
-	jal	min_caml_load_objects
-	mov	r7 r1
-	lw	r30 r1 0
-	lw	r30 r31 4
-	addi	r30 r30 -28
-	sll	r4 r8 2
-	lwo	r7 r8 r7
-	addi	r0 r8 0
-	sll	r8 r8 2
-	lwoc1	r6 r8 f0
-	lw	r7 r8 20
-	addi	r0 r9 0
-	sll	r9 r9 2
-	lwoc1	r8 r9 f1
-	sub.s	f0 f1 f0
-	addi	r0 r8 1
-	sll	r8 r8 2
-	lwoc1	r6 r8 f1
-	lw	r7 r8 20
-	addi	r0 r9 1
-	sll	r9 r9 2
-	lwoc1	r8 r9 f2
-	sub.s	f1 f2 f1
-	addi	r0 r8 2
-	sll	r8 r8 2
-	lwoc1	r6 r8 f2
-	lw	r7 r6 20
-	addi	r0 r8 2
-	sll	r8 r8 2
-	lwoc1	r6 r8 f3
-	sub.s	f2 f3 f2
-	lw	r5 r6 4
-	sll	r4 r4 2
-	lwo	r6 r4 r4
-	lw	r7 r6 4
-	addi	r0 r8 1
-	sub	r6 r8 r25
-	beq	r25 r0 beq_else.29445
-	addi	r0 r5 2
-	sub	r6 r5 r25
-	beq	r25 r0 beq_else.29447
-	sw	r31 r30 28
-	addi	r30 r30 32
-	mov	r2 r4
-	mov	r1 r7
-	jal	solver_second_fast.2950
-	addi	r30 r30 -32
-	lw	r30 r31 28
-	j	beq_cont.29448
-beq_else.29447:
-	lui	r24 0
-	ori	r24 r24 0
-	mtc1	r24 f3
-	addi	r0 r5 0
-	sll	r5 r5 2
-	lwoc1	r4 r5 f4
-	sub.s	f3 f4 f30
-	mfc1	f30 r25
-	blez	r25 bfle_nontail_else.29449
-	addi	r0 r5 1
-	j	bfle_nontail_cont.29450
-bfle_nontail_else.29449:
-	addi	r0 r5 0
-bfle_nontail_cont.29450:
-	addi	r0 r6 0
-	sub	r5 r6 r25
-	beq	r25 r0 beq_else.29451
-	addi	r30 r30 28
-	sw	r1 r30 0
-	sw	r31 r30 4
-	jal	min_caml_load_solver_dist
-	mov	r5 r1
-	lw	r30 r1 0
-	lw	r30 r31 4
-	addi	r30 r30 -28
-	addi	r0 r6 0
-	addi	r0 r7 1
-	sll	r7 r7 2
-	lwoc1	r4 r7 f3
-	mul.s	f3 f0 f0
-	addi	r0 r7 2
-	sll	r7 r7 2
-	lwoc1	r4 r7 f3
-	mul.s	f3 f1 f1
-	add.s	f0 f1 f0
-	addi	r0 r7 3
-	sll	r7 r7 2
-	lwoc1	r4 r7 f1
-	mul.s	f1 f2 f1
-	add.s	f0 f1 f0
-	sll	r6 r4 2
-	swoc1	f0 r5 r4
-	addi	r0 r1 1
-	j	beq_cont.29452
-beq_else.29451:
-	addi	r0 r1 0
-beq_cont.29452:
-beq_cont.29448:
-	j	beq_cont.29446
-beq_else.29445:
-	lw	r5 r5 0
-	sw	r31 r30 28
-	addi	r30 r30 32
-	mov	r3 r4
-	mov	r2 r5
-	mov	r1 r7
-	jal	solver_rect_fast.2937
-	addi	r30 r30 -32
-	lw	r30 r31 28
-beq_cont.29446:
-	addi	r0 r2 0
-	sub	r1 r2 r25
-	beq	r25 r0 beq_else.29453
-	lui	r24 48588
-	ori	r24 r24 52429
-	mtc1	r24 f0
-	addi	r30 r30 28
-	sw	r1 r30 0
-	sw	r31 r30 4
-	jal	min_caml_load_solver_dist
-	mov	r1 r1
-	lw	r30 r31 4
-	addi	r30 r30 -28
-	addi	r0 r2 0
-	sll	r2 r2 2
-	lwoc1	r1 r2 f1
-	sub.s	f0 f1 f0
-	lui	r24 0
-	ori	r24 r24 0
-	mtc1	r24 f1
-	sub.s	f0 f1 f30
-	mfc1	f30 r25
-	blez	r25 bfle_nontail_else.29455
-	addi	r0 r1 1
-	j	bfle_nontail_cont.29456
-bfle_nontail_else.29455:
-	addi	r0 r1 0
-bfle_nontail_cont.29456:
-	addi	r0 r2 0
-	sub	r1 r2 r25
-	beq	r25 r0 beq_else.29457
-	addi	r0 r1 1
-	sll	r1 r1 2
-	lw	r30 r2 20
-	lwo	r2 r1 r1
-	addi	r0 r3 -1
-	sub	r1 r3 r25
-	beq	r25 r0 beq_else.29459
-	addi	r30 r30 28
-	sw	r1 r30 0
-	sw	r31 r30 4
-	jal	min_caml_load_and_net
-	mov	r3 r1
-	lw	r30 r1 0
-	lw	r30 r31 4
-	addi	r30 r30 -28
-	sll	r1 r1 2
-	lwo	r3 r1 r1
-	addi	r0 r3 0
-	sw	r31 r30 28
-	addi	r30 r30 32
-	mov	r2 r1
-	mov	r1 r3
-	jal	shadow_check_and_group.3022
-	addi	r30 r30 -32
-	lw	r30 r31 28
-	addi	r0 r2 0
-	sub	r1 r2 r25
-	beq	r25 r0 beq_else.29461
-	addi	r0 r1 1
-	j	beq_cont.29462
-beq_else.29461:
-	addi	r0 r1 2
-	sll	r1 r1 2
-	lw	r30 r2 20
-	lwo	r2 r1 r1
-	addi	r0 r3 -1
-	sub	r1 r3 r25
-	beq	r25 r0 beq_else.29463
-	addi	r30 r30 28
-	sw	r1 r30 0
-	sw	r31 r30 4
-	jal	min_caml_load_and_net
-	mov	r3 r1
-	lw	r30 r1 0
-	lw	r30 r31 4
-	addi	r30 r30 -28
-	sll	r1 r1 2
-	lwo	r3 r1 r1
-	addi	r0 r3 0
-	sw	r31 r30 28
-	addi	r30 r30 32
-	mov	r2 r1
-	mov	r1 r3
-	jal	shadow_check_and_group.3022
-	addi	r30 r30 -32
-	lw	r30 r31 28
-	addi	r0 r2 0
-	sub	r1 r2 r25
-	beq	r25 r0 beq_else.29465
-	addi	r0 r1 1
-	j	beq_cont.29466
-beq_else.29465:
-	addi	r0 r1 3
-	sll	r1 r1 2
-	lw	r30 r2 20
-	lwo	r2 r1 r1
-	addi	r0 r3 -1
-	sub	r1 r3 r25
-	beq	r25 r0 beq_else.29467
-	addi	r30 r30 28
-	sw	r1 r30 0
-	sw	r31 r30 4
-	jal	min_caml_load_and_net
-	mov	r3 r1
-	lw	r30 r1 0
-	lw	r30 r31 4
-	addi	r30 r30 -28
-	sll	r1 r1 2
-	lwo	r3 r1 r1
-	addi	r0 r3 0
-	sw	r31 r30 28
-	addi	r30 r30 32
-	mov	r2 r1
-	mov	r1 r3
-	jal	shadow_check_and_group.3022
-	addi	r30 r30 -32
-	lw	r30 r31 28
-	addi	r0 r2 0
-	sub	r1 r2 r25
-	beq	r25 r0 beq_else.29469
-	addi	r0 r1 1
-	j	beq_cont.29470
-beq_else.29469:
-	addi	r0 r1 4
-	sll	r1 r1 2
-	lw	r30 r2 20
-	lwo	r2 r1 r1
-	addi	r0 r3 -1
-	sub	r1 r3 r25
-	beq	r25 r0 beq_else.29471
-	addi	r30 r30 28
-	sw	r1 r30 0
-	sw	r31 r30 4
-	jal	min_caml_load_and_net
-	mov	r3 r1
-	lw	r30 r1 0
-	lw	r30 r31 4
-	addi	r30 r30 -28
-	sll	r1 r1 2
-	lwo	r3 r1 r1
-	addi	r0 r3 0
-	sw	r31 r30 28
-	addi	r30 r30 32
-	mov	r2 r1
-	mov	r1 r3
-	jal	shadow_check_and_group.3022
-	addi	r30 r30 -32
-	lw	r30 r31 28
-	addi	r0 r2 0
-	sub	r1 r2 r25
-	beq	r25 r0 beq_else.29473
-	addi	r0 r1 1
-	j	beq_cont.29474
-beq_else.29473:
-	addi	r0 r1 5
-	sll	r1 r1 2
-	lw	r30 r2 20
-	lwo	r2 r1 r1
-	addi	r0 r3 -1
-	sub	r1 r3 r25
-	beq	r25 r0 beq_else.29475
-	addi	r30 r30 28
-	sw	r1 r30 0
-	sw	r31 r30 4
-	jal	min_caml_load_and_net
-	mov	r3 r1
-	lw	r30 r1 0
-	lw	r30 r31 4
-	addi	r30 r30 -28
-	sll	r1 r1 2
-	lwo	r3 r1 r1
-	addi	r0 r3 0
-	sw	r31 r30 28
-	addi	r30 r30 32
-	mov	r2 r1
-	mov	r1 r3
-	jal	shadow_check_and_group.3022
-	addi	r30 r30 -32
-	lw	r30 r31 28
-	addi	r0 r2 0
-	sub	r1 r2 r25
-	beq	r25 r0 beq_else.29477
-	addi	r0 r1 1
-	j	beq_cont.29478
-beq_else.29477:
-	addi	r0 r1 6
-	sll	r1 r1 2
-	lw	r30 r2 20
-	lwo	r2 r1 r1
-	addi	r0 r3 -1
-	sub	r1 r3 r25
-	beq	r25 r0 beq_else.29479
-	addi	r30 r30 28
-	sw	r1 r30 0
-	sw	r31 r30 4
-	jal	min_caml_load_and_net
-	mov	r3 r1
-	lw	r30 r1 0
-	lw	r30 r31 4
-	addi	r30 r30 -28
-	sll	r1 r1 2
-	lwo	r3 r1 r1
-	addi	r0 r3 0
-	sw	r31 r30 28
-	addi	r30 r30 32
-	mov	r2 r1
-	mov	r1 r3
-	jal	shadow_check_and_group.3022
-	addi	r30 r30 -32
-	lw	r30 r31 28
-	addi	r0 r2 0
-	sub	r1 r2 r25
-	beq	r25 r0 beq_else.29481
-	addi	r0 r1 1
-	j	beq_cont.29482
-beq_else.29481:
-	addi	r0 r1 7
-	lw	r30 r2 20
-	sw	r31 r30 28
-	addi	r30 r30 32
-	jal	shadow_check_one_or_group.3025
-	addi	r30 r30 -32
-	lw	r30 r31 28
-beq_cont.29482:
-	j	beq_cont.29480
-beq_else.29479:
-	addi	r0 r1 0
-beq_cont.29480:
-beq_cont.29478:
-	j	beq_cont.29476
-beq_else.29475:
-	addi	r0 r1 0
-beq_cont.29476:
-beq_cont.29474:
-	j	beq_cont.29472
-beq_else.29471:
-	addi	r0 r1 0
-beq_cont.29472:
-beq_cont.29470:
-	j	beq_cont.29468
-beq_else.29467:
-	addi	r0 r1 0
-beq_cont.29468:
-beq_cont.29466:
-	j	beq_cont.29464
-beq_else.29463:
-	addi	r0 r1 0
-beq_cont.29464:
-beq_cont.29462:
-	j	beq_cont.29460
-beq_else.29459:
-	addi	r0 r1 0
-beq_cont.29460:
-	addi	r0 r2 0
-	sub	r1 r2 r25
-	beq	r25 r0 beq_else.29483
-	addi	r0 r1 1
-	j	beq_cont.29484
-beq_else.29483:
-	addi	r0 r1 0
-beq_cont.29484:
-	j	beq_cont.29458
-beq_else.29457:
-	addi	r0 r1 0
-beq_cont.29458:
-	j	beq_cont.29454
-beq_else.29453:
-	addi	r0 r1 0
-beq_cont.29454:
-	j	beq_cont.29444
-beq_else.29443:
-	addi	r0 r1 1
-beq_cont.29444:
-	addi	r0 r2 0
-	sub	r1 r2 r25
-	beq	r25 r0 beq_tail_else.29485
-	addi	r0 r1 1
-	sll	r1 r1 2
-	lw	r30 r2 20
-	lwo	r2 r1 r1
-	addi	r0 r3 -1
-	sub	r1 r3 r25
-	beq	r25 r0 beq_else.29486
-	addi	r30 r30 28
-	sw	r1 r30 0
-	sw	r31 r30 4
-	jal	min_caml_load_and_net
-	mov	r3 r1
-	lw	r30 r1 0
-	lw	r30 r31 4
-	addi	r30 r30 -28
-	sll	r1 r1 2
-	lwo	r3 r1 r1
-	addi	r0 r3 0
-	sw	r31 r30 28
-	addi	r30 r30 32
-	mov	r2 r1
-	mov	r1 r3
-	jal	shadow_check_and_group.3022
-	addi	r30 r30 -32
-	lw	r30 r31 28
-	addi	r0 r2 0
-	sub	r1 r2 r25
-	beq	r25 r0 beq_else.29488
-	addi	r0 r1 1
-	j	beq_cont.29489
-beq_else.29488:
-	addi	r0 r1 2
-	sll	r1 r1 2
-	lw	r30 r2 20
-	lwo	r2 r1 r1
-	addi	r0 r3 -1
-	sub	r1 r3 r25
-	beq	r25 r0 beq_else.29490
-	addi	r30 r30 28
-	sw	r1 r30 0
-	sw	r31 r30 4
-	jal	min_caml_load_and_net
-	mov	r3 r1
-	lw	r30 r1 0
-	lw	r30 r31 4
-	addi	r30 r30 -28
-	sll	r1 r1 2
-	lwo	r3 r1 r1
-	addi	r0 r3 0
-	sw	r31 r30 28
-	addi	r30 r30 32
-	mov	r2 r1
-	mov	r1 r3
-	jal	shadow_check_and_group.3022
-	addi	r30 r30 -32
-	lw	r30 r31 28
-	addi	r0 r2 0
-	sub	r1 r2 r25
-	beq	r25 r0 beq_else.29492
-	addi	r0 r1 1
-	j	beq_cont.29493
-beq_else.29492:
-	addi	r0 r1 3
-	sll	r1 r1 2
-	lw	r30 r2 20
-	lwo	r2 r1 r1
-	addi	r0 r3 -1
-	sub	r1 r3 r25
-	beq	r25 r0 beq_else.29494
-	addi	r30 r30 28
-	sw	r1 r30 0
-	sw	r31 r30 4
-	jal	min_caml_load_and_net
-	mov	r3 r1
-	lw	r30 r1 0
-	lw	r30 r31 4
-	addi	r30 r30 -28
-	sll	r1 r1 2
-	lwo	r3 r1 r1
-	addi	r0 r3 0
-	sw	r31 r30 28
-	addi	r30 r30 32
-	mov	r2 r1
-	mov	r1 r3
-	jal	shadow_check_and_group.3022
-	addi	r30 r30 -32
-	lw	r30 r31 28
-	addi	r0 r2 0
-	sub	r1 r2 r25
-	beq	r25 r0 beq_else.29496
-	addi	r0 r1 1
-	j	beq_cont.29497
-beq_else.29496:
-	addi	r0 r1 4
-	sll	r1 r1 2
-	lw	r30 r2 20
-	lwo	r2 r1 r1
-	addi	r0 r3 -1
-	sub	r1 r3 r25
-	beq	r25 r0 beq_else.29498
-	addi	r30 r30 28
-	sw	r1 r30 0
-	sw	r31 r30 4
-	jal	min_caml_load_and_net
-	mov	r3 r1
-	lw	r30 r1 0
-	lw	r30 r31 4
-	addi	r30 r30 -28
-	sll	r1 r1 2
-	lwo	r3 r1 r1
-	addi	r0 r3 0
-	sw	r31 r30 28
-	addi	r30 r30 32
-	mov	r2 r1
-	mov	r1 r3
-	jal	shadow_check_and_group.3022
-	addi	r30 r30 -32
-	lw	r30 r31 28
-	addi	r0 r2 0
-	sub	r1 r2 r25
-	beq	r25 r0 beq_else.29500
-	addi	r0 r1 1
-	j	beq_cont.29501
-beq_else.29500:
-	addi	r0 r1 5
-	sll	r1 r1 2
-	lw	r30 r2 20
-	lwo	r2 r1 r1
-	addi	r0 r3 -1
-	sub	r1 r3 r25
-	beq	r25 r0 beq_else.29502
-	addi	r30 r30 28
-	sw	r1 r30 0
-	sw	r31 r30 4
-	jal	min_caml_load_and_net
-	mov	r3 r1
-	lw	r30 r1 0
-	lw	r30 r31 4
-	addi	r30 r30 -28
-	sll	r1 r1 2
-	lwo	r3 r1 r1
-	addi	r0 r3 0
-	sw	r31 r30 28
-	addi	r30 r30 32
-	mov	r2 r1
-	mov	r1 r3
-	jal	shadow_check_and_group.3022
-	addi	r30 r30 -32
-	lw	r30 r31 28
-	addi	r0 r2 0
-	sub	r1 r2 r25
-	beq	r25 r0 beq_else.29504
-	addi	r0 r1 1
-	j	beq_cont.29505
-beq_else.29504:
-	addi	r0 r1 6
-	sll	r1 r1 2
-	lw	r30 r2 20
-	lwo	r2 r1 r1
-	addi	r0 r3 -1
-	sub	r1 r3 r25
-	beq	r25 r0 beq_else.29506
-	addi	r30 r30 28
-	sw	r1 r30 0
-	sw	r31 r30 4
-	jal	min_caml_load_and_net
-	mov	r3 r1
-	lw	r30 r1 0
-	lw	r30 r31 4
-	addi	r30 r30 -28
-	sll	r1 r1 2
-	lwo	r3 r1 r1
-	addi	r0 r3 0
-	sw	r31 r30 28
-	addi	r30 r30 32
-	mov	r2 r1
-	mov	r1 r3
-	jal	shadow_check_and_group.3022
-	addi	r30 r30 -32
-	lw	r30 r31 28
-	addi	r0 r2 0
-	sub	r1 r2 r25
-	beq	r25 r0 beq_else.29508
-	addi	r0 r1 1
-	j	beq_cont.29509
-beq_else.29508:
-	addi	r0 r1 7
-	lw	r30 r2 20
-	sw	r31 r30 28
-	addi	r30 r30 32
-	jal	shadow_check_one_or_group.3025
-	addi	r30 r30 -32
-	lw	r30 r31 28
-beq_cont.29509:
-	j	beq_cont.29507
-beq_else.29506:
-	addi	r0 r1 0
-beq_cont.29507:
-beq_cont.29505:
-	j	beq_cont.29503
-beq_else.29502:
-	addi	r0 r1 0
-beq_cont.29503:
-beq_cont.29501:
-	j	beq_cont.29499
-beq_else.29498:
-	addi	r0 r1 0
-beq_cont.29499:
-beq_cont.29497:
-	j	beq_cont.29495
-beq_else.29494:
-	addi	r0 r1 0
-beq_cont.29495:
-beq_cont.29493:
-	j	beq_cont.29491
-beq_else.29490:
-	addi	r0 r1 0
-beq_cont.29491:
-beq_cont.29489:
-	j	beq_cont.29487
-beq_else.29486:
-	addi	r0 r1 0
-beq_cont.29487:
-	addi	r0 r2 0
-	sub	r1 r2 r25
-	beq	r25 r0 beq_tail_else.29510
-	addi	r0 r1 1
-	jr	r31
-beq_tail_else.29510:
+beq_tail_else.29400:
 	addi	r0 r1 1
 	lw	r30 r2 24
 	add	r2 r1 r1
 	lw	r30 r2 4
 	j	shadow_check_one_or_matrix.3028
-beq_tail_else.29485:
+beq_tail_else.29375:
 	addi	r0 r1 1
 	lw	r30 r2 24
 	add	r2 r1 r1
 	lw	r30 r2 4
 	j	shadow_check_one_or_matrix.3028
-beq_tail_else.29442:
+beq_tail_else.29332:
 	addi	r0 r1 0
 	jr	r31
-beq_tail_else.29296:
+beq_tail_else.29186:
 	addi	r0 r1 0
 	jr	r31
 solve_each_element.3031:
@@ -10048,7 +9970,7 @@ solve_each_element.3031:
 	lwo	r2 r4 r4
 	addi	r0 r5 -1
 	sub	r4 r5 r25
-	beq	r25 r0 beq_tail_else.29511
+	beq	r25 r0 beq_tail_else.29401
 	addi	r30 r30 0
 	sw	r1 r30 0
 	sw	r31 r30 4
@@ -10098,10 +10020,10 @@ solve_each_element.3031:
 	sw	r1 r30 8
 	sw	r4 r30 12
 	sub	r5 r7 r25
-	beq	r25 r0 beq_else.29512
+	beq	r25 r0 beq_else.29402
 	addi	r0 r7 2
 	sub	r5 r7 r25
-	beq	r25 r0 beq_else.29514
+	beq	r25 r0 beq_else.29404
 	sw	r31 r30 16
 	addi	r30 r30 20
 	mov	r2 r3
@@ -10109,8 +10031,8 @@ solve_each_element.3031:
 	jal	solver_second.2927
 	addi	r30 r30 -20
 	lw	r30 r31 16
-	j	beq_cont.29515
-beq_else.29514:
+	j	beq_cont.29405
+beq_else.29404:
 	lw	r6 r5 16
 	addi	r0 r6 0
 	sll	r6 r6 2
@@ -10140,15 +10062,15 @@ beq_else.29514:
 	mtc1	r24 f4
 	sub.s	f3 f4 f30
 	mfc1	f30 r25
-	blez	r25 bfle_nontail_else.29516
+	blez	r25 bfle_nontail_else.29406
 	addi	r0 r6 1
-	j	bfle_nontail_cont.29517
-bfle_nontail_else.29516:
+	j	bfle_nontail_cont.29407
+bfle_nontail_else.29406:
 	addi	r0 r6 0
-bfle_nontail_cont.29517:
+bfle_nontail_cont.29407:
 	addi	r0 r7 0
 	sub	r6 r7 r25
-	beq	r25 r0 beq_else.29518
+	beq	r25 r0 beq_else.29408
 	addi	r30 r30 16
 	sw	r1 r30 0
 	sw	r31 r30 4
@@ -10177,13 +10099,13 @@ bfle_nontail_cont.29517:
 	sll	r7 r5 2
 	swoc1	f0 r6 r5
 	addi	r0 r1 1
-	j	beq_cont.29519
-beq_else.29518:
+	j	beq_cont.29409
+beq_else.29408:
 	addi	r0 r1 0
-beq_cont.29519:
-beq_cont.29515:
-	j	beq_cont.29513
-beq_else.29512:
+beq_cont.29409:
+beq_cont.29405:
+	j	beq_cont.29403
+beq_else.29402:
 	sw	r31 r30 16
 	addi	r30 r30 20
 	mov	r2 r3
@@ -10191,10 +10113,10 @@ beq_else.29512:
 	jal	solver_rect.2902
 	addi	r30 r30 -20
 	lw	r30 r31 16
-beq_cont.29513:
+beq_cont.29403:
 	addi	r0 r2 0
 	sub	r1 r2 r25
-	beq	r25 r0 beq_tail_else.29520
+	beq	r25 r0 beq_tail_else.29410
 	addi	r30 r30 16
 	sw	r1 r30 0
 	sw	r31 r30 4
@@ -10215,15 +10137,15 @@ beq_cont.29513:
 	mtc1	r24 f2
 	sub.s	f1 f2 f30
 	mfc1	f30 r25
-	blez	r25 bfle_nontail_else.29521
+	blez	r25 bfle_nontail_else.29411
 	addi	r0 r2 1
-	j	bfle_nontail_cont.29522
-bfle_nontail_else.29521:
+	j	bfle_nontail_cont.29412
+bfle_nontail_else.29411:
 	addi	r0 r2 0
-bfle_nontail_cont.29522:
+bfle_nontail_cont.29412:
 	addi	r0 r3 0
 	sub	r2 r3 r25
-	beq	r25 r0 beq_else.29523
+	beq	r25 r0 beq_else.29413
 	addi	r30 r30 16
 	sw	r1 r30 0
 	sw	r31 r30 4
@@ -10241,15 +10163,15 @@ bfle_nontail_cont.29522:
 	mtc1	r24 f2
 	sub.s	f1 f2 f30
 	mfc1	f30 r25
-	blez	r25 bfle_nontail_else.29525
+	blez	r25 bfle_nontail_else.29415
 	addi	r0 r2 1
-	j	bfle_nontail_cont.29526
-bfle_nontail_else.29525:
+	j	bfle_nontail_cont.29416
+bfle_nontail_else.29415:
 	addi	r0 r2 0
-bfle_nontail_cont.29526:
+bfle_nontail_cont.29416:
 	addi	r0 r3 0
 	sub	r2 r3 r25
-	beq	r25 r0 beq_else.29527
+	beq	r25 r0 beq_else.29417
 	lui	r24 15395
 	ori	r24 r24 55050
 	mtc1	r24 f1
@@ -10314,7 +10236,7 @@ bfle_nontail_cont.29526:
 	swc1	f1 r30 28
 	swc1	f0 r30 32
 	sub	r2 r5 r25
-	beq	r25 r0 beq_else.29529
+	beq	r25 r0 beq_else.29419
 	addi	r30 r30 36
 	sw	r1 r30 0
 	sw	r31 r30 4
@@ -10336,17 +10258,17 @@ bfle_nontail_cont.29526:
 	lw	r30 r31 36
 	addi	r0 r2 0
 	sub	r1 r2 r25
-	beq	r25 r0 beq_else.29531
+	beq	r25 r0 beq_else.29421
 	addi	r0 r1 0
-	j	beq_cont.29532
-beq_else.29531:
+	j	beq_cont.29422
+beq_else.29421:
 	addi	r0 r1 1
 	sll	r1 r1 2
 	lw	r30 r2 4
 	lwo	r2 r1 r1
 	addi	r0 r3 -1
 	sub	r1 r3 r25
-	beq	r25 r0 beq_else.29533
+	beq	r25 r0 beq_else.29423
 	addi	r30 r30 36
 	sw	r1 r30 0
 	sw	r31 r30 4
@@ -10378,10 +10300,10 @@ beq_else.29531:
 	lw	r1 r3 4
 	addi	r0 r4 1
 	sub	r3 r4 r25
-	beq	r25 r0 beq_else.29535
+	beq	r25 r0 beq_else.29425
 	addi	r0 r4 2
 	sub	r3 r4 r25
-	beq	r25 r0 beq_else.29537
+	beq	r25 r0 beq_else.29427
 	mul.s	f0 f0 f6
 	lw	r1 r3 16
 	addi	r0 r4 0
@@ -10405,7 +10327,7 @@ beq_else.29531:
 	lw	r1 r3 12
 	addi	r0 r4 0
 	sub	r3 r4 r25
-	beq	r25 r0 beq_else.29539
+	beq	r25 r0 beq_else.29429
 	mul.s	f2 f4 f7
 	lw	r1 r3 36
 	addi	r0 r4 0
@@ -10427,58 +10349,58 @@ beq_else.29531:
 	lwoc1	r3 r4 f2
 	mul.s	f0 f2 f0
 	add.s	f4 f0 f0
-	j	beq_cont.29540
-beq_else.29539:
+	j	beq_cont.29430
+beq_else.29429:
 	mov.s	f6 f0
-beq_cont.29540:
+beq_cont.29430:
 	lw	r1 r3 4
 	addi	r0 r4 3
 	sub	r3 r4 r25
-	beq	r25 r0 beq_else.29541
-	j	beq_cont.29542
-beq_else.29541:
+	beq	r25 r0 beq_else.29431
+	j	beq_cont.29432
+beq_else.29431:
 	lui	r24 16256
 	ori	r24 r24 0
 	mtc1	r24 f2
 	sub.s	f0 f2 f0
-beq_cont.29542:
+beq_cont.29432:
 	lw	r1 r1 24
 	lui	r24 0
 	ori	r24 r24 0
 	mtc1	r24 f2
 	sub.s	f2 f0 f30
 	mfc1	f30 r25
-	blez	r25 bfle_nontail_else.29543
+	blez	r25 bfle_nontail_else.29433
 	addi	r0 r3 1
-	j	bfle_nontail_cont.29544
-bfle_nontail_else.29543:
+	j	bfle_nontail_cont.29434
+bfle_nontail_else.29433:
 	addi	r0 r3 0
-bfle_nontail_cont.29544:
+bfle_nontail_cont.29434:
 	addi	r0 r4 0
 	sub	r1 r4 r25
-	beq	r25 r0 beq_else.29545
+	beq	r25 r0 beq_else.29435
 	addi	r0 r1 0
 	sub	r3 r1 r25
-	beq	r25 r0 beq_else.29547
+	beq	r25 r0 beq_else.29437
 	addi	r0 r1 0
-	j	beq_cont.29548
-beq_else.29547:
+	j	beq_cont.29438
+beq_else.29437:
 	addi	r0 r1 1
-beq_cont.29548:
-	j	beq_cont.29546
-beq_else.29545:
+beq_cont.29438:
+	j	beq_cont.29436
+beq_else.29435:
 	mov	r1 r3
-beq_cont.29546:
+beq_cont.29436:
 	addi	r0 r3 0
 	sub	r1 r3 r25
-	beq	r25 r0 beq_else.29549
+	beq	r25 r0 beq_else.29439
 	addi	r0 r1 0
-	j	beq_cont.29550
-beq_else.29549:
+	j	beq_cont.29440
+beq_else.29439:
 	addi	r0 r1 1
-beq_cont.29550:
-	j	beq_cont.29538
-beq_else.29537:
+beq_cont.29440:
+	j	beq_cont.29428
+beq_else.29427:
 	lw	r1 r3 16
 	addi	r0 r4 0
 	sll	r4 r4 2
@@ -10500,38 +10422,38 @@ beq_else.29537:
 	mtc1	r24 f2
 	sub.s	f2 f0 f30
 	mfc1	f30 r25
-	blez	r25 bfle_nontail_else.29551
+	blez	r25 bfle_nontail_else.29441
 	addi	r0 r3 1
-	j	bfle_nontail_cont.29552
-bfle_nontail_else.29551:
+	j	bfle_nontail_cont.29442
+bfle_nontail_else.29441:
 	addi	r0 r3 0
-bfle_nontail_cont.29552:
+bfle_nontail_cont.29442:
 	addi	r0 r4 0
 	sub	r1 r4 r25
-	beq	r25 r0 beq_else.29553
+	beq	r25 r0 beq_else.29443
 	addi	r0 r1 0
 	sub	r3 r1 r25
-	beq	r25 r0 beq_else.29555
+	beq	r25 r0 beq_else.29445
 	addi	r0 r1 0
-	j	beq_cont.29556
-beq_else.29555:
+	j	beq_cont.29446
+beq_else.29445:
 	addi	r0 r1 1
-beq_cont.29556:
-	j	beq_cont.29554
-beq_else.29553:
+beq_cont.29446:
+	j	beq_cont.29444
+beq_else.29443:
 	mov	r1 r3
-beq_cont.29554:
+beq_cont.29444:
 	addi	r0 r3 0
 	sub	r1 r3 r25
-	beq	r25 r0 beq_else.29557
+	beq	r25 r0 beq_else.29447
 	addi	r0 r1 0
-	j	beq_cont.29558
-beq_else.29557:
+	j	beq_cont.29448
+beq_else.29447:
 	addi	r0 r1 1
-beq_cont.29558:
-beq_cont.29538:
-	j	beq_cont.29536
-beq_else.29535:
+beq_cont.29448:
+beq_cont.29428:
+	j	beq_cont.29426
+beq_else.29425:
 	lw	r1 r3 16
 	addi	r0 r4 0
 	sll	r4 r4 2
@@ -10543,15 +10465,15 @@ beq_else.29535:
 	mtc1	r24 f6
 	sub.s	f0 f6 f30
 	mfc1	f30 r25
-	blez	r25 bfle_nontail_else.29559
+	blez	r25 bfle_nontail_else.29449
 	addi	r0 r3 1
-	j	bfle_nontail_cont.29560
-bfle_nontail_else.29559:
+	j	bfle_nontail_cont.29450
+bfle_nontail_else.29449:
 	addi	r0 r3 0
-bfle_nontail_cont.29560:
+bfle_nontail_cont.29450:
 	addi	r0 r4 0
 	sub	r3 r4 r25
-	beq	r25 r0 beq_else.29561
+	beq	r25 r0 beq_else.29451
 	lw	r1 r3 16
 	addi	r0 r4 1
 	sll	r4 r4 2
@@ -10563,15 +10485,15 @@ bfle_nontail_cont.29560:
 	mtc1	r24 f2
 	sub.s	f0 f2 f30
 	mfc1	f30 r25
-	blez	r25 bfle_nontail_else.29563
+	blez	r25 bfle_nontail_else.29453
 	addi	r0 r3 1
-	j	bfle_nontail_cont.29564
-bfle_nontail_else.29563:
+	j	bfle_nontail_cont.29454
+bfle_nontail_else.29453:
 	addi	r0 r3 0
-bfle_nontail_cont.29564:
+bfle_nontail_cont.29454:
 	addi	r0 r4 0
 	sub	r3 r4 r25
-	beq	r25 r0 beq_else.29565
+	beq	r25 r0 beq_else.29455
 	lw	r1 r3 16
 	addi	r0 r4 2
 	sll	r4 r4 2
@@ -10583,49 +10505,49 @@ bfle_nontail_cont.29564:
 	mtc1	r24 f2
 	sub.s	f0 f2 f30
 	mfc1	f30 r25
-	blez	r25 bfle_nontail_else.29567
+	blez	r25 bfle_nontail_else.29457
 	addi	r0 r3 1
-	j	bfle_nontail_cont.29568
-bfle_nontail_else.29567:
+	j	bfle_nontail_cont.29458
+bfle_nontail_else.29457:
 	addi	r0 r3 0
-bfle_nontail_cont.29568:
-	j	beq_cont.29566
-beq_else.29565:
+bfle_nontail_cont.29458:
+	j	beq_cont.29456
+beq_else.29455:
 	addi	r0 r3 0
-beq_cont.29566:
-	j	beq_cont.29562
-beq_else.29561:
+beq_cont.29456:
+	j	beq_cont.29452
+beq_else.29451:
 	addi	r0 r3 0
-beq_cont.29562:
+beq_cont.29452:
 	addi	r0 r4 0
 	sub	r3 r4 r25
-	beq	r25 r0 beq_else.29569
+	beq	r25 r0 beq_else.29459
 	lw	r1 r1 24
-	j	beq_cont.29570
-beq_else.29569:
+	j	beq_cont.29460
+beq_else.29459:
 	lw	r1 r1 24
 	addi	r0 r3 0
 	sub	r1 r3 r25
-	beq	r25 r0 beq_else.29571
+	beq	r25 r0 beq_else.29461
 	addi	r0 r1 0
-	j	beq_cont.29572
-beq_else.29571:
+	j	beq_cont.29462
+beq_else.29461:
 	addi	r0 r1 1
-beq_cont.29572:
-beq_cont.29570:
-beq_cont.29536:
+beq_cont.29462:
+beq_cont.29460:
+beq_cont.29426:
 	addi	r0 r3 0
 	sub	r1 r3 r25
-	beq	r25 r0 beq_else.29573
+	beq	r25 r0 beq_else.29463
 	addi	r0 r1 0
-	j	beq_cont.29574
-beq_else.29573:
+	j	beq_cont.29464
+beq_else.29463:
 	addi	r0 r1 2
 	sll	r1 r1 2
 	lwo	r2 r1 r1
 	addi	r0 r3 -1
 	sub	r1 r3 r25
-	beq	r25 r0 beq_else.29575
+	beq	r25 r0 beq_else.29465
 	addi	r30 r30 36
 	sw	r1 r30 0
 	sw	r31 r30 4
@@ -10646,10 +10568,10 @@ beq_else.29573:
 	lw	r30 r31 36
 	addi	r0 r2 0
 	sub	r1 r2 r25
-	beq	r25 r0 beq_else.29577
+	beq	r25 r0 beq_else.29467
 	addi	r0 r1 0
-	j	beq_cont.29578
-beq_else.29577:
+	j	beq_cont.29468
+beq_else.29467:
 	addi	r0 r1 3
 	lwc1	 r30 f0 28
 	lwc1	 r30 f1 24
@@ -10660,24 +10582,24 @@ beq_else.29577:
 	jal	check_all_inside.3016
 	addi	r30 r30 -40
 	lw	r30 r31 36
-beq_cont.29578:
-	j	beq_cont.29576
-beq_else.29575:
+beq_cont.29468:
+	j	beq_cont.29466
+beq_else.29465:
 	addi	r0 r1 1
-beq_cont.29576:
-beq_cont.29574:
-	j	beq_cont.29534
-beq_else.29533:
+beq_cont.29466:
+beq_cont.29464:
+	j	beq_cont.29424
+beq_else.29423:
 	addi	r0 r1 1
-beq_cont.29534:
-beq_cont.29532:
-	j	beq_cont.29530
-beq_else.29529:
+beq_cont.29424:
+beq_cont.29422:
+	j	beq_cont.29420
+beq_else.29419:
 	addi	r0 r1 1
-beq_cont.29530:
+beq_cont.29420:
 	addi	r0 r2 0
 	sub	r1 r2 r25
-	beq	r25 r0 beq_else.29579
+	beq	r25 r0 beq_else.29469
 	addi	r30 r30 36
 	sw	r1 r30 0
 	sw	r31 r30 4
@@ -10730,22 +10652,22 @@ beq_cont.29530:
 	sll	r2 r2 2
 	lw	r30 r3 16
 	swo	r3 r1 r2
-	j	beq_cont.29580
-beq_else.29579:
-beq_cont.29580:
-	j	beq_cont.29528
-beq_else.29527:
-beq_cont.29528:
-	j	beq_cont.29524
-beq_else.29523:
-beq_cont.29524:
+	j	beq_cont.29470
+beq_else.29469:
+beq_cont.29470:
+	j	beq_cont.29418
+beq_else.29417:
+beq_cont.29418:
+	j	beq_cont.29414
+beq_else.29413:
+beq_cont.29414:
 	addi	r0 r1 1
 	lw	r30 r2 8
 	add	r2 r1 r1
 	lw	r30 r2 4
 	lw	r30 r3 0
 	j	solve_each_element.3031
-beq_tail_else.29520:
+beq_tail_else.29410:
 	addi	r30 r30 36
 	sw	r1 r30 0
 	sw	r31 r30 4
@@ -10759,23 +10681,23 @@ beq_tail_else.29520:
 	lw	r1 r1 24
 	addi	r0 r2 0
 	sub	r1 r2 r25
-	beq	r25 r0 beq_tail_else.29581
+	beq	r25 r0 beq_tail_else.29471
 	addi	r0 r1 1
 	lw	r30 r2 8
 	add	r2 r1 r1
 	lw	r30 r2 4
 	lw	r30 r3 0
 	j	solve_each_element.3031
-beq_tail_else.29581:
+beq_tail_else.29471:
 	jr	r31
-beq_tail_else.29511:
+beq_tail_else.29401:
 	jr	r31
 solve_one_or_network.3035:
 	sll	r1 r4 2
 	lwo	r2 r4 r4
 	addi	r0 r5 -1
 	sub	r4 r5 r25
-	beq	r25 r0 beq_tail_else.29584
+	beq	r25 r0 beq_tail_else.29474
 	addi	r30 r30 0
 	sw	r1 r30 0
 	sw	r31 r30 4
@@ -10805,7 +10727,7 @@ solve_one_or_network.3035:
 	lwo	r3 r2 r2
 	addi	r0 r4 -1
 	sub	r2 r4 r25
-	beq	r25 r0 beq_tail_else.29585
+	beq	r25 r0 beq_tail_else.29475
 	addi	r30 r30 12
 	sw	r1 r30 0
 	sw	r31 r30 4
@@ -10834,7 +10756,7 @@ solve_one_or_network.3035:
 	lwo	r3 r2 r2
 	addi	r0 r4 -1
 	sub	r2 r4 r25
-	beq	r25 r0 beq_tail_else.29586
+	beq	r25 r0 beq_tail_else.29476
 	addi	r30 r30 16
 	sw	r1 r30 0
 	sw	r31 r30 4
@@ -10863,7 +10785,7 @@ solve_one_or_network.3035:
 	lwo	r3 r2 r2
 	addi	r0 r4 -1
 	sub	r2 r4 r25
-	beq	r25 r0 beq_tail_else.29587
+	beq	r25 r0 beq_tail_else.29477
 	addi	r30 r30 20
 	sw	r1 r30 0
 	sw	r31 r30 4
@@ -10892,7 +10814,7 @@ solve_one_or_network.3035:
 	lwo	r3 r2 r2
 	addi	r0 r4 -1
 	sub	r2 r4 r25
-	beq	r25 r0 beq_tail_else.29588
+	beq	r25 r0 beq_tail_else.29478
 	addi	r30 r30 24
 	sw	r1 r30 0
 	sw	r31 r30 4
@@ -10921,7 +10843,7 @@ solve_one_or_network.3035:
 	lwo	r3 r2 r2
 	addi	r0 r4 -1
 	sub	r2 r4 r25
-	beq	r25 r0 beq_tail_else.29589
+	beq	r25 r0 beq_tail_else.29479
 	addi	r30 r30 28
 	sw	r1 r30 0
 	sw	r31 r30 4
@@ -10950,7 +10872,7 @@ solve_one_or_network.3035:
 	lwo	r3 r2 r2
 	addi	r0 r4 -1
 	sub	r2 r4 r25
-	beq	r25 r0 beq_tail_else.29590
+	beq	r25 r0 beq_tail_else.29480
 	addi	r30 r30 32
 	sw	r1 r30 0
 	sw	r31 r30 4
@@ -10979,7 +10901,7 @@ solve_one_or_network.3035:
 	lwo	r3 r2 r2
 	addi	r0 r4 -1
 	sub	r2 r4 r25
-	beq	r25 r0 beq_tail_else.29591
+	beq	r25 r0 beq_tail_else.29481
 	addi	r30 r30 36
 	sw	r1 r30 0
 	sw	r31 r30 4
@@ -11006,21 +10928,21 @@ solve_one_or_network.3035:
 	lw	r30 r2 4
 	lw	r30 r3 0
 	j	solve_one_or_network.3035
-beq_tail_else.29591:
+beq_tail_else.29481:
 	jr	r31
-beq_tail_else.29590:
+beq_tail_else.29480:
 	jr	r31
-beq_tail_else.29589:
+beq_tail_else.29479:
 	jr	r31
-beq_tail_else.29588:
+beq_tail_else.29478:
 	jr	r31
-beq_tail_else.29587:
+beq_tail_else.29477:
 	jr	r31
-beq_tail_else.29586:
+beq_tail_else.29476:
 	jr	r31
-beq_tail_else.29585:
+beq_tail_else.29475:
 	jr	r31
-beq_tail_else.29584:
+beq_tail_else.29474:
 	jr	r31
 trace_or_matrix.3039:
 	sll	r1 r4 2
@@ -11030,13 +10952,13 @@ trace_or_matrix.3039:
 	lwo	r4 r5 r5
 	addi	r0 r6 -1
 	sub	r5 r6 r25
-	beq	r25 r0 beq_tail_else.29600
+	beq	r25 r0 beq_tail_else.29490
 	addi	r0 r6 99
 	sw	r3 r30 0
 	sw	r2 r30 4
 	sw	r1 r30 8
 	sub	r5 r6 r25
-	beq	r25 r0 beq_else.29601
+	beq	r25 r0 beq_else.29491
 	addi	r30 r30 12
 	sw	r1 r30 0
 	sw	r31 r30 4
@@ -11083,10 +11005,10 @@ trace_or_matrix.3039:
 	addi	r0 r7 1
 	sw	r4 r30 12
 	sub	r6 r7 r25
-	beq	r25 r0 beq_else.29603
+	beq	r25 r0 beq_else.29493
 	addi	r0 r7 2
 	sub	r6 r7 r25
-	beq	r25 r0 beq_else.29605
+	beq	r25 r0 beq_else.29495
 	sw	r31 r30 16
 	addi	r30 r30 20
 	mov	r2 r3
@@ -11094,8 +11016,8 @@ trace_or_matrix.3039:
 	jal	solver_second.2927
 	addi	r30 r30 -20
 	lw	r30 r31 16
-	j	beq_cont.29606
-beq_else.29605:
+	j	beq_cont.29496
+beq_else.29495:
 	lw	r5 r5 16
 	addi	r0 r6 0
 	sll	r6 r6 2
@@ -11125,15 +11047,15 @@ beq_else.29605:
 	mtc1	r24 f4
 	sub.s	f3 f4 f30
 	mfc1	f30 r25
-	blez	r25 bfle_nontail_else.29607
+	blez	r25 bfle_nontail_else.29497
 	addi	r0 r6 1
-	j	bfle_nontail_cont.29608
-bfle_nontail_else.29607:
+	j	bfle_nontail_cont.29498
+bfle_nontail_else.29497:
 	addi	r0 r6 0
-bfle_nontail_cont.29608:
+bfle_nontail_cont.29498:
 	addi	r0 r7 0
 	sub	r6 r7 r25
-	beq	r25 r0 beq_else.29609
+	beq	r25 r0 beq_else.29499
 	addi	r30 r30 16
 	sw	r1 r30 0
 	sw	r31 r30 4
@@ -11162,13 +11084,13 @@ bfle_nontail_cont.29608:
 	sll	r7 r5 2
 	swoc1	f0 r6 r5
 	addi	r0 r1 1
-	j	beq_cont.29610
-beq_else.29609:
+	j	beq_cont.29500
+beq_else.29499:
 	addi	r0 r1 0
-beq_cont.29610:
-beq_cont.29606:
-	j	beq_cont.29604
-beq_else.29603:
+beq_cont.29500:
+beq_cont.29496:
+	j	beq_cont.29494
+beq_else.29493:
 	sw	r31 r30 16
 	addi	r30 r30 20
 	mov	r2 r3
@@ -11176,10 +11098,10 @@ beq_else.29603:
 	jal	solver_rect.2902
 	addi	r30 r30 -20
 	lw	r30 r31 16
-beq_cont.29604:
+beq_cont.29494:
 	addi	r0 r2 0
 	sub	r1 r2 r25
-	beq	r25 r0 beq_else.29611
+	beq	r25 r0 beq_else.29501
 	addi	r30 r30 16
 	sw	r1 r30 0
 	sw	r31 r30 4
@@ -11206,22 +11128,22 @@ beq_cont.29604:
 	mtc1	r24 f1
 	sub.s	f0 f1 f30
 	mfc1	f30 r25
-	blez	r25 bfle_nontail_else.29613
+	blez	r25 bfle_nontail_else.29503
 	addi	r0 r1 1
-	j	bfle_nontail_cont.29614
-bfle_nontail_else.29613:
+	j	bfle_nontail_cont.29504
+bfle_nontail_else.29503:
 	addi	r0 r1 0
-bfle_nontail_cont.29614:
+bfle_nontail_cont.29504:
 	addi	r0 r2 0
 	sub	r1 r2 r25
-	beq	r25 r0 beq_else.29615
+	beq	r25 r0 beq_else.29505
 	addi	r0 r1 1
 	sll	r1 r1 2
 	lw	r30 r2 12
 	lwo	r2 r1 r1
 	addi	r0 r3 -1
 	sub	r1 r3 r25
-	beq	r25 r0 beq_else.29617
+	beq	r25 r0 beq_else.29507
 	addi	r30 r30 16
 	sw	r1 r30 0
 	sw	r31 r30 4
@@ -11248,7 +11170,7 @@ bfle_nontail_cont.29614:
 	lwo	r2 r1 r1
 	addi	r0 r3 -1
 	sub	r1 r3 r25
-	beq	r25 r0 beq_else.29619
+	beq	r25 r0 beq_else.29509
 	addi	r30 r30 16
 	sw	r1 r30 0
 	sw	r31 r30 4
@@ -11275,7 +11197,7 @@ bfle_nontail_cont.29614:
 	lwo	r2 r1 r1
 	addi	r0 r3 -1
 	sub	r1 r3 r25
-	beq	r25 r0 beq_else.29621
+	beq	r25 r0 beq_else.29511
 	addi	r30 r30 16
 	sw	r1 r30 0
 	sw	r31 r30 4
@@ -11302,7 +11224,7 @@ bfle_nontail_cont.29614:
 	lwo	r2 r1 r1
 	addi	r0 r3 -1
 	sub	r1 r3 r25
-	beq	r25 r0 beq_else.29623
+	beq	r25 r0 beq_else.29513
 	addi	r30 r30 16
 	sw	r1 r30 0
 	sw	r31 r30 4
@@ -11329,7 +11251,7 @@ bfle_nontail_cont.29614:
 	lwo	r2 r1 r1
 	addi	r0 r3 -1
 	sub	r1 r3 r25
-	beq	r25 r0 beq_else.29625
+	beq	r25 r0 beq_else.29515
 	addi	r30 r30 16
 	sw	r1 r30 0
 	sw	r31 r30 4
@@ -11356,7 +11278,7 @@ bfle_nontail_cont.29614:
 	lwo	r2 r1 r1
 	addi	r0 r3 -1
 	sub	r1 r3 r25
-	beq	r25 r0 beq_else.29627
+	beq	r25 r0 beq_else.29517
 	addi	r30 r30 16
 	sw	r1 r30 0
 	sw	r31 r30 4
@@ -11383,7 +11305,7 @@ bfle_nontail_cont.29614:
 	lwo	r2 r1 r1
 	addi	r0 r3 -1
 	sub	r1 r3 r25
-	beq	r25 r0 beq_else.29629
+	beq	r25 r0 beq_else.29519
 	addi	r30 r30 16
 	sw	r1 r30 0
 	sw	r31 r30 4
@@ -11412,41 +11334,41 @@ bfle_nontail_cont.29614:
 	jal	solve_one_or_network.3035
 	addi	r30 r30 -20
 	lw	r30 r31 16
-	j	beq_cont.29630
-beq_else.29629:
-beq_cont.29630:
-	j	beq_cont.29628
-beq_else.29627:
-beq_cont.29628:
-	j	beq_cont.29626
-beq_else.29625:
-beq_cont.29626:
-	j	beq_cont.29624
-beq_else.29623:
-beq_cont.29624:
-	j	beq_cont.29622
-beq_else.29621:
-beq_cont.29622:
-	j	beq_cont.29620
-beq_else.29619:
-beq_cont.29620:
-	j	beq_cont.29618
-beq_else.29617:
-beq_cont.29618:
-	j	beq_cont.29616
-beq_else.29615:
-beq_cont.29616:
-	j	beq_cont.29612
-beq_else.29611:
-beq_cont.29612:
-	j	beq_cont.29602
-beq_else.29601:
+	j	beq_cont.29520
+beq_else.29519:
+beq_cont.29520:
+	j	beq_cont.29518
+beq_else.29517:
+beq_cont.29518:
+	j	beq_cont.29516
+beq_else.29515:
+beq_cont.29516:
+	j	beq_cont.29514
+beq_else.29513:
+beq_cont.29514:
+	j	beq_cont.29512
+beq_else.29511:
+beq_cont.29512:
+	j	beq_cont.29510
+beq_else.29509:
+beq_cont.29510:
+	j	beq_cont.29508
+beq_else.29507:
+beq_cont.29508:
+	j	beq_cont.29506
+beq_else.29505:
+beq_cont.29506:
+	j	beq_cont.29502
+beq_else.29501:
+beq_cont.29502:
+	j	beq_cont.29492
+beq_else.29491:
 	addi	r0 r5 1
 	sll	r5 r5 2
 	lwo	r4 r5 r5
 	addi	r0 r6 -1
 	sub	r5 r6 r25
-	beq	r25 r0 beq_else.29631
+	beq	r25 r0 beq_else.29521
 	addi	r30 r30 16
 	sw	r1 r30 0
 	sw	r31 r30 4
@@ -11472,7 +11394,7 @@ beq_else.29601:
 	lwo	r2 r1 r1
 	addi	r0 r3 -1
 	sub	r1 r3 r25
-	beq	r25 r0 beq_else.29633
+	beq	r25 r0 beq_else.29523
 	addi	r30 r30 16
 	sw	r1 r30 0
 	sw	r31 r30 4
@@ -11499,7 +11421,7 @@ beq_else.29601:
 	lwo	r2 r1 r1
 	addi	r0 r3 -1
 	sub	r1 r3 r25
-	beq	r25 r0 beq_else.29635
+	beq	r25 r0 beq_else.29525
 	addi	r30 r30 16
 	sw	r1 r30 0
 	sw	r31 r30 4
@@ -11526,7 +11448,7 @@ beq_else.29601:
 	lwo	r2 r1 r1
 	addi	r0 r3 -1
 	sub	r1 r3 r25
-	beq	r25 r0 beq_else.29637
+	beq	r25 r0 beq_else.29527
 	addi	r30 r30 16
 	sw	r1 r30 0
 	sw	r31 r30 4
@@ -11553,7 +11475,7 @@ beq_else.29601:
 	lwo	r2 r1 r1
 	addi	r0 r3 -1
 	sub	r1 r3 r25
-	beq	r25 r0 beq_else.29639
+	beq	r25 r0 beq_else.29529
 	addi	r30 r30 16
 	sw	r1 r30 0
 	sw	r31 r30 4
@@ -11580,7 +11502,7 @@ beq_else.29601:
 	lwo	r2 r1 r1
 	addi	r0 r3 -1
 	sub	r1 r3 r25
-	beq	r25 r0 beq_else.29641
+	beq	r25 r0 beq_else.29531
 	addi	r30 r30 16
 	sw	r1 r30 0
 	sw	r31 r30 4
@@ -11607,7 +11529,7 @@ beq_else.29601:
 	lwo	r2 r1 r1
 	addi	r0 r3 -1
 	sub	r1 r3 r25
-	beq	r25 r0 beq_else.29643
+	beq	r25 r0 beq_else.29533
 	addi	r30 r30 16
 	sw	r1 r30 0
 	sw	r31 r30 4
@@ -11636,28 +11558,28 @@ beq_else.29601:
 	jal	solve_one_or_network.3035
 	addi	r30 r30 -20
 	lw	r30 r31 16
-	j	beq_cont.29644
-beq_else.29643:
-beq_cont.29644:
-	j	beq_cont.29642
-beq_else.29641:
-beq_cont.29642:
-	j	beq_cont.29640
-beq_else.29639:
-beq_cont.29640:
-	j	beq_cont.29638
-beq_else.29637:
-beq_cont.29638:
-	j	beq_cont.29636
-beq_else.29635:
-beq_cont.29636:
-	j	beq_cont.29634
-beq_else.29633:
-beq_cont.29634:
-	j	beq_cont.29632
-beq_else.29631:
-beq_cont.29632:
-beq_cont.29602:
+	j	beq_cont.29534
+beq_else.29533:
+beq_cont.29534:
+	j	beq_cont.29532
+beq_else.29531:
+beq_cont.29532:
+	j	beq_cont.29530
+beq_else.29529:
+beq_cont.29530:
+	j	beq_cont.29528
+beq_else.29527:
+beq_cont.29528:
+	j	beq_cont.29526
+beq_else.29525:
+beq_cont.29526:
+	j	beq_cont.29524
+beq_else.29523:
+beq_cont.29524:
+	j	beq_cont.29522
+beq_else.29521:
+beq_cont.29522:
+beq_cont.29492:
 	addi	r0 r1 1
 	lw	r30 r2 8
 	add	r2 r1 r1
@@ -11669,11 +11591,11 @@ beq_cont.29602:
 	lwo	r2 r4 r4
 	addi	r0 r5 -1
 	sub	r4 r5 r25
-	beq	r25 r0 beq_tail_else.29645
+	beq	r25 r0 beq_tail_else.29535
 	addi	r0 r5 99
 	sw	r1 r30 16
 	sub	r4 r5 r25
-	beq	r25 r0 beq_else.29646
+	beq	r25 r0 beq_else.29536
 	addi	r30 r30 20
 	sw	r1 r30 0
 	sw	r31 r30 4
@@ -11694,7 +11616,7 @@ beq_cont.29602:
 	lw	r30 r31 24
 	addi	r0 r2 0
 	sub	r1 r2 r25
-	beq	r25 r0 beq_else.29648
+	beq	r25 r0 beq_else.29538
 	addi	r30 r30 24
 	sw	r1 r30 0
 	sw	r31 r30 4
@@ -11721,22 +11643,22 @@ beq_cont.29602:
 	mtc1	r24 f1
 	sub.s	f0 f1 f30
 	mfc1	f30 r25
-	blez	r25 bfle_nontail_else.29650
+	blez	r25 bfle_nontail_else.29540
 	addi	r0 r1 1
-	j	bfle_nontail_cont.29651
-bfle_nontail_else.29650:
+	j	bfle_nontail_cont.29541
+bfle_nontail_else.29540:
 	addi	r0 r1 0
-bfle_nontail_cont.29651:
+bfle_nontail_cont.29541:
 	addi	r0 r2 0
 	sub	r1 r2 r25
-	beq	r25 r0 beq_else.29652
+	beq	r25 r0 beq_else.29542
 	addi	r0 r1 1
 	sll	r1 r1 2
 	lw	r30 r2 20
 	lwo	r2 r1 r1
 	addi	r0 r3 -1
 	sub	r1 r3 r25
-	beq	r25 r0 beq_else.29654
+	beq	r25 r0 beq_else.29544
 	addi	r30 r30 24
 	sw	r1 r30 0
 	sw	r31 r30 4
@@ -11763,7 +11685,7 @@ bfle_nontail_cont.29651:
 	lwo	r2 r1 r1
 	addi	r0 r3 -1
 	sub	r1 r3 r25
-	beq	r25 r0 beq_else.29656
+	beq	r25 r0 beq_else.29546
 	addi	r30 r30 24
 	sw	r1 r30 0
 	sw	r31 r30 4
@@ -11790,7 +11712,7 @@ bfle_nontail_cont.29651:
 	lwo	r2 r1 r1
 	addi	r0 r3 -1
 	sub	r1 r3 r25
-	beq	r25 r0 beq_else.29658
+	beq	r25 r0 beq_else.29548
 	addi	r30 r30 24
 	sw	r1 r30 0
 	sw	r31 r30 4
@@ -11817,7 +11739,7 @@ bfle_nontail_cont.29651:
 	lwo	r2 r1 r1
 	addi	r0 r3 -1
 	sub	r1 r3 r25
-	beq	r25 r0 beq_else.29660
+	beq	r25 r0 beq_else.29550
 	addi	r30 r30 24
 	sw	r1 r30 0
 	sw	r31 r30 4
@@ -11844,7 +11766,7 @@ bfle_nontail_cont.29651:
 	lwo	r2 r1 r1
 	addi	r0 r3 -1
 	sub	r1 r3 r25
-	beq	r25 r0 beq_else.29662
+	beq	r25 r0 beq_else.29552
 	addi	r30 r30 24
 	sw	r1 r30 0
 	sw	r31 r30 4
@@ -11871,7 +11793,7 @@ bfle_nontail_cont.29651:
 	lwo	r2 r1 r1
 	addi	r0 r3 -1
 	sub	r1 r3 r25
-	beq	r25 r0 beq_else.29664
+	beq	r25 r0 beq_else.29554
 	addi	r30 r30 24
 	sw	r1 r30 0
 	sw	r31 r30 4
@@ -11900,38 +11822,38 @@ bfle_nontail_cont.29651:
 	jal	solve_one_or_network.3035
 	addi	r30 r30 -28
 	lw	r30 r31 24
-	j	beq_cont.29665
-beq_else.29664:
-beq_cont.29665:
-	j	beq_cont.29663
-beq_else.29662:
-beq_cont.29663:
-	j	beq_cont.29661
-beq_else.29660:
-beq_cont.29661:
-	j	beq_cont.29659
-beq_else.29658:
-beq_cont.29659:
-	j	beq_cont.29657
-beq_else.29656:
-beq_cont.29657:
-	j	beq_cont.29655
-beq_else.29654:
-beq_cont.29655:
-	j	beq_cont.29653
-beq_else.29652:
-beq_cont.29653:
-	j	beq_cont.29649
-beq_else.29648:
-beq_cont.29649:
-	j	beq_cont.29647
-beq_else.29646:
+	j	beq_cont.29555
+beq_else.29554:
+beq_cont.29555:
+	j	beq_cont.29553
+beq_else.29552:
+beq_cont.29553:
+	j	beq_cont.29551
+beq_else.29550:
+beq_cont.29551:
+	j	beq_cont.29549
+beq_else.29548:
+beq_cont.29549:
+	j	beq_cont.29547
+beq_else.29546:
+beq_cont.29547:
+	j	beq_cont.29545
+beq_else.29544:
+beq_cont.29545:
+	j	beq_cont.29543
+beq_else.29542:
+beq_cont.29543:
+	j	beq_cont.29539
+beq_else.29538:
+beq_cont.29539:
+	j	beq_cont.29537
+beq_else.29536:
 	addi	r0 r4 1
 	sll	r4 r4 2
 	lwo	r2 r4 r4
 	addi	r0 r5 -1
 	sub	r4 r5 r25
-	beq	r25 r0 beq_else.29666
+	beq	r25 r0 beq_else.29556
 	addi	r30 r30 24
 	sw	r1 r30 0
 	sw	r31 r30 4
@@ -11959,7 +11881,7 @@ beq_else.29646:
 	lwo	r2 r1 r1
 	addi	r0 r3 -1
 	sub	r1 r3 r25
-	beq	r25 r0 beq_else.29668
+	beq	r25 r0 beq_else.29558
 	addi	r30 r30 24
 	sw	r1 r30 0
 	sw	r31 r30 4
@@ -11986,7 +11908,7 @@ beq_else.29646:
 	lwo	r2 r1 r1
 	addi	r0 r3 -1
 	sub	r1 r3 r25
-	beq	r25 r0 beq_else.29670
+	beq	r25 r0 beq_else.29560
 	addi	r30 r30 24
 	sw	r1 r30 0
 	sw	r31 r30 4
@@ -12013,7 +11935,7 @@ beq_else.29646:
 	lwo	r2 r1 r1
 	addi	r0 r3 -1
 	sub	r1 r3 r25
-	beq	r25 r0 beq_else.29672
+	beq	r25 r0 beq_else.29562
 	addi	r30 r30 24
 	sw	r1 r30 0
 	sw	r31 r30 4
@@ -12040,7 +11962,7 @@ beq_else.29646:
 	lwo	r2 r1 r1
 	addi	r0 r3 -1
 	sub	r1 r3 r25
-	beq	r25 r0 beq_else.29674
+	beq	r25 r0 beq_else.29564
 	addi	r30 r30 24
 	sw	r1 r30 0
 	sw	r31 r30 4
@@ -12067,7 +11989,7 @@ beq_else.29646:
 	lwo	r2 r1 r1
 	addi	r0 r3 -1
 	sub	r1 r3 r25
-	beq	r25 r0 beq_else.29676
+	beq	r25 r0 beq_else.29566
 	addi	r30 r30 24
 	sw	r1 r30 0
 	sw	r31 r30 4
@@ -12096,34 +12018,34 @@ beq_else.29646:
 	jal	solve_one_or_network.3035
 	addi	r30 r30 -28
 	lw	r30 r31 24
-	j	beq_cont.29677
-beq_else.29676:
-beq_cont.29677:
-	j	beq_cont.29675
-beq_else.29674:
-beq_cont.29675:
-	j	beq_cont.29673
-beq_else.29672:
-beq_cont.29673:
-	j	beq_cont.29671
-beq_else.29670:
-beq_cont.29671:
-	j	beq_cont.29669
-beq_else.29668:
-beq_cont.29669:
-	j	beq_cont.29667
-beq_else.29666:
-beq_cont.29667:
-beq_cont.29647:
+	j	beq_cont.29567
+beq_else.29566:
+beq_cont.29567:
+	j	beq_cont.29565
+beq_else.29564:
+beq_cont.29565:
+	j	beq_cont.29563
+beq_else.29562:
+beq_cont.29563:
+	j	beq_cont.29561
+beq_else.29560:
+beq_cont.29561:
+	j	beq_cont.29559
+beq_else.29558:
+beq_cont.29559:
+	j	beq_cont.29557
+beq_else.29556:
+beq_cont.29557:
+beq_cont.29537:
 	addi	r0 r1 1
 	lw	r30 r2 16
 	add	r2 r1 r1
 	lw	r30 r2 4
 	lw	r30 r3 0
 	j	trace_or_matrix.3039
-beq_tail_else.29645:
+beq_tail_else.29535:
 	jr	r31
-beq_tail_else.29600:
+beq_tail_else.29490:
 	jr	r31
 solve_each_element_fast.3045:
 	lw	r3 r4 0
@@ -12131,7 +12053,7 @@ solve_each_element_fast.3045:
 	lwo	r2 r5 r5
 	addi	r0 r6 -1
 	sub	r5 r6 r25
-	beq	r25 r0 beq_tail_else.29680
+	beq	r25 r0 beq_tail_else.29570
 	addi	r30 r30 0
 	sw	r1 r30 0
 	sw	r31 r30 4
@@ -12163,10 +12085,10 @@ solve_each_element_fast.3045:
 	sw	r1 r30 12
 	sw	r5 r30 16
 	sub	r9 r10 r25
-	beq	r25 r0 beq_else.29681
+	beq	r25 r0 beq_else.29571
 	addi	r0 r10 2
 	sub	r9 r10 r25
-	beq	r25 r0 beq_else.29683
+	beq	r25 r0 beq_else.29573
 	addi	r0 r9 0
 	sll	r9 r9 2
 	lwoc1	r8 r9 f3
@@ -12176,18 +12098,18 @@ solve_each_element_fast.3045:
 	sub.s	f3 f4 f30
 	mfc1	f30 r25
 	sll	r25 r25 1
-	beq	r25 r0 bfeq_nontail_else.29685
+	beq	r25 r0 bfeq_nontail_else.29575
 	addi	r0 r9 0
-	j	bfeq_nontail_cont.29686
-bfeq_nontail_else.29685:
+	j	bfeq_nontail_cont.29576
+bfeq_nontail_else.29575:
 	addi	r0 r9 1
-bfeq_nontail_cont.29686:
+bfeq_nontail_cont.29576:
 	addi	r0 r10 0
 	sub	r9 r10 r25
-	beq	r25 r0 beq_else.29687
+	beq	r25 r0 beq_else.29577
 	addi	r0 r1 0
-	j	beq_cont.29688
-beq_else.29687:
+	j	beq_cont.29578
+beq_else.29577:
 	addi	r0 r9 1
 	sll	r9 r9 2
 	lwoc1	r8 r9 f4
@@ -12213,19 +12135,19 @@ beq_else.29687:
 	mtc1	r24 f2
 	sub.s	f1 f2 f30
 	mfc1	f30 r25
-	blez	r25 bfle_nontail_else.29689
+	blez	r25 bfle_nontail_else.29579
 	addi	r0 r7 1
-	j	bfle_nontail_cont.29690
-bfle_nontail_else.29689:
+	j	bfle_nontail_cont.29580
+bfle_nontail_else.29579:
 	addi	r0 r7 0
-bfle_nontail_cont.29690:
+bfle_nontail_cont.29580:
 	addi	r0 r9 0
 	sub	r7 r9 r25
-	beq	r25 r0 beq_else.29691
+	beq	r25 r0 beq_else.29581
 	lw	r6 r6 24
 	addi	r0 r7 0
 	sub	r6 r7 r25
-	beq	r25 r0 beq_else.29693
+	beq	r25 r0 beq_else.29583
 	addi	r30 r30 20
 	sw	r1 r30 0
 	sw	r31 r30 4
@@ -12235,68 +12157,42 @@ bfle_nontail_cont.29690:
 	lw	r30 r31 4
 	addi	r30 r30 -20
 	addi	r0 r7 0
-	sw	r6 r30 20
-	sw	r7 r30 24
-	sw	r8 r30 28
-	swc1	f0 r30 32
-	sw	r31 r30 36
-	addi	r30 r30 40
-	mov.s	f1 f0
-	jal	min_caml_sqrt
-	addi	r30 r30 -40
-	lw	r30 r31 36
-	lwc1	 r30 f1 32
-	add.s	f1 f0 f0
-	addi	r0 r1 4
-	sll	r1 r1 2
-	lw	r30 r2 28
-	lwoc1	r2 r1 f1
+	sqrt.s	f1 f1
+	add.s	f0 f1 f0
+	addi	r0 r9 4
+	sll	r9 r9 2
+	lwoc1	r8 r9 f1
 	mul.s	f0 f1 f0
-	lw	r30 r1 24
-	sll	r1 r1 2
-	lw	r30 r2 20
-	swoc1	f0 r2 r1
-	j	beq_cont.29694
-beq_else.29693:
-	addi	r30 r30 36
+	sll	r7 r7 2
+	swoc1	f0 r6 r7
+	j	beq_cont.29584
+beq_else.29583:
+	addi	r30 r30 20
 	sw	r1 r30 0
 	sw	r31 r30 4
 	jal	min_caml_load_solver_dist
 	mov	r6 r1
 	lw	r30 r1 0
 	lw	r30 r31 4
-	addi	r30 r30 -36
+	addi	r30 r30 -20
 	addi	r0 r7 0
-	sw	r6 r30 36
-	sw	r7 r30 40
-	sw	r8 r30 28
-	swc1	f0 r30 32
-	sw	r31 r30 44
-	addi	r30 r30 48
-	mov.s	f1 f0
-	jal	min_caml_sqrt
-	addi	r30 r30 -48
-	lw	r30 r31 44
-	lwc1	 r30 f1 32
-	sub.s	f1 f0 f0
-	addi	r0 r1 4
-	sll	r1 r1 2
-	lw	r30 r2 28
-	lwoc1	r2 r1 f1
+	sqrt.s	f1 f1
+	sub.s	f0 f1 f0
+	addi	r0 r9 4
+	sll	r9 r9 2
+	lwoc1	r8 r9 f1
 	mul.s	f0 f1 f0
-	lw	r30 r1 40
-	sll	r1 r1 2
-	lw	r30 r2 36
-	swoc1	f0 r2 r1
-beq_cont.29694:
+	sll	r7 r7 2
+	swoc1	f0 r6 r7
+beq_cont.29584:
 	addi	r0 r1 1
-	j	beq_cont.29692
-beq_else.29691:
+	j	beq_cont.29582
+beq_else.29581:
 	addi	r0 r1 0
-beq_cont.29692:
-beq_cont.29688:
-	j	beq_cont.29684
-beq_else.29683:
+beq_cont.29582:
+beq_cont.29578:
+	j	beq_cont.29574
+beq_else.29573:
 	lui	r24 0
 	ori	r24 r24 0
 	mtc1	r24 f0
@@ -12305,23 +12201,23 @@ beq_else.29683:
 	lwoc1	r8 r6 f1
 	sub.s	f0 f1 f30
 	mfc1	f30 r25
-	blez	r25 bfle_nontail_else.29695
+	blez	r25 bfle_nontail_else.29585
 	addi	r0 r6 1
-	j	bfle_nontail_cont.29696
-bfle_nontail_else.29695:
+	j	bfle_nontail_cont.29586
+bfle_nontail_else.29585:
 	addi	r0 r6 0
-bfle_nontail_cont.29696:
+bfle_nontail_cont.29586:
 	addi	r0 r9 0
 	sub	r6 r9 r25
-	beq	r25 r0 beq_else.29697
-	addi	r30 r30 44
+	beq	r25 r0 beq_else.29587
+	addi	r30 r30 20
 	sw	r1 r30 0
 	sw	r31 r30 4
 	jal	min_caml_load_solver_dist
 	mov	r6 r1
 	lw	r30 r1 0
 	lw	r30 r31 4
-	addi	r30 r30 -44
+	addi	r30 r30 -20
 	addi	r0 r9 0
 	addi	r0 r10 0
 	sll	r10 r10 2
@@ -12333,34 +12229,34 @@ bfle_nontail_cont.29696:
 	sll	r9 r7 2
 	swoc1	f0 r6 r7
 	addi	r0 r1 1
-	j	beq_cont.29698
-beq_else.29697:
+	j	beq_cont.29588
+beq_else.29587:
 	addi	r0 r1 0
-beq_cont.29698:
-beq_cont.29684:
-	j	beq_cont.29682
-beq_else.29681:
+beq_cont.29588:
+beq_cont.29574:
+	j	beq_cont.29572
+beq_else.29571:
 	lw	r3 r7 0
-	sw	r31 r30 44
-	addi	r30 r30 48
+	sw	r31 r30 20
+	addi	r30 r30 24
 	mov	r3 r8
 	mov	r2 r7
 	mov	r1 r6
 	jal	solver_rect_fast.2937
-	addi	r30 r30 -48
-	lw	r30 r31 44
-beq_cont.29682:
+	addi	r30 r30 -24
+	lw	r30 r31 20
+beq_cont.29572:
 	addi	r0 r2 0
 	sub	r1 r2 r25
-	beq	r25 r0 beq_tail_else.29699
-	addi	r30 r30 44
+	beq	r25 r0 beq_tail_else.29589
+	addi	r30 r30 20
 	sw	r1 r30 0
 	sw	r31 r30 4
 	jal	min_caml_load_solver_dist
 	mov	r2 r1
 	lw	r30 r1 0
 	lw	r30 r31 4
-	addi	r30 r30 -44
+	addi	r30 r30 -20
 	addi	r0 r3 0
 	sll	r3 r3 2
 	lwoc1	r2 r3 f0
@@ -12373,23 +12269,23 @@ beq_cont.29682:
 	mtc1	r24 f2
 	sub.s	f1 f2 f30
 	mfc1	f30 r25
-	blez	r25 bfle_nontail_else.29700
+	blez	r25 bfle_nontail_else.29590
 	addi	r0 r2 1
-	j	bfle_nontail_cont.29701
-bfle_nontail_else.29700:
+	j	bfle_nontail_cont.29591
+bfle_nontail_else.29590:
 	addi	r0 r2 0
-bfle_nontail_cont.29701:
+bfle_nontail_cont.29591:
 	addi	r0 r3 0
 	sub	r2 r3 r25
-	beq	r25 r0 beq_else.29702
-	addi	r30 r30 44
+	beq	r25 r0 beq_else.29592
+	addi	r30 r30 20
 	sw	r1 r30 0
 	sw	r31 r30 4
 	jal	min_caml_load_tmin
 	mov	r2 r1
 	lw	r30 r1 0
 	lw	r30 r31 4
-	addi	r30 r30 -44
+	addi	r30 r30 -20
 	addi	r0 r3 0
 	sll	r3 r3 2
 	lwoc1	r2 r3 f1
@@ -12399,15 +12295,15 @@ bfle_nontail_cont.29701:
 	mtc1	r24 f2
 	sub.s	f1 f2 f30
 	mfc1	f30 r25
-	blez	r25 bfle_nontail_else.29704
+	blez	r25 bfle_nontail_else.29594
 	addi	r0 r2 1
-	j	bfle_nontail_cont.29705
-bfle_nontail_else.29704:
+	j	bfle_nontail_cont.29595
+bfle_nontail_else.29594:
 	addi	r0 r2 0
-bfle_nontail_cont.29705:
+bfle_nontail_cont.29595:
 	addi	r0 r3 0
 	sub	r2 r3 r25
-	beq	r25 r0 beq_else.29706
+	beq	r25 r0 beq_else.29596
 	lui	r24 15395
 	ori	r24 r24 55050
 	mtc1	r24 f1
@@ -12417,14 +12313,14 @@ bfle_nontail_cont.29705:
 	lw	r30 r3 0
 	lwoc1	r3 r2 f1
 	mul.s	f1 f0 f1
-	addi	r30 r30 44
+	addi	r30 r30 20
 	sw	r1 r30 0
 	sw	r31 r30 4
 	jal	min_caml_load_startp_fast
 	mov	r2 r1
 	lw	r30 r1 0
 	lw	r30 r31 4
-	addi	r30 r30 -44
+	addi	r30 r30 -20
 	addi	r0 r4 0
 	sll	r4 r4 2
 	lwoc1	r2 r4 f2
@@ -12433,14 +12329,14 @@ bfle_nontail_cont.29705:
 	sll	r2 r2 2
 	lwoc1	r3 r2 f2
 	mul.s	f2 f0 f2
-	addi	r30 r30 44
+	addi	r30 r30 20
 	sw	r1 r30 0
 	sw	r31 r30 4
 	jal	min_caml_load_startp_fast
 	mov	r2 r1
 	lw	r30 r1 0
 	lw	r30 r31 4
-	addi	r30 r30 -44
+	addi	r30 r30 -20
 	addi	r0 r4 1
 	sll	r4 r4 2
 	lwoc1	r2 r4 f3
@@ -12449,14 +12345,14 @@ bfle_nontail_cont.29705:
 	sll	r2 r2 2
 	lwoc1	r3 r2 f3
 	mul.s	f3 f0 f3
-	addi	r30 r30 44
+	addi	r30 r30 20
 	sw	r1 r30 0
 	sw	r31 r30 4
 	jal	min_caml_load_startp_fast
 	mov	r2 r1
 	lw	r30 r1 0
 	lw	r30 r31 4
-	addi	r30 r30 -44
+	addi	r30 r30 -20
 	addi	r0 r3 2
 	sll	r3 r3 2
 	lwoc1	r2 r3 f4
@@ -12466,80 +12362,80 @@ bfle_nontail_cont.29705:
 	lw	r30 r3 8
 	lwo	r3 r2 r2
 	addi	r0 r4 -1
-	sw	r1 r30 44
-	swc1	f3 r30 48
-	swc1	f2 r30 52
-	swc1	f1 r30 56
-	swc1	f0 r30 60
+	sw	r1 r30 20
+	swc1	f3 r30 24
+	swc1	f2 r30 28
+	swc1	f1 r30 32
+	swc1	f0 r30 36
 	sub	r2 r4 r25
-	beq	r25 r0 beq_else.29708
-	addi	r30 r30 64
+	beq	r25 r0 beq_else.29598
+	addi	r30 r30 40
 	sw	r1 r30 0
 	sw	r31 r30 4
 	jal	min_caml_load_objects
 	mov	r4 r1
 	lw	r30 r1 0
 	lw	r30 r31 4
-	addi	r30 r30 -64
+	addi	r30 r30 -40
 	sll	r2 r2 2
 	lwo	r4 r2 r2
-	sw	r31 r30 64
-	addi	r30 r30 68
+	sw	r31 r30 40
+	addi	r30 r30 44
 	mov	r1 r2
 	mov.s	f1 f0
 	mov.s	f2 f1
 	mov.s	f3 f2
 	jal	is_outside.3011
-	addi	r30 r30 -68
-	lw	r30 r31 64
+	addi	r30 r30 -44
+	lw	r30 r31 40
 	addi	r0 r2 0
 	sub	r1 r2 r25
-	beq	r25 r0 beq_else.29710
+	beq	r25 r0 beq_else.29600
 	addi	r0 r1 0
-	j	beq_cont.29711
-beq_else.29710:
+	j	beq_cont.29601
+beq_else.29600:
 	addi	r0 r1 1
 	sll	r1 r1 2
 	lw	r30 r2 8
 	lwo	r2 r1 r1
 	addi	r0 r3 -1
 	sub	r1 r3 r25
-	beq	r25 r0 beq_else.29712
-	addi	r30 r30 64
+	beq	r25 r0 beq_else.29602
+	addi	r30 r30 40
 	sw	r1 r30 0
 	sw	r31 r30 4
 	jal	min_caml_load_objects
 	mov	r3 r1
 	lw	r30 r1 0
 	lw	r30 r31 4
-	addi	r30 r30 -64
+	addi	r30 r30 -40
 	sll	r1 r1 2
 	lwo	r3 r1 r1
 	lw	r1 r3 20
 	addi	r0 r4 0
 	sll	r4 r4 2
 	lwoc1	r3 r4 f0
-	lwc1	 r30 f1 56
+	lwc1	 r30 f1 32
 	sub.s	f1 f0 f0
 	lw	r1 r3 20
 	addi	r0 r4 1
 	sll	r4 r4 2
 	lwoc1	r3 r4 f2
-	lwc1	 r30 f3 52
+	lwc1	 r30 f3 28
 	sub.s	f3 f2 f2
 	lw	r1 r3 20
 	addi	r0 r4 2
 	sll	r4 r4 2
 	lwoc1	r3 r4 f4
-	lwc1	 r30 f5 48
+	lwc1	 r30 f5 24
 	sub.s	f5 f4 f4
 	lw	r1 r3 4
 	addi	r0 r4 1
 	sub	r3 r4 r25
-	beq	r25 r0 beq_else.29714
+	beq	r25 r0 beq_else.29604
 	addi	r0 r4 2
 	sub	r3 r4 r25
-	beq	r25 r0 beq_else.29716
+	beq	r25 r0 beq_else.29606
 	mul.s	f0 f0 f6
 	lw	r1 r3 16
 	addi	r0 r4 0
@@ -12563,7 +12459,7 @@ beq_else.29710:
 	lw	r1 r3 12
 	addi	r0 r4 0
 	sub	r3 r4 r25
-	beq	r25 r0 beq_else.29718
+	beq	r25 r0 beq_else.29608
 	mul.s	f2 f4 f7
 	lw	r1 r3 36
 	addi	r0 r4 0
@@ -12585,58 +12481,58 @@ beq_else.29710:
 	lwoc1	r3 r4 f2
 	mul.s	f0 f2 f0
 	add.s	f4 f0 f0
-	j	beq_cont.29719
-beq_else.29718:
+	j	beq_cont.29609
+beq_else.29608:
 	mov.s	f6 f0
-beq_cont.29719:
+beq_cont.29609:
 	lw	r1 r3 4
 	addi	r0 r4 3
 	sub	r3 r4 r25
-	beq	r25 r0 beq_else.29720
-	j	beq_cont.29721
-beq_else.29720:
+	beq	r25 r0 beq_else.29610
+	j	beq_cont.29611
+beq_else.29610:
 	lui	r24 16256
 	ori	r24 r24 0
 	mtc1	r24 f2
 	sub.s	f0 f2 f0
-beq_cont.29721:
+beq_cont.29611:
 	lw	r1 r1 24
 	lui	r24 0
 	ori	r24 r24 0
 	mtc1	r24 f2
 	sub.s	f2 f0 f30
 	mfc1	f30 r25
-	blez	r25 bfle_nontail_else.29722
+	blez	r25 bfle_nontail_else.29612
 	addi	r0 r3 1
-	j	bfle_nontail_cont.29723
-bfle_nontail_else.29722:
+	j	bfle_nontail_cont.29613
+bfle_nontail_else.29612:
 	addi	r0 r3 0
-bfle_nontail_cont.29723:
+bfle_nontail_cont.29613:
 	addi	r0 r4 0
 	sub	r1 r4 r25
-	beq	r25 r0 beq_else.29724
+	beq	r25 r0 beq_else.29614
 	addi	r0 r1 0
 	sub	r3 r1 r25
-	beq	r25 r0 beq_else.29726
+	beq	r25 r0 beq_else.29616
 	addi	r0 r1 0
-	j	beq_cont.29727
-beq_else.29726:
+	j	beq_cont.29617
+beq_else.29616:
 	addi	r0 r1 1
-beq_cont.29727:
-	j	beq_cont.29725
-beq_else.29724:
+beq_cont.29617:
+	j	beq_cont.29615
+beq_else.29614:
 	mov	r1 r3
-beq_cont.29725:
+beq_cont.29615:
 	addi	r0 r3 0
 	sub	r1 r3 r25
-	beq	r25 r0 beq_else.29728
+	beq	r25 r0 beq_else.29618
 	addi	r0 r1 0
-	j	beq_cont.29729
-beq_else.29728:
+	j	beq_cont.29619
+beq_else.29618:
 	addi	r0 r1 1
-beq_cont.29729:
-	j	beq_cont.29717
-beq_else.29716:
+beq_cont.29619:
+	j	beq_cont.29607
+beq_else.29606:
 	lw	r1 r3 16
 	addi	r0 r4 0
 	sll	r4 r4 2
@@ -12658,38 +12554,38 @@ beq_else.29716:
 	mtc1	r24 f2
 	sub.s	f2 f0 f30
 	mfc1	f30 r25
-	blez	r25 bfle_nontail_else.29730
+	blez	r25 bfle_nontail_else.29620
 	addi	r0 r3 1
-	j	bfle_nontail_cont.29731
-bfle_nontail_else.29730:
+	j	bfle_nontail_cont.29621
+bfle_nontail_else.29620:
 	addi	r0 r3 0
-bfle_nontail_cont.29731:
+bfle_nontail_cont.29621:
 	addi	r0 r4 0
 	sub	r1 r4 r25
-	beq	r25 r0 beq_else.29732
+	beq	r25 r0 beq_else.29622
 	addi	r0 r1 0
 	sub	r3 r1 r25
-	beq	r25 r0 beq_else.29734
+	beq	r25 r0 beq_else.29624
 	addi	r0 r1 0
-	j	beq_cont.29735
-beq_else.29734:
+	j	beq_cont.29625
+beq_else.29624:
 	addi	r0 r1 1
-beq_cont.29735:
-	j	beq_cont.29733
-beq_else.29732:
+beq_cont.29625:
+	j	beq_cont.29623
+beq_else.29622:
 	mov	r1 r3
-beq_cont.29733:
+beq_cont.29623:
 	addi	r0 r3 0
 	sub	r1 r3 r25
-	beq	r25 r0 beq_else.29736
+	beq	r25 r0 beq_else.29626
 	addi	r0 r1 0
-	j	beq_cont.29737
-beq_else.29736:
+	j	beq_cont.29627
+beq_else.29626:
 	addi	r0 r1 1
-beq_cont.29737:
-beq_cont.29717:
-	j	beq_cont.29715
-beq_else.29714:
+beq_cont.29627:
+beq_cont.29607:
+	j	beq_cont.29605
+beq_else.29604:
 	lw	r1 r3 16
 	addi	r0 r4 0
 	sll	r4 r4 2
@@ -12701,15 +12597,15 @@ beq_else.29714:
 	mtc1	r24 f6
 	sub.s	f0 f6 f30
 	mfc1	f30 r25
-	blez	r25 bfle_nontail_else.29738
+	blez	r25 bfle_nontail_else.29628
 	addi	r0 r3 1
-	j	bfle_nontail_cont.29739
-bfle_nontail_else.29738:
+	j	bfle_nontail_cont.29629
+bfle_nontail_else.29628:
 	addi	r0 r3 0
-bfle_nontail_cont.29739:
+bfle_nontail_cont.29629:
 	addi	r0 r4 0
 	sub	r3 r4 r25
-	beq	r25 r0 beq_else.29740
+	beq	r25 r0 beq_else.29630
 	lw	r1 r3 16
 	addi	r0 r4 1
 	sll	r4 r4 2
@@ -12721,15 +12617,15 @@ bfle_nontail_cont.29739:
 	mtc1	r24 f2
 	sub.s	f0 f2 f30
 	mfc1	f30 r25
-	blez	r25 bfle_nontail_else.29742
+	blez	r25 bfle_nontail_else.29632
 	addi	r0 r3 1
-	j	bfle_nontail_cont.29743
-bfle_nontail_else.29742:
+	j	bfle_nontail_cont.29633
+bfle_nontail_else.29632:
 	addi	r0 r3 0
-bfle_nontail_cont.29743:
+bfle_nontail_cont.29633:
 	addi	r0 r4 0
 	sub	r3 r4 r25
-	beq	r25 r0 beq_else.29744
+	beq	r25 r0 beq_else.29634
 	lw	r1 r3 16
 	addi	r0 r4 2
 	sll	r4 r4 2
@@ -12741,199 +12637,199 @@ bfle_nontail_cont.29743:
 	mtc1	r24 f2
 	sub.s	f0 f2 f30
 	mfc1	f30 r25
-	blez	r25 bfle_nontail_else.29746
+	blez	r25 bfle_nontail_else.29636
 	addi	r0 r3 1
-	j	bfle_nontail_cont.29747
-bfle_nontail_else.29746:
+	j	bfle_nontail_cont.29637
+bfle_nontail_else.29636:
 	addi	r0 r3 0
-bfle_nontail_cont.29747:
-	j	beq_cont.29745
-beq_else.29744:
+bfle_nontail_cont.29637:
+	j	beq_cont.29635
+beq_else.29634:
 	addi	r0 r3 0
-beq_cont.29745:
-	j	beq_cont.29741
-beq_else.29740:
+beq_cont.29635:
+	j	beq_cont.29631
+beq_else.29630:
 	addi	r0 r3 0
-beq_cont.29741:
+beq_cont.29631:
 	addi	r0 r4 0
 	sub	r3 r4 r25
-	beq	r25 r0 beq_else.29748
+	beq	r25 r0 beq_else.29638
 	lw	r1 r1 24
-	j	beq_cont.29749
-beq_else.29748:
+	j	beq_cont.29639
+beq_else.29638:
 	lw	r1 r1 24
 	addi	r0 r3 0
 	sub	r1 r3 r25
-	beq	r25 r0 beq_else.29750
+	beq	r25 r0 beq_else.29640
 	addi	r0 r1 0
-	j	beq_cont.29751
-beq_else.29750:
+	j	beq_cont.29641
+beq_else.29640:
 	addi	r0 r1 1
-beq_cont.29751:
-beq_cont.29749:
-beq_cont.29715:
+beq_cont.29641:
+beq_cont.29639:
+beq_cont.29605:
 	addi	r0 r3 0
 	sub	r1 r3 r25
-	beq	r25 r0 beq_else.29752
+	beq	r25 r0 beq_else.29642
 	addi	r0 r1 0
-	j	beq_cont.29753
-beq_else.29752:
+	j	beq_cont.29643
+beq_else.29642:
 	addi	r0 r1 2
 	sll	r1 r1 2
 	lwo	r2 r1 r1
 	addi	r0 r3 -1
 	sub	r1 r3 r25
-	beq	r25 r0 beq_else.29754
-	addi	r30 r30 64
+	beq	r25 r0 beq_else.29644
+	addi	r30 r30 40
 	sw	r1 r30 0
 	sw	r31 r30 4
 	jal	min_caml_load_objects
 	mov	r3 r1
 	lw	r30 r1 0
 	lw	r30 r31 4
-	addi	r30 r30 -64
+	addi	r30 r30 -40
 	sll	r1 r1 2
 	lwo	r3 r1 r1
-	sw	r31 r30 64
-	addi	r30 r30 68
+	sw	r31 r30 40
+	addi	r30 r30 44
 	mov.s	f5 f2
 	mov.s	f1 f0
 	mov.s	f3 f1
 	jal	is_outside.3011
-	addi	r30 r30 -68
-	lw	r30 r31 64
+	addi	r30 r30 -44
+	lw	r30 r31 40
 	addi	r0 r2 0
 	sub	r1 r2 r25
-	beq	r25 r0 beq_else.29756
+	beq	r25 r0 beq_else.29646
 	addi	r0 r1 0
-	j	beq_cont.29757
-beq_else.29756:
+	j	beq_cont.29647
+beq_else.29646:
 	addi	r0 r1 3
-	lwc1	 r30 f0 56
-	lwc1	 r30 f1 52
-	lwc1	 r30 f2 48
+	lwc1	 r30 f0 32
+	lwc1	 r30 f1 28
+	lwc1	 r30 f2 24
 	lw	r30 r2 8
-	sw	r31 r30 64
-	addi	r30 r30 68
+	sw	r31 r30 40
+	addi	r30 r30 44
 	jal	check_all_inside.3016
-	addi	r30 r30 -68
-	lw	r30 r31 64
-beq_cont.29757:
-	j	beq_cont.29755
-beq_else.29754:
+	addi	r30 r30 -44
+	lw	r30 r31 40
+beq_cont.29647:
+	j	beq_cont.29645
+beq_else.29644:
 	addi	r0 r1 1
-beq_cont.29755:
-beq_cont.29753:
-	j	beq_cont.29713
-beq_else.29712:
+beq_cont.29645:
+beq_cont.29643:
+	j	beq_cont.29603
+beq_else.29602:
 	addi	r0 r1 1
-beq_cont.29713:
-beq_cont.29711:
-	j	beq_cont.29709
-beq_else.29708:
+beq_cont.29603:
+beq_cont.29601:
+	j	beq_cont.29599
+beq_else.29598:
 	addi	r0 r1 1
-beq_cont.29709:
+beq_cont.29599:
 	addi	r0 r2 0
 	sub	r1 r2 r25
-	beq	r25 r0 beq_else.29758
-	addi	r30 r30 64
+	beq	r25 r0 beq_else.29648
+	addi	r30 r30 40
 	sw	r1 r30 0
 	sw	r31 r30 4
 	jal	min_caml_load_tmin
 	mov	r1 r1
 	lw	r30 r31 4
-	addi	r30 r30 -64
+	addi	r30 r30 -40
 	addi	r0 r2 0
 	sll	r2 r2 2
-	lwc1	 r30 f0 60
+	lwc1	 r30 f0 36
 	swoc1	f0 r1 r2
-	addi	r30 r30 64
+	addi	r30 r30 40
 	sw	r1 r30 0
 	sw	r31 r30 4
 	jal	min_caml_load_intersection_point
 	mov	r1 r1
 	lw	r30 r31 4
-	addi	r30 r30 -64
+	addi	r30 r30 -40
 	addi	r0 r2 0
 	sll	r2 r2 2
-	lwc1	 r30 f0 56
+	lwc1	 r30 f0 32
 	swoc1	f0 r1 r2
 	addi	r0 r2 1
 	sll	r2 r2 2
-	lwc1	 r30 f0 52
+	lwc1	 r30 f0 28
 	swoc1	f0 r1 r2
 	addi	r0 r2 2
 	sll	r2 r2 2
-	lwc1	 r30 f0 48
+	lwc1	 r30 f0 24
 	swoc1	f0 r1 r2
-	addi	r30 r30 64
+	addi	r30 r30 40
 	sw	r1 r30 0
 	sw	r31 r30 4
 	jal	min_caml_load_intersected_object_id
 	mov	r1 r1
 	lw	r30 r31 4
-	addi	r30 r30 -64
+	addi	r30 r30 -40
 	addi	r0 r2 0
 	sll	r2 r2 2
 	lw	r30 r3 16
 	swo	r3 r1 r2
-	addi	r30 r30 64
+	addi	r30 r30 40
 	sw	r1 r30 0
 	sw	r31 r30 4
 	jal	min_caml_load_intsec_rectside
 	mov	r1 r1
 	lw	r30 r31 4
-	addi	r30 r30 -64
+	addi	r30 r30 -40
 	addi	r0 r2 0
 	sll	r2 r2 2
-	lw	r30 r3 44
+	lw	r30 r3 20
 	swo	r3 r1 r2
-	j	beq_cont.29759
-beq_else.29758:
-beq_cont.29759:
-	j	beq_cont.29707
-beq_else.29706:
-beq_cont.29707:
-	j	beq_cont.29703
-beq_else.29702:
-beq_cont.29703:
+	j	beq_cont.29649
+beq_else.29648:
+beq_cont.29649:
+	j	beq_cont.29597
+beq_else.29596:
+beq_cont.29597:
+	j	beq_cont.29593
+beq_else.29592:
+beq_cont.29593:
 	addi	r0 r1 1
 	lw	r30 r2 12
 	add	r2 r1 r1
 	lw	r30 r2 8
 	lw	r30 r3 4
 	j	solve_each_element_fast.3045
-beq_tail_else.29699:
-	addi	r30 r30 64
+beq_tail_else.29589:
+	addi	r30 r30 40
 	sw	r1 r30 0
 	sw	r31 r30 4
 	jal	min_caml_load_objects
 	mov	r1 r1
 	lw	r30 r31 4
-	addi	r30 r30 -64
+	addi	r30 r30 -40
 	lw	r30 r2 16
 	sll	r2 r2 2
 	lwo	r1 r2 r1
 	lw	r1 r1 24
 	addi	r0 r2 0
 	sub	r1 r2 r25
-	beq	r25 r0 beq_tail_else.29760
+	beq	r25 r0 beq_tail_else.29650
 	addi	r0 r1 1
 	lw	r30 r2 12
 	add	r2 r1 r1
 	lw	r30 r2 8
 	lw	r30 r3 4
 	j	solve_each_element_fast.3045
-beq_tail_else.29760:
+beq_tail_else.29650:
 	jr	r31
-beq_tail_else.29680:
+beq_tail_else.29570:
 	jr	r31
 solve_one_or_network_fast.3049:
 	sll	r1 r4 2
 	lwo	r2 r4 r4
 	addi	r0 r5 -1
 	sub	r4 r5 r25
-	beq	r25 r0 beq_tail_else.29763
+	beq	r25 r0 beq_tail_else.29653
 	addi	r30 r30 0
 	sw	r1 r30 0
 	sw	r31 r30 4
@@ -12963,7 +12859,7 @@ solve_one_or_network_fast.3049:
 	lwo	r3 r2 r2
 	addi	r0 r4 -1
 	sub	r2 r4 r25
-	beq	r25 r0 beq_tail_else.29764
+	beq	r25 r0 beq_tail_else.29654
 	addi	r30 r30 12
 	sw	r1 r30 0
 	sw	r31 r30 4
@@ -12992,7 +12888,7 @@ solve_one_or_network_fast.3049:
 	lwo	r3 r2 r2
 	addi	r0 r4 -1
 	sub	r2 r4 r25
-	beq	r25 r0 beq_tail_else.29765
+	beq	r25 r0 beq_tail_else.29655
 	addi	r30 r30 16
 	sw	r1 r30 0
 	sw	r31 r30 4
@@ -13021,7 +12917,7 @@ solve_one_or_network_fast.3049:
 	lwo	r3 r2 r2
 	addi	r0 r4 -1
 	sub	r2 r4 r25
-	beq	r25 r0 beq_tail_else.29766
+	beq	r25 r0 beq_tail_else.29656
 	addi	r30 r30 20
 	sw	r1 r30 0
 	sw	r31 r30 4
@@ -13050,7 +12946,7 @@ solve_one_or_network_fast.3049:
 	lwo	r3 r2 r2
 	addi	r0 r4 -1
 	sub	r2 r4 r25
-	beq	r25 r0 beq_tail_else.29767
+	beq	r25 r0 beq_tail_else.29657
 	addi	r30 r30 24
 	sw	r1 r30 0
 	sw	r31 r30 4
@@ -13079,7 +12975,7 @@ solve_one_or_network_fast.3049:
 	lwo	r3 r2 r2
 	addi	r0 r4 -1
 	sub	r2 r4 r25
-	beq	r25 r0 beq_tail_else.29768
+	beq	r25 r0 beq_tail_else.29658
 	addi	r30 r30 28
 	sw	r1 r30 0
 	sw	r31 r30 4
@@ -13108,7 +13004,7 @@ solve_one_or_network_fast.3049:
 	lwo	r3 r2 r2
 	addi	r0 r4 -1
 	sub	r2 r4 r25
-	beq	r25 r0 beq_tail_else.29769
+	beq	r25 r0 beq_tail_else.29659
 	addi	r30 r30 32
 	sw	r1 r30 0
 	sw	r31 r30 4
@@ -13137,7 +13033,7 @@ solve_one_or_network_fast.3049:
 	lwo	r3 r2 r2
 	addi	r0 r4 -1
 	sub	r2 r4 r25
-	beq	r25 r0 beq_tail_else.29770
+	beq	r25 r0 beq_tail_else.29660
 	addi	r30 r30 36
 	sw	r1 r30 0
 	sw	r31 r30 4
@@ -13164,21 +13060,21 @@ solve_one_or_network_fast.3049:
 	lw	r30 r2 4
 	lw	r30 r3 0
 	j	solve_one_or_network_fast.3049
-beq_tail_else.29770:
+beq_tail_else.29660:
 	jr	r31
-beq_tail_else.29769:
+beq_tail_else.29659:
 	jr	r31
-beq_tail_else.29768:
+beq_tail_else.29658:
 	jr	r31
-beq_tail_else.29767:
+beq_tail_else.29657:
 	jr	r31
-beq_tail_else.29766:
+beq_tail_else.29656:
 	jr	r31
-beq_tail_else.29765:
+beq_tail_else.29655:
 	jr	r31
-beq_tail_else.29764:
+beq_tail_else.29654:
 	jr	r31
-beq_tail_else.29763:
+beq_tail_else.29653:
 	jr	r31
 trace_or_matrix_fast.3053:
 	sll	r1 r4 2
@@ -13188,13 +13084,13 @@ trace_or_matrix_fast.3053:
 	lwo	r4 r5 r5
 	addi	r0 r6 -1
 	sub	r5 r6 r25
-	beq	r25 r0 beq_tail_else.29779
+	beq	r25 r0 beq_tail_else.29669
 	addi	r0 r6 99
 	sw	r3 r30 0
 	sw	r2 r30 4
 	sw	r1 r30 8
 	sub	r5 r6 r25
-	beq	r25 r0 beq_else.29780
+	beq	r25 r0 beq_else.29670
 	addi	r30 r30 12
 	sw	r1 r30 0
 	sw	r31 r30 4
@@ -13222,10 +13118,10 @@ trace_or_matrix_fast.3053:
 	addi	r0 r9 1
 	sw	r4 r30 12
 	sub	r8 r9 r25
-	beq	r25 r0 beq_else.29782
+	beq	r25 r0 beq_else.29672
 	addi	r0 r9 2
 	sub	r8 r9 r25
-	beq	r25 r0 beq_else.29784
+	beq	r25 r0 beq_else.29674
 	addi	r0 r8 0
 	sll	r8 r8 2
 	lwoc1	r5 r8 f3
@@ -13235,18 +13131,18 @@ trace_or_matrix_fast.3053:
 	sub.s	f3 f4 f30
 	mfc1	f30 r25
 	sll	r25 r25 1
-	beq	r25 r0 bfeq_nontail_else.29786
+	beq	r25 r0 bfeq_nontail_else.29676
 	addi	r0 r8 0
-	j	bfeq_nontail_cont.29787
-bfeq_nontail_else.29786:
+	j	bfeq_nontail_cont.29677
+bfeq_nontail_else.29676:
 	addi	r0 r8 1
-bfeq_nontail_cont.29787:
+bfeq_nontail_cont.29677:
 	addi	r0 r9 0
 	sub	r8 r9 r25
-	beq	r25 r0 beq_else.29788
+	beq	r25 r0 beq_else.29678
 	addi	r0 r1 0
-	j	beq_cont.29789
-beq_else.29788:
+	j	beq_cont.29679
+beq_else.29678:
 	addi	r0 r8 1
 	sll	r8 r8 2
 	lwoc1	r5 r8 f4
@@ -13272,19 +13168,19 @@ beq_else.29788:
 	mtc1	r24 f2
 	sub.s	f1 f2 f30
 	mfc1	f30 r25
-	blez	r25 bfle_nontail_else.29790
+	blez	r25 bfle_nontail_else.29680
 	addi	r0 r7 1
-	j	bfle_nontail_cont.29791
-bfle_nontail_else.29790:
+	j	bfle_nontail_cont.29681
+bfle_nontail_else.29680:
 	addi	r0 r7 0
-bfle_nontail_cont.29791:
+bfle_nontail_cont.29681:
 	addi	r0 r8 0
 	sub	r7 r8 r25
-	beq	r25 r0 beq_else.29792
+	beq	r25 r0 beq_else.29682
 	lw	r6 r6 24
 	addi	r0 r7 0
 	sub	r6 r7 r25
-	beq	r25 r0 beq_else.29794
+	beq	r25 r0 beq_else.29684
 	addi	r30 r30 16
 	sw	r1 r30 0
 	sw	r31 r30 4
@@ -13294,68 +13190,42 @@ bfle_nontail_cont.29791:
 	lw	r30 r31 4
 	addi	r30 r30 -16
 	addi	r0 r7 0
-	sw	r6 r30 16
-	sw	r7 r30 20
-	sw	r5 r30 24
-	swc1	f0 r30 28
-	sw	r31 r30 32
-	addi	r30 r30 36
-	mov.s	f1 f0
-	jal	min_caml_sqrt
-	addi	r30 r30 -36
-	lw	r30 r31 32
-	lwc1	 r30 f1 28
-	add.s	f1 f0 f0
-	addi	r0 r1 4
-	sll	r1 r1 2
-	lw	r30 r2 24
-	lwoc1	r2 r1 f1
+	sqrt.s	f1 f1
+	add.s	f0 f1 f0
+	addi	r0 r8 4
+	sll	r8 r8 2
+	lwoc1	r5 r8 f1
 	mul.s	f0 f1 f0
-	lw	r30 r1 20
-	sll	r1 r1 2
-	lw	r30 r2 16
-	swoc1	f0 r2 r1
-	j	beq_cont.29795
-beq_else.29794:
-	addi	r30 r30 32
+	sll	r7 r5 2
+	swoc1	f0 r6 r5
+	j	beq_cont.29685
+beq_else.29684:
+	addi	r30 r30 16
 	sw	r1 r30 0
 	sw	r31 r30 4
 	jal	min_caml_load_solver_dist
 	mov	r6 r1
 	lw	r30 r1 0
 	lw	r30 r31 4
-	addi	r30 r30 -32
+	addi	r30 r30 -16
 	addi	r0 r7 0
-	sw	r6 r30 32
-	sw	r7 r30 36
-	sw	r5 r30 24
-	swc1	f0 r30 28
-	sw	r31 r30 40
-	addi	r30 r30 44
-	mov.s	f1 f0
-	jal	min_caml_sqrt
-	addi	r30 r30 -44
-	lw	r30 r31 40
-	lwc1	 r30 f1 28
-	sub.s	f1 f0 f0
-	addi	r0 r1 4
-	sll	r1 r1 2
-	lw	r30 r2 24
-	lwoc1	r2 r1 f1
+	sqrt.s	f1 f1
+	sub.s	f0 f1 f0
+	addi	r0 r8 4
+	sll	r8 r8 2
+	lwoc1	r5 r8 f1
 	mul.s	f0 f1 f0
-	lw	r30 r1 36
-	sll	r1 r1 2
-	lw	r30 r2 32
-	swoc1	f0 r2 r1
-beq_cont.29795:
+	sll	r7 r5 2
+	swoc1	f0 r6 r5
+beq_cont.29685:
 	addi	r0 r1 1
-	j	beq_cont.29793
-beq_else.29792:
+	j	beq_cont.29683
+beq_else.29682:
 	addi	r0 r1 0
-beq_cont.29793:
-beq_cont.29789:
-	j	beq_cont.29785
-beq_else.29784:
+beq_cont.29683:
+beq_cont.29679:
+	j	beq_cont.29675
+beq_else.29674:
 	lui	r24 0
 	ori	r24 r24 0
 	mtc1	r24 f0
@@ -13364,23 +13234,23 @@ beq_else.29784:
 	lwoc1	r5 r6 f1
 	sub.s	f0 f1 f30
 	mfc1	f30 r25
-	blez	r25 bfle_nontail_else.29796
+	blez	r25 bfle_nontail_else.29686
 	addi	r0 r6 1
-	j	bfle_nontail_cont.29797
-bfle_nontail_else.29796:
+	j	bfle_nontail_cont.29687
+bfle_nontail_else.29686:
 	addi	r0 r6 0
-bfle_nontail_cont.29797:
+bfle_nontail_cont.29687:
 	addi	r0 r8 0
 	sub	r6 r8 r25
-	beq	r25 r0 beq_else.29798
-	addi	r30 r30 40
+	beq	r25 r0 beq_else.29688
+	addi	r30 r30 16
 	sw	r1 r30 0
 	sw	r31 r30 4
 	jal	min_caml_load_solver_dist
 	mov	r6 r1
 	lw	r30 r1 0
 	lw	r30 r31 4
-	addi	r30 r30 -40
+	addi	r30 r30 -16
 	addi	r0 r8 0
 	addi	r0 r9 0
 	sll	r9 r9 2
@@ -13392,43 +13262,43 @@ bfle_nontail_cont.29797:
 	sll	r8 r5 2
 	swoc1	f0 r6 r5
 	addi	r0 r1 1
-	j	beq_cont.29799
-beq_else.29798:
+	j	beq_cont.29689
+beq_else.29688:
 	addi	r0 r1 0
-beq_cont.29799:
-beq_cont.29785:
-	j	beq_cont.29783
-beq_else.29782:
+beq_cont.29689:
+beq_cont.29675:
+	j	beq_cont.29673
+beq_else.29672:
 	lw	r3 r7 0
-	sw	r31 r30 40
-	addi	r30 r30 44
+	sw	r31 r30 16
+	addi	r30 r30 20
 	mov	r3 r5
 	mov	r2 r7
 	mov	r1 r6
 	jal	solver_rect_fast.2937
-	addi	r30 r30 -44
-	lw	r30 r31 40
-beq_cont.29783:
+	addi	r30 r30 -20
+	lw	r30 r31 16
+beq_cont.29673:
 	addi	r0 r2 0
 	sub	r1 r2 r25
-	beq	r25 r0 beq_else.29800
-	addi	r30 r30 40
+	beq	r25 r0 beq_else.29690
+	addi	r30 r30 16
 	sw	r1 r30 0
 	sw	r31 r30 4
 	jal	min_caml_load_solver_dist
 	mov	r1 r1
 	lw	r30 r31 4
-	addi	r30 r30 -40
+	addi	r30 r30 -16
 	addi	r0 r2 0
 	sll	r2 r2 2
 	lwoc1	r1 r2 f0
-	addi	r30 r30 40
+	addi	r30 r30 16
 	sw	r1 r30 0
 	sw	r31 r30 4
 	jal	min_caml_load_tmin
 	mov	r1 r1
 	lw	r30 r31 4
-	addi	r30 r30 -40
+	addi	r30 r30 -16
 	addi	r0 r2 0
 	sll	r2 r2 2
 	lwoc1	r1 r2 f1
@@ -13438,458 +13308,458 @@ beq_cont.29783:
 	mtc1	r24 f1
 	sub.s	f0 f1 f30
 	mfc1	f30 r25
-	blez	r25 bfle_nontail_else.29802
+	blez	r25 bfle_nontail_else.29692
 	addi	r0 r1 1
-	j	bfle_nontail_cont.29803
-bfle_nontail_else.29802:
+	j	bfle_nontail_cont.29693
+bfle_nontail_else.29692:
 	addi	r0 r1 0
-bfle_nontail_cont.29803:
+bfle_nontail_cont.29693:
 	addi	r0 r2 0
 	sub	r1 r2 r25
-	beq	r25 r0 beq_else.29804
+	beq	r25 r0 beq_else.29694
 	addi	r0 r1 1
 	sll	r1 r1 2
 	lw	r30 r2 12
 	lwo	r2 r1 r1
 	addi	r0 r3 -1
 	sub	r1 r3 r25
-	beq	r25 r0 beq_else.29806
-	addi	r30 r30 40
+	beq	r25 r0 beq_else.29696
+	addi	r30 r30 16
 	sw	r1 r30 0
 	sw	r31 r30 4
 	jal	min_caml_load_and_net
 	mov	r3 r1
 	lw	r30 r1 0
 	lw	r30 r31 4
-	addi	r30 r30 -40
+	addi	r30 r30 -16
 	sll	r1 r1 2
 	lwo	r3 r1 r1
 	addi	r0 r3 0
 	lw	r30 r4 0
-	sw	r31 r30 40
-	addi	r30 r30 44
+	sw	r31 r30 16
+	addi	r30 r30 20
 	mov	r2 r1
 	mov	r1 r3
 	mov	r3 r4
 	jal	solve_each_element_fast.3045
-	addi	r30 r30 -44
-	lw	r30 r31 40
+	addi	r30 r30 -20
+	lw	r30 r31 16
 	addi	r0 r1 2
 	sll	r1 r1 2
 	lw	r30 r2 12
 	lwo	r2 r1 r1
 	addi	r0 r3 -1
 	sub	r1 r3 r25
-	beq	r25 r0 beq_else.29808
-	addi	r30 r30 40
+	beq	r25 r0 beq_else.29698
+	addi	r30 r30 16
 	sw	r1 r30 0
 	sw	r31 r30 4
 	jal	min_caml_load_and_net
 	mov	r3 r1
 	lw	r30 r1 0
 	lw	r30 r31 4
-	addi	r30 r30 -40
+	addi	r30 r30 -16
 	sll	r1 r1 2
 	lwo	r3 r1 r1
 	addi	r0 r3 0
 	lw	r30 r4 0
-	sw	r31 r30 40
-	addi	r30 r30 44
+	sw	r31 r30 16
+	addi	r30 r30 20
 	mov	r2 r1
 	mov	r1 r3
 	mov	r3 r4
 	jal	solve_each_element_fast.3045
-	addi	r30 r30 -44
-	lw	r30 r31 40
+	addi	r30 r30 -20
+	lw	r30 r31 16
 	addi	r0 r1 3
 	sll	r1 r1 2
 	lw	r30 r2 12
 	lwo	r2 r1 r1
 	addi	r0 r3 -1
 	sub	r1 r3 r25
-	beq	r25 r0 beq_else.29810
-	addi	r30 r30 40
+	beq	r25 r0 beq_else.29700
+	addi	r30 r30 16
 	sw	r1 r30 0
 	sw	r31 r30 4
 	jal	min_caml_load_and_net
 	mov	r3 r1
 	lw	r30 r1 0
 	lw	r30 r31 4
-	addi	r30 r30 -40
+	addi	r30 r30 -16
 	sll	r1 r1 2
 	lwo	r3 r1 r1
 	addi	r0 r3 0
 	lw	r30 r4 0
-	sw	r31 r30 40
-	addi	r30 r30 44
+	sw	r31 r30 16
+	addi	r30 r30 20
 	mov	r2 r1
 	mov	r1 r3
 	mov	r3 r4
 	jal	solve_each_element_fast.3045
-	addi	r30 r30 -44
-	lw	r30 r31 40
+	addi	r30 r30 -20
+	lw	r30 r31 16
 	addi	r0 r1 4
 	sll	r1 r1 2
 	lw	r30 r2 12
 	lwo	r2 r1 r1
 	addi	r0 r3 -1
 	sub	r1 r3 r25
-	beq	r25 r0 beq_else.29812
-	addi	r30 r30 40
+	beq	r25 r0 beq_else.29702
+	addi	r30 r30 16
 	sw	r1 r30 0
 	sw	r31 r30 4
 	jal	min_caml_load_and_net
 	mov	r3 r1
 	lw	r30 r1 0
 	lw	r30 r31 4
-	addi	r30 r30 -40
+	addi	r30 r30 -16
 	sll	r1 r1 2
 	lwo	r3 r1 r1
 	addi	r0 r3 0
 	lw	r30 r4 0
-	sw	r31 r30 40
-	addi	r30 r30 44
+	sw	r31 r30 16
+	addi	r30 r30 20
 	mov	r2 r1
 	mov	r1 r3
 	mov	r3 r4
 	jal	solve_each_element_fast.3045
-	addi	r30 r30 -44
-	lw	r30 r31 40
+	addi	r30 r30 -20
+	lw	r30 r31 16
 	addi	r0 r1 5
 	sll	r1 r1 2
 	lw	r30 r2 12
 	lwo	r2 r1 r1
 	addi	r0 r3 -1
 	sub	r1 r3 r25
-	beq	r25 r0 beq_else.29814
-	addi	r30 r30 40
+	beq	r25 r0 beq_else.29704
+	addi	r30 r30 16
 	sw	r1 r30 0
 	sw	r31 r30 4
 	jal	min_caml_load_and_net
 	mov	r3 r1
 	lw	r30 r1 0
 	lw	r30 r31 4
-	addi	r30 r30 -40
+	addi	r30 r30 -16
 	sll	r1 r1 2
 	lwo	r3 r1 r1
 	addi	r0 r3 0
 	lw	r30 r4 0
-	sw	r31 r30 40
-	addi	r30 r30 44
+	sw	r31 r30 16
+	addi	r30 r30 20
 	mov	r2 r1
 	mov	r1 r3
 	mov	r3 r4
 	jal	solve_each_element_fast.3045
-	addi	r30 r30 -44
-	lw	r30 r31 40
+	addi	r30 r30 -20
+	lw	r30 r31 16
 	addi	r0 r1 6
 	sll	r1 r1 2
 	lw	r30 r2 12
 	lwo	r2 r1 r1
 	addi	r0 r3 -1
 	sub	r1 r3 r25
-	beq	r25 r0 beq_else.29816
-	addi	r30 r30 40
+	beq	r25 r0 beq_else.29706
+	addi	r30 r30 16
 	sw	r1 r30 0
 	sw	r31 r30 4
 	jal	min_caml_load_and_net
 	mov	r3 r1
 	lw	r30 r1 0
 	lw	r30 r31 4
-	addi	r30 r30 -40
+	addi	r30 r30 -16
 	sll	r1 r1 2
 	lwo	r3 r1 r1
 	addi	r0 r3 0
 	lw	r30 r4 0
-	sw	r31 r30 40
-	addi	r30 r30 44
+	sw	r31 r30 16
+	addi	r30 r30 20
 	mov	r2 r1
 	mov	r1 r3
 	mov	r3 r4
 	jal	solve_each_element_fast.3045
-	addi	r30 r30 -44
-	lw	r30 r31 40
+	addi	r30 r30 -20
+	lw	r30 r31 16
 	addi	r0 r1 7
 	sll	r1 r1 2
 	lw	r30 r2 12
 	lwo	r2 r1 r1
 	addi	r0 r3 -1
 	sub	r1 r3 r25
-	beq	r25 r0 beq_else.29818
-	addi	r30 r30 40
+	beq	r25 r0 beq_else.29708
+	addi	r30 r30 16
 	sw	r1 r30 0
 	sw	r31 r30 4
 	jal	min_caml_load_and_net
 	mov	r3 r1
 	lw	r30 r1 0
 	lw	r30 r31 4
-	addi	r30 r30 -40
+	addi	r30 r30 -16
 	sll	r1 r1 2
 	lwo	r3 r1 r1
 	addi	r0 r3 0
 	lw	r30 r4 0
-	sw	r31 r30 40
-	addi	r30 r30 44
+	sw	r31 r30 16
+	addi	r30 r30 20
 	mov	r2 r1
 	mov	r1 r3
 	mov	r3 r4
 	jal	solve_each_element_fast.3045
-	addi	r30 r30 -44
-	lw	r30 r31 40
+	addi	r30 r30 -20
+	lw	r30 r31 16
 	addi	r0 r1 8
 	lw	r30 r2 12
 	lw	r30 r3 0
-	sw	r31 r30 40
-	addi	r30 r30 44
+	sw	r31 r30 16
+	addi	r30 r30 20
 	jal	solve_one_or_network_fast.3049
-	addi	r30 r30 -44
-	lw	r30 r31 40
-	j	beq_cont.29819
-beq_else.29818:
-beq_cont.29819:
-	j	beq_cont.29817
-beq_else.29816:
-beq_cont.29817:
-	j	beq_cont.29815
-beq_else.29814:
-beq_cont.29815:
-	j	beq_cont.29813
-beq_else.29812:
-beq_cont.29813:
-	j	beq_cont.29811
-beq_else.29810:
-beq_cont.29811:
-	j	beq_cont.29809
-beq_else.29808:
-beq_cont.29809:
-	j	beq_cont.29807
-beq_else.29806:
-beq_cont.29807:
-	j	beq_cont.29805
-beq_else.29804:
-beq_cont.29805:
-	j	beq_cont.29801
-beq_else.29800:
-beq_cont.29801:
-	j	beq_cont.29781
-beq_else.29780:
+	addi	r30 r30 -20
+	lw	r30 r31 16
+	j	beq_cont.29709
+beq_else.29708:
+beq_cont.29709:
+	j	beq_cont.29707
+beq_else.29706:
+beq_cont.29707:
+	j	beq_cont.29705
+beq_else.29704:
+beq_cont.29705:
+	j	beq_cont.29703
+beq_else.29702:
+beq_cont.29703:
+	j	beq_cont.29701
+beq_else.29700:
+beq_cont.29701:
+	j	beq_cont.29699
+beq_else.29698:
+beq_cont.29699:
+	j	beq_cont.29697
+beq_else.29696:
+beq_cont.29697:
+	j	beq_cont.29695
+beq_else.29694:
+beq_cont.29695:
+	j	beq_cont.29691
+beq_else.29690:
+beq_cont.29691:
+	j	beq_cont.29671
+beq_else.29670:
 	addi	r0 r5 1
 	sll	r5 r5 2
 	lwo	r4 r5 r5
 	addi	r0 r6 -1
 	sub	r5 r6 r25
-	beq	r25 r0 beq_else.29820
-	addi	r30 r30 40
+	beq	r25 r0 beq_else.29710
+	addi	r30 r30 16
 	sw	r1 r30 0
 	sw	r31 r30 4
 	jal	min_caml_load_and_net
 	mov	r6 r1
 	lw	r30 r1 0
 	lw	r30 r31 4
-	addi	r30 r30 -40
+	addi	r30 r30 -16
 	sll	r5 r5 2
 	lwo	r6 r5 r5
 	addi	r0 r6 0
 	sw	r4 r30 12
-	sw	r31 r30 40
-	addi	r30 r30 44
+	sw	r31 r30 16
+	addi	r30 r30 20
 	mov	r2 r5
 	mov	r1 r6
 	jal	solve_each_element_fast.3045
-	addi	r30 r30 -44
-	lw	r30 r31 40
+	addi	r30 r30 -20
+	lw	r30 r31 16
 	addi	r0 r1 2
 	sll	r1 r1 2
 	lw	r30 r2 12
 	lwo	r2 r1 r1
 	addi	r0 r3 -1
 	sub	r1 r3 r25
-	beq	r25 r0 beq_else.29822
-	addi	r30 r30 40
+	beq	r25 r0 beq_else.29712
+	addi	r30 r30 16
 	sw	r1 r30 0
 	sw	r31 r30 4
 	jal	min_caml_load_and_net
 	mov	r3 r1
 	lw	r30 r1 0
 	lw	r30 r31 4
-	addi	r30 r30 -40
+	addi	r30 r30 -16
 	sll	r1 r1 2
 	lwo	r3 r1 r1
 	addi	r0 r3 0
 	lw	r30 r4 0
-	sw	r31 r30 40
-	addi	r30 r30 44
+	sw	r31 r30 16
+	addi	r30 r30 20
 	mov	r2 r1
 	mov	r1 r3
 	mov	r3 r4
 	jal	solve_each_element_fast.3045
-	addi	r30 r30 -44
-	lw	r30 r31 40
+	addi	r30 r30 -20
+	lw	r30 r31 16
 	addi	r0 r1 3
 	sll	r1 r1 2
 	lw	r30 r2 12
 	lwo	r2 r1 r1
 	addi	r0 r3 -1
 	sub	r1 r3 r25
-	beq	r25 r0 beq_else.29824
-	addi	r30 r30 40
+	beq	r25 r0 beq_else.29714
+	addi	r30 r30 16
 	sw	r1 r30 0
 	sw	r31 r30 4
 	jal	min_caml_load_and_net
 	mov	r3 r1
 	lw	r30 r1 0
 	lw	r30 r31 4
-	addi	r30 r30 -40
+	addi	r30 r30 -16
 	sll	r1 r1 2
 	lwo	r3 r1 r1
 	addi	r0 r3 0
 	lw	r30 r4 0
-	sw	r31 r30 40
-	addi	r30 r30 44
+	sw	r31 r30 16
+	addi	r30 r30 20
 	mov	r2 r1
 	mov	r1 r3
 	mov	r3 r4
 	jal	solve_each_element_fast.3045
-	addi	r30 r30 -44
-	lw	r30 r31 40
+	addi	r30 r30 -20
+	lw	r30 r31 16
 	addi	r0 r1 4
 	sll	r1 r1 2
 	lw	r30 r2 12
 	lwo	r2 r1 r1
 	addi	r0 r3 -1
 	sub	r1 r3 r25
-	beq	r25 r0 beq_else.29826
-	addi	r30 r30 40
+	beq	r25 r0 beq_else.29716
+	addi	r30 r30 16
 	sw	r1 r30 0
 	sw	r31 r30 4
 	jal	min_caml_load_and_net
 	mov	r3 r1
 	lw	r30 r1 0
 	lw	r30 r31 4
-	addi	r30 r30 -40
+	addi	r30 r30 -16
 	sll	r1 r1 2
 	lwo	r3 r1 r1
 	addi	r0 r3 0
 	lw	r30 r4 0
-	sw	r31 r30 40
-	addi	r30 r30 44
+	sw	r31 r30 16
+	addi	r30 r30 20
 	mov	r2 r1
 	mov	r1 r3
 	mov	r3 r4
 	jal	solve_each_element_fast.3045
-	addi	r30 r30 -44
-	lw	r30 r31 40
+	addi	r30 r30 -20
+	lw	r30 r31 16
 	addi	r0 r1 5
 	sll	r1 r1 2
 	lw	r30 r2 12
 	lwo	r2 r1 r1
 	addi	r0 r3 -1
 	sub	r1 r3 r25
-	beq	r25 r0 beq_else.29828
-	addi	r30 r30 40
+	beq	r25 r0 beq_else.29718
+	addi	r30 r30 16
 	sw	r1 r30 0
 	sw	r31 r30 4
 	jal	min_caml_load_and_net
 	mov	r3 r1
 	lw	r30 r1 0
 	lw	r30 r31 4
-	addi	r30 r30 -40
+	addi	r30 r30 -16
 	sll	r1 r1 2
 	lwo	r3 r1 r1
 	addi	r0 r3 0
 	lw	r30 r4 0
-	sw	r31 r30 40
-	addi	r30 r30 44
+	sw	r31 r30 16
+	addi	r30 r30 20
 	mov	r2 r1
 	mov	r1 r3
 	mov	r3 r4
 	jal	solve_each_element_fast.3045
-	addi	r30 r30 -44
-	lw	r30 r31 40
+	addi	r30 r30 -20
+	lw	r30 r31 16
 	addi	r0 r1 6
 	sll	r1 r1 2
 	lw	r30 r2 12
 	lwo	r2 r1 r1
 	addi	r0 r3 -1
 	sub	r1 r3 r25
-	beq	r25 r0 beq_else.29830
-	addi	r30 r30 40
+	beq	r25 r0 beq_else.29720
+	addi	r30 r30 16
 	sw	r1 r30 0
 	sw	r31 r30 4
 	jal	min_caml_load_and_net
 	mov	r3 r1
 	lw	r30 r1 0
 	lw	r30 r31 4
-	addi	r30 r30 -40
+	addi	r30 r30 -16
 	sll	r1 r1 2
 	lwo	r3 r1 r1
 	addi	r0 r3 0
 	lw	r30 r4 0
-	sw	r31 r30 40
-	addi	r30 r30 44
+	sw	r31 r30 16
+	addi	r30 r30 20
 	mov	r2 r1
 	mov	r1 r3
 	mov	r3 r4
 	jal	solve_each_element_fast.3045
-	addi	r30 r30 -44
-	lw	r30 r31 40
+	addi	r30 r30 -20
+	lw	r30 r31 16
 	addi	r0 r1 7
 	sll	r1 r1 2
 	lw	r30 r2 12
 	lwo	r2 r1 r1
 	addi	r0 r3 -1
 	sub	r1 r3 r25
-	beq	r25 r0 beq_else.29832
-	addi	r30 r30 40
+	beq	r25 r0 beq_else.29722
+	addi	r30 r30 16
 	sw	r1 r30 0
 	sw	r31 r30 4
 	jal	min_caml_load_and_net
 	mov	r3 r1
 	lw	r30 r1 0
 	lw	r30 r31 4
-	addi	r30 r30 -40
+	addi	r30 r30 -16
 	sll	r1 r1 2
 	lwo	r3 r1 r1
 	addi	r0 r3 0
 	lw	r30 r4 0
-	sw	r31 r30 40
-	addi	r30 r30 44
+	sw	r31 r30 16
+	addi	r30 r30 20
 	mov	r2 r1
 	mov	r1 r3
 	mov	r3 r4
 	jal	solve_each_element_fast.3045
-	addi	r30 r30 -44
-	lw	r30 r31 40
+	addi	r30 r30 -20
+	lw	r30 r31 16
 	addi	r0 r1 8
 	lw	r30 r2 12
 	lw	r30 r3 0
-	sw	r31 r30 40
-	addi	r30 r30 44
+	sw	r31 r30 16
+	addi	r30 r30 20
 	jal	solve_one_or_network_fast.3049
-	addi	r30 r30 -44
-	lw	r30 r31 40
-	j	beq_cont.29833
-beq_else.29832:
-beq_cont.29833:
-	j	beq_cont.29831
-beq_else.29830:
-beq_cont.29831:
-	j	beq_cont.29829
-beq_else.29828:
-beq_cont.29829:
-	j	beq_cont.29827
-beq_else.29826:
-beq_cont.29827:
-	j	beq_cont.29825
-beq_else.29824:
-beq_cont.29825:
-	j	beq_cont.29823
-beq_else.29822:
-beq_cont.29823:
-	j	beq_cont.29821
-beq_else.29820:
-beq_cont.29821:
-beq_cont.29781:
+	addi	r30 r30 -20
+	lw	r30 r31 16
+	j	beq_cont.29723
+beq_else.29722:
+beq_cont.29723:
+	j	beq_cont.29721
+beq_else.29720:
+beq_cont.29721:
+	j	beq_cont.29719
+beq_else.29718:
+beq_cont.29719:
+	j	beq_cont.29717
+beq_else.29716:
+beq_cont.29717:
+	j	beq_cont.29715
+beq_else.29714:
+beq_cont.29715:
+	j	beq_cont.29713
+beq_else.29712:
+beq_cont.29713:
+	j	beq_cont.29711
+beq_else.29710:
+beq_cont.29711:
+beq_cont.29671:
 	addi	r0 r1 1
 	lw	r30 r2 8
 	add	r2 r1 r1
@@ -13901,40 +13771,40 @@ beq_cont.29781:
 	lwo	r2 r4 r4
 	addi	r0 r5 -1
 	sub	r4 r5 r25
-	beq	r25 r0 beq_tail_else.29834
+	beq	r25 r0 beq_tail_else.29724
 	addi	r0 r5 99
-	sw	r1 r30 40
+	sw	r1 r30 16
 	sub	r4 r5 r25
-	beq	r25 r0 beq_else.29835
+	beq	r25 r0 beq_else.29725
 	lw	r30 r5 0
-	sw	r2 r30 44
-	sw	r31 r30 48
-	addi	r30 r30 52
+	sw	r2 r30 20
+	sw	r31 r30 24
+	addi	r30 r30 28
 	mov	r2 r5
 	mov	r1 r4
 	jal	solver_fast2.2974
-	addi	r30 r30 -52
-	lw	r30 r31 48
+	addi	r30 r30 -28
+	lw	r30 r31 24
 	addi	r0 r2 0
 	sub	r1 r2 r25
-	beq	r25 r0 beq_else.29837
-	addi	r30 r30 48
+	beq	r25 r0 beq_else.29727
+	addi	r30 r30 24
 	sw	r1 r30 0
 	sw	r31 r30 4
 	jal	min_caml_load_solver_dist
 	mov	r1 r1
 	lw	r30 r31 4
-	addi	r30 r30 -48
+	addi	r30 r30 -24
 	addi	r0 r2 0
 	sll	r2 r2 2
 	lwoc1	r1 r2 f0
-	addi	r30 r30 48
+	addi	r30 r30 24
 	sw	r1 r30 0
 	sw	r31 r30 4
 	jal	min_caml_load_tmin
 	mov	r1 r1
 	lw	r30 r31 4
-	addi	r30 r30 -48
+	addi	r30 r30 -24
 	addi	r0 r2 0
 	sll	r2 r2 2
 	lwoc1	r1 r2 f1
@@ -13944,409 +13814,409 @@ beq_cont.29781:
 	mtc1	r24 f1
 	sub.s	f0 f1 f30
 	mfc1	f30 r25
-	blez	r25 bfle_nontail_else.29839
+	blez	r25 bfle_nontail_else.29729
 	addi	r0 r1 1
-	j	bfle_nontail_cont.29840
-bfle_nontail_else.29839:
+	j	bfle_nontail_cont.29730
+bfle_nontail_else.29729:
 	addi	r0 r1 0
-bfle_nontail_cont.29840:
+bfle_nontail_cont.29730:
 	addi	r0 r2 0
 	sub	r1 r2 r25
-	beq	r25 r0 beq_else.29841
+	beq	r25 r0 beq_else.29731
 	addi	r0 r1 1
 	sll	r1 r1 2
-	lw	r30 r2 44
+	lw	r30 r2 20
 	lwo	r2 r1 r1
 	addi	r0 r3 -1
 	sub	r1 r3 r25
-	beq	r25 r0 beq_else.29843
-	addi	r30 r30 48
+	beq	r25 r0 beq_else.29733
+	addi	r30 r30 24
 	sw	r1 r30 0
 	sw	r31 r30 4
 	jal	min_caml_load_and_net
 	mov	r3 r1
 	lw	r30 r1 0
 	lw	r30 r31 4
-	addi	r30 r30 -48
+	addi	r30 r30 -24
 	sll	r1 r1 2
 	lwo	r3 r1 r1
 	addi	r0 r3 0
 	lw	r30 r4 0
-	sw	r31 r30 48
-	addi	r30 r30 52
+	sw	r31 r30 24
+	addi	r30 r30 28
 	mov	r2 r1
 	mov	r1 r3
 	mov	r3 r4
 	jal	solve_each_element_fast.3045
-	addi	r30 r30 -52
-	lw	r30 r31 48
+	addi	r30 r30 -28
+	lw	r30 r31 24
 	addi	r0 r1 2
 	sll	r1 r1 2
-	lw	r30 r2 44
+	lw	r30 r2 20
 	lwo	r2 r1 r1
 	addi	r0 r3 -1
 	sub	r1 r3 r25
-	beq	r25 r0 beq_else.29845
-	addi	r30 r30 48
+	beq	r25 r0 beq_else.29735
+	addi	r30 r30 24
 	sw	r1 r30 0
 	sw	r31 r30 4
 	jal	min_caml_load_and_net
 	mov	r3 r1
 	lw	r30 r1 0
 	lw	r30 r31 4
-	addi	r30 r30 -48
+	addi	r30 r30 -24
 	sll	r1 r1 2
 	lwo	r3 r1 r1
 	addi	r0 r3 0
 	lw	r30 r4 0
-	sw	r31 r30 48
-	addi	r30 r30 52
+	sw	r31 r30 24
+	addi	r30 r30 28
 	mov	r2 r1
 	mov	r1 r3
 	mov	r3 r4
 	jal	solve_each_element_fast.3045
-	addi	r30 r30 -52
-	lw	r30 r31 48
+	addi	r30 r30 -28
+	lw	r30 r31 24
 	addi	r0 r1 3
 	sll	r1 r1 2
-	lw	r30 r2 44
+	lw	r30 r2 20
 	lwo	r2 r1 r1
 	addi	r0 r3 -1
 	sub	r1 r3 r25
-	beq	r25 r0 beq_else.29847
-	addi	r30 r30 48
+	beq	r25 r0 beq_else.29737
+	addi	r30 r30 24
 	sw	r1 r30 0
 	sw	r31 r30 4
 	jal	min_caml_load_and_net
 	mov	r3 r1
 	lw	r30 r1 0
 	lw	r30 r31 4
-	addi	r30 r30 -48
+	addi	r30 r30 -24
 	sll	r1 r1 2
 	lwo	r3 r1 r1
 	addi	r0 r3 0
 	lw	r30 r4 0
-	sw	r31 r30 48
-	addi	r30 r30 52
+	sw	r31 r30 24
+	addi	r30 r30 28
 	mov	r2 r1
 	mov	r1 r3
 	mov	r3 r4
 	jal	solve_each_element_fast.3045
-	addi	r30 r30 -52
-	lw	r30 r31 48
+	addi	r30 r30 -28
+	lw	r30 r31 24
 	addi	r0 r1 4
 	sll	r1 r1 2
-	lw	r30 r2 44
+	lw	r30 r2 20
 	lwo	r2 r1 r1
 	addi	r0 r3 -1
 	sub	r1 r3 r25
-	beq	r25 r0 beq_else.29849
-	addi	r30 r30 48
+	beq	r25 r0 beq_else.29739
+	addi	r30 r30 24
 	sw	r1 r30 0
 	sw	r31 r30 4
 	jal	min_caml_load_and_net
 	mov	r3 r1
 	lw	r30 r1 0
 	lw	r30 r31 4
-	addi	r30 r30 -48
+	addi	r30 r30 -24
 	sll	r1 r1 2
 	lwo	r3 r1 r1
 	addi	r0 r3 0
 	lw	r30 r4 0
-	sw	r31 r30 48
-	addi	r30 r30 52
+	sw	r31 r30 24
+	addi	r30 r30 28
 	mov	r2 r1
 	mov	r1 r3
 	mov	r3 r4
 	jal	solve_each_element_fast.3045
-	addi	r30 r30 -52
-	lw	r30 r31 48
+	addi	r30 r30 -28
+	lw	r30 r31 24
 	addi	r0 r1 5
 	sll	r1 r1 2
-	lw	r30 r2 44
+	lw	r30 r2 20
 	lwo	r2 r1 r1
 	addi	r0 r3 -1
 	sub	r1 r3 r25
-	beq	r25 r0 beq_else.29851
-	addi	r30 r30 48
+	beq	r25 r0 beq_else.29741
+	addi	r30 r30 24
 	sw	r1 r30 0
 	sw	r31 r30 4
 	jal	min_caml_load_and_net
 	mov	r3 r1
 	lw	r30 r1 0
 	lw	r30 r31 4
-	addi	r30 r30 -48
+	addi	r30 r30 -24
 	sll	r1 r1 2
 	lwo	r3 r1 r1
 	addi	r0 r3 0
 	lw	r30 r4 0
-	sw	r31 r30 48
-	addi	r30 r30 52
+	sw	r31 r30 24
+	addi	r30 r30 28
 	mov	r2 r1
 	mov	r1 r3
 	mov	r3 r4
 	jal	solve_each_element_fast.3045
-	addi	r30 r30 -52
-	lw	r30 r31 48
+	addi	r30 r30 -28
+	lw	r30 r31 24
 	addi	r0 r1 6
 	sll	r1 r1 2
-	lw	r30 r2 44
+	lw	r30 r2 20
 	lwo	r2 r1 r1
 	addi	r0 r3 -1
 	sub	r1 r3 r25
-	beq	r25 r0 beq_else.29853
-	addi	r30 r30 48
+	beq	r25 r0 beq_else.29743
+	addi	r30 r30 24
 	sw	r1 r30 0
 	sw	r31 r30 4
 	jal	min_caml_load_and_net
 	mov	r3 r1
 	lw	r30 r1 0
 	lw	r30 r31 4
-	addi	r30 r30 -48
+	addi	r30 r30 -24
 	sll	r1 r1 2
 	lwo	r3 r1 r1
 	addi	r0 r3 0
 	lw	r30 r4 0
-	sw	r31 r30 48
-	addi	r30 r30 52
+	sw	r31 r30 24
+	addi	r30 r30 28
 	mov	r2 r1
 	mov	r1 r3
 	mov	r3 r4
 	jal	solve_each_element_fast.3045
-	addi	r30 r30 -52
-	lw	r30 r31 48
+	addi	r30 r30 -28
+	lw	r30 r31 24
 	addi	r0 r1 7
-	lw	r30 r2 44
+	lw	r30 r2 20
 	lw	r30 r3 0
-	sw	r31 r30 48
-	addi	r30 r30 52
+	sw	r31 r30 24
+	addi	r30 r30 28
 	jal	solve_one_or_network_fast.3049
-	addi	r30 r30 -52
-	lw	r30 r31 48
-	j	beq_cont.29854
-beq_else.29853:
-beq_cont.29854:
-	j	beq_cont.29852
-beq_else.29851:
-beq_cont.29852:
-	j	beq_cont.29850
-beq_else.29849:
-beq_cont.29850:
-	j	beq_cont.29848
-beq_else.29847:
-beq_cont.29848:
-	j	beq_cont.29846
-beq_else.29845:
-beq_cont.29846:
-	j	beq_cont.29844
-beq_else.29843:
-beq_cont.29844:
-	j	beq_cont.29842
-beq_else.29841:
-beq_cont.29842:
-	j	beq_cont.29838
-beq_else.29837:
-beq_cont.29838:
-	j	beq_cont.29836
-beq_else.29835:
+	addi	r30 r30 -28
+	lw	r30 r31 24
+	j	beq_cont.29744
+beq_else.29743:
+beq_cont.29744:
+	j	beq_cont.29742
+beq_else.29741:
+beq_cont.29742:
+	j	beq_cont.29740
+beq_else.29739:
+beq_cont.29740:
+	j	beq_cont.29738
+beq_else.29737:
+beq_cont.29738:
+	j	beq_cont.29736
+beq_else.29735:
+beq_cont.29736:
+	j	beq_cont.29734
+beq_else.29733:
+beq_cont.29734:
+	j	beq_cont.29732
+beq_else.29731:
+beq_cont.29732:
+	j	beq_cont.29728
+beq_else.29727:
+beq_cont.29728:
+	j	beq_cont.29726
+beq_else.29725:
 	addi	r0 r4 1
 	sll	r4 r4 2
 	lwo	r2 r4 r4
 	addi	r0 r5 -1
 	sub	r4 r5 r25
-	beq	r25 r0 beq_else.29855
-	addi	r30 r30 48
+	beq	r25 r0 beq_else.29745
+	addi	r30 r30 24
 	sw	r1 r30 0
 	sw	r31 r30 4
 	jal	min_caml_load_and_net
 	mov	r5 r1
 	lw	r30 r1 0
 	lw	r30 r31 4
-	addi	r30 r30 -48
+	addi	r30 r30 -24
 	sll	r4 r4 2
 	lwo	r5 r4 r4
 	addi	r0 r5 0
 	lw	r30 r6 0
-	sw	r2 r30 44
-	sw	r31 r30 48
-	addi	r30 r30 52
+	sw	r2 r30 20
+	sw	r31 r30 24
+	addi	r30 r30 28
 	mov	r3 r6
 	mov	r2 r4
 	mov	r1 r5
 	jal	solve_each_element_fast.3045
-	addi	r30 r30 -52
-	lw	r30 r31 48
+	addi	r30 r30 -28
+	lw	r30 r31 24
 	addi	r0 r1 2
 	sll	r1 r1 2
-	lw	r30 r2 44
+	lw	r30 r2 20
 	lwo	r2 r1 r1
 	addi	r0 r3 -1
 	sub	r1 r3 r25
-	beq	r25 r0 beq_else.29857
-	addi	r30 r30 48
+	beq	r25 r0 beq_else.29747
+	addi	r30 r30 24
 	sw	r1 r30 0
 	sw	r31 r30 4
 	jal	min_caml_load_and_net
 	mov	r3 r1
 	lw	r30 r1 0
 	lw	r30 r31 4
-	addi	r30 r30 -48
+	addi	r30 r30 -24
 	sll	r1 r1 2
 	lwo	r3 r1 r1
 	addi	r0 r3 0
 	lw	r30 r4 0
-	sw	r31 r30 48
-	addi	r30 r30 52
+	sw	r31 r30 24
+	addi	r30 r30 28
 	mov	r2 r1
 	mov	r1 r3
 	mov	r3 r4
 	jal	solve_each_element_fast.3045
-	addi	r30 r30 -52
-	lw	r30 r31 48
+	addi	r30 r30 -28
+	lw	r30 r31 24
 	addi	r0 r1 3
 	sll	r1 r1 2
-	lw	r30 r2 44
+	lw	r30 r2 20
 	lwo	r2 r1 r1
 	addi	r0 r3 -1
 	sub	r1 r3 r25
-	beq	r25 r0 beq_else.29859
-	addi	r30 r30 48
+	beq	r25 r0 beq_else.29749
+	addi	r30 r30 24
 	sw	r1 r30 0
 	sw	r31 r30 4
 	jal	min_caml_load_and_net
 	mov	r3 r1
 	lw	r30 r1 0
 	lw	r30 r31 4
-	addi	r30 r30 -48
+	addi	r30 r30 -24
 	sll	r1 r1 2
 	lwo	r3 r1 r1
 	addi	r0 r3 0
 	lw	r30 r4 0
-	sw	r31 r30 48
-	addi	r30 r30 52
+	sw	r31 r30 24
+	addi	r30 r30 28
 	mov	r2 r1
 	mov	r1 r3
 	mov	r3 r4
 	jal	solve_each_element_fast.3045
-	addi	r30 r30 -52
-	lw	r30 r31 48
+	addi	r30 r30 -28
+	lw	r30 r31 24
 	addi	r0 r1 4
 	sll	r1 r1 2
-	lw	r30 r2 44
+	lw	r30 r2 20
 	lwo	r2 r1 r1
 	addi	r0 r3 -1
 	sub	r1 r3 r25
-	beq	r25 r0 beq_else.29861
-	addi	r30 r30 48
+	beq	r25 r0 beq_else.29751
+	addi	r30 r30 24
 	sw	r1 r30 0
 	sw	r31 r30 4
 	jal	min_caml_load_and_net
 	mov	r3 r1
 	lw	r30 r1 0
 	lw	r30 r31 4
-	addi	r30 r30 -48
+	addi	r30 r30 -24
 	sll	r1 r1 2
 	lwo	r3 r1 r1
 	addi	r0 r3 0
 	lw	r30 r4 0
-	sw	r31 r30 48
-	addi	r30 r30 52
+	sw	r31 r30 24
+	addi	r30 r30 28
 	mov	r2 r1
 	mov	r1 r3
 	mov	r3 r4
 	jal	solve_each_element_fast.3045
-	addi	r30 r30 -52
-	lw	r30 r31 48
+	addi	r30 r30 -28
+	lw	r30 r31 24
 	addi	r0 r1 5
 	sll	r1 r1 2
-	lw	r30 r2 44
+	lw	r30 r2 20
 	lwo	r2 r1 r1
 	addi	r0 r3 -1
 	sub	r1 r3 r25
-	beq	r25 r0 beq_else.29863
-	addi	r30 r30 48
+	beq	r25 r0 beq_else.29753
+	addi	r30 r30 24
 	sw	r1 r30 0
 	sw	r31 r30 4
 	jal	min_caml_load_and_net
 	mov	r3 r1
 	lw	r30 r1 0
 	lw	r30 r31 4
-	addi	r30 r30 -48
+	addi	r30 r30 -24
 	sll	r1 r1 2
 	lwo	r3 r1 r1
 	addi	r0 r3 0
 	lw	r30 r4 0
-	sw	r31 r30 48
-	addi	r30 r30 52
+	sw	r31 r30 24
+	addi	r30 r30 28
 	mov	r2 r1
 	mov	r1 r3
 	mov	r3 r4
 	jal	solve_each_element_fast.3045
-	addi	r30 r30 -52
-	lw	r30 r31 48
+	addi	r30 r30 -28
+	lw	r30 r31 24
 	addi	r0 r1 6
 	sll	r1 r1 2
-	lw	r30 r2 44
+	lw	r30 r2 20
 	lwo	r2 r1 r1
 	addi	r0 r3 -1
 	sub	r1 r3 r25
-	beq	r25 r0 beq_else.29865
-	addi	r30 r30 48
+	beq	r25 r0 beq_else.29755
+	addi	r30 r30 24
 	sw	r1 r30 0
 	sw	r31 r30 4
 	jal	min_caml_load_and_net
 	mov	r3 r1
 	lw	r30 r1 0
 	lw	r30 r31 4
-	addi	r30 r30 -48
+	addi	r30 r30 -24
 	sll	r1 r1 2
 	lwo	r3 r1 r1
 	addi	r0 r3 0
 	lw	r30 r4 0
-	sw	r31 r30 48
-	addi	r30 r30 52
+	sw	r31 r30 24
+	addi	r30 r30 28
 	mov	r2 r1
 	mov	r1 r3
 	mov	r3 r4
 	jal	solve_each_element_fast.3045
-	addi	r30 r30 -52
-	lw	r30 r31 48
+	addi	r30 r30 -28
+	lw	r30 r31 24
 	addi	r0 r1 7
-	lw	r30 r2 44
+	lw	r30 r2 20
 	lw	r30 r3 0
-	sw	r31 r30 48
-	addi	r30 r30 52
+	sw	r31 r30 24
+	addi	r30 r30 28
 	jal	solve_one_or_network_fast.3049
-	addi	r30 r30 -52
-	lw	r30 r31 48
-	j	beq_cont.29866
-beq_else.29865:
-beq_cont.29866:
-	j	beq_cont.29864
-beq_else.29863:
-beq_cont.29864:
-	j	beq_cont.29862
-beq_else.29861:
-beq_cont.29862:
-	j	beq_cont.29860
-beq_else.29859:
-beq_cont.29860:
-	j	beq_cont.29858
-beq_else.29857:
-beq_cont.29858:
-	j	beq_cont.29856
-beq_else.29855:
-beq_cont.29856:
-beq_cont.29836:
+	addi	r30 r30 -28
+	lw	r30 r31 24
+	j	beq_cont.29756
+beq_else.29755:
+beq_cont.29756:
+	j	beq_cont.29754
+beq_else.29753:
+beq_cont.29754:
+	j	beq_cont.29752
+beq_else.29751:
+beq_cont.29752:
+	j	beq_cont.29750
+beq_else.29749:
+beq_cont.29750:
+	j	beq_cont.29748
+beq_else.29747:
+beq_cont.29748:
+	j	beq_cont.29746
+beq_else.29745:
+beq_cont.29746:
+beq_cont.29726:
 	addi	r0 r1 1
-	lw	r30 r2 40
+	lw	r30 r2 16
 	add	r2 r1 r1
 	lw	r30 r2 4
 	lw	r30 r3 0
 	j	trace_or_matrix_fast.3053
-beq_tail_else.29834:
+beq_tail_else.29724:
 	jr	r31
-beq_tail_else.29779:
+beq_tail_else.29669:
 	jr	r31
 get_nvector_second.3063:
 	addi	r30 r30 0
@@ -14415,7 +14285,7 @@ get_nvector_second.3063:
 	lw	r1 r2 12
 	addi	r0 r3 0
 	sub	r2 r3 r25
-	beq	r25 r0 beq_else.29869
+	beq	r25 r0 beq_else.29759
 	addi	r30 r30 0
 	sw	r1 r30 0
 	sw	r31 r30 4
@@ -14497,8 +14367,8 @@ get_nvector_second.3063:
 	add.s	f5 f0 f0
 	sll	r3 r3 2
 	swoc1	f0 r2 r3
-	j	beq_cont.29870
-beq_else.29869:
+	j	beq_cont.29760
+beq_else.29759:
 	addi	r30 r30 0
 	sw	r1 r30 0
 	sw	r31 r30 4
@@ -14532,7 +14402,7 @@ beq_else.29869:
 	addi	r0 r3 2
 	sll	r3 r3 2
 	swoc1	f5 r2 r3
-beq_cont.29870:
+beq_cont.29760:
 	addi	r30 r30 0
 	sw	r1 r30 0
 	sw	r31 r30 4
@@ -14565,71 +14435,63 @@ beq_cont.29870:
 	lwoc1	r2 r3 f2
 	mul.s	f1 f2 f1
 	add.s	f0 f1 f0
-	sw	r2 r30 0
-	sw	r1 r30 4
-	sw	r31 r30 8
-	addi	r30 r30 12
-	jal	min_caml_sqrt
-	addi	r30 r30 -12
-	lw	r30 r31 8
+	sqrt.s	f0 f0
 	lui	r24 0
 	ori	r24 r24 0
 	mtc1	r24 f1
 	sub.s	f0 f1 f30
 	mfc1	f30 r25
 	sll	r25 r25 1
-	beq	r25 r0 bfeq_nontail_else.29871
-	addi	r0 r1 0
-	j	bfeq_nontail_cont.29872
-bfeq_nontail_else.29871:
-	addi	r0 r1 1
-bfeq_nontail_cont.29872:
-	addi	r0 r2 0
-	sub	r1 r2 r25
-	beq	r25 r0 beq_else.29873
+	beq	r25 r0 bfeq_nontail_else.29761
+	addi	r0 r3 0
+	j	bfeq_nontail_cont.29762
+bfeq_nontail_else.29761:
+	addi	r0 r3 1
+bfeq_nontail_cont.29762:
+	addi	r0 r4 0
+	sub	r3 r4 r25
+	beq	r25 r0 beq_else.29763
 	lui	r24 16256
 	ori	r24 r24 0
 	mtc1	r24 f0
-	j	beq_cont.29874
-beq_else.29873:
-	addi	r0 r1 0
-	lw	r30 r2 4
-	sub	r2 r1 r25
-	beq	r25 r0 beq_else.29875
+	j	beq_cont.29764
+beq_else.29763:
+	addi	r0 r3 0
+	sub	r1 r3 r25
+	beq	r25 r0 beq_else.29765
 	lui	r24 49024
 	ori	r24 r24 0
 	mtc1	r24 f1
 	div.s	f1 f0 f0
-	j	beq_cont.29876
-beq_else.29875:
+	j	beq_cont.29766
+beq_else.29765:
 	lui	r24 16256
 	ori	r24 r24 0
 	mtc1	r24 f1
 	div.s	f1 f0 f0
-beq_cont.29876:
-beq_cont.29874:
+beq_cont.29766:
+beq_cont.29764:
 	addi	r0 r1 0
-	addi	r0 r2 0
-	sll	r2 r2 2
-	lw	r30 r3 0
-	lwoc1	r3 r2 f1
+	addi	r0 r3 0
+	sll	r3 r3 2
+	lwoc1	r2 r3 f1
 	mul.s	f1 f0 f1
 	sll	r1 r1 2
-	swoc1	f1 r3 r1
+	swoc1	f1 r2 r1
 	addi	r0 r1 1
-	addi	r0 r2 1
-	sll	r2 r2 2
-	lwoc1	r3 r2 f1
+	addi	r0 r3 1
+	sll	r3 r3 2
+	lwoc1	r2 r3 f1
 	mul.s	f1 f0 f1
 	sll	r1 r1 2
-	swoc1	f1 r3 r1
+	swoc1	f1 r2 r1
 	addi	r0 r1 2
-	addi	r0 r2 2
-	sll	r2 r2 2
-	lwoc1	r3 r2 f1
+	addi	r0 r3 2
+	sll	r3 r3 2
+	lwoc1	r2 r3 f1
 	mul.s	f1 f0 f0
 	sll	r1 r1 2
-	swoc1	f0 r3 r1
+	swoc1	f0 r2 r1
 	jr	r31
 utexture.3068:
 	lw	r1 r3 0
@@ -14680,18 +14542,18 @@ utexture.3068:
 	swoc1	f0 r4 r5
 	addi	r0 r4 1
 	sub	r3 r4 r25
-	beq	r25 r0 beq_tail_else.29878
+	beq	r25 r0 beq_tail_else.29768
 	addi	r0 r4 2
 	sub	r3 r4 r25
-	beq	r25 r0 beq_tail_else.29879
+	beq	r25 r0 beq_tail_else.29769
 	addi	r0 r4 3
 	sub	r3 r4 r25
-	beq	r25 r0 beq_tail_else.29880
+	beq	r25 r0 beq_tail_else.29770
 	addi	r0 r4 4
 	sub	r3 r4 r25
-	beq	r25 r0 beq_tail_else.29881
+	beq	r25 r0 beq_tail_else.29771
 	jr	r31
-beq_tail_else.29881:
+beq_tail_else.29771:
 	addi	r0 r3 0
 	sll	r3 r3 2
 	lwoc1	r2 r3 f0
@@ -14704,22 +14566,11 @@ beq_tail_else.29881:
 	addi	r0 r4 0
 	sll	r4 r4 2
 	lwoc1	r3 r4 f1
-	sw	r1 r30 0
-	sw	r2 r30 4
-	swc1	f0 r30 8
-	sw	r31 r30 12
-	addi	r30 r30 16
-	mov.s	f1 f0
-	jal	min_caml_sqrt
-	addi	r30 r30 -16
-	lw	r30 r31 12
-	lwc1	 r30 f1 8
-	mul.s	f1 f0 f0
-	addi	r0 r1 2
-	sll	r1 r1 2
-	lw	r30 r2 4
-	lwoc1	r2 r1 f1
-	lw	r30 r1 0
+	sqrt.s	f1 f1
+	mul.s	f0 f1 f0
+	addi	r0 r3 2
+	sll	r3 r3 2
+	lwoc1	r2 r3 f1
 	lw	r1 r3 20
 	addi	r0 r4 2
 	sll	r4 r4 2
@@ -14729,52 +14580,45 @@ beq_tail_else.29881:
 	addi	r0 r4 2
 	sll	r4 r4 2
 	lwoc1	r3 r4 f2
-	swc1	f0 r30 12
-	swc1	f1 r30 16
-	sw	r31 r30 20
-	addi	r30 r30 24
-	mov.s	f2 f0
-	jal	min_caml_sqrt
-	addi	r30 r30 -24
-	lw	r30 r31 20
-	lwc1	 r30 f1 16
-	mul.s	f1 f0 f0
-	lwc1	 r30 f1 12
-	mul.s	f1 f1 f2
-	mul.s	f0 f0 f3
+	sqrt.s	f2 f2
+	mul.s	f1 f2 f1
+	mul.s	f0 f0 f2
+	mul.s	f1 f1 f3
 	add.s	f2 f3 f2
 	lui	r24 14545
 	ori	r24 r24 46871
 	mtc1	r24 f3
-	abs.s	f1 f4
+	abs.s	f0 f4
 	sub.s	f3 f4 f3
 	lui	r24 0
 	ori	r24 r24 0
 	mtc1	r24 f4
 	sub.s	f3 f4 f30
 	mfc1	f30 r25
-	blez	r25 bfle_nontail_else.29883
-	addi	r0 r1 1
-	j	bfle_nontail_cont.29884
-bfle_nontail_else.29883:
-	addi	r0 r1 0
-bfle_nontail_cont.29884:
-	addi	r0 r2 0
-	swc1	f2 r30 20
-	sub	r1 r2 r25
-	beq	r25 r0 beq_else.29885
+	blez	r25 bfle_nontail_else.29773
+	addi	r0 r3 1
+	j	bfle_nontail_cont.29774
+bfle_nontail_else.29773:
+	addi	r0 r3 0
+bfle_nontail_cont.29774:
+	addi	r0 r4 0
+	swc1	f2 r30 0
+	sw	r1 r30 4
+	sw	r2 r30 8
+	sub	r3 r4 r25
+	beq	r25 r0 beq_else.29775
 	lui	r24 16752
 	ori	r24 r24 0
 	mtc1	r24 f0
-	j	beq_cont.29886
-beq_else.29885:
-	div.s	f0 f1 f0
+	j	beq_cont.29776
+beq_else.29775:
+	div.s	f1 f0 f0
 	abs.s	f0 f0
-	sw	r31 r30 24
-	addi	r30 r30 28
+	sw	r31 r30 12
+	addi	r30 r30 16
 	jal	min_caml_atan
-	addi	r30 r30 -28
-	lw	r30 r31 24
+	addi	r30 r30 -16
+	lw	r30 r31 12
 	lui	r24 16880
 	ori	r24 r24 0
 	mtc1	r24 f1
@@ -14783,20 +14627,20 @@ beq_else.29885:
 	ori	r24 r24 4059
 	mtc1	r24 f1
 	div.s	f0 f1 f0
-beq_cont.29886:
-	swc1	f0 r30 24
-	sw	r31 r30 28
-	addi	r30 r30 32
+beq_cont.29776:
+	swc1	f0 r30 12
+	sw	r31 r30 16
+	addi	r30 r30 20
 	jal	min_caml_floor
-	addi	r30 r30 -32
-	lw	r30 r31 28
-	lwc1	 r30 f1 24
+	addi	r30 r30 -20
+	lw	r30 r31 16
+	lwc1	 r30 f1 12
 	sub.s	f1 f0 f0
 	addi	r0 r1 1
 	sll	r1 r1 2
-	lw	r30 r2 4
+	lw	r30 r2 8
 	lwoc1	r2 r1 f1
-	lw	r30 r1 0
+	lw	r30 r1 4
 	lw	r1 r2 20
 	addi	r0 r3 1
 	sll	r3 r3 2
@@ -14806,48 +14650,42 @@ beq_cont.29886:
 	addi	r0 r2 1
 	sll	r2 r2 2
 	lwoc1	r1 r2 f2
-	swc1	f0 r30 28
-	swc1	f1 r30 32
-	sw	r31 r30 36
-	addi	r30 r30 40
-	mov.s	f2 f0
-	jal	min_caml_sqrt
-	addi	r30 r30 -40
-	lw	r30 r31 36
-	lwc1	 r30 f1 32
-	mul.s	f1 f0 f0
+	sqrt.s	f2 f2
+	mul.s	f1 f2 f1
 	lui	r24 14545
 	ori	r24 r24 46871
-	mtc1	r24 f1
-	lwc1	 r30 f2 20
-	abs.s	f2 f3
-	sub.s	f1 f3 f1
+	mtc1	r24 f2
+	lwc1	 r30 f3 0
+	abs.s	f3 f4
+	sub.s	f2 f4 f2
 	lui	r24 0
 	ori	r24 r24 0
-	mtc1	r24 f3
-	sub.s	f1 f3 f30
+	mtc1	r24 f4
+	sub.s	f2 f4 f30
 	mfc1	f30 r25
-	blez	r25 bfle_nontail_else.29887
+	blez	r25 bfle_nontail_else.29777
 	addi	r0 r1 1
-	j	bfle_nontail_cont.29888
-bfle_nontail_else.29887:
+	j	bfle_nontail_cont.29778
+bfle_nontail_else.29777:
 	addi	r0 r1 0
-bfle_nontail_cont.29888:
+bfle_nontail_cont.29778:
 	addi	r0 r2 0
+	swc1	f0 r30 16
 	sub	r1 r2 r25
-	beq	r25 r0 beq_else.29889
+	beq	r25 r0 beq_else.29779
 	lui	r24 16752
 	ori	r24 r24 0
 	mtc1	r24 f0
-	j	beq_cont.29890
-beq_else.29889:
-	div.s	f0 f2 f0
-	abs.s	f0 f0
-	sw	r31 r30 36
-	addi	r30 r30 40
+	j	beq_cont.29780
+beq_else.29779:
+	div.s	f1 f3 f1
+	abs.s	f1 f1
+	sw	r31 r30 20
+	addi	r30 r30 24
+	mov.s	f1 f0
 	jal	min_caml_atan
-	addi	r30 r30 -40
-	lw	r30 r31 36
+	addi	r30 r30 -24
+	lw	r30 r31 20
 	lui	r24 16880
 	ori	r24 r24 0
 	mtc1	r24 f1
@@ -14856,14 +14694,14 @@ beq_else.29889:
 	ori	r24 r24 4059
 	mtc1	r24 f1
 	div.s	f0 f1 f0
-beq_cont.29890:
-	swc1	f0 r30 36
-	sw	r31 r30 40
-	addi	r30 r30 44
+beq_cont.29780:
+	swc1	f0 r30 20
+	sw	r31 r30 24
+	addi	r30 r30 28
 	jal	min_caml_floor
-	addi	r30 r30 -44
-	lw	r30 r31 40
-	lwc1	 r30 f1 36
+	addi	r30 r30 -28
+	lw	r30 r31 24
+	lwc1	 r30 f1 20
 	sub.s	f1 f0 f0
 	lui	r24 15897
 	ori	r24 r24 39322
@@ -14871,7 +14709,7 @@ beq_cont.29890:
 	lui	r24 16128
 	ori	r24 r24 0
 	mtc1	r24 f2
-	lwc1	 r30 f3 28
+	lwc1	 r30 f3 16
 	sub.s	f2 f3 f2
 	lui	r24 16128
 	ori	r24 r24 0
@@ -14894,28 +14732,28 @@ beq_cont.29890:
 	mtc1	r24 f1
 	sub.s	f1 f0 f30
 	mfc1	f30 r25
-	blez	r25 bfle_nontail_else.29891
+	blez	r25 bfle_nontail_else.29781
 	addi	r0 r1 1
-	j	bfle_nontail_cont.29892
-bfle_nontail_else.29891:
+	j	bfle_nontail_cont.29782
+bfle_nontail_else.29781:
 	addi	r0 r1 0
-bfle_nontail_cont.29892:
+bfle_nontail_cont.29782:
 	addi	r0 r2 0
 	sub	r1 r2 r25
-	beq	r25 r0 beq_else.29893
+	beq	r25 r0 beq_else.29783
 	lui	r24 0
 	ori	r24 r24 0
 	mtc1	r24 f0
-	j	beq_cont.29894
-beq_else.29893:
-beq_cont.29894:
-	addi	r30 r30 40
+	j	beq_cont.29784
+beq_else.29783:
+beq_cont.29784:
+	addi	r30 r30 24
 	sw	r1 r30 0
 	sw	r31 r30 4
 	jal	min_caml_load_texture_color
 	mov	r1 r1
 	lw	r30 r31 4
-	addi	r30 r30 -40
+	addi	r30 r30 -24
 	addi	r0 r2 2
 	lui	r24 17279
 	ori	r24 r24 0
@@ -14928,7 +14766,7 @@ beq_cont.29894:
 	sll	r2 r2 2
 	swoc1	f0 r1 r2
 	jr	r31
-beq_tail_else.29880:
+beq_tail_else.29770:
 	addi	r0 r3 0
 	sll	r3 r3 2
 	lwoc1	r2 r3 f0
@@ -14948,50 +14786,46 @@ beq_tail_else.29880:
 	mul.s	f0 f0 f0
 	mul.s	f1 f1 f1
 	add.s	f0 f1 f0
-	sw	r31 r30 40
-	addi	r30 r30 44
-	jal	min_caml_sqrt
-	addi	r30 r30 -44
-	lw	r30 r31 40
+	sqrt.s	f0 f0
 	lui	r24 16672
 	ori	r24 r24 0
 	mtc1	r24 f1
 	div.s	f0 f1 f0
-	swc1	f0 r30 40
-	sw	r31 r30 44
-	addi	r30 r30 48
+	swc1	f0 r30 24
+	sw	r31 r30 28
+	addi	r30 r30 32
 	jal	min_caml_floor
-	addi	r30 r30 -48
-	lw	r30 r31 44
-	lwc1	 r30 f1 40
+	addi	r30 r30 -32
+	lw	r30 r31 28
+	lwc1	 r30 f1 24
 	sub.s	f1 f0 f0
 	lui	r24 16457
 	ori	r24 r24 4059
 	mtc1	r24 f1
 	mul.s	f0 f1 f0
-	swc1	f0 r30 44
-	sw	r31 r30 48
-	addi	r30 r30 52
+	swc1	f0 r30 28
+	sw	r31 r30 32
+	addi	r30 r30 36
 	jal	min_caml_cos
-	addi	r30 r30 -52
-	lw	r30 r31 48
-	lwc1	 r30 f1 44
-	swc1	f0 r30 48
-	sw	r31 r30 52
-	addi	r30 r30 56
+	addi	r30 r30 -36
+	lw	r30 r31 32
+	lwc1	 r30 f1 28
+	swc1	f0 r30 32
+	sw	r31 r30 36
+	addi	r30 r30 40
 	mov.s	f1 f0
 	jal	min_caml_cos
-	addi	r30 r30 -56
-	lw	r30 r31 52
-	lwc1	 r30 f1 48
+	addi	r30 r30 -40
+	lw	r30 r31 36
+	lwc1	 r30 f1 32
 	mul.s	f1 f0 f0
-	addi	r30 r30 52
+	addi	r30 r30 36
 	sw	r1 r30 0
 	sw	r31 r30 4
 	jal	min_caml_load_texture_color
 	mov	r1 r1
 	lw	r30 r31 4
-	addi	r30 r30 -52
+	addi	r30 r30 -36
 	addi	r0 r2 1
 	lui	r24 17279
 	ori	r24 r24 0
@@ -14999,13 +14833,13 @@ beq_tail_else.29880:
 	mul.s	f0 f1 f1
 	sll	r2 r2 2
 	swoc1	f1 r1 r2
-	addi	r30 r30 52
+	addi	r30 r30 36
 	sw	r1 r30 0
 	sw	r31 r30 4
 	jal	min_caml_load_texture_color
 	mov	r1 r1
 	lw	r30 r31 4
-	addi	r30 r30 -52
+	addi	r30 r30 -36
 	addi	r0 r2 2
 	lui	r24 16256
 	ori	r24 r24 0
@@ -15018,7 +14852,7 @@ beq_tail_else.29880:
 	sll	r2 r2 2
 	swoc1	f0 r1 r2
 	jr	r31
-beq_tail_else.29879:
+beq_tail_else.29769:
 	addi	r0 r1 1
 	sll	r1 r1 2
 	lwoc1	r2 r1 f0
@@ -15026,36 +14860,36 @@ beq_tail_else.29879:
 	ori	r24 r24 0
 	mtc1	r24 f1
 	mul.s	f0 f1 f0
-	sw	r2 r30 4
-	sw	r31 r30 52
-	addi	r30 r30 56
+	sw	r2 r30 8
+	sw	r31 r30 36
+	addi	r30 r30 40
 	jal	min_caml_sin
-	addi	r30 r30 -56
-	lw	r30 r31 52
+	addi	r30 r30 -40
+	lw	r30 r31 36
 	addi	r0 r1 1
 	sll	r1 r1 2
-	lw	r30 r2 4
+	lw	r30 r2 8
 	lwoc1	r2 r1 f1
 	lui	r24 16000
 	ori	r24 r24 0
 	mtc1	r24 f2
 	mul.s	f1 f2 f1
-	swc1	f0 r30 52
-	sw	r31 r30 56
-	addi	r30 r30 60
+	swc1	f0 r30 36
+	sw	r31 r30 40
+	addi	r30 r30 44
 	mov.s	f1 f0
 	jal	min_caml_sin
-	addi	r30 r30 -60
-	lw	r30 r31 56
-	lwc1	 r30 f1 52
+	addi	r30 r30 -44
+	lw	r30 r31 40
+	lwc1	 r30 f1 36
 	mul.s	f1 f0 f0
-	addi	r30 r30 56
+	addi	r30 r30 40
 	sw	r1 r30 0
 	sw	r31 r30 4
 	jal	min_caml_load_texture_color
 	mov	r1 r1
 	lw	r30 r31 4
-	addi	r30 r30 -56
+	addi	r30 r30 -40
 	addi	r0 r2 0
 	lui	r24 17279
 	ori	r24 r24 0
@@ -15063,13 +14897,13 @@ beq_tail_else.29879:
 	mul.s	f1 f0 f1
 	sll	r2 r2 2
 	swoc1	f1 r1 r2
-	addi	r30 r30 56
+	addi	r30 r30 40
 	sw	r1 r30 0
 	sw	r31 r30 4
 	jal	min_caml_load_texture_color
 	mov	r1 r1
 	lw	r30 r31 4
-	addi	r30 r30 -56
+	addi	r30 r30 -40
 	addi	r0 r2 1
 	lui	r24 17279
 	ori	r24 r24 0
@@ -15082,7 +14916,7 @@ beq_tail_else.29879:
 	sll	r2 r2 2
 	swoc1	f0 r1 r2
 	jr	r31
-beq_tail_else.29878:
+beq_tail_else.29768:
 	addi	r0 r3 0
 	sll	r3 r3 2
 	lwoc1	r2 r3 f0
@@ -15095,15 +14929,15 @@ beq_tail_else.29878:
 	ori	r24 r24 52429
 	mtc1	r24 f1
 	mul.s	f0 f1 f1
-	sw	r1 r30 0
-	sw	r2 r30 4
-	swc1	f0 r30 56
-	sw	r31 r30 60
-	addi	r30 r30 64
+	sw	r1 r30 4
+	sw	r2 r30 8
+	swc1	f0 r30 40
+	sw	r31 r30 44
+	addi	r30 r30 48
 	mov.s	f1 f0
 	jal	min_caml_floor
-	addi	r30 r30 -64
-	lw	r30 r31 60
+	addi	r30 r30 -48
+	lw	r30 r31 44
 	lui	r24 16800
 	ori	r24 r24 0
 	mtc1	r24 f1
@@ -15111,7 +14945,7 @@ beq_tail_else.29878:
 	lui	r24 16672
 	ori	r24 r24 0
 	mtc1	r24 f1
-	lwc1	 r30 f2 56
+	lwc1	 r30 f2 40
 	sub.s	f2 f0 f0
 	sub.s	f1 f0 f0
 	lui	r24 0
@@ -15119,17 +14953,17 @@ beq_tail_else.29878:
 	mtc1	r24 f1
 	sub.s	f0 f1 f30
 	mfc1	f30 r25
-	blez	r25 bfle_nontail_else.29898
+	blez	r25 bfle_nontail_else.29788
 	addi	r0 r1 1
-	j	bfle_nontail_cont.29899
-bfle_nontail_else.29898:
+	j	bfle_nontail_cont.29789
+bfle_nontail_else.29788:
 	addi	r0 r1 0
-bfle_nontail_cont.29899:
+bfle_nontail_cont.29789:
 	addi	r0 r2 2
 	sll	r2 r2 2
-	lw	r30 r3 4
+	lw	r30 r3 8
 	lwoc1	r3 r2 f0
-	lw	r30 r2 0
+	lw	r30 r2 4
 	lw	r2 r2 20
 	addi	r0 r3 2
 	sll	r3 r3 2
@@ -15139,14 +14973,14 @@ bfle_nontail_cont.29899:
 	ori	r24 r24 52429
 	mtc1	r24 f1
 	mul.s	f0 f1 f1
-	sw	r1 r30 60
-	swc1	f0 r30 64
-	sw	r31 r30 68
-	addi	r30 r30 72
+	sw	r1 r30 44
+	swc1	f0 r30 48
+	sw	r31 r30 52
+	addi	r30 r30 56
 	mov.s	f1 f0
 	jal	min_caml_floor
-	addi	r30 r30 -72
-	lw	r30 r31 68
+	addi	r30 r30 -56
+	lw	r30 r31 52
 	lui	r24 16800
 	ori	r24 r24 0
 	mtc1	r24 f1
@@ -15154,7 +14988,7 @@ bfle_nontail_cont.29899:
 	lui	r24 16672
 	ori	r24 r24 0
 	mtc1	r24 f1
-	lwc1	 r30 f2 64
+	lwc1	 r30 f2 48
 	sub.s	f2 f0 f0
 	sub.s	f1 f0 f0
 	lui	r24 0
@@ -15162,52 +14996,52 @@ bfle_nontail_cont.29899:
 	mtc1	r24 f1
 	sub.s	f0 f1 f30
 	mfc1	f30 r25
-	blez	r25 bfle_nontail_else.29900
+	blez	r25 bfle_nontail_else.29790
 	addi	r0 r1 1
-	j	bfle_nontail_cont.29901
-bfle_nontail_else.29900:
+	j	bfle_nontail_cont.29791
+bfle_nontail_else.29790:
 	addi	r0 r1 0
-bfle_nontail_cont.29901:
-	addi	r30 r30 68
+bfle_nontail_cont.29791:
+	addi	r30 r30 52
 	sw	r1 r30 0
 	sw	r31 r30 4
 	jal	min_caml_load_texture_color
 	mov	r2 r1
 	lw	r30 r1 0
 	lw	r30 r31 4
-	addi	r30 r30 -68
+	addi	r30 r30 -52
 	addi	r0 r3 1
 	addi	r0 r4 0
-	lw	r30 r5 60
+	lw	r30 r5 44
 	sub	r5 r4 r25
-	beq	r25 r0 beq_else.29902
+	beq	r25 r0 beq_else.29792
 	addi	r0 r4 0
 	sub	r1 r4 r25
-	beq	r25 r0 beq_else.29904
+	beq	r25 r0 beq_else.29794
 	lui	r24 17279
 	ori	r24 r24 0
 	mtc1	r24 f0
-	j	beq_cont.29905
-beq_else.29904:
+	j	beq_cont.29795
+beq_else.29794:
 	lui	r24 0
 	ori	r24 r24 0
 	mtc1	r24 f0
-beq_cont.29905:
-	j	beq_cont.29903
-beq_else.29902:
+beq_cont.29795:
+	j	beq_cont.29793
+beq_else.29792:
 	addi	r0 r4 0
 	sub	r1 r4 r25
-	beq	r25 r0 beq_else.29906
+	beq	r25 r0 beq_else.29796
 	lui	r24 0
 	ori	r24 r24 0
 	mtc1	r24 f0
-	j	beq_cont.29907
-beq_else.29906:
+	j	beq_cont.29797
+beq_else.29796:
 	lui	r24 17279
 	ori	r24 r24 0
 	mtc1	r24 f0
-beq_cont.29907:
-beq_cont.29903:
+beq_cont.29797:
+beq_cont.29793:
 	sll	r3 r1 2
 	swoc1	f0 r2 r1
 	jr	r31
@@ -15217,15 +15051,15 @@ add_light.3071:
 	mtc1	r24 f3
 	sub.s	f0 f3 f30
 	mfc1	f30 r25
-	blez	r25 bfle_nontail_else.29909
+	blez	r25 bfle_nontail_else.29799
 	addi	r0 r1 1
-	j	bfle_nontail_cont.29910
-bfle_nontail_else.29909:
+	j	bfle_nontail_cont.29800
+bfle_nontail_else.29799:
 	addi	r0 r1 0
-bfle_nontail_cont.29910:
+bfle_nontail_cont.29800:
 	addi	r0 r2 0
 	sub	r1 r2 r25
-	beq	r25 r0 beq_else.29911
+	beq	r25 r0 beq_else.29801
 	addi	r30 r30 0
 	sw	r1 r30 0
 	sw	r31 r30 4
@@ -15274,23 +15108,23 @@ bfle_nontail_cont.29910:
 	add.s	f3 f0 f0
 	sll	r3 r2 2
 	swoc1	f0 r1 r2
-	j	beq_cont.29912
-beq_else.29911:
-beq_cont.29912:
+	j	beq_cont.29802
+beq_else.29801:
+beq_cont.29802:
 	lui	r24 0
 	ori	r24 r24 0
 	mtc1	r24 f0
 	sub.s	f1 f0 f30
 	mfc1	f30 r25
-	blez	r25 bfle_nontail_else.29913
+	blez	r25 bfle_nontail_else.29803
 	addi	r0 r1 1
-	j	bfle_nontail_cont.29914
-bfle_nontail_else.29913:
+	j	bfle_nontail_cont.29804
+bfle_nontail_else.29803:
 	addi	r0 r1 0
-bfle_nontail_cont.29914:
+bfle_nontail_cont.29804:
 	addi	r0 r2 0
 	sub	r1 r2 r25
-	beq	r25 r0 beq_tail_else.29915
+	beq	r25 r0 beq_tail_else.29805
 	mul.s	f1 f1 f0
 	mul.s	f1 f1 f1
 	mul.s	f0 f1 f0
@@ -15362,14 +15196,14 @@ bfle_nontail_cont.29914:
 	sll	r2 r2 2
 	swoc1	f0 r1 r2
 	jr	r31
-beq_tail_else.29915:
+beq_tail_else.29805:
 	jr	r31
 trace_reflections.3075:
 	addi	r0 r3 0
 	sub	r3 r1 r25
-	blez	r25 ble_tail_else.29918
+	blez	r25 ble_tail_else.29808
 	jr	r31
-ble_tail_else.29918:
+ble_tail_else.29808:
 	addi	r30 r30 0
 	sw	r1 r30 0
 	sw	r31 r30 4
@@ -15440,15 +15274,15 @@ ble_tail_else.29918:
 	mtc1	r24 f2
 	sub.s	f1 f2 f30
 	mfc1	f30 r25
-	blez	r25 bfle_nontail_else.29920
+	blez	r25 bfle_nontail_else.29810
 	addi	r0 r1 1
-	j	bfle_nontail_cont.29921
-bfle_nontail_else.29920:
+	j	bfle_nontail_cont.29811
+bfle_nontail_else.29810:
 	addi	r0 r1 0
-bfle_nontail_cont.29921:
+bfle_nontail_cont.29811:
 	addi	r0 r2 0
 	sub	r1 r2 r25
-	beq	r25 r0 beq_else.29922
+	beq	r25 r0 beq_else.29812
 	lui	r24 19646
 	ori	r24 r24 48160
 	mtc1	r24 f1
@@ -15458,19 +15292,19 @@ bfle_nontail_cont.29921:
 	mtc1	r24 f1
 	sub.s	f0 f1 f30
 	mfc1	f30 r25
-	blez	r25 bfle_nontail_else.29924
+	blez	r25 bfle_nontail_else.29814
 	addi	r0 r1 1
-	j	bfle_nontail_cont.29925
-bfle_nontail_else.29924:
+	j	bfle_nontail_cont.29815
+bfle_nontail_else.29814:
 	addi	r0 r1 0
-bfle_nontail_cont.29925:
-	j	beq_cont.29923
-beq_else.29922:
+bfle_nontail_cont.29815:
+	j	beq_cont.29813
+beq_else.29812:
 	addi	r0 r1 0
-beq_cont.29923:
+beq_cont.29813:
 	addi	r0 r2 0
 	sub	r1 r2 r25
-	beq	r25 r0 beq_else.29926
+	beq	r25 r0 beq_else.29816
 	addi	r30 r30 24
 	sw	r1 r30 0
 	sw	r31 r30 4
@@ -15498,9 +15332,9 @@ beq_cont.29923:
 	lw	r30 r2 20
 	lw	r2 r3 0
 	sub	r1 r3 r25
-	beq	r25 r0 beq_else.29928
-	j	beq_cont.29929
-beq_else.29928:
+	beq	r25 r0 beq_else.29818
+	j	beq_cont.29819
+beq_else.29818:
 	addi	r0 r1 0
 	addi	r30 r30 24
 	sw	r1 r30 0
@@ -15520,12 +15354,12 @@ beq_else.29928:
 	lwo	r1 r4 r4
 	addi	r0 r5 -1
 	sub	r4 r5 r25
-	beq	r25 r0 beq_else.29930
+	beq	r25 r0 beq_else.29820
 	addi	r0 r5 99
 	sw	r1 r30 24
 	sw	r3 r30 28
 	sub	r4 r5 r25
-	beq	r25 r0 beq_else.29932
+	beq	r25 r0 beq_else.29822
 	addi	r30 r30 32
 	sw	r1 r30 0
 	sw	r31 r30 4
@@ -15582,10 +15416,10 @@ beq_else.29928:
 	lw	r7 r6 4
 	addi	r0 r8 1
 	sub	r6 r8 r25
-	beq	r25 r0 beq_else.29934
+	beq	r25 r0 beq_else.29824
 	addi	r0 r5 2
 	sub	r6 r5 r25
-	beq	r25 r0 beq_else.29936
+	beq	r25 r0 beq_else.29826
 	sw	r31 r30 32
 	addi	r30 r30 36
 	mov	r2 r4
@@ -15593,8 +15427,8 @@ beq_else.29928:
 	jal	solver_second_fast.2950
 	addi	r30 r30 -36
 	lw	r30 r31 32
-	j	beq_cont.29937
-beq_else.29936:
+	j	beq_cont.29827
+beq_else.29826:
 	lui	r24 0
 	ori	r24 r24 0
 	mtc1	r24 f3
@@ -15603,15 +15437,15 @@ beq_else.29936:
 	lwoc1	r4 r5 f4
 	sub.s	f3 f4 f30
 	mfc1	f30 r25
-	blez	r25 bfle_nontail_else.29938
+	blez	r25 bfle_nontail_else.29828
 	addi	r0 r5 1
-	j	bfle_nontail_cont.29939
-bfle_nontail_else.29938:
+	j	bfle_nontail_cont.29829
+bfle_nontail_else.29828:
 	addi	r0 r5 0
-bfle_nontail_cont.29939:
+bfle_nontail_cont.29829:
 	addi	r0 r6 0
 	sub	r5 r6 r25
-	beq	r25 r0 beq_else.29940
+	beq	r25 r0 beq_else.29830
 	addi	r30 r30 32
 	sw	r1 r30 0
 	sw	r31 r30 4
@@ -15638,13 +15472,13 @@ bfle_nontail_cont.29939:
 	sll	r6 r4 2
 	swoc1	f0 r5 r4
 	addi	r0 r1 1
-	j	beq_cont.29941
-beq_else.29940:
+	j	beq_cont.29831
+beq_else.29830:
 	addi	r0 r1 0
-beq_cont.29941:
-beq_cont.29937:
-	j	beq_cont.29935
-beq_else.29934:
+beq_cont.29831:
+beq_cont.29827:
+	j	beq_cont.29825
+beq_else.29824:
 	lw	r5 r5 0
 	sw	r31 r30 32
 	addi	r30 r30 36
@@ -15654,10 +15488,10 @@ beq_else.29934:
 	jal	solver_rect_fast.2937
 	addi	r30 r30 -36
 	lw	r30 r31 32
-beq_cont.29935:
+beq_cont.29825:
 	addi	r0 r2 0
 	sub	r1 r2 r25
-	beq	r25 r0 beq_else.29942
+	beq	r25 r0 beq_else.29832
 	lui	r24 48588
 	ori	r24 r24 52429
 	mtc1	r24 f0
@@ -15677,22 +15511,22 @@ beq_cont.29935:
 	mtc1	r24 f1
 	sub.s	f0 f1 f30
 	mfc1	f30 r25
-	blez	r25 bfle_nontail_else.29944
+	blez	r25 bfle_nontail_else.29834
 	addi	r0 r1 1
-	j	bfle_nontail_cont.29945
-bfle_nontail_else.29944:
+	j	bfle_nontail_cont.29835
+bfle_nontail_else.29834:
 	addi	r0 r1 0
-bfle_nontail_cont.29945:
+bfle_nontail_cont.29835:
 	addi	r0 r2 0
 	sub	r1 r2 r25
-	beq	r25 r0 beq_else.29946
+	beq	r25 r0 beq_else.29836
 	addi	r0 r1 1
 	sll	r1 r1 2
 	lw	r30 r2 24
 	lwo	r2 r1 r1
 	addi	r0 r3 -1
 	sub	r1 r3 r25
-	beq	r25 r0 beq_else.29948
+	beq	r25 r0 beq_else.29838
 	addi	r30 r30 32
 	sw	r1 r30 0
 	sw	r31 r30 4
@@ -15713,17 +15547,17 @@ bfle_nontail_cont.29945:
 	lw	r30 r31 32
 	addi	r0 r2 0
 	sub	r1 r2 r25
-	beq	r25 r0 beq_else.29950
+	beq	r25 r0 beq_else.29840
 	addi	r0 r1 1
-	j	beq_cont.29951
-beq_else.29950:
+	j	beq_cont.29841
+beq_else.29840:
 	addi	r0 r1 2
 	sll	r1 r1 2
 	lw	r30 r2 24
 	lwo	r2 r1 r1
 	addi	r0 r3 -1
 	sub	r1 r3 r25
-	beq	r25 r0 beq_else.29952
+	beq	r25 r0 beq_else.29842
 	addi	r30 r30 32
 	sw	r1 r30 0
 	sw	r31 r30 4
@@ -15744,17 +15578,17 @@ beq_else.29950:
 	lw	r30 r31 32
 	addi	r0 r2 0
 	sub	r1 r2 r25
-	beq	r25 r0 beq_else.29954
+	beq	r25 r0 beq_else.29844
 	addi	r0 r1 1
-	j	beq_cont.29955
-beq_else.29954:
+	j	beq_cont.29845
+beq_else.29844:
 	addi	r0 r1 3
 	sll	r1 r1 2
 	lw	r30 r2 24
 	lwo	r2 r1 r1
 	addi	r0 r3 -1
 	sub	r1 r3 r25
-	beq	r25 r0 beq_else.29956
+	beq	r25 r0 beq_else.29846
 	addi	r30 r30 32
 	sw	r1 r30 0
 	sw	r31 r30 4
@@ -15775,17 +15609,17 @@ beq_else.29954:
 	lw	r30 r31 32
 	addi	r0 r2 0
 	sub	r1 r2 r25
-	beq	r25 r0 beq_else.29958
+	beq	r25 r0 beq_else.29848
 	addi	r0 r1 1
-	j	beq_cont.29959
-beq_else.29958:
+	j	beq_cont.29849
+beq_else.29848:
 	addi	r0 r1 4
 	sll	r1 r1 2
 	lw	r30 r2 24
 	lwo	r2 r1 r1
 	addi	r0 r3 -1
 	sub	r1 r3 r25
-	beq	r25 r0 beq_else.29960
+	beq	r25 r0 beq_else.29850
 	addi	r30 r30 32
 	sw	r1 r30 0
 	sw	r31 r30 4
@@ -15806,17 +15640,17 @@ beq_else.29958:
 	lw	r30 r31 32
 	addi	r0 r2 0
 	sub	r1 r2 r25
-	beq	r25 r0 beq_else.29962
+	beq	r25 r0 beq_else.29852
 	addi	r0 r1 1
-	j	beq_cont.29963
-beq_else.29962:
+	j	beq_cont.29853
+beq_else.29852:
 	addi	r0 r1 5
 	sll	r1 r1 2
 	lw	r30 r2 24
 	lwo	r2 r1 r1
 	addi	r0 r3 -1
 	sub	r1 r3 r25
-	beq	r25 r0 beq_else.29964
+	beq	r25 r0 beq_else.29854
 	addi	r30 r30 32
 	sw	r1 r30 0
 	sw	r31 r30 4
@@ -15837,17 +15671,17 @@ beq_else.29962:
 	lw	r30 r31 32
 	addi	r0 r2 0
 	sub	r1 r2 r25
-	beq	r25 r0 beq_else.29966
+	beq	r25 r0 beq_else.29856
 	addi	r0 r1 1
-	j	beq_cont.29967
-beq_else.29966:
+	j	beq_cont.29857
+beq_else.29856:
 	addi	r0 r1 6
 	sll	r1 r1 2
 	lw	r30 r2 24
 	lwo	r2 r1 r1
 	addi	r0 r3 -1
 	sub	r1 r3 r25
-	beq	r25 r0 beq_else.29968
+	beq	r25 r0 beq_else.29858
 	addi	r30 r30 32
 	sw	r1 r30 0
 	sw	r31 r30 4
@@ -15868,10 +15702,10 @@ beq_else.29966:
 	lw	r30 r31 32
 	addi	r0 r2 0
 	sub	r1 r2 r25
-	beq	r25 r0 beq_else.29970
+	beq	r25 r0 beq_else.29860
 	addi	r0 r1 1
-	j	beq_cont.29971
-beq_else.29970:
+	j	beq_cont.29861
+beq_else.29860:
 	addi	r0 r1 7
 	lw	r30 r2 24
 	sw	r31 r30 32
@@ -15879,66 +15713,66 @@ beq_else.29970:
 	jal	shadow_check_one_or_group.3025
 	addi	r30 r30 -36
 	lw	r30 r31 32
-beq_cont.29971:
-	j	beq_cont.29969
-beq_else.29968:
+beq_cont.29861:
+	j	beq_cont.29859
+beq_else.29858:
 	addi	r0 r1 0
-beq_cont.29969:
-beq_cont.29967:
-	j	beq_cont.29965
-beq_else.29964:
+beq_cont.29859:
+beq_cont.29857:
+	j	beq_cont.29855
+beq_else.29854:
 	addi	r0 r1 0
-beq_cont.29965:
-beq_cont.29963:
-	j	beq_cont.29961
-beq_else.29960:
+beq_cont.29855:
+beq_cont.29853:
+	j	beq_cont.29851
+beq_else.29850:
 	addi	r0 r1 0
-beq_cont.29961:
-beq_cont.29959:
-	j	beq_cont.29957
-beq_else.29956:
+beq_cont.29851:
+beq_cont.29849:
+	j	beq_cont.29847
+beq_else.29846:
 	addi	r0 r1 0
-beq_cont.29957:
-beq_cont.29955:
-	j	beq_cont.29953
-beq_else.29952:
+beq_cont.29847:
+beq_cont.29845:
+	j	beq_cont.29843
+beq_else.29842:
 	addi	r0 r1 0
-beq_cont.29953:
-beq_cont.29951:
-	j	beq_cont.29949
-beq_else.29948:
+beq_cont.29843:
+beq_cont.29841:
+	j	beq_cont.29839
+beq_else.29838:
 	addi	r0 r1 0
-beq_cont.29949:
+beq_cont.29839:
 	addi	r0 r2 0
 	sub	r1 r2 r25
-	beq	r25 r0 beq_else.29972
+	beq	r25 r0 beq_else.29862
 	addi	r0 r1 1
-	j	beq_cont.29973
-beq_else.29972:
+	j	beq_cont.29863
+beq_else.29862:
 	addi	r0 r1 0
-beq_cont.29973:
-	j	beq_cont.29947
-beq_else.29946:
+beq_cont.29863:
+	j	beq_cont.29837
+beq_else.29836:
 	addi	r0 r1 0
-beq_cont.29947:
-	j	beq_cont.29943
-beq_else.29942:
+beq_cont.29837:
+	j	beq_cont.29833
+beq_else.29832:
 	addi	r0 r1 0
-beq_cont.29943:
-	j	beq_cont.29933
-beq_else.29932:
+beq_cont.29833:
+	j	beq_cont.29823
+beq_else.29822:
 	addi	r0 r1 1
-beq_cont.29933:
+beq_cont.29823:
 	addi	r0 r2 0
 	sub	r1 r2 r25
-	beq	r25 r0 beq_else.29974
+	beq	r25 r0 beq_else.29864
 	addi	r0 r1 1
 	sll	r1 r1 2
 	lw	r30 r2 24
 	lwo	r2 r1 r1
 	addi	r0 r3 -1
 	sub	r1 r3 r25
-	beq	r25 r0 beq_else.29976
+	beq	r25 r0 beq_else.29866
 	addi	r30 r30 32
 	sw	r1 r30 0
 	sw	r31 r30 4
@@ -15959,17 +15793,17 @@ beq_cont.29933:
 	lw	r30 r31 32
 	addi	r0 r2 0
 	sub	r1 r2 r25
-	beq	r25 r0 beq_else.29978
+	beq	r25 r0 beq_else.29868
 	addi	r0 r1 1
-	j	beq_cont.29979
-beq_else.29978:
+	j	beq_cont.29869
+beq_else.29868:
 	addi	r0 r1 2
 	sll	r1 r1 2
 	lw	r30 r2 24
 	lwo	r2 r1 r1
 	addi	r0 r3 -1
 	sub	r1 r3 r25
-	beq	r25 r0 beq_else.29980
+	beq	r25 r0 beq_else.29870
 	addi	r30 r30 32
 	sw	r1 r30 0
 	sw	r31 r30 4
@@ -15990,17 +15824,17 @@ beq_else.29978:
 	lw	r30 r31 32
 	addi	r0 r2 0
 	sub	r1 r2 r25
-	beq	r25 r0 beq_else.29982
+	beq	r25 r0 beq_else.29872
 	addi	r0 r1 1
-	j	beq_cont.29983
-beq_else.29982:
+	j	beq_cont.29873
+beq_else.29872:
 	addi	r0 r1 3
 	sll	r1 r1 2
 	lw	r30 r2 24
 	lwo	r2 r1 r1
 	addi	r0 r3 -1
 	sub	r1 r3 r25
-	beq	r25 r0 beq_else.29984
+	beq	r25 r0 beq_else.29874
 	addi	r30 r30 32
 	sw	r1 r30 0
 	sw	r31 r30 4
@@ -16021,17 +15855,17 @@ beq_else.29982:
 	lw	r30 r31 32
 	addi	r0 r2 0
 	sub	r1 r2 r25
-	beq	r25 r0 beq_else.29986
+	beq	r25 r0 beq_else.29876
 	addi	r0 r1 1
-	j	beq_cont.29987
-beq_else.29986:
+	j	beq_cont.29877
+beq_else.29876:
 	addi	r0 r1 4
 	sll	r1 r1 2
 	lw	r30 r2 24
 	lwo	r2 r1 r1
 	addi	r0 r3 -1
 	sub	r1 r3 r25
-	beq	r25 r0 beq_else.29988
+	beq	r25 r0 beq_else.29878
 	addi	r30 r30 32
 	sw	r1 r30 0
 	sw	r31 r30 4
@@ -16052,17 +15886,17 @@ beq_else.29986:
 	lw	r30 r31 32
 	addi	r0 r2 0
 	sub	r1 r2 r25
-	beq	r25 r0 beq_else.29990
+	beq	r25 r0 beq_else.29880
 	addi	r0 r1 1
-	j	beq_cont.29991
-beq_else.29990:
+	j	beq_cont.29881
+beq_else.29880:
 	addi	r0 r1 5
 	sll	r1 r1 2
 	lw	r30 r2 24
 	lwo	r2 r1 r1
 	addi	r0 r3 -1
 	sub	r1 r3 r25
-	beq	r25 r0 beq_else.29992
+	beq	r25 r0 beq_else.29882
 	addi	r30 r30 32
 	sw	r1 r30 0
 	sw	r31 r30 4
@@ -16083,17 +15917,17 @@ beq_else.29990:
 	lw	r30 r31 32
 	addi	r0 r2 0
 	sub	r1 r2 r25
-	beq	r25 r0 beq_else.29994
+	beq	r25 r0 beq_else.29884
 	addi	r0 r1 1
-	j	beq_cont.29995
-beq_else.29994:
+	j	beq_cont.29885
+beq_else.29884:
 	addi	r0 r1 6
 	sll	r1 r1 2
 	lw	r30 r2 24
 	lwo	r2 r1 r1
 	addi	r0 r3 -1
 	sub	r1 r3 r25
-	beq	r25 r0 beq_else.29996
+	beq	r25 r0 beq_else.29886
 	addi	r30 r30 32
 	sw	r1 r30 0
 	sw	r31 r30 4
@@ -16114,10 +15948,10 @@ beq_else.29994:
 	lw	r30 r31 32
 	addi	r0 r2 0
 	sub	r1 r2 r25
-	beq	r25 r0 beq_else.29998
+	beq	r25 r0 beq_else.29888
 	addi	r0 r1 1
-	j	beq_cont.29999
-beq_else.29998:
+	j	beq_cont.29889
+beq_else.29888:
 	addi	r0 r1 7
 	lw	r30 r2 24
 	sw	r31 r30 32
@@ -16125,42 +15959,42 @@ beq_else.29998:
 	jal	shadow_check_one_or_group.3025
 	addi	r30 r30 -36
 	lw	r30 r31 32
-beq_cont.29999:
-	j	beq_cont.29997
-beq_else.29996:
+beq_cont.29889:
+	j	beq_cont.29887
+beq_else.29886:
 	addi	r0 r1 0
-beq_cont.29997:
-beq_cont.29995:
-	j	beq_cont.29993
-beq_else.29992:
+beq_cont.29887:
+beq_cont.29885:
+	j	beq_cont.29883
+beq_else.29882:
 	addi	r0 r1 0
-beq_cont.29993:
-beq_cont.29991:
-	j	beq_cont.29989
-beq_else.29988:
+beq_cont.29883:
+beq_cont.29881:
+	j	beq_cont.29879
+beq_else.29878:
 	addi	r0 r1 0
-beq_cont.29989:
-beq_cont.29987:
-	j	beq_cont.29985
-beq_else.29984:
+beq_cont.29879:
+beq_cont.29877:
+	j	beq_cont.29875
+beq_else.29874:
 	addi	r0 r1 0
-beq_cont.29985:
-beq_cont.29983:
-	j	beq_cont.29981
-beq_else.29980:
+beq_cont.29875:
+beq_cont.29873:
+	j	beq_cont.29871
+beq_else.29870:
 	addi	r0 r1 0
-beq_cont.29981:
-beq_cont.29979:
-	j	beq_cont.29977
-beq_else.29976:
+beq_cont.29871:
+beq_cont.29869:
+	j	beq_cont.29867
+beq_else.29866:
 	addi	r0 r1 0
-beq_cont.29977:
+beq_cont.29867:
 	addi	r0 r2 0
 	sub	r1 r2 r25
-	beq	r25 r0 beq_else.30000
+	beq	r25 r0 beq_else.29890
 	addi	r0 r1 1
-	j	beq_cont.30001
-beq_else.30000:
+	j	beq_cont.29891
+beq_else.29890:
 	addi	r0 r1 1
 	lw	r30 r2 28
 	sw	r31 r30 32
@@ -16168,9 +16002,9 @@ beq_else.30000:
 	jal	shadow_check_one_or_matrix.3028
 	addi	r30 r30 -36
 	lw	r30 r31 32
-beq_cont.30001:
-	j	beq_cont.29975
-beq_else.29974:
+beq_cont.29891:
+	j	beq_cont.29865
+beq_else.29864:
 	addi	r0 r1 1
 	lw	r30 r2 28
 	sw	r31 r30 32
@@ -16178,16 +16012,16 @@ beq_else.29974:
 	jal	shadow_check_one_or_matrix.3028
 	addi	r30 r30 -36
 	lw	r30 r31 32
-beq_cont.29975:
-	j	beq_cont.29931
-beq_else.29930:
+beq_cont.29865:
+	j	beq_cont.29821
+beq_else.29820:
 	addi	r0 r1 0
-beq_cont.29931:
+beq_cont.29821:
 	addi	r0 r2 0
 	sub	r1 r2 r25
-	beq	r25 r0 beq_else.30002
-	j	beq_cont.30003
-beq_else.30002:
+	beq	r25 r0 beq_else.29892
+	j	beq_cont.29893
+beq_else.29892:
 	addi	r30 r30 32
 	sw	r1 r30 0
 	sw	r31 r30 4
@@ -16256,15 +16090,15 @@ beq_else.30002:
 	mtc1	r24 f3
 	sub.s	f0 f3 f30
 	mfc1	f30 r25
-	blez	r25 bfle_nontail_else.30004
+	blez	r25 bfle_nontail_else.29894
 	addi	r0 r1 1
-	j	bfle_nontail_cont.30005
-bfle_nontail_else.30004:
+	j	bfle_nontail_cont.29895
+bfle_nontail_else.29894:
 	addi	r0 r1 0
-bfle_nontail_cont.30005:
+bfle_nontail_cont.29895:
 	addi	r0 r2 0
 	sub	r1 r2 r25
-	beq	r25 r0 beq_else.30006
+	beq	r25 r0 beq_else.29896
 	addi	r30 r30 32
 	sw	r1 r30 0
 	sw	r31 r30 4
@@ -16313,23 +16147,23 @@ bfle_nontail_cont.30005:
 	add.s	f3 f0 f0
 	sll	r4 r2 2
 	swoc1	f0 r1 r2
-	j	beq_cont.30007
-beq_else.30006:
-beq_cont.30007:
+	j	beq_cont.29897
+beq_else.29896:
+beq_cont.29897:
 	lui	r24 0
 	ori	r24 r24 0
 	mtc1	r24 f0
 	sub.s	f1 f0 f30
 	mfc1	f30 r25
-	blez	r25 bfle_nontail_else.30008
+	blez	r25 bfle_nontail_else.29898
 	addi	r0 r1 1
-	j	bfle_nontail_cont.30009
-bfle_nontail_else.30008:
+	j	bfle_nontail_cont.29899
+bfle_nontail_else.29898:
 	addi	r0 r1 0
-bfle_nontail_cont.30009:
+bfle_nontail_cont.29899:
 	addi	r0 r2 0
 	sub	r1 r2 r25
-	beq	r25 r0 beq_else.30010
+	beq	r25 r0 beq_else.29900
 	mul.s	f1 f1 f0
 	mul.s	f1 f1 f1
 	mul.s	f0 f1 f0
@@ -16401,22 +16235,22 @@ bfle_nontail_cont.30009:
 	add.s	f3 f0 f0
 	sll	r2 r2 2
 	swoc1	f0 r1 r2
-	j	beq_cont.30011
-beq_else.30010:
-beq_cont.30011:
-beq_cont.30003:
-beq_cont.29929:
-	j	beq_cont.29927
-beq_else.29926:
-beq_cont.29927:
+	j	beq_cont.29901
+beq_else.29900:
+beq_cont.29901:
+beq_cont.29893:
+beq_cont.29819:
+	j	beq_cont.29817
+beq_else.29816:
+beq_cont.29817:
 	addi	r0 r1 1
 	lw	r30 r2 0
 	sub	r2 r1 r1
 	addi	r0 r2 0
 	sub	r2 r1 r25
-	blez	r25 ble_tail_else.30012
+	blez	r25 ble_tail_else.29902
 	jr	r31
-ble_tail_else.30012:
+ble_tail_else.29902:
 	addi	r30 r30 32
 	sw	r1 r30 0
 	sw	r31 r30 4
@@ -16464,11 +16298,11 @@ ble_tail_else.30012:
 	sw	r3 r30 36
 	sw	r2 r30 40
 	sub	r6 r7 r25
-	beq	r25 r0 beq_else.30014
+	beq	r25 r0 beq_else.29904
 	addi	r0 r7 99
 	sw	r5 r30 44
 	sub	r6 r7 r25
-	beq	r25 r0 beq_else.30016
+	beq	r25 r0 beq_else.29906
 	sw	r4 r30 48
 	sw	r31 r30 52
 	addi	r30 r30 56
@@ -16479,7 +16313,7 @@ ble_tail_else.30012:
 	lw	r30 r31 52
 	addi	r0 r2 0
 	sub	r1 r2 r25
-	beq	r25 r0 beq_else.30018
+	beq	r25 r0 beq_else.29908
 	addi	r30 r30 52
 	sw	r1 r30 0
 	sw	r31 r30 4
@@ -16506,22 +16340,22 @@ ble_tail_else.30012:
 	mtc1	r24 f1
 	sub.s	f0 f1 f30
 	mfc1	f30 r25
-	blez	r25 bfle_nontail_else.30020
+	blez	r25 bfle_nontail_else.29910
 	addi	r0 r1 1
-	j	bfle_nontail_cont.30021
-bfle_nontail_else.30020:
+	j	bfle_nontail_cont.29911
+bfle_nontail_else.29910:
 	addi	r0 r1 0
-bfle_nontail_cont.30021:
+bfle_nontail_cont.29911:
 	addi	r0 r2 0
 	sub	r1 r2 r25
-	beq	r25 r0 beq_else.30022
+	beq	r25 r0 beq_else.29912
 	addi	r0 r1 1
 	sll	r1 r1 2
 	lw	r30 r2 48
 	lwo	r2 r1 r1
 	addi	r0 r3 -1
 	sub	r1 r3 r25
-	beq	r25 r0 beq_else.30024
+	beq	r25 r0 beq_else.29914
 	addi	r30 r30 52
 	sw	r1 r30 0
 	sw	r31 r30 4
@@ -16548,7 +16382,7 @@ bfle_nontail_cont.30021:
 	lwo	r2 r1 r1
 	addi	r0 r3 -1
 	sub	r1 r3 r25
-	beq	r25 r0 beq_else.30026
+	beq	r25 r0 beq_else.29916
 	addi	r30 r30 52
 	sw	r1 r30 0
 	sw	r31 r30 4
@@ -16575,7 +16409,7 @@ bfle_nontail_cont.30021:
 	lwo	r2 r1 r1
 	addi	r0 r3 -1
 	sub	r1 r3 r25
-	beq	r25 r0 beq_else.30028
+	beq	r25 r0 beq_else.29918
 	addi	r30 r30 52
 	sw	r1 r30 0
 	sw	r31 r30 4
@@ -16602,7 +16436,7 @@ bfle_nontail_cont.30021:
 	lwo	r2 r1 r1
 	addi	r0 r3 -1
 	sub	r1 r3 r25
-	beq	r25 r0 beq_else.30030
+	beq	r25 r0 beq_else.29920
 	addi	r30 r30 52
 	sw	r1 r30 0
 	sw	r31 r30 4
@@ -16631,32 +16465,32 @@ bfle_nontail_cont.30021:
 	jal	solve_one_or_network_fast.3049
 	addi	r30 r30 -56
 	lw	r30 r31 52
-	j	beq_cont.30031
-beq_else.30030:
-beq_cont.30031:
-	j	beq_cont.30029
-beq_else.30028:
-beq_cont.30029:
-	j	beq_cont.30027
-beq_else.30026:
-beq_cont.30027:
-	j	beq_cont.30025
-beq_else.30024:
-beq_cont.30025:
-	j	beq_cont.30023
-beq_else.30022:
-beq_cont.30023:
-	j	beq_cont.30019
-beq_else.30018:
-beq_cont.30019:
-	j	beq_cont.30017
-beq_else.30016:
+	j	beq_cont.29921
+beq_else.29920:
+beq_cont.29921:
+	j	beq_cont.29919
+beq_else.29918:
+beq_cont.29919:
+	j	beq_cont.29917
+beq_else.29916:
+beq_cont.29917:
+	j	beq_cont.29915
+beq_else.29914:
+beq_cont.29915:
+	j	beq_cont.29913
+beq_else.29912:
+beq_cont.29913:
+	j	beq_cont.29909
+beq_else.29908:
+beq_cont.29909:
+	j	beq_cont.29907
+beq_else.29906:
 	addi	r0 r6 1
 	sll	r6 r6 2
 	lwo	r4 r6 r6
 	addi	r0 r7 -1
 	sub	r6 r7 r25
-	beq	r25 r0 beq_else.30032
+	beq	r25 r0 beq_else.29922
 	addi	r30 r30 52
 	sw	r1 r30 0
 	sw	r31 r30 4
@@ -16682,7 +16516,7 @@ beq_else.30016:
 	lwo	r2 r1 r1
 	addi	r0 r3 -1
 	sub	r1 r3 r25
-	beq	r25 r0 beq_else.30034
+	beq	r25 r0 beq_else.29924
 	addi	r30 r30 52
 	sw	r1 r30 0
 	sw	r31 r30 4
@@ -16709,7 +16543,7 @@ beq_else.30016:
 	lwo	r2 r1 r1
 	addi	r0 r3 -1
 	sub	r1 r3 r25
-	beq	r25 r0 beq_else.30036
+	beq	r25 r0 beq_else.29926
 	addi	r30 r30 52
 	sw	r1 r30 0
 	sw	r31 r30 4
@@ -16736,7 +16570,7 @@ beq_else.30016:
 	lwo	r2 r1 r1
 	addi	r0 r3 -1
 	sub	r1 r3 r25
-	beq	r25 r0 beq_else.30038
+	beq	r25 r0 beq_else.29928
 	addi	r30 r30 52
 	sw	r1 r30 0
 	sw	r31 r30 4
@@ -16765,19 +16599,19 @@ beq_else.30016:
 	jal	solve_one_or_network_fast.3049
 	addi	r30 r30 -56
 	lw	r30 r31 52
-	j	beq_cont.30039
-beq_else.30038:
-beq_cont.30039:
-	j	beq_cont.30037
-beq_else.30036:
-beq_cont.30037:
-	j	beq_cont.30035
-beq_else.30034:
-beq_cont.30035:
-	j	beq_cont.30033
-beq_else.30032:
-beq_cont.30033:
-beq_cont.30017:
+	j	beq_cont.29929
+beq_else.29928:
+beq_cont.29929:
+	j	beq_cont.29927
+beq_else.29926:
+beq_cont.29927:
+	j	beq_cont.29925
+beq_else.29924:
+beq_cont.29925:
+	j	beq_cont.29923
+beq_else.29922:
+beq_cont.29923:
+beq_cont.29907:
 	addi	r0 r1 1
 	lw	r30 r2 44
 	lw	r30 r3 36
@@ -16786,9 +16620,9 @@ beq_cont.30017:
 	jal	trace_or_matrix_fast.3053
 	addi	r30 r30 -56
 	lw	r30 r31 52
-	j	beq_cont.30015
-beq_else.30014:
-beq_cont.30015:
+	j	beq_cont.29905
+beq_else.29904:
+beq_cont.29905:
 	addi	r30 r30 52
 	sw	r1 r30 0
 	sw	r31 r30 4
@@ -16808,15 +16642,15 @@ beq_cont.30015:
 	mtc1	r24 f2
 	sub.s	f1 f2 f30
 	mfc1	f30 r25
-	blez	r25 bfle_nontail_else.30040
+	blez	r25 bfle_nontail_else.29930
 	addi	r0 r1 1
-	j	bfle_nontail_cont.30041
-bfle_nontail_else.30040:
+	j	bfle_nontail_cont.29931
+bfle_nontail_else.29930:
 	addi	r0 r1 0
-bfle_nontail_cont.30041:
+bfle_nontail_cont.29931:
 	addi	r0 r2 0
 	sub	r1 r2 r25
-	beq	r25 r0 beq_else.30042
+	beq	r25 r0 beq_else.29932
 	lui	r24 19646
 	ori	r24 r24 48160
 	mtc1	r24 f1
@@ -16826,19 +16660,19 @@ bfle_nontail_cont.30041:
 	mtc1	r24 f1
 	sub.s	f0 f1 f30
 	mfc1	f30 r25
-	blez	r25 bfle_nontail_else.30044
+	blez	r25 bfle_nontail_else.29934
 	addi	r0 r1 1
-	j	bfle_nontail_cont.30045
-bfle_nontail_else.30044:
+	j	bfle_nontail_cont.29935
+bfle_nontail_else.29934:
 	addi	r0 r1 0
-bfle_nontail_cont.30045:
-	j	beq_cont.30043
-beq_else.30042:
+bfle_nontail_cont.29935:
+	j	beq_cont.29933
+beq_else.29932:
 	addi	r0 r1 0
-beq_cont.30043:
+beq_cont.29933:
 	addi	r0 r2 0
 	sub	r1 r2 r25
-	beq	r25 r0 beq_else.30046
+	beq	r25 r0 beq_else.29936
 	addi	r30 r30 52
 	sw	r1 r30 0
 	sw	r31 r30 4
@@ -16866,9 +16700,9 @@ beq_cont.30043:
 	lw	r30 r2 40
 	lw	r2 r3 0
 	sub	r1 r3 r25
-	beq	r25 r0 beq_else.30048
-	j	beq_cont.30049
-beq_else.30048:
+	beq	r25 r0 beq_else.29938
+	j	beq_cont.29939
+beq_else.29938:
 	addi	r0 r1 0
 	addi	r30 r30 52
 	sw	r1 r30 0
@@ -16889,9 +16723,9 @@ beq_else.30048:
 	lw	r30 r31 52
 	addi	r0 r2 0
 	sub	r1 r2 r25
-	beq	r25 r0 beq_else.30050
-	j	beq_cont.30051
-beq_else.30050:
+	beq	r25 r0 beq_else.29940
+	j	beq_cont.29941
+beq_else.29940:
 	addi	r30 r30 52
 	sw	r1 r30 0
 	sw	r31 r30 4
@@ -16962,11 +16796,11 @@ beq_else.30050:
 	jal	add_light.3071
 	addi	r30 r30 -56
 	lw	r30 r31 52
-beq_cont.30051:
-beq_cont.30049:
-	j	beq_cont.30047
-beq_else.30046:
-beq_cont.30047:
+beq_cont.29941:
+beq_cont.29939:
+	j	beq_cont.29937
+beq_else.29936:
+beq_cont.29937:
 	addi	r0 r1 1
 	lw	r30 r2 32
 	sub	r2 r1 r1
@@ -16977,9 +16811,9 @@ beq_cont.30047:
 trace_ray.3080:
 	addi	r0 r4 4
 	sub	r1 r4 r25
-	blez	r25 ble_tail_else.30052
+	blez	r25 ble_tail_else.29942
 	jr	r31
-ble_tail_else.30052:
+ble_tail_else.29942:
 	lw	r3 r4 8
 	addi	r30 r30 0
 	sw	r1 r30 0
@@ -17040,15 +16874,15 @@ ble_tail_else.30052:
 	mtc1	r24 f2
 	sub.s	f1 f2 f30
 	mfc1	f30 r25
-	blez	r25 bfle_nontail_else.30054
+	blez	r25 bfle_nontail_else.29944
 	addi	r0 r1 1
-	j	bfle_nontail_cont.30055
-bfle_nontail_else.30054:
+	j	bfle_nontail_cont.29945
+bfle_nontail_else.29944:
 	addi	r0 r1 0
-bfle_nontail_cont.30055:
+bfle_nontail_cont.29945:
 	addi	r0 r2 0
 	sub	r1 r2 r25
-	beq	r25 r0 beq_else.30056
+	beq	r25 r0 beq_else.29946
 	lui	r24 19646
 	ori	r24 r24 48160
 	mtc1	r24 f1
@@ -17058,19 +16892,19 @@ bfle_nontail_cont.30055:
 	mtc1	r24 f1
 	sub.s	f0 f1 f30
 	mfc1	f30 r25
-	blez	r25 bfle_nontail_else.30058
+	blez	r25 bfle_nontail_else.29948
 	addi	r0 r1 1
-	j	bfle_nontail_cont.30059
-bfle_nontail_else.30058:
+	j	bfle_nontail_cont.29949
+bfle_nontail_else.29948:
 	addi	r0 r1 0
-bfle_nontail_cont.30059:
-	j	beq_cont.30057
-beq_else.30056:
+bfle_nontail_cont.29949:
+	j	beq_cont.29947
+beq_else.29946:
 	addi	r0 r1 0
-beq_cont.30057:
+beq_cont.29947:
 	addi	r0 r2 0
 	sub	r1 r2 r25
-	beq	r25 r0 beq_tail_else.30060
+	beq	r25 r0 beq_tail_else.29950
 	addi	r30 r30 24
 	sw	r1 r30 0
 	sw	r31 r30 4
@@ -17105,18 +16939,18 @@ beq_cont.30057:
 	sw	r1 r30 32
 	sw	r2 r30 36
 	sub	r4 r5 r25
-	beq	r25 r0 beq_else.30061
+	beq	r25 r0 beq_else.29951
 	addi	r0 r5 2
 	sub	r4 r5 r25
-	beq	r25 r0 beq_else.30063
+	beq	r25 r0 beq_else.29953
 	sw	r31 r30 40
 	addi	r30 r30 44
 	mov	r1 r2
 	jal	get_nvector_second.3063
 	addi	r30 r30 -44
 	lw	r30 r31 40
-	j	beq_cont.30064
-beq_else.30063:
+	j	beq_cont.29954
+beq_else.29953:
 	addi	r30 r30 40
 	sw	r1 r30 0
 	sw	r31 r30 4
@@ -17165,9 +16999,9 @@ beq_else.30063:
 	neg.s	f2 f2
 	sll	r5 r5 2
 	swoc1	f2 r4 r5
-beq_cont.30064:
-	j	beq_cont.30062
-beq_else.30061:
+beq_cont.29954:
+	j	beq_cont.29952
+beq_else.29951:
 	addi	r30 r30 40
 	sw	r1 r30 0
 	sw	r31 r30 4
@@ -17220,48 +17054,48 @@ beq_else.30061:
 	sub.s	f2 f3 f30
 	mfc1	f30 r25
 	sll	r25 r25 1
-	beq	r25 r0 bfeq_nontail_else.30065
+	beq	r25 r0 bfeq_nontail_else.29955
 	addi	r0 r4 0
-	j	bfeq_nontail_cont.30066
-bfeq_nontail_else.30065:
+	j	bfeq_nontail_cont.29956
+bfeq_nontail_else.29955:
 	addi	r0 r4 1
-bfeq_nontail_cont.30066:
+bfeq_nontail_cont.29956:
 	addi	r0 r8 0
 	sub	r4 r8 r25
-	beq	r25 r0 beq_else.30067
+	beq	r25 r0 beq_else.29957
 	lui	r24 0
 	ori	r24 r24 0
 	mtc1	r24 f2
-	j	beq_cont.30068
-beq_else.30067:
+	j	beq_cont.29958
+beq_else.29957:
 	lui	r24 0
 	ori	r24 r24 0
 	mtc1	r24 f3
 	sub.s	f2 f3 f30
 	mfc1	f30 r25
-	blez	r25 bfle_nontail_else.30069
+	blez	r25 bfle_nontail_else.29959
 	addi	r0 r4 1
-	j	bfle_nontail_cont.30070
-bfle_nontail_else.30069:
+	j	bfle_nontail_cont.29960
+bfle_nontail_else.29959:
 	addi	r0 r4 0
-bfle_nontail_cont.30070:
+bfle_nontail_cont.29960:
 	addi	r0 r8 0
 	sub	r4 r8 r25
-	beq	r25 r0 beq_else.30071
+	beq	r25 r0 beq_else.29961
 	lui	r24 16256
 	ori	r24 r24 0
 	mtc1	r24 f2
-	j	beq_cont.30072
-beq_else.30071:
+	j	beq_cont.29962
+beq_else.29961:
 	lui	r24 49024
 	ori	r24 r24 0
 	mtc1	r24 f2
-beq_cont.30072:
-beq_cont.30068:
+beq_cont.29962:
+beq_cont.29958:
 	neg.s	f2 f2
 	sll	r6 r4 2
 	swoc1	f2 r5 r4
-beq_cont.30062:
+beq_cont.29952:
 	addi	r30 r30 40
 	sw	r1 r30 0
 	sw	r31 r30 4
@@ -17373,20 +17207,20 @@ beq_cont.30062:
 	mtc1	r24 f1
 	sub.s	f0 f1 f30
 	mfc1	f30 r25
-	blez	r25 bfle_nontail_else.30073
+	blez	r25 bfle_nontail_else.29963
 	addi	r0 r6 1
-	j	bfle_nontail_cont.30074
-bfle_nontail_else.30073:
+	j	bfle_nontail_cont.29964
+bfle_nontail_else.29963:
 	addi	r0 r6 0
-bfle_nontail_cont.30074:
+bfle_nontail_cont.29964:
 	addi	r0 r7 0
 	sub	r6 r7 r25
-	beq	r25 r0 beq_else.30075
+	beq	r25 r0 beq_else.29965
 	addi	r0 r6 0
 	sll	r2 r7 2
 	swo	r6 r3 r7
-	j	beq_cont.30076
-beq_else.30075:
+	j	beq_cont.29966
+beq_else.29965:
 	addi	r0 r6 1
 	sll	r2 r7 2
 	swo	r6 r3 r7
@@ -17476,7 +17310,7 @@ beq_else.30075:
 	lwoc1	r6 r8 f0
 	sll	r7 r6 2
 	swoc1	f0 r3 r6
-beq_cont.30076:
+beq_cont.29966:
 	lui	r24 49152
 	ori	r24 r24 0
 	mtc1	r24 f0
@@ -17580,12 +17414,12 @@ beq_cont.30076:
 	addi	r0 r9 -1
 	swc1	f0 r30 40
 	sub	r8 r9 r25
-	beq	r25 r0 beq_else.30077
+	beq	r25 r0 beq_else.29967
 	addi	r0 r9 99
 	sw	r3 r30 44
 	sw	r6 r30 48
 	sub	r8 r9 r25
-	beq	r25 r0 beq_else.30079
+	beq	r25 r0 beq_else.29969
 	addi	r30 r30 52
 	sw	r1 r30 0
 	sw	r31 r30 4
@@ -17642,10 +17476,10 @@ beq_cont.30076:
 	lw	r11 r10 4
 	addi	r0 r12 1
 	sub	r10 r12 r25
-	beq	r25 r0 beq_else.30081
+	beq	r25 r0 beq_else.29971
 	addi	r0 r9 2
 	sub	r10 r9 r25
-	beq	r25 r0 beq_else.30083
+	beq	r25 r0 beq_else.29973
 	sw	r31 r30 52
 	addi	r30 r30 56
 	mov	r2 r8
@@ -17656,8 +17490,8 @@ beq_cont.30076:
 	jal	solver_second_fast.2950
 	addi	r30 r30 -56
 	lw	r30 r31 52
-	j	beq_cont.30084
-beq_else.30083:
+	j	beq_cont.29974
+beq_else.29973:
 	lui	r24 0
 	ori	r24 r24 0
 	mtc1	r24 f5
@@ -17666,15 +17500,15 @@ beq_else.30083:
 	lwoc1	r8 r9 f6
 	sub.s	f5 f6 f30
 	mfc1	f30 r25
-	blez	r25 bfle_nontail_else.30085
+	blez	r25 bfle_nontail_else.29975
 	addi	r0 r9 1
-	j	bfle_nontail_cont.30086
-bfle_nontail_else.30085:
+	j	bfle_nontail_cont.29976
+bfle_nontail_else.29975:
 	addi	r0 r9 0
-bfle_nontail_cont.30086:
+bfle_nontail_cont.29976:
 	addi	r0 r10 0
 	sub	r9 r10 r25
-	beq	r25 r0 beq_else.30087
+	beq	r25 r0 beq_else.29977
 	addi	r30 r30 52
 	sw	r1 r30 0
 	sw	r31 r30 4
@@ -17701,13 +17535,13 @@ bfle_nontail_cont.30086:
 	sll	r10 r8 2
 	swoc1	f2 r9 r8
 	addi	r0 r1 1
-	j	beq_cont.30088
-beq_else.30087:
+	j	beq_cont.29978
+beq_else.29977:
 	addi	r0 r1 0
-beq_cont.30088:
-beq_cont.30084:
-	j	beq_cont.30082
-beq_else.30081:
+beq_cont.29978:
+beq_cont.29974:
+	j	beq_cont.29972
+beq_else.29971:
 	lw	r9 r9 0
 	sw	r31 r30 52
 	addi	r30 r30 56
@@ -17720,10 +17554,10 @@ beq_else.30081:
 	jal	solver_rect_fast.2937
 	addi	r30 r30 -56
 	lw	r30 r31 52
-beq_cont.30082:
+beq_cont.29972:
 	addi	r0 r2 0
 	sub	r1 r2 r25
-	beq	r25 r0 beq_else.30089
+	beq	r25 r0 beq_else.29979
 	lui	r24 48588
 	ori	r24 r24 52429
 	mtc1	r24 f0
@@ -17743,22 +17577,22 @@ beq_cont.30082:
 	mtc1	r24 f1
 	sub.s	f0 f1 f30
 	mfc1	f30 r25
-	blez	r25 bfle_nontail_else.30091
+	blez	r25 bfle_nontail_else.29981
 	addi	r0 r1 1
-	j	bfle_nontail_cont.30092
-bfle_nontail_else.30091:
+	j	bfle_nontail_cont.29982
+bfle_nontail_else.29981:
 	addi	r0 r1 0
-bfle_nontail_cont.30092:
+bfle_nontail_cont.29982:
 	addi	r0 r2 0
 	sub	r1 r2 r25
-	beq	r25 r0 beq_else.30093
+	beq	r25 r0 beq_else.29983
 	addi	r0 r1 1
 	sll	r1 r1 2
 	lw	r30 r2 44
 	lwo	r2 r1 r1
 	addi	r0 r3 -1
 	sub	r1 r3 r25
-	beq	r25 r0 beq_else.30095
+	beq	r25 r0 beq_else.29985
 	addi	r30 r30 52
 	sw	r1 r30 0
 	sw	r31 r30 4
@@ -17779,17 +17613,17 @@ bfle_nontail_cont.30092:
 	lw	r30 r31 52
 	addi	r0 r2 0
 	sub	r1 r2 r25
-	beq	r25 r0 beq_else.30097
+	beq	r25 r0 beq_else.29987
 	addi	r0 r1 1
-	j	beq_cont.30098
-beq_else.30097:
+	j	beq_cont.29988
+beq_else.29987:
 	addi	r0 r1 2
 	sll	r1 r1 2
 	lw	r30 r2 44
 	lwo	r2 r1 r1
 	addi	r0 r3 -1
 	sub	r1 r3 r25
-	beq	r25 r0 beq_else.30099
+	beq	r25 r0 beq_else.29989
 	addi	r30 r30 52
 	sw	r1 r30 0
 	sw	r31 r30 4
@@ -17810,17 +17644,17 @@ beq_else.30097:
 	lw	r30 r31 52
 	addi	r0 r2 0
 	sub	r1 r2 r25
-	beq	r25 r0 beq_else.30101
+	beq	r25 r0 beq_else.29991
 	addi	r0 r1 1
-	j	beq_cont.30102
-beq_else.30101:
+	j	beq_cont.29992
+beq_else.29991:
 	addi	r0 r1 3
 	sll	r1 r1 2
 	lw	r30 r2 44
 	lwo	r2 r1 r1
 	addi	r0 r3 -1
 	sub	r1 r3 r25
-	beq	r25 r0 beq_else.30103
+	beq	r25 r0 beq_else.29993
 	addi	r30 r30 52
 	sw	r1 r30 0
 	sw	r31 r30 4
@@ -17841,17 +17675,17 @@ beq_else.30101:
 	lw	r30 r31 52
 	addi	r0 r2 0
 	sub	r1 r2 r25
-	beq	r25 r0 beq_else.30105
+	beq	r25 r0 beq_else.29995
 	addi	r0 r1 1
-	j	beq_cont.30106
-beq_else.30105:
+	j	beq_cont.29996
+beq_else.29995:
 	addi	r0 r1 4
 	sll	r1 r1 2
 	lw	r30 r2 44
 	lwo	r2 r1 r1
 	addi	r0 r3 -1
 	sub	r1 r3 r25
-	beq	r25 r0 beq_else.30107
+	beq	r25 r0 beq_else.29997
 	addi	r30 r30 52
 	sw	r1 r30 0
 	sw	r31 r30 4
@@ -17872,17 +17706,17 @@ beq_else.30105:
 	lw	r30 r31 52
 	addi	r0 r2 0
 	sub	r1 r2 r25
-	beq	r25 r0 beq_else.30109
+	beq	r25 r0 beq_else.29999
 	addi	r0 r1 1
-	j	beq_cont.30110
-beq_else.30109:
+	j	beq_cont.30000
+beq_else.29999:
 	addi	r0 r1 5
 	sll	r1 r1 2
 	lw	r30 r2 44
 	lwo	r2 r1 r1
 	addi	r0 r3 -1
 	sub	r1 r3 r25
-	beq	r25 r0 beq_else.30111
+	beq	r25 r0 beq_else.30001
 	addi	r30 r30 52
 	sw	r1 r30 0
 	sw	r31 r30 4
@@ -17903,17 +17737,17 @@ beq_else.30109:
 	lw	r30 r31 52
 	addi	r0 r2 0
 	sub	r1 r2 r25
-	beq	r25 r0 beq_else.30113
+	beq	r25 r0 beq_else.30003
 	addi	r0 r1 1
-	j	beq_cont.30114
-beq_else.30113:
+	j	beq_cont.30004
+beq_else.30003:
 	addi	r0 r1 6
 	sll	r1 r1 2
 	lw	r30 r2 44
 	lwo	r2 r1 r1
 	addi	r0 r3 -1
 	sub	r1 r3 r25
-	beq	r25 r0 beq_else.30115
+	beq	r25 r0 beq_else.30005
 	addi	r30 r30 52
 	sw	r1 r30 0
 	sw	r31 r30 4
@@ -17934,10 +17768,10 @@ beq_else.30113:
 	lw	r30 r31 52
 	addi	r0 r2 0
 	sub	r1 r2 r25
-	beq	r25 r0 beq_else.30117
+	beq	r25 r0 beq_else.30007
 	addi	r0 r1 1
-	j	beq_cont.30118
-beq_else.30117:
+	j	beq_cont.30008
+beq_else.30007:
 	addi	r0 r1 7
 	lw	r30 r2 44
 	sw	r31 r30 52
@@ -17945,66 +17779,66 @@ beq_else.30117:
 	jal	shadow_check_one_or_group.3025
 	addi	r30 r30 -56
 	lw	r30 r31 52
-beq_cont.30118:
-	j	beq_cont.30116
-beq_else.30115:
+beq_cont.30008:
+	j	beq_cont.30006
+beq_else.30005:
 	addi	r0 r1 0
-beq_cont.30116:
-beq_cont.30114:
-	j	beq_cont.30112
-beq_else.30111:
+beq_cont.30006:
+beq_cont.30004:
+	j	beq_cont.30002
+beq_else.30001:
 	addi	r0 r1 0
-beq_cont.30112:
-beq_cont.30110:
-	j	beq_cont.30108
-beq_else.30107:
+beq_cont.30002:
+beq_cont.30000:
+	j	beq_cont.29998
+beq_else.29997:
 	addi	r0 r1 0
-beq_cont.30108:
-beq_cont.30106:
-	j	beq_cont.30104
-beq_else.30103:
+beq_cont.29998:
+beq_cont.29996:
+	j	beq_cont.29994
+beq_else.29993:
 	addi	r0 r1 0
-beq_cont.30104:
-beq_cont.30102:
-	j	beq_cont.30100
-beq_else.30099:
+beq_cont.29994:
+beq_cont.29992:
+	j	beq_cont.29990
+beq_else.29989:
 	addi	r0 r1 0
-beq_cont.30100:
-beq_cont.30098:
-	j	beq_cont.30096
-beq_else.30095:
+beq_cont.29990:
+beq_cont.29988:
+	j	beq_cont.29986
+beq_else.29985:
 	addi	r0 r1 0
-beq_cont.30096:
+beq_cont.29986:
 	addi	r0 r2 0
 	sub	r1 r2 r25
-	beq	r25 r0 beq_else.30119
+	beq	r25 r0 beq_else.30009
 	addi	r0 r1 1
-	j	beq_cont.30120
-beq_else.30119:
+	j	beq_cont.30010
+beq_else.30009:
 	addi	r0 r1 0
-beq_cont.30120:
-	j	beq_cont.30094
-beq_else.30093:
+beq_cont.30010:
+	j	beq_cont.29984
+beq_else.29983:
 	addi	r0 r1 0
-beq_cont.30094:
-	j	beq_cont.30090
-beq_else.30089:
+beq_cont.29984:
+	j	beq_cont.29980
+beq_else.29979:
 	addi	r0 r1 0
-beq_cont.30090:
-	j	beq_cont.30080
-beq_else.30079:
+beq_cont.29980:
+	j	beq_cont.29970
+beq_else.29969:
 	addi	r0 r1 1
-beq_cont.30080:
+beq_cont.29970:
 	addi	r0 r2 0
 	sub	r1 r2 r25
-	beq	r25 r0 beq_else.30121
+	beq	r25 r0 beq_else.30011
 	addi	r0 r1 1
 	sll	r1 r1 2
 	lw	r30 r2 44
 	lwo	r2 r1 r1
 	addi	r0 r3 -1
 	sub	r1 r3 r25
-	beq	r25 r0 beq_else.30123
+	beq	r25 r0 beq_else.30013
 	addi	r30 r30 52
 	sw	r1 r30 0
 	sw	r31 r30 4
@@ -18025,17 +17859,17 @@ beq_cont.30080:
 	lw	r30 r31 52
 	addi	r0 r2 0
 	sub	r1 r2 r25
-	beq	r25 r0 beq_else.30125
+	beq	r25 r0 beq_else.30015
 	addi	r0 r1 1
-	j	beq_cont.30126
-beq_else.30125:
+	j	beq_cont.30016
+beq_else.30015:
 	addi	r0 r1 2
 	sll	r1 r1 2
 	lw	r30 r2 44
 	lwo	r2 r1 r1
 	addi	r0 r3 -1
 	sub	r1 r3 r25
-	beq	r25 r0 beq_else.30127
+	beq	r25 r0 beq_else.30017
 	addi	r30 r30 52
 	sw	r1 r30 0
 	sw	r31 r30 4
@@ -18056,17 +17890,17 @@ beq_else.30125:
 	lw	r30 r31 52
 	addi	r0 r2 0
 	sub	r1 r2 r25
-	beq	r25 r0 beq_else.30129
+	beq	r25 r0 beq_else.30019
 	addi	r0 r1 1
-	j	beq_cont.30130
-beq_else.30129:
+	j	beq_cont.30020
+beq_else.30019:
 	addi	r0 r1 3
 	sll	r1 r1 2
 	lw	r30 r2 44
 	lwo	r2 r1 r1
 	addi	r0 r3 -1
 	sub	r1 r3 r25
-	beq	r25 r0 beq_else.30131
+	beq	r25 r0 beq_else.30021
 	addi	r30 r30 52
 	sw	r1 r30 0
 	sw	r31 r30 4
@@ -18087,17 +17921,17 @@ beq_else.30129:
 	lw	r30 r31 52
 	addi	r0 r2 0
 	sub	r1 r2 r25
-	beq	r25 r0 beq_else.30133
+	beq	r25 r0 beq_else.30023
 	addi	r0 r1 1
-	j	beq_cont.30134
-beq_else.30133:
+	j	beq_cont.30024
+beq_else.30023:
 	addi	r0 r1 4
 	sll	r1 r1 2
 	lw	r30 r2 44
 	lwo	r2 r1 r1
 	addi	r0 r3 -1
 	sub	r1 r3 r25
-	beq	r25 r0 beq_else.30135
+	beq	r25 r0 beq_else.30025
 	addi	r30 r30 52
 	sw	r1 r30 0
 	sw	r31 r30 4
@@ -18118,17 +17952,17 @@ beq_else.30133:
 	lw	r30 r31 52
 	addi	r0 r2 0
 	sub	r1 r2 r25
-	beq	r25 r0 beq_else.30137
+	beq	r25 r0 beq_else.30027
 	addi	r0 r1 1
-	j	beq_cont.30138
-beq_else.30137:
+	j	beq_cont.30028
+beq_else.30027:
 	addi	r0 r1 5
 	sll	r1 r1 2
 	lw	r30 r2 44
 	lwo	r2 r1 r1
 	addi	r0 r3 -1
 	sub	r1 r3 r25
-	beq	r25 r0 beq_else.30139
+	beq	r25 r0 beq_else.30029
 	addi	r30 r30 52
 	sw	r1 r30 0
 	sw	r31 r30 4
@@ -18149,17 +17983,17 @@ beq_else.30137:
 	lw	r30 r31 52
 	addi	r0 r2 0
 	sub	r1 r2 r25
-	beq	r25 r0 beq_else.30141
+	beq	r25 r0 beq_else.30031
 	addi	r0 r1 1
-	j	beq_cont.30142
-beq_else.30141:
+	j	beq_cont.30032
+beq_else.30031:
 	addi	r0 r1 6
 	sll	r1 r1 2
 	lw	r30 r2 44
 	lwo	r2 r1 r1
 	addi	r0 r3 -1
 	sub	r1 r3 r25
-	beq	r25 r0 beq_else.30143
+	beq	r25 r0 beq_else.30033
 	addi	r30 r30 52
 	sw	r1 r30 0
 	sw	r31 r30 4
@@ -18180,10 +18014,10 @@ beq_else.30141:
 	lw	r30 r31 52
 	addi	r0 r2 0
 	sub	r1 r2 r25
-	beq	r25 r0 beq_else.30145
+	beq	r25 r0 beq_else.30035
 	addi	r0 r1 1
-	j	beq_cont.30146
-beq_else.30145:
+	j	beq_cont.30036
+beq_else.30035:
 	addi	r0 r1 7
 	lw	r30 r2 44
 	sw	r31 r30 52
@@ -18191,42 +18025,42 @@ beq_else.30145:
 	jal	shadow_check_one_or_group.3025
 	addi	r30 r30 -56
 	lw	r30 r31 52
-beq_cont.30146:
-	j	beq_cont.30144
-beq_else.30143:
+beq_cont.30036:
+	j	beq_cont.30034
+beq_else.30033:
 	addi	r0 r1 0
-beq_cont.30144:
-beq_cont.30142:
-	j	beq_cont.30140
-beq_else.30139:
+beq_cont.30034:
+beq_cont.30032:
+	j	beq_cont.30030
+beq_else.30029:
 	addi	r0 r1 0
-beq_cont.30140:
-beq_cont.30138:
-	j	beq_cont.30136
-beq_else.30135:
+beq_cont.30030:
+beq_cont.30028:
+	j	beq_cont.30026
+beq_else.30025:
 	addi	r0 r1 0
-beq_cont.30136:
-beq_cont.30134:
-	j	beq_cont.30132
-beq_else.30131:
+beq_cont.30026:
+beq_cont.30024:
+	j	beq_cont.30022
+beq_else.30021:
 	addi	r0 r1 0
-beq_cont.30132:
-beq_cont.30130:
-	j	beq_cont.30128
-beq_else.30127:
+beq_cont.30022:
+beq_cont.30020:
+	j	beq_cont.30018
+beq_else.30017:
 	addi	r0 r1 0
-beq_cont.30128:
-beq_cont.30126:
-	j	beq_cont.30124
-beq_else.30123:
+beq_cont.30018:
+beq_cont.30016:
+	j	beq_cont.30014
+beq_else.30013:
 	addi	r0 r1 0
-beq_cont.30124:
+beq_cont.30014:
 	addi	r0 r2 0
 	sub	r1 r2 r25
-	beq	r25 r0 beq_else.30147
+	beq	r25 r0 beq_else.30037
 	addi	r0 r1 1
-	j	beq_cont.30148
-beq_else.30147:
+	j	beq_cont.30038
+beq_else.30037:
 	addi	r0 r1 1
 	lw	r30 r2 48
 	sw	r31 r30 52
@@ -18234,9 +18068,9 @@ beq_else.30147:
 	jal	shadow_check_one_or_matrix.3028
 	addi	r30 r30 -56
 	lw	r30 r31 52
-beq_cont.30148:
-	j	beq_cont.30122
-beq_else.30121:
+beq_cont.30038:
+	j	beq_cont.30012
+beq_else.30011:
 	addi	r0 r1 1
 	lw	r30 r2 48
 	sw	r31 r30 52
@@ -18244,16 +18078,16 @@ beq_else.30121:
 	jal	shadow_check_one_or_matrix.3028
 	addi	r30 r30 -56
 	lw	r30 r31 52
-beq_cont.30122:
-	j	beq_cont.30078
-beq_else.30077:
+beq_cont.30012:
+	j	beq_cont.29968
+beq_else.29967:
 	addi	r0 r1 0
-beq_cont.30078:
+beq_cont.29968:
 	addi	r0 r2 0
 	sub	r1 r2 r25
-	beq	r25 r0 beq_else.30149
-	j	beq_cont.30150
-beq_else.30149:
+	beq	r25 r0 beq_else.30039
+	j	beq_cont.30040
+beq_else.30039:
 	addi	r30 r30 52
 	sw	r1 r30 0
 	sw	r31 r30 4
@@ -18332,15 +18166,15 @@ beq_else.30149:
 	mtc1	r24 f3
 	sub.s	f0 f3 f30
 	mfc1	f30 r25
-	blez	r25 bfle_nontail_else.30151
+	blez	r25 bfle_nontail_else.30041
 	addi	r0 r1 1
-	j	bfle_nontail_cont.30152
-bfle_nontail_else.30151:
+	j	bfle_nontail_cont.30042
+bfle_nontail_else.30041:
 	addi	r0 r1 0
-bfle_nontail_cont.30152:
+bfle_nontail_cont.30042:
 	addi	r0 r2 0
 	sub	r1 r2 r25
-	beq	r25 r0 beq_else.30153
+	beq	r25 r0 beq_else.30043
 	addi	r30 r30 52
 	sw	r1 r30 0
 	sw	r31 r30 4
@@ -18389,23 +18223,23 @@ bfle_nontail_cont.30152:
 	add.s	f3 f0 f0
 	sll	r4 r2 2
 	swoc1	f0 r1 r2
-	j	beq_cont.30154
-beq_else.30153:
-beq_cont.30154:
+	j	beq_cont.30044
+beq_else.30043:
+beq_cont.30044:
 	lui	r24 0
 	ori	r24 r24 0
 	mtc1	r24 f0
 	sub.s	f2 f0 f30
 	mfc1	f30 r25
-	blez	r25 bfle_nontail_else.30155
+	blez	r25 bfle_nontail_else.30045
 	addi	r0 r1 1
-	j	bfle_nontail_cont.30156
-bfle_nontail_else.30155:
+	j	bfle_nontail_cont.30046
+bfle_nontail_else.30045:
 	addi	r0 r1 0
-bfle_nontail_cont.30156:
+bfle_nontail_cont.30046:
 	addi	r0 r2 0
 	sub	r1 r2 r25
-	beq	r25 r0 beq_else.30157
+	beq	r25 r0 beq_else.30047
 	mul.s	f2 f2 f0
 	mul.s	f2 f2 f2
 	mul.s	f0 f2 f0
@@ -18477,10 +18311,10 @@ bfle_nontail_cont.30156:
 	add.s	f3 f0 f0
 	sll	r2 r2 2
 	swoc1	f0 r1 r2
-	j	beq_cont.30158
-beq_else.30157:
-beq_cont.30158:
-beq_cont.30150:
+	j	beq_cont.30048
+beq_else.30047:
+beq_cont.30048:
+beq_cont.30040:
 	addi	r30 r30 52
 	sw	r1 r30 0
 	sw	r31 r30 4
@@ -18546,9 +18380,9 @@ beq_cont.30150:
 	sub	r1 r2 r1
 	addi	r0 r2 0
 	sub	r2 r1 r25
-	blez	r25 ble_nontail_else.30159
-	j	ble_nontail_cont.30160
-ble_nontail_else.30159:
+	blez	r25 ble_nontail_else.30049
+	j	ble_nontail_cont.30050
+ble_nontail_else.30049:
 	addi	r30 r30 52
 	sw	r1 r30 0
 	sw	r31 r30 4
@@ -18596,11 +18430,11 @@ ble_nontail_else.30159:
 	sw	r3 r30 56
 	sw	r2 r30 60
 	sub	r6 r7 r25
-	beq	r25 r0 beq_else.30161
+	beq	r25 r0 beq_else.30051
 	addi	r0 r7 99
 	sw	r5 r30 64
 	sub	r6 r7 r25
-	beq	r25 r0 beq_else.30163
+	beq	r25 r0 beq_else.30053
 	sw	r4 r30 68
 	sw	r31 r30 72
 	addi	r30 r30 76
@@ -18611,7 +18445,7 @@ ble_nontail_else.30159:
 	lw	r30 r31 72
 	addi	r0 r2 0
 	sub	r1 r2 r25
-	beq	r25 r0 beq_else.30165
+	beq	r25 r0 beq_else.30055
 	addi	r30 r30 72
 	sw	r1 r30 0
 	sw	r31 r30 4
@@ -18638,22 +18472,22 @@ ble_nontail_else.30159:
 	mtc1	r24 f1
 	sub.s	f0 f1 f30
 	mfc1	f30 r25
-	blez	r25 bfle_nontail_else.30167
+	blez	r25 bfle_nontail_else.30057
 	addi	r0 r1 1
-	j	bfle_nontail_cont.30168
-bfle_nontail_else.30167:
+	j	bfle_nontail_cont.30058
+bfle_nontail_else.30057:
 	addi	r0 r1 0
-bfle_nontail_cont.30168:
+bfle_nontail_cont.30058:
 	addi	r0 r2 0
 	sub	r1 r2 r25
-	beq	r25 r0 beq_else.30169
+	beq	r25 r0 beq_else.30059
 	addi	r0 r1 1
 	sll	r1 r1 2
 	lw	r30 r2 68
 	lwo	r2 r1 r1
 	addi	r0 r3 -1
 	sub	r1 r3 r25
-	beq	r25 r0 beq_else.30171
+	beq	r25 r0 beq_else.30061
 	addi	r30 r30 72
 	sw	r1 r30 0
 	sw	r31 r30 4
@@ -18680,7 +18514,7 @@ bfle_nontail_cont.30168:
 	lwo	r2 r1 r1
 	addi	r0 r3 -1
 	sub	r1 r3 r25
-	beq	r25 r0 beq_else.30173
+	beq	r25 r0 beq_else.30063
 	addi	r30 r30 72
 	sw	r1 r30 0
 	sw	r31 r30 4
@@ -18707,7 +18541,7 @@ bfle_nontail_cont.30168:
 	lwo	r2 r1 r1
 	addi	r0 r3 -1
 	sub	r1 r3 r25
-	beq	r25 r0 beq_else.30175
+	beq	r25 r0 beq_else.30065
 	addi	r30 r30 72
 	sw	r1 r30 0
 	sw	r31 r30 4
@@ -18734,7 +18568,7 @@ bfle_nontail_cont.30168:
 	lwo	r2 r1 r1
 	addi	r0 r3 -1
 	sub	r1 r3 r25
-	beq	r25 r0 beq_else.30177
+	beq	r25 r0 beq_else.30067
 	addi	r30 r30 72
 	sw	r1 r30 0
 	sw	r31 r30 4
@@ -18763,32 +18597,32 @@ bfle_nontail_cont.30168:
 	jal	solve_one_or_network_fast.3049
 	addi	r30 r30 -76
 	lw	r30 r31 72
-	j	beq_cont.30178
-beq_else.30177:
-beq_cont.30178:
-	j	beq_cont.30176
-beq_else.30175:
-beq_cont.30176:
-	j	beq_cont.30174
-beq_else.30173:
-beq_cont.30174:
-	j	beq_cont.30172
-beq_else.30171:
-beq_cont.30172:
-	j	beq_cont.30170
-beq_else.30169:
-beq_cont.30170:
-	j	beq_cont.30166
-beq_else.30165:
-beq_cont.30166:
-	j	beq_cont.30164
-beq_else.30163:
+	j	beq_cont.30068
+beq_else.30067:
+beq_cont.30068:
+	j	beq_cont.30066
+beq_else.30065:
+beq_cont.30066:
+	j	beq_cont.30064
+beq_else.30063:
+beq_cont.30064:
+	j	beq_cont.30062
+beq_else.30061:
+beq_cont.30062:
+	j	beq_cont.30060
+beq_else.30059:
+beq_cont.30060:
+	j	beq_cont.30056
+beq_else.30055:
+beq_cont.30056:
+	j	beq_cont.30054
+beq_else.30053:
 	addi	r0 r6 1
 	sll	r6 r6 2
 	lwo	r4 r6 r6
 	addi	r0 r7 -1
 	sub	r6 r7 r25
-	beq	r25 r0 beq_else.30179
+	beq	r25 r0 beq_else.30069
 	addi	r30 r30 72
 	sw	r1 r30 0
 	sw	r31 r30 4
@@ -18814,7 +18648,7 @@ beq_else.30163:
 	lwo	r2 r1 r1
 	addi	r0 r3 -1
 	sub	r1 r3 r25
-	beq	r25 r0 beq_else.30181
+	beq	r25 r0 beq_else.30071
 	addi	r30 r30 72
 	sw	r1 r30 0
 	sw	r31 r30 4
@@ -18841,7 +18675,7 @@ beq_else.30163:
 	lwo	r2 r1 r1
 	addi	r0 r3 -1
 	sub	r1 r3 r25
-	beq	r25 r0 beq_else.30183
+	beq	r25 r0 beq_else.30073
 	addi	r30 r30 72
 	sw	r1 r30 0
 	sw	r31 r30 4
@@ -18868,7 +18702,7 @@ beq_else.30163:
 	lwo	r2 r1 r1
 	addi	r0 r3 -1
 	sub	r1 r3 r25
-	beq	r25 r0 beq_else.30185
+	beq	r25 r0 beq_else.30075
 	addi	r30 r30 72
 	sw	r1 r30 0
 	sw	r31 r30 4
@@ -18897,19 +18731,19 @@ beq_else.30163:
 	jal	solve_one_or_network_fast.3049
 	addi	r30 r30 -76
 	lw	r30 r31 72
-	j	beq_cont.30186
-beq_else.30185:
-beq_cont.30186:
-	j	beq_cont.30184
-beq_else.30183:
-beq_cont.30184:
-	j	beq_cont.30182
-beq_else.30181:
-beq_cont.30182:
-	j	beq_cont.30180
-beq_else.30179:
-beq_cont.30180:
-beq_cont.30164:
+	j	beq_cont.30076
+beq_else.30075:
+beq_cont.30076:
+	j	beq_cont.30074
+beq_else.30073:
+beq_cont.30074:
+	j	beq_cont.30072
+beq_else.30071:
+beq_cont.30072:
+	j	beq_cont.30070
+beq_else.30069:
+beq_cont.30070:
+beq_cont.30054:
 	addi	r0 r1 1
 	lw	r30 r2 64
 	lw	r30 r3 56
@@ -18918,9 +18752,9 @@ beq_cont.30164:
 	jal	trace_or_matrix_fast.3053
 	addi	r30 r30 -76
 	lw	r30 r31 72
-	j	beq_cont.30162
-beq_else.30161:
-beq_cont.30162:
+	j	beq_cont.30052
+beq_else.30051:
+beq_cont.30052:
 	addi	r30 r30 72
 	sw	r1 r30 0
 	sw	r31 r30 4
@@ -18940,15 +18774,15 @@ beq_cont.30162:
 	mtc1	r24 f2
 	sub.s	f1 f2 f30
 	mfc1	f30 r25
-	blez	r25 bfle_nontail_else.30187
+	blez	r25 bfle_nontail_else.30077
 	addi	r0 r1 1
-	j	bfle_nontail_cont.30188
-bfle_nontail_else.30187:
+	j	bfle_nontail_cont.30078
+bfle_nontail_else.30077:
 	addi	r0 r1 0
-bfle_nontail_cont.30188:
+bfle_nontail_cont.30078:
 	addi	r0 r2 0
 	sub	r1 r2 r25
-	beq	r25 r0 beq_else.30189
+	beq	r25 r0 beq_else.30079
 	lui	r24 19646
 	ori	r24 r24 48160
 	mtc1	r24 f1
@@ -18958,19 +18792,19 @@ bfle_nontail_cont.30188:
 	mtc1	r24 f1
 	sub.s	f0 f1 f30
 	mfc1	f30 r25
-	blez	r25 bfle_nontail_else.30191
+	blez	r25 bfle_nontail_else.30081
 	addi	r0 r1 1
-	j	bfle_nontail_cont.30192
-bfle_nontail_else.30191:
+	j	bfle_nontail_cont.30082
+bfle_nontail_else.30081:
 	addi	r0 r1 0
-bfle_nontail_cont.30192:
-	j	beq_cont.30190
-beq_else.30189:
+bfle_nontail_cont.30082:
+	j	beq_cont.30080
+beq_else.30079:
 	addi	r0 r1 0
-beq_cont.30190:
+beq_cont.30080:
 	addi	r0 r2 0
 	sub	r1 r2 r25
-	beq	r25 r0 beq_else.30193
+	beq	r25 r0 beq_else.30083
 	addi	r30 r30 72
 	sw	r1 r30 0
 	sw	r31 r30 4
@@ -18998,9 +18832,9 @@ beq_cont.30190:
 	lw	r30 r2 60
 	lw	r2 r3 0
 	sub	r1 r3 r25
-	beq	r25 r0 beq_else.30195
-	j	beq_cont.30196
-beq_else.30195:
+	beq	r25 r0 beq_else.30085
+	j	beq_cont.30086
+beq_else.30085:
 	addi	r0 r1 0
 	addi	r30 r30 72
 	sw	r1 r30 0
@@ -19021,9 +18855,9 @@ beq_else.30195:
 	lw	r30 r31 72
 	addi	r0 r2 0
 	sub	r1 r2 r25
-	beq	r25 r0 beq_else.30197
-	j	beq_cont.30198
-beq_else.30197:
+	beq	r25 r0 beq_else.30087
+	j	beq_cont.30088
+beq_else.30087:
 	addi	r30 r30 72
 	sw	r1 r30 0
 	sw	r31 r30 4
@@ -19094,11 +18928,11 @@ beq_else.30197:
 	jal	add_light.3071
 	addi	r30 r30 -76
 	lw	r30 r31 72
-beq_cont.30198:
-beq_cont.30196:
-	j	beq_cont.30194
-beq_else.30193:
-beq_cont.30194:
+beq_cont.30088:
+beq_cont.30086:
+	j	beq_cont.30084
+beq_else.30083:
+beq_cont.30084:
 	addi	r0 r1 1
 	lw	r30 r2 52
 	sub	r2 r1 r1
@@ -19110,7 +18944,7 @@ beq_cont.30194:
 	jal	trace_reflections.3075
 	addi	r30 r30 -76
 	lw	r30 r31 72
-ble_nontail_cont.30160:
+ble_nontail_cont.30050:
 	lui	r24 15820
 	ori	r24 r24 52429
 	mtc1	r24 f0
@@ -19121,34 +18955,34 @@ ble_nontail_cont.30160:
 	mtc1	r24 f2
 	sub.s	f0 f2 f30
 	mfc1	f30 r25
-	blez	r25 bfle_nontail_else.30199
+	blez	r25 bfle_nontail_else.30089
 	addi	r0 r1 1
-	j	bfle_nontail_cont.30200
-bfle_nontail_else.30199:
+	j	bfle_nontail_cont.30090
+bfle_nontail_else.30089:
 	addi	r0 r1 0
-bfle_nontail_cont.30200:
+bfle_nontail_cont.30090:
 	addi	r0 r2 0
 	sub	r1 r2 r25
-	beq	r25 r0 beq_tail_else.30201
+	beq	r25 r0 beq_tail_else.30091
 	addi	r0 r1 4
 	lw	r30 r2 20
 	sub	r1 r2 r25
-	blez	r25 ble_nontail_else.30202
+	blez	r25 ble_nontail_else.30092
 	addi	r0 r1 1
 	add	r2 r1 r1
 	addi	r0 r3 -1
 	sll	r1 r1 2
 	lw	r30 r4 16
 	swo	r3 r4 r1
-	j	ble_nontail_cont.30203
-ble_nontail_else.30202:
-ble_nontail_cont.30203:
+	j	ble_nontail_cont.30093
+ble_nontail_else.30092:
+ble_nontail_cont.30093:
 	addi	r0 r1 2
 	lw	r30 r3 24
 	sub	r3 r1 r25
-	beq	r25 r0 beq_tail_else.30204
+	beq	r25 r0 beq_tail_else.30094
 	jr	r31
-beq_tail_else.30204:
+beq_tail_else.30094:
 	lui	r24 16256
 	ori	r24 r24 0
 	mtc1	r24 f0
@@ -19177,9 +19011,9 @@ beq_tail_else.30204:
 	lw	r30 r2 12
 	lw	r30 r3 4
 	j	trace_ray.3080
-beq_tail_else.30201:
+beq_tail_else.30091:
 	jr	r31
-beq_tail_else.30060:
+beq_tail_else.29950:
 	addi	r0 r1 -1
 	lw	r30 r2 20
 	sll	r2 r3 2
@@ -19187,7 +19021,7 @@ beq_tail_else.30060:
 	swo	r1 r4 r3
 	addi	r0 r1 0
 	sub	r2 r1 r25
-	beq	r25 r0 beq_tail_else.30207
+	beq	r25 r0 beq_tail_else.30097
 	addi	r30 r30 72
 	sw	r1 r30 0
 	sw	r31 r30 4
@@ -19225,15 +19059,15 @@ beq_tail_else.30060:
 	mtc1	r24 f1
 	sub.s	f0 f1 f30
 	mfc1	f30 r25
-	blez	r25 bfle_nontail_else.30208
+	blez	r25 bfle_nontail_else.30098
 	addi	r0 r1 1
-	j	bfle_nontail_cont.30209
-bfle_nontail_else.30208:
+	j	bfle_nontail_cont.30099
+bfle_nontail_else.30098:
 	addi	r0 r1 0
-bfle_nontail_cont.30209:
+bfle_nontail_cont.30099:
 	addi	r0 r2 0
 	sub	r1 r2 r25
-	beq	r25 r0 beq_tail_else.30210
+	beq	r25 r0 beq_tail_else.30100
 	mul.s	f0 f0 f1
 	mul.s	f1 f0 f0
 	lwc1	 r30 f1 8
@@ -19316,9 +19150,9 @@ bfle_nontail_cont.30209:
 	sll	r2 r2 2
 	swoc1	f0 r1 r2
 	jr	r31
-beq_tail_else.30210:
+beq_tail_else.30100:
 	jr	r31
-beq_tail_else.30207:
+beq_tail_else.30097:
 	jr	r31
 trace_diffuse_ray.3086:
 	addi	r30 r30 0
@@ -19377,15 +19211,15 @@ trace_diffuse_ray.3086:
 	mtc1	r24 f2
 	sub.s	f1 f2 f30
 	mfc1	f30 r25
-	blez	r25 bfle_nontail_else.30214
+	blez	r25 bfle_nontail_else.30104
 	addi	r0 r1 1
-	j	bfle_nontail_cont.30215
-bfle_nontail_else.30214:
+	j	bfle_nontail_cont.30105
+bfle_nontail_else.30104:
 	addi	r0 r1 0
-bfle_nontail_cont.30215:
+bfle_nontail_cont.30105:
 	addi	r0 r2 0
 	sub	r1 r2 r25
-	beq	r25 r0 beq_else.30216
+	beq	r25 r0 beq_else.30106
 	lui	r24 19646
 	ori	r24 r24 48160
 	mtc1	r24 f1
@@ -19395,19 +19229,19 @@ bfle_nontail_cont.30215:
 	mtc1	r24 f1
 	sub.s	f0 f1 f30
 	mfc1	f30 r25
-	blez	r25 bfle_nontail_else.30218
+	blez	r25 bfle_nontail_else.30108
 	addi	r0 r1 1
-	j	bfle_nontail_cont.30219
-bfle_nontail_else.30218:
+	j	bfle_nontail_cont.30109
+bfle_nontail_else.30108:
 	addi	r0 r1 0
-bfle_nontail_cont.30219:
-	j	beq_cont.30217
-beq_else.30216:
+bfle_nontail_cont.30109:
+	j	beq_cont.30107
+beq_else.30106:
 	addi	r0 r1 0
-beq_cont.30217:
+beq_cont.30107:
 	addi	r0 r2 0
 	sub	r1 r2 r25
-	beq	r25 r0 beq_tail_else.30220
+	beq	r25 r0 beq_tail_else.30110
 	addi	r30 r30 8
 	sw	r1 r30 0
 	sw	r31 r30 4
@@ -19434,17 +19268,17 @@ beq_cont.30217:
 	addi	r0 r4 1
 	sw	r1 r30 8
 	sub	r3 r4 r25
-	beq	r25 r0 beq_else.30221
+	beq	r25 r0 beq_else.30111
 	addi	r0 r2 2
 	sub	r3 r2 r25
-	beq	r25 r0 beq_else.30223
+	beq	r25 r0 beq_else.30113
 	sw	r31 r30 12
 	addi	r30 r30 16
 	jal	get_nvector_second.3063
 	addi	r30 r30 -16
 	lw	r30 r31 12
-	j	beq_cont.30224
-beq_else.30223:
+	j	beq_cont.30114
+beq_else.30113:
 	addi	r30 r30 12
 	sw	r1 r30 0
 	sw	r31 r30 4
@@ -19493,9 +19327,9 @@ beq_else.30223:
 	neg.s	f0 f0
 	sll	r3 r3 2
 	swoc1	f0 r2 r3
-beq_cont.30224:
-	j	beq_cont.30222
-beq_else.30221:
+beq_cont.30114:
+	j	beq_cont.30112
+beq_else.30111:
 	addi	r30 r30 12
 	sw	r1 r30 0
 	sw	r31 r30 4
@@ -19547,48 +19381,48 @@ beq_else.30221:
 	sub.s	f0 f1 f30
 	mfc1	f30 r25
 	sll	r25 r25 1
-	beq	r25 r0 bfeq_nontail_else.30225
+	beq	r25 r0 bfeq_nontail_else.30115
 	addi	r0 r2 0
-	j	bfeq_nontail_cont.30226
-bfeq_nontail_else.30225:
+	j	bfeq_nontail_cont.30116
+bfeq_nontail_else.30115:
 	addi	r0 r2 1
-bfeq_nontail_cont.30226:
+bfeq_nontail_cont.30116:
 	addi	r0 r3 0
 	sub	r2 r3 r25
-	beq	r25 r0 beq_else.30227
+	beq	r25 r0 beq_else.30117
 	lui	r24 0
 	ori	r24 r24 0
 	mtc1	r24 f0
-	j	beq_cont.30228
-beq_else.30227:
+	j	beq_cont.30118
+beq_else.30117:
 	lui	r24 0
 	ori	r24 r24 0
 	mtc1	r24 f1
 	sub.s	f0 f1 f30
 	mfc1	f30 r25
-	blez	r25 bfle_nontail_else.30229
+	blez	r25 bfle_nontail_else.30119
 	addi	r0 r2 1
-	j	bfle_nontail_cont.30230
-bfle_nontail_else.30229:
+	j	bfle_nontail_cont.30120
+bfle_nontail_else.30119:
 	addi	r0 r2 0
-bfle_nontail_cont.30230:
+bfle_nontail_cont.30120:
 	addi	r0 r3 0
 	sub	r2 r3 r25
-	beq	r25 r0 beq_else.30231
+	beq	r25 r0 beq_else.30121
 	lui	r24 16256
 	ori	r24 r24 0
 	mtc1	r24 f0
-	j	beq_cont.30232
-beq_else.30231:
+	j	beq_cont.30122
+beq_else.30121:
 	lui	r24 49024
 	ori	r24 r24 0
 	mtc1	r24 f0
-beq_cont.30232:
-beq_cont.30228:
+beq_cont.30122:
+beq_cont.30118:
 	neg.s	f0 f0
 	sll	r5 r2 2
 	swoc1	f0 r4 r2
-beq_cont.30222:
+beq_cont.30112:
 	addi	r30 r30 12
 	sw	r1 r30 0
 	sw	r31 r30 4
@@ -19622,12 +19456,12 @@ beq_cont.30222:
 	lwo	r1 r3 r3
 	addi	r0 r4 -1
 	sub	r3 r4 r25
-	beq	r25 r0 beq_else.30233
+	beq	r25 r0 beq_else.30123
 	addi	r0 r4 99
 	sw	r1 r30 12
 	sw	r2 r30 16
 	sub	r3 r4 r25
-	beq	r25 r0 beq_else.30235
+	beq	r25 r0 beq_else.30125
 	addi	r30 r30 20
 	sw	r1 r30 0
 	sw	r31 r30 4
@@ -19684,10 +19518,10 @@ beq_cont.30222:
 	lw	r6 r5 4
 	addi	r0 r7 1
 	sub	r5 r7 r25
-	beq	r25 r0 beq_else.30237
+	beq	r25 r0 beq_else.30127
 	addi	r0 r4 2
 	sub	r5 r4 r25
-	beq	r25 r0 beq_else.30239
+	beq	r25 r0 beq_else.30129
 	sw	r31 r30 20
 	addi	r30 r30 24
 	mov	r2 r3
@@ -19695,8 +19529,8 @@ beq_cont.30222:
 	jal	solver_second_fast.2950
 	addi	r30 r30 -24
 	lw	r30 r31 20
-	j	beq_cont.30240
-beq_else.30239:
+	j	beq_cont.30130
+beq_else.30129:
 	lui	r24 0
 	ori	r24 r24 0
 	mtc1	r24 f3
@@ -19705,15 +19539,15 @@ beq_else.30239:
 	lwoc1	r3 r4 f4
 	sub.s	f3 f4 f30
 	mfc1	f30 r25
-	blez	r25 bfle_nontail_else.30241
+	blez	r25 bfle_nontail_else.30131
 	addi	r0 r4 1
-	j	bfle_nontail_cont.30242
-bfle_nontail_else.30241:
+	j	bfle_nontail_cont.30132
+bfle_nontail_else.30131:
 	addi	r0 r4 0
-bfle_nontail_cont.30242:
+bfle_nontail_cont.30132:
 	addi	r0 r5 0
 	sub	r4 r5 r25
-	beq	r25 r0 beq_else.30243
+	beq	r25 r0 beq_else.30133
 	addi	r30 r30 20
 	sw	r1 r30 0
 	sw	r31 r30 4
@@ -19740,13 +19574,13 @@ bfle_nontail_cont.30242:
 	sll	r5 r3 2
 	swoc1	f0 r4 r3
 	addi	r0 r1 1
-	j	beq_cont.30244
-beq_else.30243:
+	j	beq_cont.30134
+beq_else.30133:
 	addi	r0 r1 0
-beq_cont.30244:
-beq_cont.30240:
-	j	beq_cont.30238
-beq_else.30237:
+beq_cont.30134:
+beq_cont.30130:
+	j	beq_cont.30128
+beq_else.30127:
 	lw	r4 r4 0
 	sw	r31 r30 20
 	addi	r30 r30 24
@@ -19755,10 +19589,10 @@ beq_else.30237:
 	jal	solver_rect_fast.2937
 	addi	r30 r30 -24
 	lw	r30 r31 20
-beq_cont.30238:
+beq_cont.30128:
 	addi	r0 r2 0
 	sub	r1 r2 r25
-	beq	r25 r0 beq_else.30245
+	beq	r25 r0 beq_else.30135
 	lui	r24 48588
 	ori	r24 r24 52429
 	mtc1	r24 f0
@@ -19778,22 +19612,22 @@ beq_cont.30238:
 	mtc1	r24 f1
 	sub.s	f0 f1 f30
 	mfc1	f30 r25
-	blez	r25 bfle_nontail_else.30247
+	blez	r25 bfle_nontail_else.30137
 	addi	r0 r1 1
-	j	bfle_nontail_cont.30248
-bfle_nontail_else.30247:
+	j	bfle_nontail_cont.30138
+bfle_nontail_else.30137:
 	addi	r0 r1 0
-bfle_nontail_cont.30248:
+bfle_nontail_cont.30138:
 	addi	r0 r2 0
 	sub	r1 r2 r25
-	beq	r25 r0 beq_else.30249
+	beq	r25 r0 beq_else.30139
 	addi	r0 r1 1
 	sll	r1 r1 2
 	lw	r30 r2 12
 	lwo	r2 r1 r1
 	addi	r0 r3 -1
 	sub	r1 r3 r25
-	beq	r25 r0 beq_else.30251
+	beq	r25 r0 beq_else.30141
 	addi	r30 r30 20
 	sw	r1 r30 0
 	sw	r31 r30 4
@@ -19814,17 +19648,17 @@ bfle_nontail_cont.30248:
 	lw	r30 r31 20
 	addi	r0 r2 0
 	sub	r1 r2 r25
-	beq	r25 r0 beq_else.30253
+	beq	r25 r0 beq_else.30143
 	addi	r0 r1 1
-	j	beq_cont.30254
-beq_else.30253:
+	j	beq_cont.30144
+beq_else.30143:
 	addi	r0 r1 2
 	sll	r1 r1 2
 	lw	r30 r2 12
 	lwo	r2 r1 r1
 	addi	r0 r3 -1
 	sub	r1 r3 r25
-	beq	r25 r0 beq_else.30255
+	beq	r25 r0 beq_else.30145
 	addi	r30 r30 20
 	sw	r1 r30 0
 	sw	r31 r30 4
@@ -19845,17 +19679,17 @@ beq_else.30253:
 	lw	r30 r31 20
 	addi	r0 r2 0
 	sub	r1 r2 r25
-	beq	r25 r0 beq_else.30257
+	beq	r25 r0 beq_else.30147
 	addi	r0 r1 1
-	j	beq_cont.30258
-beq_else.30257:
+	j	beq_cont.30148
+beq_else.30147:
 	addi	r0 r1 3
 	sll	r1 r1 2
 	lw	r30 r2 12
 	lwo	r2 r1 r1
 	addi	r0 r3 -1
 	sub	r1 r3 r25
-	beq	r25 r0 beq_else.30259
+	beq	r25 r0 beq_else.30149
 	addi	r30 r30 20
 	sw	r1 r30 0
 	sw	r31 r30 4
@@ -19876,17 +19710,17 @@ beq_else.30257:
 	lw	r30 r31 20
 	addi	r0 r2 0
 	sub	r1 r2 r25
-	beq	r25 r0 beq_else.30261
+	beq	r25 r0 beq_else.30151
 	addi	r0 r1 1
-	j	beq_cont.30262
-beq_else.30261:
+	j	beq_cont.30152
+beq_else.30151:
 	addi	r0 r1 4
 	sll	r1 r1 2
 	lw	r30 r2 12
 	lwo	r2 r1 r1
 	addi	r0 r3 -1
 	sub	r1 r3 r25
-	beq	r25 r0 beq_else.30263
+	beq	r25 r0 beq_else.30153
 	addi	r30 r30 20
 	sw	r1 r30 0
 	sw	r31 r30 4
@@ -19907,17 +19741,17 @@ beq_else.30261:
 	lw	r30 r31 20
 	addi	r0 r2 0
 	sub	r1 r2 r25
-	beq	r25 r0 beq_else.30265
+	beq	r25 r0 beq_else.30155
 	addi	r0 r1 1
-	j	beq_cont.30266
-beq_else.30265:
+	j	beq_cont.30156
+beq_else.30155:
 	addi	r0 r1 5
 	sll	r1 r1 2
 	lw	r30 r2 12
 	lwo	r2 r1 r1
 	addi	r0 r3 -1
 	sub	r1 r3 r25
-	beq	r25 r0 beq_else.30267
+	beq	r25 r0 beq_else.30157
 	addi	r30 r30 20
 	sw	r1 r30 0
 	sw	r31 r30 4
@@ -19938,17 +19772,17 @@ beq_else.30265:
 	lw	r30 r31 20
 	addi	r0 r2 0
 	sub	r1 r2 r25
-	beq	r25 r0 beq_else.30269
+	beq	r25 r0 beq_else.30159
 	addi	r0 r1 1
-	j	beq_cont.30270
-beq_else.30269:
+	j	beq_cont.30160
+beq_else.30159:
 	addi	r0 r1 6
 	sll	r1 r1 2
 	lw	r30 r2 12
 	lwo	r2 r1 r1
 	addi	r0 r3 -1
 	sub	r1 r3 r25
-	beq	r25 r0 beq_else.30271
+	beq	r25 r0 beq_else.30161
 	addi	r30 r30 20
 	sw	r1 r30 0
 	sw	r31 r30 4
@@ -19969,10 +19803,10 @@ beq_else.30269:
 	lw	r30 r31 20
 	addi	r0 r2 0
 	sub	r1 r2 r25
-	beq	r25 r0 beq_else.30273
+	beq	r25 r0 beq_else.30163
 	addi	r0 r1 1
-	j	beq_cont.30274
-beq_else.30273:
+	j	beq_cont.30164
+beq_else.30163:
 	addi	r0 r1 7
 	lw	r30 r2 12
 	sw	r31 r30 20
@@ -19980,66 +19814,66 @@ beq_else.30273:
 	jal	shadow_check_one_or_group.3025
 	addi	r30 r30 -24
 	lw	r30 r31 20
-beq_cont.30274:
-	j	beq_cont.30272
-beq_else.30271:
+beq_cont.30164:
+	j	beq_cont.30162
+beq_else.30161:
 	addi	r0 r1 0
-beq_cont.30272:
-beq_cont.30270:
-	j	beq_cont.30268
-beq_else.30267:
+beq_cont.30162:
+beq_cont.30160:
+	j	beq_cont.30158
+beq_else.30157:
 	addi	r0 r1 0
-beq_cont.30268:
-beq_cont.30266:
-	j	beq_cont.30264
-beq_else.30263:
+beq_cont.30158:
+beq_cont.30156:
+	j	beq_cont.30154
+beq_else.30153:
 	addi	r0 r1 0
-beq_cont.30264:
-beq_cont.30262:
-	j	beq_cont.30260
-beq_else.30259:
+beq_cont.30154:
+beq_cont.30152:
+	j	beq_cont.30150
+beq_else.30149:
 	addi	r0 r1 0
-beq_cont.30260:
-beq_cont.30258:
-	j	beq_cont.30256
-beq_else.30255:
+beq_cont.30150:
+beq_cont.30148:
+	j	beq_cont.30146
+beq_else.30145:
 	addi	r0 r1 0
-beq_cont.30256:
-beq_cont.30254:
-	j	beq_cont.30252
-beq_else.30251:
+beq_cont.30146:
+beq_cont.30144:
+	j	beq_cont.30142
+beq_else.30141:
 	addi	r0 r1 0
-beq_cont.30252:
+beq_cont.30142:
 	addi	r0 r2 0
 	sub	r1 r2 r25
-	beq	r25 r0 beq_else.30275
+	beq	r25 r0 beq_else.30165
 	addi	r0 r1 1
-	j	beq_cont.30276
-beq_else.30275:
+	j	beq_cont.30166
+beq_else.30165:
 	addi	r0 r1 0
-beq_cont.30276:
-	j	beq_cont.30250
-beq_else.30249:
+beq_cont.30166:
+	j	beq_cont.30140
+beq_else.30139:
 	addi	r0 r1 0
-beq_cont.30250:
-	j	beq_cont.30246
-beq_else.30245:
+beq_cont.30140:
+	j	beq_cont.30136
+beq_else.30135:
 	addi	r0 r1 0
-beq_cont.30246:
-	j	beq_cont.30236
-beq_else.30235:
+beq_cont.30136:
+	j	beq_cont.30126
+beq_else.30125:
 	addi	r0 r1 1
-beq_cont.30236:
+beq_cont.30126:
 	addi	r0 r2 0
 	sub	r1 r2 r25
-	beq	r25 r0 beq_else.30277
+	beq	r25 r0 beq_else.30167
 	addi	r0 r1 1
 	sll	r1 r1 2
 	lw	r30 r2 12
 	lwo	r2 r1 r1
 	addi	r0 r3 -1
 	sub	r1 r3 r25
-	beq	r25 r0 beq_else.30279
+	beq	r25 r0 beq_else.30169
 	addi	r30 r30 20
 	sw	r1 r30 0
 	sw	r31 r30 4
@@ -20060,17 +19894,17 @@ beq_cont.30236:
 	lw	r30 r31 20
 	addi	r0 r2 0
 	sub	r1 r2 r25
-	beq	r25 r0 beq_else.30281
+	beq	r25 r0 beq_else.30171
 	addi	r0 r1 1
-	j	beq_cont.30282
-beq_else.30281:
+	j	beq_cont.30172
+beq_else.30171:
 	addi	r0 r1 2
 	sll	r1 r1 2
 	lw	r30 r2 12
 	lwo	r2 r1 r1
 	addi	r0 r3 -1
 	sub	r1 r3 r25
-	beq	r25 r0 beq_else.30283
+	beq	r25 r0 beq_else.30173
 	addi	r30 r30 20
 	sw	r1 r30 0
 	sw	r31 r30 4
@@ -20091,17 +19925,17 @@ beq_else.30281:
 	lw	r30 r31 20
 	addi	r0 r2 0
 	sub	r1 r2 r25
-	beq	r25 r0 beq_else.30285
+	beq	r25 r0 beq_else.30175
 	addi	r0 r1 1
-	j	beq_cont.30286
-beq_else.30285:
+	j	beq_cont.30176
+beq_else.30175:
 	addi	r0 r1 3
 	sll	r1 r1 2
 	lw	r30 r2 12
 	lwo	r2 r1 r1
 	addi	r0 r3 -1
 	sub	r1 r3 r25
-	beq	r25 r0 beq_else.30287
+	beq	r25 r0 beq_else.30177
 	addi	r30 r30 20
 	sw	r1 r30 0
 	sw	r31 r30 4
@@ -20122,17 +19956,17 @@ beq_else.30285:
 	lw	r30 r31 20
 	addi	r0 r2 0
 	sub	r1 r2 r25
-	beq	r25 r0 beq_else.30289
+	beq	r25 r0 beq_else.30179
 	addi	r0 r1 1
-	j	beq_cont.30290
-beq_else.30289:
+	j	beq_cont.30180
+beq_else.30179:
 	addi	r0 r1 4
 	sll	r1 r1 2
 	lw	r30 r2 12
 	lwo	r2 r1 r1
 	addi	r0 r3 -1
 	sub	r1 r3 r25
-	beq	r25 r0 beq_else.30291
+	beq	r25 r0 beq_else.30181
 	addi	r30 r30 20
 	sw	r1 r30 0
 	sw	r31 r30 4
@@ -20153,17 +19987,17 @@ beq_else.30289:
 	lw	r30 r31 20
 	addi	r0 r2 0
 	sub	r1 r2 r25
-	beq	r25 r0 beq_else.30293
+	beq	r25 r0 beq_else.30183
 	addi	r0 r1 1
-	j	beq_cont.30294
-beq_else.30293:
+	j	beq_cont.30184
+beq_else.30183:
 	addi	r0 r1 5
 	sll	r1 r1 2
 	lw	r30 r2 12
 	lwo	r2 r1 r1
 	addi	r0 r3 -1
 	sub	r1 r3 r25
-	beq	r25 r0 beq_else.30295
+	beq	r25 r0 beq_else.30185
 	addi	r30 r30 20
 	sw	r1 r30 0
 	sw	r31 r30 4
@@ -20184,17 +20018,17 @@ beq_else.30293:
 	lw	r30 r31 20
 	addi	r0 r2 0
 	sub	r1 r2 r25
-	beq	r25 r0 beq_else.30297
+	beq	r25 r0 beq_else.30187
 	addi	r0 r1 1
-	j	beq_cont.30298
-beq_else.30297:
+	j	beq_cont.30188
+beq_else.30187:
 	addi	r0 r1 6
 	sll	r1 r1 2
 	lw	r30 r2 12
 	lwo	r2 r1 r1
 	addi	r0 r3 -1
 	sub	r1 r3 r25
-	beq	r25 r0 beq_else.30299
+	beq	r25 r0 beq_else.30189
 	addi	r30 r30 20
 	sw	r1 r30 0
 	sw	r31 r30 4
@@ -20215,10 +20049,10 @@ beq_else.30297:
 	lw	r30 r31 20
 	addi	r0 r2 0
 	sub	r1 r2 r25
-	beq	r25 r0 beq_else.30301
+	beq	r25 r0 beq_else.30191
 	addi	r0 r1 1
-	j	beq_cont.30302
-beq_else.30301:
+	j	beq_cont.30192
+beq_else.30191:
 	addi	r0 r1 7
 	lw	r30 r2 12
 	sw	r31 r30 20
@@ -20226,42 +20060,42 @@ beq_else.30301:
 	jal	shadow_check_one_or_group.3025
 	addi	r30 r30 -24
 	lw	r30 r31 20
-beq_cont.30302:
-	j	beq_cont.30300
-beq_else.30299:
+beq_cont.30192:
+	j	beq_cont.30190
+beq_else.30189:
 	addi	r0 r1 0
-beq_cont.30300:
-beq_cont.30298:
-	j	beq_cont.30296
-beq_else.30295:
+beq_cont.30190:
+beq_cont.30188:
+	j	beq_cont.30186
+beq_else.30185:
 	addi	r0 r1 0
-beq_cont.30296:
-beq_cont.30294:
-	j	beq_cont.30292
-beq_else.30291:
+beq_cont.30186:
+beq_cont.30184:
+	j	beq_cont.30182
+beq_else.30181:
 	addi	r0 r1 0
-beq_cont.30292:
-beq_cont.30290:
-	j	beq_cont.30288
-beq_else.30287:
+beq_cont.30182:
+beq_cont.30180:
+	j	beq_cont.30178
+beq_else.30177:
 	addi	r0 r1 0
-beq_cont.30288:
-beq_cont.30286:
-	j	beq_cont.30284
-beq_else.30283:
+beq_cont.30178:
+beq_cont.30176:
+	j	beq_cont.30174
+beq_else.30173:
 	addi	r0 r1 0
-beq_cont.30284:
-beq_cont.30282:
-	j	beq_cont.30280
-beq_else.30279:
+beq_cont.30174:
+beq_cont.30172:
+	j	beq_cont.30170
+beq_else.30169:
 	addi	r0 r1 0
-beq_cont.30280:
+beq_cont.30170:
 	addi	r0 r2 0
 	sub	r1 r2 r25
-	beq	r25 r0 beq_else.30303
+	beq	r25 r0 beq_else.30193
 	addi	r0 r1 1
-	j	beq_cont.30304
-beq_else.30303:
+	j	beq_cont.30194
+beq_else.30193:
 	addi	r0 r1 1
 	lw	r30 r2 16
 	sw	r31 r30 20
@@ -20269,9 +20103,9 @@ beq_else.30303:
 	jal	shadow_check_one_or_matrix.3028
 	addi	r30 r30 -24
 	lw	r30 r31 20
-beq_cont.30304:
-	j	beq_cont.30278
-beq_else.30277:
+beq_cont.30194:
+	j	beq_cont.30168
+beq_else.30167:
 	addi	r0 r1 1
 	lw	r30 r2 16
 	sw	r31 r30 20
@@ -20279,16 +20113,16 @@ beq_else.30277:
 	jal	shadow_check_one_or_matrix.3028
 	addi	r30 r30 -24
 	lw	r30 r31 20
-beq_cont.30278:
-	j	beq_cont.30234
-beq_else.30233:
+beq_cont.30168:
+	j	beq_cont.30124
+beq_else.30123:
 	addi	r0 r1 0
-beq_cont.30234:
+beq_cont.30124:
 	addi	r0 r2 0
 	sub	r1 r2 r25
-	beq	r25 r0 beq_tail_else.30305
+	beq	r25 r0 beq_tail_else.30195
 	jr	r31
-beq_tail_else.30305:
+beq_tail_else.30195:
 	addi	r30 r30 20
 	sw	r1 r30 0
 	sw	r31 r30 4
@@ -20333,21 +20167,21 @@ beq_tail_else.30305:
 	mtc1	r24 f1
 	sub.s	f0 f1 f30
 	mfc1	f30 r25
-	blez	r25 bfle_nontail_else.30307
+	blez	r25 bfle_nontail_else.30197
 	addi	r0 r1 1
-	j	bfle_nontail_cont.30308
-bfle_nontail_else.30307:
+	j	bfle_nontail_cont.30198
+bfle_nontail_else.30197:
 	addi	r0 r1 0
-bfle_nontail_cont.30308:
+bfle_nontail_cont.30198:
 	addi	r0 r2 0
 	sub	r1 r2 r25
-	beq	r25 r0 beq_else.30309
-	j	beq_cont.30310
-beq_else.30309:
+	beq	r25 r0 beq_else.30199
+	j	beq_cont.30200
+beq_else.30199:
 	lui	r24 0
 	ori	r24 r24 0
 	mtc1	r24 f0
-beq_cont.30310:
+beq_cont.30200:
 	addi	r30 r30 20
 	sw	r1 r30 0
 	sw	r31 r30 4
@@ -20405,14 +20239,14 @@ beq_cont.30310:
 	sll	r3 r2 2
 	swoc1	f0 r1 r2
 	jr	r31
-beq_tail_else.30220:
+beq_tail_else.30110:
 	jr	r31
 iter_trace_diffuse_rays.3089:
 	addi	r0 r5 0
 	sub	r5 r4 r25
-	blez	r25 ble_tail_else.30313
+	blez	r25 ble_tail_else.30203
 	jr	r31
-ble_tail_else.30313:
+ble_tail_else.30203:
 	sll	r4 r5 2
 	lwo	r1 r5 r5
 	lw	r5 r5 0
@@ -20444,19 +20278,19 @@ ble_tail_else.30313:
 	mtc1	r24 f1
 	sub.s	f1 f0 f30
 	mfc1	f30 r25
-	blez	r25 bfle_nontail_else.30315
+	blez	r25 bfle_nontail_else.30205
 	addi	r0 r5 1
-	j	bfle_nontail_cont.30316
-bfle_nontail_else.30315:
+	j	bfle_nontail_cont.30206
+bfle_nontail_else.30205:
 	addi	r0 r5 0
-bfle_nontail_cont.30316:
+bfle_nontail_cont.30206:
 	addi	r0 r6 0
 	sw	r3 r30 0
 	sw	r2 r30 4
 	sw	r1 r30 8
 	sw	r4 r30 12
 	sub	r5 r6 r25
-	beq	r25 r0 beq_else.30317
+	beq	r25 r0 beq_else.30207
 	addi	r0 r5 1
 	add	r4 r5 r5
 	sll	r5 r5 2
@@ -20500,11 +20334,11 @@ bfle_nontail_cont.30316:
 	swc1	f0 r30 16
 	sw	r5 r30 20
 	sub	r8 r9 r25
-	beq	r25 r0 beq_else.30319
+	beq	r25 r0 beq_else.30209
 	addi	r0 r9 99
 	sw	r7 r30 24
 	sub	r8 r9 r25
-	beq	r25 r0 beq_else.30321
+	beq	r25 r0 beq_else.30211
 	sw	r6 r30 28
 	sw	r31 r30 32
 	addi	r30 r30 36
@@ -20515,7 +20349,7 @@ bfle_nontail_cont.30316:
 	lw	r30 r31 32
 	addi	r0 r2 0
 	sub	r1 r2 r25
-	beq	r25 r0 beq_else.30323
+	beq	r25 r0 beq_else.30213
 	addi	r30 r30 32
 	sw	r1 r30 0
 	sw	r31 r30 4
@@ -20542,22 +20376,22 @@ bfle_nontail_cont.30316:
 	mtc1	r24 f1
 	sub.s	f0 f1 f30
 	mfc1	f30 r25
-	blez	r25 bfle_nontail_else.30325
+	blez	r25 bfle_nontail_else.30215
 	addi	r0 r1 1
-	j	bfle_nontail_cont.30326
-bfle_nontail_else.30325:
+	j	bfle_nontail_cont.30216
+bfle_nontail_else.30215:
 	addi	r0 r1 0
-bfle_nontail_cont.30326:
+bfle_nontail_cont.30216:
 	addi	r0 r2 0
 	sub	r1 r2 r25
-	beq	r25 r0 beq_else.30327
+	beq	r25 r0 beq_else.30217
 	addi	r0 r1 1
 	sll	r1 r1 2
 	lw	r30 r2 28
 	lwo	r2 r1 r1
 	addi	r0 r3 -1
 	sub	r1 r3 r25
-	beq	r25 r0 beq_else.30329
+	beq	r25 r0 beq_else.30219
 	addi	r30 r30 32
 	sw	r1 r30 0
 	sw	r31 r30 4
@@ -20584,7 +20418,7 @@ bfle_nontail_cont.30326:
 	lwo	r2 r1 r1
 	addi	r0 r3 -1
 	sub	r1 r3 r25
-	beq	r25 r0 beq_else.30331
+	beq	r25 r0 beq_else.30221
 	addi	r30 r30 32
 	sw	r1 r30 0
 	sw	r31 r30 4
@@ -20611,7 +20445,7 @@ bfle_nontail_cont.30326:
 	lwo	r2 r1 r1
 	addi	r0 r3 -1
 	sub	r1 r3 r25
-	beq	r25 r0 beq_else.30333
+	beq	r25 r0 beq_else.30223
 	addi	r30 r30 32
 	sw	r1 r30 0
 	sw	r31 r30 4
@@ -20638,7 +20472,7 @@ bfle_nontail_cont.30326:
 	lwo	r2 r1 r1
 	addi	r0 r3 -1
 	sub	r1 r3 r25
-	beq	r25 r0 beq_else.30335
+	beq	r25 r0 beq_else.30225
 	addi	r30 r30 32
 	sw	r1 r30 0
 	sw	r31 r30 4
@@ -20667,32 +20501,32 @@ bfle_nontail_cont.30326:
 	jal	solve_one_or_network_fast.3049
 	addi	r30 r30 -36
 	lw	r30 r31 32
-	j	beq_cont.30336
-beq_else.30335:
-beq_cont.30336:
-	j	beq_cont.30334
-beq_else.30333:
-beq_cont.30334:
-	j	beq_cont.30332
-beq_else.30331:
-beq_cont.30332:
-	j	beq_cont.30330
-beq_else.30329:
-beq_cont.30330:
-	j	beq_cont.30328
-beq_else.30327:
-beq_cont.30328:
-	j	beq_cont.30324
-beq_else.30323:
-beq_cont.30324:
-	j	beq_cont.30322
-beq_else.30321:
+	j	beq_cont.30226
+beq_else.30225:
+beq_cont.30226:
+	j	beq_cont.30224
+beq_else.30223:
+beq_cont.30224:
+	j	beq_cont.30222
+beq_else.30221:
+beq_cont.30222:
+	j	beq_cont.30220
+beq_else.30219:
+beq_cont.30220:
+	j	beq_cont.30218
+beq_else.30217:
+beq_cont.30218:
+	j	beq_cont.30214
+beq_else.30213:
+beq_cont.30214:
+	j	beq_cont.30212
+beq_else.30211:
 	addi	r0 r8 1
 	sll	r8 r8 2
 	lwo	r6 r8 r8
 	addi	r0 r9 -1
 	sub	r8 r9 r25
-	beq	r25 r0 beq_else.30337
+	beq	r25 r0 beq_else.30227
 	addi	r30 r30 32
 	sw	r1 r30 0
 	sw	r31 r30 4
@@ -20719,7 +20553,7 @@ beq_else.30321:
 	lwo	r2 r1 r1
 	addi	r0 r3 -1
 	sub	r1 r3 r25
-	beq	r25 r0 beq_else.30339
+	beq	r25 r0 beq_else.30229
 	addi	r30 r30 32
 	sw	r1 r30 0
 	sw	r31 r30 4
@@ -20746,7 +20580,7 @@ beq_else.30321:
 	lwo	r2 r1 r1
 	addi	r0 r3 -1
 	sub	r1 r3 r25
-	beq	r25 r0 beq_else.30341
+	beq	r25 r0 beq_else.30231
 	addi	r30 r30 32
 	sw	r1 r30 0
 	sw	r31 r30 4
@@ -20773,7 +20607,7 @@ beq_else.30321:
 	lwo	r2 r1 r1
 	addi	r0 r3 -1
 	sub	r1 r3 r25
-	beq	r25 r0 beq_else.30343
+	beq	r25 r0 beq_else.30233
 	addi	r30 r30 32
 	sw	r1 r30 0
 	sw	r31 r30 4
@@ -20802,19 +20636,19 @@ beq_else.30321:
 	jal	solve_one_or_network_fast.3049
 	addi	r30 r30 -36
 	lw	r30 r31 32
-	j	beq_cont.30344
-beq_else.30343:
-beq_cont.30344:
-	j	beq_cont.30342
-beq_else.30341:
-beq_cont.30342:
-	j	beq_cont.30340
-beq_else.30339:
-beq_cont.30340:
-	j	beq_cont.30338
-beq_else.30337:
-beq_cont.30338:
-beq_cont.30322:
+	j	beq_cont.30234
+beq_else.30233:
+beq_cont.30234:
+	j	beq_cont.30232
+beq_else.30231:
+beq_cont.30232:
+	j	beq_cont.30230
+beq_else.30229:
+beq_cont.30230:
+	j	beq_cont.30228
+beq_else.30227:
+beq_cont.30228:
+beq_cont.30212:
 	addi	r0 r1 1
 	lw	r30 r2 24
 	lw	r30 r3 20
@@ -20823,9 +20657,9 @@ beq_cont.30322:
 	jal	trace_or_matrix_fast.3053
 	addi	r30 r30 -36
 	lw	r30 r31 32
-	j	beq_cont.30320
-beq_else.30319:
-beq_cont.30320:
+	j	beq_cont.30210
+beq_else.30209:
+beq_cont.30210:
 	addi	r30 r30 32
 	sw	r1 r30 0
 	sw	r31 r30 4
@@ -20845,15 +20679,15 @@ beq_cont.30320:
 	mtc1	r24 f2
 	sub.s	f1 f2 f30
 	mfc1	f30 r25
-	blez	r25 bfle_nontail_else.30345
+	blez	r25 bfle_nontail_else.30235
 	addi	r0 r1 1
-	j	bfle_nontail_cont.30346
-bfle_nontail_else.30345:
+	j	bfle_nontail_cont.30236
+bfle_nontail_else.30235:
 	addi	r0 r1 0
-bfle_nontail_cont.30346:
+bfle_nontail_cont.30236:
 	addi	r0 r2 0
 	sub	r1 r2 r25
-	beq	r25 r0 beq_else.30347
+	beq	r25 r0 beq_else.30237
 	lui	r24 19646
 	ori	r24 r24 48160
 	mtc1	r24 f1
@@ -20863,19 +20697,19 @@ bfle_nontail_cont.30346:
 	mtc1	r24 f1
 	sub.s	f0 f1 f30
 	mfc1	f30 r25
-	blez	r25 bfle_nontail_else.30349
+	blez	r25 bfle_nontail_else.30239
 	addi	r0 r1 1
-	j	bfle_nontail_cont.30350
-bfle_nontail_else.30349:
+	j	bfle_nontail_cont.30240
+bfle_nontail_else.30239:
 	addi	r0 r1 0
-bfle_nontail_cont.30350:
-	j	beq_cont.30348
-beq_else.30347:
+bfle_nontail_cont.30240:
+	j	beq_cont.30238
+beq_else.30237:
 	addi	r0 r1 0
-beq_cont.30348:
+beq_cont.30238:
 	addi	r0 r2 0
 	sub	r1 r2 r25
-	beq	r25 r0 beq_else.30351
+	beq	r25 r0 beq_else.30241
 	addi	r30 r30 32
 	sw	r1 r30 0
 	sw	r31 r30 4
@@ -20902,17 +20736,17 @@ beq_cont.30348:
 	addi	r0 r4 1
 	sw	r1 r30 32
 	sub	r3 r4 r25
-	beq	r25 r0 beq_else.30353
+	beq	r25 r0 beq_else.30243
 	addi	r0 r2 2
 	sub	r3 r2 r25
-	beq	r25 r0 beq_else.30355
+	beq	r25 r0 beq_else.30245
 	sw	r31 r30 36
 	addi	r30 r30 40
 	jal	get_nvector_second.3063
 	addi	r30 r30 -40
 	lw	r30 r31 36
-	j	beq_cont.30356
-beq_else.30355:
+	j	beq_cont.30246
+beq_else.30245:
 	addi	r30 r30 36
 	sw	r1 r30 0
 	sw	r31 r30 4
@@ -20961,9 +20795,9 @@ beq_else.30355:
 	neg.s	f0 f0
 	sll	r3 r3 2
 	swoc1	f0 r2 r3
-beq_cont.30356:
-	j	beq_cont.30354
-beq_else.30353:
+beq_cont.30246:
+	j	beq_cont.30244
+beq_else.30243:
 	addi	r30 r30 36
 	sw	r1 r30 0
 	sw	r31 r30 4
@@ -21015,48 +20849,48 @@ beq_else.30353:
 	sub.s	f0 f1 f30
 	mfc1	f30 r25
 	sll	r25 r25 1
-	beq	r25 r0 bfeq_nontail_else.30357
+	beq	r25 r0 bfeq_nontail_else.30247
 	addi	r0 r2 0
-	j	bfeq_nontail_cont.30358
-bfeq_nontail_else.30357:
+	j	bfeq_nontail_cont.30248
+bfeq_nontail_else.30247:
 	addi	r0 r2 1
-bfeq_nontail_cont.30358:
+bfeq_nontail_cont.30248:
 	addi	r0 r3 0
 	sub	r2 r3 r25
-	beq	r25 r0 beq_else.30359
+	beq	r25 r0 beq_else.30249
 	lui	r24 0
 	ori	r24 r24 0
 	mtc1	r24 f0
-	j	beq_cont.30360
-beq_else.30359:
+	j	beq_cont.30250
+beq_else.30249:
 	lui	r24 0
 	ori	r24 r24 0
 	mtc1	r24 f1
 	sub.s	f0 f1 f30
 	mfc1	f30 r25
-	blez	r25 bfle_nontail_else.30361
+	blez	r25 bfle_nontail_else.30251
 	addi	r0 r2 1
-	j	bfle_nontail_cont.30362
-bfle_nontail_else.30361:
+	j	bfle_nontail_cont.30252
+bfle_nontail_else.30251:
 	addi	r0 r2 0
-bfle_nontail_cont.30362:
+bfle_nontail_cont.30252:
 	addi	r0 r3 0
 	sub	r2 r3 r25
-	beq	r25 r0 beq_else.30363
+	beq	r25 r0 beq_else.30253
 	lui	r24 16256
 	ori	r24 r24 0
 	mtc1	r24 f0
-	j	beq_cont.30364
-beq_else.30363:
+	j	beq_cont.30254
+beq_else.30253:
 	lui	r24 49024
 	ori	r24 r24 0
 	mtc1	r24 f0
-beq_cont.30364:
-beq_cont.30360:
+beq_cont.30254:
+beq_cont.30250:
 	neg.s	f0 f0
 	sll	r5 r2 2
 	swoc1	f0 r4 r2
-beq_cont.30354:
+beq_cont.30244:
 	addi	r30 r30 36
 	sw	r1 r30 0
 	sw	r31 r30 4
@@ -21090,9 +20924,9 @@ beq_cont.30354:
 	lw	r30 r31 36
 	addi	r0 r2 0
 	sub	r1 r2 r25
-	beq	r25 r0 beq_else.30365
-	j	beq_cont.30366
-beq_else.30365:
+	beq	r25 r0 beq_else.30255
+	j	beq_cont.30256
+beq_else.30255:
 	addi	r30 r30 36
 	sw	r1 r30 0
 	sw	r31 r30 4
@@ -21137,21 +20971,21 @@ beq_else.30365:
 	mtc1	r24 f1
 	sub.s	f0 f1 f30
 	mfc1	f30 r25
-	blez	r25 bfle_nontail_else.30367
+	blez	r25 bfle_nontail_else.30257
 	addi	r0 r1 1
-	j	bfle_nontail_cont.30368
-bfle_nontail_else.30367:
+	j	bfle_nontail_cont.30258
+bfle_nontail_else.30257:
 	addi	r0 r1 0
-bfle_nontail_cont.30368:
+bfle_nontail_cont.30258:
 	addi	r0 r2 0
 	sub	r1 r2 r25
-	beq	r25 r0 beq_else.30369
-	j	beq_cont.30370
-beq_else.30369:
+	beq	r25 r0 beq_else.30259
+	j	beq_cont.30260
+beq_else.30259:
 	lui	r24 0
 	ori	r24 r24 0
 	mtc1	r24 f0
-beq_cont.30370:
+beq_cont.30260:
 	addi	r30 r30 36
 	sw	r1 r30 0
 	sw	r31 r30 4
@@ -21208,12 +21042,12 @@ beq_cont.30370:
 	add.s	f1 f0 f0
 	sll	r3 r2 2
 	swoc1	f0 r1 r2
-beq_cont.30366:
-	j	beq_cont.30352
-beq_else.30351:
-beq_cont.30352:
-	j	beq_cont.30318
-beq_else.30317:
+beq_cont.30256:
+	j	beq_cont.30242
+beq_else.30241:
+beq_cont.30242:
+	j	beq_cont.30208
+beq_else.30207:
 	sll	r4 r5 2
 	lwo	r1 r5 r5
 	lui	r24 17174
@@ -21255,11 +21089,11 @@ beq_else.30317:
 	swc1	f0 r30 36
 	sw	r5 r30 40
 	sub	r8 r9 r25
-	beq	r25 r0 beq_else.30371
+	beq	r25 r0 beq_else.30261
 	addi	r0 r9 99
 	sw	r7 r30 44
 	sub	r8 r9 r25
-	beq	r25 r0 beq_else.30373
+	beq	r25 r0 beq_else.30263
 	sw	r6 r30 48
 	sw	r31 r30 52
 	addi	r30 r30 56
@@ -21270,7 +21104,7 @@ beq_else.30317:
 	lw	r30 r31 52
 	addi	r0 r2 0
 	sub	r1 r2 r25
-	beq	r25 r0 beq_else.30375
+	beq	r25 r0 beq_else.30265
 	addi	r30 r30 52
 	sw	r1 r30 0
 	sw	r31 r30 4
@@ -21297,22 +21131,22 @@ beq_else.30317:
 	mtc1	r24 f1
 	sub.s	f0 f1 f30
 	mfc1	f30 r25
-	blez	r25 bfle_nontail_else.30377
+	blez	r25 bfle_nontail_else.30267
 	addi	r0 r1 1
-	j	bfle_nontail_cont.30378
-bfle_nontail_else.30377:
+	j	bfle_nontail_cont.30268
+bfle_nontail_else.30267:
 	addi	r0 r1 0
-bfle_nontail_cont.30378:
+bfle_nontail_cont.30268:
 	addi	r0 r2 0
 	sub	r1 r2 r25
-	beq	r25 r0 beq_else.30379
+	beq	r25 r0 beq_else.30269
 	addi	r0 r1 1
 	sll	r1 r1 2
 	lw	r30 r2 48
 	lwo	r2 r1 r1
 	addi	r0 r3 -1
 	sub	r1 r3 r25
-	beq	r25 r0 beq_else.30381
+	beq	r25 r0 beq_else.30271
 	addi	r30 r30 52
 	sw	r1 r30 0
 	sw	r31 r30 4
@@ -21339,7 +21173,7 @@ bfle_nontail_cont.30378:
 	lwo	r2 r1 r1
 	addi	r0 r3 -1
 	sub	r1 r3 r25
-	beq	r25 r0 beq_else.30383
+	beq	r25 r0 beq_else.30273
 	addi	r30 r30 52
 	sw	r1 r30 0
 	sw	r31 r30 4
@@ -21366,7 +21200,7 @@ bfle_nontail_cont.30378:
 	lwo	r2 r1 r1
 	addi	r0 r3 -1
 	sub	r1 r3 r25
-	beq	r25 r0 beq_else.30385
+	beq	r25 r0 beq_else.30275
 	addi	r30 r30 52
 	sw	r1 r30 0
 	sw	r31 r30 4
@@ -21393,7 +21227,7 @@ bfle_nontail_cont.30378:
 	lwo	r2 r1 r1
 	addi	r0 r3 -1
 	sub	r1 r3 r25
-	beq	r25 r0 beq_else.30387
+	beq	r25 r0 beq_else.30277
 	addi	r30 r30 52
 	sw	r1 r30 0
 	sw	r31 r30 4
@@ -21422,32 +21256,32 @@ bfle_nontail_cont.30378:
 	jal	solve_one_or_network_fast.3049
 	addi	r30 r30 -56
 	lw	r30 r31 52
-	j	beq_cont.30388
-beq_else.30387:
-beq_cont.30388:
-	j	beq_cont.30386
-beq_else.30385:
-beq_cont.30386:
-	j	beq_cont.30384
-beq_else.30383:
-beq_cont.30384:
-	j	beq_cont.30382
-beq_else.30381:
-beq_cont.30382:
-	j	beq_cont.30380
-beq_else.30379:
-beq_cont.30380:
-	j	beq_cont.30376
-beq_else.30375:
-beq_cont.30376:
-	j	beq_cont.30374
-beq_else.30373:
+	j	beq_cont.30278
+beq_else.30277:
+beq_cont.30278:
+	j	beq_cont.30276
+beq_else.30275:
+beq_cont.30276:
+	j	beq_cont.30274
+beq_else.30273:
+beq_cont.30274:
+	j	beq_cont.30272
+beq_else.30271:
+beq_cont.30272:
+	j	beq_cont.30270
+beq_else.30269:
+beq_cont.30270:
+	j	beq_cont.30266
+beq_else.30265:
+beq_cont.30266:
+	j	beq_cont.30264
+beq_else.30263:
 	addi	r0 r8 1
 	sll	r8 r8 2
 	lwo	r6 r8 r8
 	addi	r0 r9 -1
 	sub	r8 r9 r25
-	beq	r25 r0 beq_else.30389
+	beq	r25 r0 beq_else.30279
 	addi	r30 r30 52
 	sw	r1 r30 0
 	sw	r31 r30 4
@@ -21474,7 +21308,7 @@ beq_else.30373:
 	lwo	r2 r1 r1
 	addi	r0 r3 -1
 	sub	r1 r3 r25
-	beq	r25 r0 beq_else.30391
+	beq	r25 r0 beq_else.30281
 	addi	r30 r30 52
 	sw	r1 r30 0
 	sw	r31 r30 4
@@ -21501,7 +21335,7 @@ beq_else.30373:
 	lwo	r2 r1 r1
 	addi	r0 r3 -1
 	sub	r1 r3 r25
-	beq	r25 r0 beq_else.30393
+	beq	r25 r0 beq_else.30283
 	addi	r30 r30 52
 	sw	r1 r30 0
 	sw	r31 r30 4
@@ -21528,7 +21362,7 @@ beq_else.30373:
 	lwo	r2 r1 r1
 	addi	r0 r3 -1
 	sub	r1 r3 r25
-	beq	r25 r0 beq_else.30395
+	beq	r25 r0 beq_else.30285
 	addi	r30 r30 52
 	sw	r1 r30 0
 	sw	r31 r30 4
@@ -21557,19 +21391,19 @@ beq_else.30373:
 	jal	solve_one_or_network_fast.3049
 	addi	r30 r30 -56
 	lw	r30 r31 52
-	j	beq_cont.30396
-beq_else.30395:
-beq_cont.30396:
-	j	beq_cont.30394
-beq_else.30393:
-beq_cont.30394:
-	j	beq_cont.30392
-beq_else.30391:
-beq_cont.30392:
-	j	beq_cont.30390
-beq_else.30389:
-beq_cont.30390:
-beq_cont.30374:
+	j	beq_cont.30286
+beq_else.30285:
+beq_cont.30286:
+	j	beq_cont.30284
+beq_else.30283:
+beq_cont.30284:
+	j	beq_cont.30282
+beq_else.30281:
+beq_cont.30282:
+	j	beq_cont.30280
+beq_else.30279:
+beq_cont.30280:
+beq_cont.30264:
 	addi	r0 r1 1
 	lw	r30 r2 44
 	lw	r30 r3 40
@@ -21578,9 +21412,9 @@ beq_cont.30374:
 	jal	trace_or_matrix_fast.3053
 	addi	r30 r30 -56
 	lw	r30 r31 52
-	j	beq_cont.30372
-beq_else.30371:
-beq_cont.30372:
+	j	beq_cont.30262
+beq_else.30261:
+beq_cont.30262:
 	addi	r30 r30 52
 	sw	r1 r30 0
 	sw	r31 r30 4
@@ -21600,15 +21434,15 @@ beq_cont.30372:
 	mtc1	r24 f2
 	sub.s	f1 f2 f30
 	mfc1	f30 r25
-	blez	r25 bfle_nontail_else.30397
+	blez	r25 bfle_nontail_else.30287
 	addi	r0 r1 1
-	j	bfle_nontail_cont.30398
-bfle_nontail_else.30397:
+	j	bfle_nontail_cont.30288
+bfle_nontail_else.30287:
 	addi	r0 r1 0
-bfle_nontail_cont.30398:
+bfle_nontail_cont.30288:
 	addi	r0 r2 0
 	sub	r1 r2 r25
-	beq	r25 r0 beq_else.30399
+	beq	r25 r0 beq_else.30289
 	lui	r24 19646
 	ori	r24 r24 48160
 	mtc1	r24 f1
@@ -21618,19 +21452,19 @@ bfle_nontail_cont.30398:
 	mtc1	r24 f1
 	sub.s	f0 f1 f30
 	mfc1	f30 r25
-	blez	r25 bfle_nontail_else.30401
+	blez	r25 bfle_nontail_else.30291
 	addi	r0 r1 1
-	j	bfle_nontail_cont.30402
-bfle_nontail_else.30401:
+	j	bfle_nontail_cont.30292
+bfle_nontail_else.30291:
 	addi	r0 r1 0
-bfle_nontail_cont.30402:
-	j	beq_cont.30400
-beq_else.30399:
+bfle_nontail_cont.30292:
+	j	beq_cont.30290
+beq_else.30289:
 	addi	r0 r1 0
-beq_cont.30400:
+beq_cont.30290:
 	addi	r0 r2 0
 	sub	r1 r2 r25
-	beq	r25 r0 beq_else.30403
+	beq	r25 r0 beq_else.30293
 	addi	r30 r30 52
 	sw	r1 r30 0
 	sw	r31 r30 4
@@ -21657,17 +21491,17 @@ beq_cont.30400:
 	addi	r0 r4 1
 	sw	r1 r30 52
 	sub	r3 r4 r25
-	beq	r25 r0 beq_else.30405
+	beq	r25 r0 beq_else.30295
 	addi	r0 r2 2
 	sub	r3 r2 r25
-	beq	r25 r0 beq_else.30407
+	beq	r25 r0 beq_else.30297
 	sw	r31 r30 56
 	addi	r30 r30 60
 	jal	get_nvector_second.3063
 	addi	r30 r30 -60
 	lw	r30 r31 56
-	j	beq_cont.30408
-beq_else.30407:
+	j	beq_cont.30298
+beq_else.30297:
 	addi	r30 r30 56
 	sw	r1 r30 0
 	sw	r31 r30 4
@@ -21716,9 +21550,9 @@ beq_else.30407:
 	neg.s	f0 f0
 	sll	r3 r3 2
 	swoc1	f0 r2 r3
-beq_cont.30408:
-	j	beq_cont.30406
-beq_else.30405:
+beq_cont.30298:
+	j	beq_cont.30296
+beq_else.30295:
 	addi	r30 r30 56
 	sw	r1 r30 0
 	sw	r31 r30 4
@@ -21770,48 +21604,48 @@ beq_else.30405:
 	sub.s	f0 f1 f30
 	mfc1	f30 r25
 	sll	r25 r25 1
-	beq	r25 r0 bfeq_nontail_else.30409
+	beq	r25 r0 bfeq_nontail_else.30299
 	addi	r0 r2 0
-	j	bfeq_nontail_cont.30410
-bfeq_nontail_else.30409:
+	j	bfeq_nontail_cont.30300
+bfeq_nontail_else.30299:
 	addi	r0 r2 1
-bfeq_nontail_cont.30410:
+bfeq_nontail_cont.30300:
 	addi	r0 r3 0
 	sub	r2 r3 r25
-	beq	r25 r0 beq_else.30411
+	beq	r25 r0 beq_else.30301
 	lui	r24 0
 	ori	r24 r24 0
 	mtc1	r24 f0
-	j	beq_cont.30412
-beq_else.30411:
+	j	beq_cont.30302
+beq_else.30301:
 	lui	r24 0
 	ori	r24 r24 0
 	mtc1	r24 f1
 	sub.s	f0 f1 f30
 	mfc1	f30 r25
-	blez	r25 bfle_nontail_else.30413
+	blez	r25 bfle_nontail_else.30303
 	addi	r0 r2 1
-	j	bfle_nontail_cont.30414
-bfle_nontail_else.30413:
+	j	bfle_nontail_cont.30304
+bfle_nontail_else.30303:
 	addi	r0 r2 0
-bfle_nontail_cont.30414:
+bfle_nontail_cont.30304:
 	addi	r0 r3 0
 	sub	r2 r3 r25
-	beq	r25 r0 beq_else.30415
+	beq	r25 r0 beq_else.30305
 	lui	r24 16256
 	ori	r24 r24 0
 	mtc1	r24 f0
-	j	beq_cont.30416
-beq_else.30415:
+	j	beq_cont.30306
+beq_else.30305:
 	lui	r24 49024
 	ori	r24 r24 0
 	mtc1	r24 f0
-beq_cont.30416:
-beq_cont.30412:
+beq_cont.30306:
+beq_cont.30302:
 	neg.s	f0 f0
 	sll	r5 r2 2
 	swoc1	f0 r4 r2
-beq_cont.30406:
+beq_cont.30296:
 	addi	r30 r30 56
 	sw	r1 r30 0
 	sw	r31 r30 4
@@ -21845,9 +21679,9 @@ beq_cont.30406:
 	lw	r30 r31 56
 	addi	r0 r2 0
 	sub	r1 r2 r25
-	beq	r25 r0 beq_else.30417
-	j	beq_cont.30418
-beq_else.30417:
+	beq	r25 r0 beq_else.30307
+	j	beq_cont.30308
+beq_else.30307:
 	addi	r30 r30 56
 	sw	r1 r30 0
 	sw	r31 r30 4
@@ -21892,21 +21726,21 @@ beq_else.30417:
 	mtc1	r24 f1
 	sub.s	f0 f1 f30
 	mfc1	f30 r25
-	blez	r25 bfle_nontail_else.30419
+	blez	r25 bfle_nontail_else.30309
 	addi	r0 r1 1
-	j	bfle_nontail_cont.30420
-bfle_nontail_else.30419:
+	j	bfle_nontail_cont.30310
+bfle_nontail_else.30309:
 	addi	r0 r1 0
-bfle_nontail_cont.30420:
+bfle_nontail_cont.30310:
 	addi	r0 r2 0
 	sub	r1 r2 r25
-	beq	r25 r0 beq_else.30421
-	j	beq_cont.30422
-beq_else.30421:
+	beq	r25 r0 beq_else.30311
+	j	beq_cont.30312
+beq_else.30311:
 	lui	r24 0
 	ori	r24 r24 0
 	mtc1	r24 f0
-beq_cont.30422:
+beq_cont.30312:
 	addi	r30 r30 56
 	sw	r1 r30 0
 	sw	r31 r30 4
@@ -21963,19 +21797,19 @@ beq_cont.30422:
 	add.s	f1 f0 f0
 	sll	r3 r2 2
 	swoc1	f0 r1 r2
-beq_cont.30418:
-	j	beq_cont.30404
-beq_else.30403:
-beq_cont.30404:
-beq_cont.30318:
+beq_cont.30308:
+	j	beq_cont.30294
+beq_else.30293:
+beq_cont.30294:
+beq_cont.30208:
 	addi	r0 r1 2
 	lw	r30 r2 12
 	sub	r2 r1 r1
 	addi	r0 r2 0
 	sub	r2 r1 r25
-	blez	r25 ble_tail_else.30423
+	blez	r25 ble_tail_else.30313
 	jr	r31
-ble_tail_else.30423:
+ble_tail_else.30313:
 	sll	r1 r2 2
 	lw	r30 r3 8
 	lwo	r3 r2 r2
@@ -22009,16 +21843,16 @@ ble_tail_else.30423:
 	mtc1	r24 f1
 	sub.s	f1 f0 f30
 	mfc1	f30 r25
-	blez	r25 bfle_nontail_else.30425
+	blez	r25 bfle_nontail_else.30315
 	addi	r0 r2 1
-	j	bfle_nontail_cont.30426
-bfle_nontail_else.30425:
+	j	bfle_nontail_cont.30316
+bfle_nontail_else.30315:
 	addi	r0 r2 0
-bfle_nontail_cont.30426:
+bfle_nontail_cont.30316:
 	addi	r0 r4 0
 	sw	r1 r30 56
 	sub	r2 r4 r25
-	beq	r25 r0 beq_else.30427
+	beq	r25 r0 beq_else.30317
 	addi	r0 r2 1
 	add	r1 r2 r2
 	sll	r2 r2 2
@@ -22033,8 +21867,8 @@ bfle_nontail_cont.30426:
 	jal	trace_diffuse_ray.3086
 	addi	r30 r30 -64
 	lw	r30 r31 60
-	j	beq_cont.30428
-beq_else.30427:
+	j	beq_cont.30318
+beq_else.30317:
 	sll	r1 r2 2
 	lwo	r3 r2 r2
 	lui	r24 17174
@@ -22047,7 +21881,7 @@ beq_else.30427:
 	jal	trace_diffuse_ray.3086
 	addi	r30 r30 -64
 	lw	r30 r31 60
-beq_cont.30428:
+beq_cont.30318:
 	addi	r0 r1 2
 	lw	r30 r2 56
 	sub	r2 r1 r4
@@ -22061,7 +21895,7 @@ trace_diffuse_ray_80percent.3098:
 	sw	r3 r30 4
 	sw	r1 r30 8
 	sub	r1 r4 r25
-	beq	r25 r0 beq_else.30429
+	beq	r25 r0 beq_else.30319
 	addi	r30 r30 12
 	sw	r1 r30 0
 	sw	r31 r30 4
@@ -22129,13 +21963,13 @@ trace_diffuse_ray_80percent.3098:
 	jal	iter_trace_diffuse_rays.3089
 	addi	r30 r30 -20
 	lw	r30 r31 16
-	j	beq_cont.30430
-beq_else.30429:
-beq_cont.30430:
+	j	beq_cont.30320
+beq_else.30319:
+beq_cont.30320:
 	addi	r0 r1 1
 	lw	r30 r2 8
 	sub	r2 r1 r25
-	beq	r25 r0 beq_else.30431
+	beq	r25 r0 beq_else.30321
 	addi	r30 r30 16
 	sw	r1 r30 0
 	sw	r31 r30 4
@@ -22203,13 +22037,13 @@ beq_cont.30430:
 	jal	iter_trace_diffuse_rays.3089
 	addi	r30 r30 -24
 	lw	r30 r31 20
-	j	beq_cont.30432
-beq_else.30431:
-beq_cont.30432:
+	j	beq_cont.30322
+beq_else.30321:
+beq_cont.30322:
 	addi	r0 r1 2
 	lw	r30 r2 8
 	sub	r2 r1 r25
-	beq	r25 r0 beq_else.30433
+	beq	r25 r0 beq_else.30323
 	addi	r30 r30 20
 	sw	r1 r30 0
 	sw	r31 r30 4
@@ -22277,13 +22111,13 @@ beq_cont.30432:
 	jal	iter_trace_diffuse_rays.3089
 	addi	r30 r30 -28
 	lw	r30 r31 24
-	j	beq_cont.30434
-beq_else.30433:
-beq_cont.30434:
+	j	beq_cont.30324
+beq_else.30323:
+beq_cont.30324:
 	addi	r0 r1 3
 	lw	r30 r2 8
 	sub	r2 r1 r25
-	beq	r25 r0 beq_else.30435
+	beq	r25 r0 beq_else.30325
 	addi	r30 r30 24
 	sw	r1 r30 0
 	sw	r31 r30 4
@@ -22351,13 +22185,13 @@ beq_cont.30434:
 	jal	iter_trace_diffuse_rays.3089
 	addi	r30 r30 -32
 	lw	r30 r31 28
-	j	beq_cont.30436
-beq_else.30435:
-beq_cont.30436:
+	j	beq_cont.30326
+beq_else.30325:
+beq_cont.30326:
 	addi	r0 r1 4
 	lw	r30 r2 8
 	sub	r2 r1 r25
-	beq	r25 r0 beq_tail_else.30437
+	beq	r25 r0 beq_tail_else.30327
 	addi	r30 r30 28
 	sw	r1 r30 0
 	sw	r31 r30 4
@@ -22420,7 +22254,7 @@ beq_cont.30436:
 	lw	r30 r2 0
 	lw	r30 r3 4
 	j	iter_trace_diffuse_rays.3089
-beq_tail_else.30437:
+beq_tail_else.30327:
 	jr	r31
 calc_diffuse_using_1point.3102:
 	lw	r1 r3 20
@@ -22470,7 +22304,7 @@ calc_diffuse_using_1point.3102:
 	sw	r4 r30 12
 	sw	r1 r30 16
 	sub	r1 r5 r25
-	beq	r25 r0 beq_else.30439
+	beq	r25 r0 beq_else.30329
 	addi	r30 r30 20
 	sw	r1 r30 0
 	sw	r31 r30 4
@@ -22563,15 +22397,15 @@ calc_diffuse_using_1point.3102:
 	mtc1	r24 f1
 	sub.s	f1 f0 f30
 	mfc1	f30 r25
-	blez	r25 bfle_nontail_else.30441
+	blez	r25 bfle_nontail_else.30331
 	addi	r0 r2 1
-	j	bfle_nontail_cont.30442
-bfle_nontail_else.30441:
+	j	bfle_nontail_cont.30332
+bfle_nontail_else.30331:
 	addi	r0 r2 0
-bfle_nontail_cont.30442:
+bfle_nontail_cont.30332:
 	addi	r0 r4 0
 	sub	r2 r4 r25
-	beq	r25 r0 beq_else.30443
+	beq	r25 r0 beq_else.30333
 	addi	r0 r1 119
 	sll	r1 r1 2
 	lwo	r3 r1 r1
@@ -22584,8 +22418,8 @@ bfle_nontail_cont.30442:
 	jal	trace_diffuse_ray.3086
 	addi	r30 r30 -28
 	lw	r30 r31 24
-	j	beq_cont.30444
-beq_else.30443:
+	j	beq_cont.30334
+beq_else.30333:
 	sll	r1 r1 2
 	lwo	r3 r1 r1
 	lui	r24 17174
@@ -22597,7 +22431,7 @@ beq_else.30443:
 	jal	trace_diffuse_ray.3086
 	addi	r30 r30 -28
 	lw	r30 r31 24
-beq_cont.30444:
+beq_cont.30334:
 	addi	r0 r4 116
 	lw	r30 r1 20
 	lw	r30 r2 8
@@ -22607,13 +22441,13 @@ beq_cont.30444:
 	jal	iter_trace_diffuse_rays.3089
 	addi	r30 r30 -28
 	lw	r30 r31 24
-	j	beq_cont.30440
-beq_else.30439:
-beq_cont.30440:
+	j	beq_cont.30330
+beq_else.30329:
+beq_cont.30330:
 	addi	r0 r1 1
 	lw	r30 r2 16
 	sub	r2 r1 r25
-	beq	r25 r0 beq_else.30445
+	beq	r25 r0 beq_else.30335
 	addi	r30 r30 24
 	sw	r1 r30 0
 	sw	r31 r30 4
@@ -22706,15 +22540,15 @@ beq_cont.30440:
 	mtc1	r24 f1
 	sub.s	f1 f0 f30
 	mfc1	f30 r25
-	blez	r25 bfle_nontail_else.30447
+	blez	r25 bfle_nontail_else.30337
 	addi	r0 r2 1
-	j	bfle_nontail_cont.30448
-bfle_nontail_else.30447:
+	j	bfle_nontail_cont.30338
+bfle_nontail_else.30337:
 	addi	r0 r2 0
-bfle_nontail_cont.30448:
+bfle_nontail_cont.30338:
 	addi	r0 r4 0
 	sub	r2 r4 r25
-	beq	r25 r0 beq_else.30449
+	beq	r25 r0 beq_else.30339
 	addi	r0 r1 119
 	sll	r1 r1 2
 	lwo	r3 r1 r1
@@ -22727,8 +22561,8 @@ bfle_nontail_cont.30448:
 	jal	trace_diffuse_ray.3086
 	addi	r30 r30 -32
 	lw	r30 r31 28
-	j	beq_cont.30450
-beq_else.30449:
+	j	beq_cont.30340
+beq_else.30339:
 	sll	r1 r1 2
 	lwo	r3 r1 r1
 	lui	r24 17174
@@ -22740,7 +22574,7 @@ beq_else.30449:
 	jal	trace_diffuse_ray.3086
 	addi	r30 r30 -32
 	lw	r30 r31 28
-beq_cont.30450:
+beq_cont.30340:
 	addi	r0 r4 116
 	lw	r30 r1 24
 	lw	r30 r2 8
@@ -22750,13 +22584,13 @@ beq_cont.30450:
 	jal	iter_trace_diffuse_rays.3089
 	addi	r30 r30 -32
 	lw	r30 r31 28
-	j	beq_cont.30446
-beq_else.30445:
-beq_cont.30446:
+	j	beq_cont.30336
+beq_else.30335:
+beq_cont.30336:
 	addi	r0 r1 2
 	lw	r30 r2 16
 	sub	r2 r1 r25
-	beq	r25 r0 beq_else.30451
+	beq	r25 r0 beq_else.30341
 	addi	r30 r30 28
 	sw	r1 r30 0
 	sw	r31 r30 4
@@ -22849,15 +22683,15 @@ beq_cont.30446:
 	mtc1	r24 f1
 	sub.s	f1 f0 f30
 	mfc1	f30 r25
-	blez	r25 bfle_nontail_else.30453
+	blez	r25 bfle_nontail_else.30343
 	addi	r0 r2 1
-	j	bfle_nontail_cont.30454
-bfle_nontail_else.30453:
+	j	bfle_nontail_cont.30344
+bfle_nontail_else.30343:
 	addi	r0 r2 0
-bfle_nontail_cont.30454:
+bfle_nontail_cont.30344:
 	addi	r0 r4 0
 	sub	r2 r4 r25
-	beq	r25 r0 beq_else.30455
+	beq	r25 r0 beq_else.30345
 	addi	r0 r1 119
 	sll	r1 r1 2
 	lwo	r3 r1 r1
@@ -22870,8 +22704,8 @@ bfle_nontail_cont.30454:
 	jal	trace_diffuse_ray.3086
 	addi	r30 r30 -36
 	lw	r30 r31 32
-	j	beq_cont.30456
-beq_else.30455:
+	j	beq_cont.30346
+beq_else.30345:
 	sll	r1 r1 2
 	lwo	r3 r1 r1
 	lui	r24 17174
@@ -22883,7 +22717,7 @@ beq_else.30455:
 	jal	trace_diffuse_ray.3086
 	addi	r30 r30 -36
 	lw	r30 r31 32
-beq_cont.30456:
+beq_cont.30346:
 	addi	r0 r4 116
 	lw	r30 r1 28
 	lw	r30 r2 8
@@ -22893,13 +22727,13 @@ beq_cont.30456:
 	jal	iter_trace_diffuse_rays.3089
 	addi	r30 r30 -36
 	lw	r30 r31 32
-	j	beq_cont.30452
-beq_else.30451:
-beq_cont.30452:
+	j	beq_cont.30342
+beq_else.30341:
+beq_cont.30342:
 	addi	r0 r1 3
 	lw	r30 r2 16
 	sub	r2 r1 r25
-	beq	r25 r0 beq_else.30457
+	beq	r25 r0 beq_else.30347
 	addi	r30 r30 32
 	sw	r1 r30 0
 	sw	r31 r30 4
@@ -22992,15 +22826,15 @@ beq_cont.30452:
 	mtc1	r24 f1
 	sub.s	f1 f0 f30
 	mfc1	f30 r25
-	blez	r25 bfle_nontail_else.30459
+	blez	r25 bfle_nontail_else.30349
 	addi	r0 r2 1
-	j	bfle_nontail_cont.30460
-bfle_nontail_else.30459:
+	j	bfle_nontail_cont.30350
+bfle_nontail_else.30349:
 	addi	r0 r2 0
-bfle_nontail_cont.30460:
+bfle_nontail_cont.30350:
 	addi	r0 r4 0
 	sub	r2 r4 r25
-	beq	r25 r0 beq_else.30461
+	beq	r25 r0 beq_else.30351
 	addi	r0 r1 119
 	sll	r1 r1 2
 	lwo	r3 r1 r1
@@ -23013,8 +22847,8 @@ bfle_nontail_cont.30460:
 	jal	trace_diffuse_ray.3086
 	addi	r30 r30 -40
 	lw	r30 r31 36
-	j	beq_cont.30462
-beq_else.30461:
+	j	beq_cont.30352
+beq_else.30351:
 	sll	r1 r1 2
 	lwo	r3 r1 r1
 	lui	r24 17174
@@ -23026,7 +22860,7 @@ beq_else.30461:
 	jal	trace_diffuse_ray.3086
 	addi	r30 r30 -40
 	lw	r30 r31 36
-beq_cont.30462:
+beq_cont.30352:
 	addi	r0 r4 116
 	lw	r30 r1 32
 	lw	r30 r2 8
@@ -23036,13 +22870,13 @@ beq_cont.30462:
 	jal	iter_trace_diffuse_rays.3089
 	addi	r30 r30 -40
 	lw	r30 r31 36
-	j	beq_cont.30458
-beq_else.30457:
-beq_cont.30458:
+	j	beq_cont.30348
+beq_else.30347:
+beq_cont.30348:
 	addi	r0 r1 4
 	lw	r30 r2 16
 	sub	r2 r1 r25
-	beq	r25 r0 beq_else.30463
+	beq	r25 r0 beq_else.30353
 	addi	r30 r30 36
 	sw	r1 r30 0
 	sw	r31 r30 4
@@ -23134,15 +22968,15 @@ beq_cont.30458:
 	mtc1	r24 f1
 	sub.s	f1 f0 f30
 	mfc1	f30 r25
-	blez	r25 bfle_nontail_else.30465
+	blez	r25 bfle_nontail_else.30355
 	addi	r0 r2 1
-	j	bfle_nontail_cont.30466
-bfle_nontail_else.30465:
+	j	bfle_nontail_cont.30356
+bfle_nontail_else.30355:
 	addi	r0 r2 0
-bfle_nontail_cont.30466:
+bfle_nontail_cont.30356:
 	addi	r0 r4 0
 	sub	r2 r4 r25
-	beq	r25 r0 beq_else.30467
+	beq	r25 r0 beq_else.30357
 	addi	r0 r1 119
 	sll	r1 r1 2
 	lwo	r3 r1 r1
@@ -23155,8 +22989,8 @@ bfle_nontail_cont.30466:
 	jal	trace_diffuse_ray.3086
 	addi	r30 r30 -44
 	lw	r30 r31 40
-	j	beq_cont.30468
-beq_else.30467:
+	j	beq_cont.30358
+beq_else.30357:
 	sll	r1 r1 2
 	lwo	r3 r1 r1
 	lui	r24 17174
@@ -23168,7 +23002,7 @@ beq_else.30467:
 	jal	trace_diffuse_ray.3086
 	addi	r30 r30 -44
 	lw	r30 r31 40
-beq_cont.30468:
+beq_cont.30358:
 	addi	r0 r4 116
 	lw	r30 r1 36
 	lw	r30 r2 8
@@ -23178,9 +23012,9 @@ beq_cont.30468:
 	jal	iter_trace_diffuse_rays.3089
 	addi	r30 r30 -44
 	lw	r30 r31 40
-	j	beq_cont.30464
-beq_else.30463:
-beq_cont.30464:
+	j	beq_cont.30354
+beq_else.30353:
+beq_cont.30354:
 	addi	r30 r30 40
 	sw	r1 r30 0
 	sw	r31 r30 4
@@ -23518,24 +23352,24 @@ calc_diffuse_using_5points.3105:
 do_without_neighbors.3111:
 	addi	r0 r3 4
 	sub	r2 r3 r25
-	blez	r25 ble_tail_else.30471
+	blez	r25 ble_tail_else.30361
 	jr	r31
-ble_tail_else.30471:
+ble_tail_else.30361:
 	lw	r1 r3 8
 	addi	r0 r4 0
 	sll	r2 r5 2
 	lwo	r3 r5 r3
 	sub	r4 r3 r25
-	blez	r25 ble_tail_else.30473
+	blez	r25 ble_tail_else.30363
 	jr	r31
-ble_tail_else.30473:
+ble_tail_else.30363:
 	lw	r1 r3 12
 	sll	r2 r4 2
 	lwo	r3 r4 r3
 	addi	r0 r4 0
 	sw	r1 r30 0
 	sub	r3 r4 r25
-	beq	r25 r0 beq_else.30475
+	beq	r25 r0 beq_else.30365
 	lw	r1 r3 20
 	lw	r1 r4 28
 	lw	r1 r5 4
@@ -23583,7 +23417,7 @@ ble_tail_else.30473:
 	sw	r5 r30 16
 	sw	r3 r30 20
 	sub	r3 r7 r25
-	beq	r25 r0 beq_else.30477
+	beq	r25 r0 beq_else.30367
 	addi	r30 r30 24
 	sw	r1 r30 0
 	sw	r31 r30 4
@@ -23651,13 +23485,13 @@ ble_tail_else.30473:
 	jal	iter_trace_diffuse_rays.3089
 	addi	r30 r30 -32
 	lw	r30 r31 28
-	j	beq_cont.30478
-beq_else.30477:
-beq_cont.30478:
+	j	beq_cont.30368
+beq_else.30367:
+beq_cont.30368:
 	addi	r0 r1 1
 	lw	r30 r2 20
 	sub	r2 r1 r25
-	beq	r25 r0 beq_else.30479
+	beq	r25 r0 beq_else.30369
 	addi	r30 r30 28
 	sw	r1 r30 0
 	sw	r31 r30 4
@@ -23725,13 +23559,13 @@ beq_cont.30478:
 	jal	iter_trace_diffuse_rays.3089
 	addi	r30 r30 -36
 	lw	r30 r31 32
-	j	beq_cont.30480
-beq_else.30479:
-beq_cont.30480:
+	j	beq_cont.30370
+beq_else.30369:
+beq_cont.30370:
 	addi	r0 r1 2
 	lw	r30 r2 20
 	sub	r2 r1 r25
-	beq	r25 r0 beq_else.30481
+	beq	r25 r0 beq_else.30371
 	addi	r30 r30 32
 	sw	r1 r30 0
 	sw	r31 r30 4
@@ -23799,13 +23633,13 @@ beq_cont.30480:
 	jal	iter_trace_diffuse_rays.3089
 	addi	r30 r30 -40
 	lw	r30 r31 36
-	j	beq_cont.30482
-beq_else.30481:
-beq_cont.30482:
+	j	beq_cont.30372
+beq_else.30371:
+beq_cont.30372:
 	addi	r0 r1 3
 	lw	r30 r2 20
 	sub	r2 r1 r25
-	beq	r25 r0 beq_else.30483
+	beq	r25 r0 beq_else.30373
 	addi	r30 r30 36
 	sw	r1 r30 0
 	sw	r31 r30 4
@@ -23873,13 +23707,13 @@ beq_cont.30482:
 	jal	iter_trace_diffuse_rays.3089
 	addi	r30 r30 -44
 	lw	r30 r31 40
-	j	beq_cont.30484
-beq_else.30483:
-beq_cont.30484:
+	j	beq_cont.30374
+beq_else.30373:
+beq_cont.30374:
 	addi	r0 r1 4
 	lw	r30 r2 20
 	sub	r2 r1 r25
-	beq	r25 r0 beq_else.30485
+	beq	r25 r0 beq_else.30375
 	addi	r30 r30 40
 	sw	r1 r30 0
 	sw	r31 r30 4
@@ -23946,9 +23780,9 @@ beq_cont.30484:
 	jal	iter_trace_diffuse_rays.3089
 	addi	r30 r30 -48
 	lw	r30 r31 44
-	j	beq_cont.30486
-beq_else.30485:
-beq_cont.30486:
+	j	beq_cont.30376
+beq_else.30375:
+beq_cont.30376:
 	addi	r30 r30 44
 	sw	r1 r30 0
 	sw	r31 r30 4
@@ -24010,64 +23844,64 @@ beq_cont.30486:
 	add.s	f0 f1 f0
 	sll	r5 r3 2
 	swoc1	f0 r1 r3
-	j	beq_cont.30476
-beq_else.30475:
-beq_cont.30476:
+	j	beq_cont.30366
+beq_else.30365:
+beq_cont.30366:
 	addi	r0 r1 1
 	add	r2 r1 r2
 	addi	r0 r1 4
 	sub	r2 r1 r25
-	blez	r25 ble_tail_else.30487
+	blez	r25 ble_tail_else.30377
 	jr	r31
-ble_tail_else.30487:
+ble_tail_else.30377:
 	lw	r30 r1 0
 	lw	r1 r3 8
 	addi	r0 r4 0
 	sll	r2 r5 2
 	lwo	r3 r5 r3
 	sub	r4 r3 r25
-	blez	r25 ble_tail_else.30489
+	blez	r25 ble_tail_else.30379
 	jr	r31
-ble_tail_else.30489:
+ble_tail_else.30379:
 	lw	r1 r3 12
 	sll	r2 r4 2
 	lwo	r3 r4 r3
 	addi	r0 r4 0
 	sw	r2 r30 44
 	sub	r3 r4 r25
-	beq	r25 r0 beq_else.30491
+	beq	r25 r0 beq_else.30381
 	sw	r31 r30 48
 	addi	r30 r30 52
 	jal	calc_diffuse_using_1point.3102
 	addi	r30 r30 -52
 	lw	r30 r31 48
-	j	beq_cont.30492
-beq_else.30491:
-beq_cont.30492:
+	j	beq_cont.30382
+beq_else.30381:
+beq_cont.30382:
 	addi	r0 r1 1
 	lw	r30 r2 44
 	add	r2 r1 r1
 	addi	r0 r2 4
 	sub	r1 r2 r25
-	blez	r25 ble_tail_else.30493
+	blez	r25 ble_tail_else.30383
 	jr	r31
-ble_tail_else.30493:
+ble_tail_else.30383:
 	lw	r30 r2 0
 	lw	r2 r3 8
 	addi	r0 r4 0
 	sll	r1 r5 2
 	lwo	r3 r5 r3
 	sub	r4 r3 r25
-	blez	r25 ble_tail_else.30495
+	blez	r25 ble_tail_else.30385
 	jr	r31
-ble_tail_else.30495:
+ble_tail_else.30385:
 	lw	r2 r3 12
 	sll	r1 r4 2
 	lwo	r3 r4 r3
 	addi	r0 r4 0
 	sw	r1 r30 48
 	sub	r3 r4 r25
-	beq	r25 r0 beq_else.30497
+	beq	r25 r0 beq_else.30387
 	lw	r2 r3 20
 	lw	r2 r4 28
 	lw	r2 r5 4
@@ -24178,41 +24012,41 @@ ble_tail_else.30495:
 	add.s	f0 f1 f0
 	sll	r5 r3 2
 	swoc1	f0 r1 r3
-	j	beq_cont.30498
-beq_else.30497:
-beq_cont.30498:
+	j	beq_cont.30388
+beq_else.30387:
+beq_cont.30388:
 	addi	r0 r1 1
 	lw	r30 r2 48
 	add	r2 r1 r2
 	addi	r0 r1 4
 	sub	r2 r1 r25
-	blez	r25 ble_tail_else.30499
+	blez	r25 ble_tail_else.30389
 	jr	r31
-ble_tail_else.30499:
+ble_tail_else.30389:
 	lw	r30 r1 0
 	lw	r1 r3 8
 	addi	r0 r4 0
 	sll	r2 r5 2
 	lwo	r3 r5 r3
 	sub	r4 r3 r25
-	blez	r25 ble_tail_else.30501
+	blez	r25 ble_tail_else.30391
 	jr	r31
-ble_tail_else.30501:
+ble_tail_else.30391:
 	lw	r1 r3 12
 	sll	r2 r4 2
 	lwo	r3 r4 r3
 	addi	r0 r4 0
 	sw	r2 r30 56
 	sub	r3 r4 r25
-	beq	r25 r0 beq_else.30503
+	beq	r25 r0 beq_else.30393
 	sw	r31 r30 60
 	addi	r30 r30 64
 	jal	calc_diffuse_using_1point.3102
 	addi	r30 r30 -64
 	lw	r30 r31 60
-	j	beq_cont.30504
-beq_else.30503:
-beq_cont.30504:
+	j	beq_cont.30394
+beq_else.30393:
+beq_cont.30394:
 	addi	r0 r1 1
 	lw	r30 r2 56
 	add	r2 r1 r2
@@ -24223,17 +24057,17 @@ try_exploit_neighbors.3127:
 	lwo	r4 r7 r7
 	addi	r0 r8 4
 	sub	r6 r8 r25
-	blez	r25 ble_tail_else.30505
+	blez	r25 ble_tail_else.30395
 	jr	r31
-ble_tail_else.30505:
+ble_tail_else.30395:
 	addi	r0 r8 0
 	lw	r7 r9 8
 	sll	r6 r10 2
 	lwo	r9 r10 r9
 	sub	r8 r9 r25
-	blez	r25 ble_tail_else.30507
+	blez	r25 ble_tail_else.30397
 	jr	r31
-ble_tail_else.30507:
+ble_tail_else.30397:
 	sll	r1 r8 2
 	lwo	r4 r8 r8
 	lw	r8 r8 8
@@ -24245,20 +24079,20 @@ ble_tail_else.30507:
 	sll	r6 r10 2
 	lwo	r9 r10 r9
 	sub	r9 r8 r25
-	beq	r25 r0 beq_else.30509
+	beq	r25 r0 beq_else.30399
 	addi	r0 r8 0
-	j	beq_cont.30510
-beq_else.30509:
+	j	beq_cont.30400
+beq_else.30399:
 	sll	r1 r9 2
 	lwo	r5 r9 r9
 	lw	r9 r9 8
 	sll	r6 r10 2
 	lwo	r9 r10 r9
 	sub	r9 r8 r25
-	beq	r25 r0 beq_else.30511
+	beq	r25 r0 beq_else.30401
 	addi	r0 r8 0
-	j	beq_cont.30512
-beq_else.30511:
+	j	beq_cont.30402
+beq_else.30401:
 	addi	r0 r9 1
 	sub	r1 r9 r9
 	sll	r9 r9 2
@@ -24267,10 +24101,10 @@ beq_else.30511:
 	sll	r6 r10 2
 	lwo	r9 r10 r9
 	sub	r9 r8 r25
-	beq	r25 r0 beq_else.30513
+	beq	r25 r0 beq_else.30403
 	addi	r0 r8 0
-	j	beq_cont.30514
-beq_else.30513:
+	j	beq_cont.30404
+beq_else.30403:
 	addi	r0 r9 1
 	add	r1 r9 r9
 	sll	r9 r9 2
@@ -24279,24 +24113,24 @@ beq_else.30513:
 	sll	r6 r10 2
 	lwo	r9 r10 r9
 	sub	r9 r8 r25
-	beq	r25 r0 beq_else.30515
+	beq	r25 r0 beq_else.30405
 	addi	r0 r8 0
-	j	beq_cont.30516
-beq_else.30515:
+	j	beq_cont.30406
+beq_else.30405:
 	addi	r0 r8 1
-beq_cont.30516:
-beq_cont.30514:
-beq_cont.30512:
-beq_cont.30510:
+beq_cont.30406:
+beq_cont.30404:
+beq_cont.30402:
+beq_cont.30400:
 	addi	r0 r9 0
 	sub	r8 r9 r25
-	beq	r25 r0 beq_tail_else.30517
+	beq	r25 r0 beq_tail_else.30407
 	lw	r7 r7 12
 	sll	r6 r8 2
 	lwo	r7 r8 r7
 	addi	r0 r8 0
 	sub	r7 r8 r25
-	beq	r25 r0 beq_else.30518
+	beq	r25 r0 beq_else.30408
 	sll	r1 r7 2
 	lwo	r3 r7 r7
 	lw	r7 r7 20
@@ -24567,26 +24401,26 @@ beq_cont.30510:
 	add.s	f0 f1 f0
 	sll	r10 r7 2
 	swoc1	f0 r8 r7
-	j	beq_cont.30519
-beq_else.30518:
-beq_cont.30519:
+	j	beq_cont.30409
+beq_else.30408:
+beq_cont.30409:
 	addi	r0 r7 1
 	add	r6 r7 r6
 	sll	r1 r7 2
 	lwo	r4 r7 r7
 	addi	r0 r8 4
 	sub	r6 r8 r25
-	blez	r25 ble_tail_else.30520
+	blez	r25 ble_tail_else.30410
 	jr	r31
-ble_tail_else.30520:
+ble_tail_else.30410:
 	addi	r0 r8 0
 	lw	r7 r9 8
 	sll	r6 r10 2
 	lwo	r9 r10 r9
 	sub	r8 r9 r25
-	blez	r25 ble_tail_else.30522
+	blez	r25 ble_tail_else.30412
 	jr	r31
-ble_tail_else.30522:
+ble_tail_else.30412:
 	sll	r1 r8 2
 	lwo	r4 r8 r8
 	lw	r8 r8 8
@@ -24598,20 +24432,20 @@ ble_tail_else.30522:
 	sll	r6 r10 2
 	lwo	r9 r10 r9
 	sub	r9 r8 r25
-	beq	r25 r0 beq_else.30524
+	beq	r25 r0 beq_else.30414
 	addi	r0 r8 0
-	j	beq_cont.30525
-beq_else.30524:
+	j	beq_cont.30415
+beq_else.30414:
 	sll	r1 r9 2
 	lwo	r5 r9 r9
 	lw	r9 r9 8
 	sll	r6 r10 2
 	lwo	r9 r10 r9
 	sub	r9 r8 r25
-	beq	r25 r0 beq_else.30526
+	beq	r25 r0 beq_else.30416
 	addi	r0 r8 0
-	j	beq_cont.30527
-beq_else.30526:
+	j	beq_cont.30417
+beq_else.30416:
 	addi	r0 r9 1
 	sub	r1 r9 r9
 	sll	r9 r9 2
@@ -24620,10 +24454,10 @@ beq_else.30526:
 	sll	r6 r10 2
 	lwo	r9 r10 r9
 	sub	r9 r8 r25
-	beq	r25 r0 beq_else.30528
+	beq	r25 r0 beq_else.30418
 	addi	r0 r8 0
-	j	beq_cont.30529
-beq_else.30528:
+	j	beq_cont.30419
+beq_else.30418:
 	addi	r0 r9 1
 	add	r1 r9 r9
 	sll	r9 r9 2
@@ -24632,18 +24466,18 @@ beq_else.30528:
 	sll	r6 r10 2
 	lwo	r9 r10 r9
 	sub	r9 r8 r25
-	beq	r25 r0 beq_else.30530
+	beq	r25 r0 beq_else.30420
 	addi	r0 r8 0
-	j	beq_cont.30531
-beq_else.30530:
+	j	beq_cont.30421
+beq_else.30420:
 	addi	r0 r8 1
-beq_cont.30531:
-beq_cont.30529:
-beq_cont.30527:
-beq_cont.30525:
+beq_cont.30421:
+beq_cont.30419:
+beq_cont.30417:
+beq_cont.30415:
 	addi	r0 r9 0
 	sub	r8 r9 r25
-	beq	r25 r0 beq_tail_else.30532
+	beq	r25 r0 beq_tail_else.30422
 	lw	r7 r7 12
 	sll	r6 r8 2
 	lwo	r7 r8 r7
@@ -24655,7 +24489,7 @@ beq_cont.30525:
 	sw	r1 r30 16
 	sw	r6 r30 20
 	sub	r7 r8 r25
-	beq	r25 r0 beq_else.30533
+	beq	r25 r0 beq_else.30423
 	sw	r31 r30 24
 	addi	r30 r30 28
 	mov	r2 r3
@@ -24665,9 +24499,9 @@ beq_cont.30525:
 	jal	calc_diffuse_using_5points.3105
 	addi	r30 r30 -28
 	lw	r30 r31 24
-	j	beq_cont.30534
-beq_else.30533:
-beq_cont.30534:
+	j	beq_cont.30424
+beq_else.30423:
+beq_cont.30424:
 	addi	r0 r1 1
 	lw	r30 r2 20
 	add	r2 r1 r6
@@ -24677,22 +24511,22 @@ beq_cont.30534:
 	lw	r30 r4 4
 	lw	r30 r5 0
 	j	try_exploit_neighbors.3127
-beq_tail_else.30532:
+beq_tail_else.30422:
 	sll	r1 r1 2
 	lwo	r4 r1 r1
 	addi	r0 r2 4
 	sub	r6 r2 r25
-	blez	r25 ble_tail_else.30535
+	blez	r25 ble_tail_else.30425
 	jr	r31
-ble_tail_else.30535:
+ble_tail_else.30425:
 	lw	r1 r2 8
 	addi	r0 r3 0
 	sll	r6 r4 2
 	lwo	r2 r4 r2
 	sub	r3 r2 r25
-	blez	r25 ble_tail_else.30537
+	blez	r25 ble_tail_else.30427
 	jr	r31
-ble_tail_else.30537:
+ble_tail_else.30427:
 	lw	r1 r2 12
 	sll	r6 r3 2
 	lwo	r2 r3 r2
@@ -24700,7 +24534,7 @@ ble_tail_else.30537:
 	sw	r1 r30 24
 	sw	r6 r30 20
 	sub	r2 r3 r25
-	beq	r25 r0 beq_else.30539
+	beq	r25 r0 beq_else.30429
 	lw	r1 r2 20
 	lw	r1 r3 28
 	lw	r1 r4 4
@@ -24811,62 +24645,62 @@ ble_tail_else.30537:
 	add.s	f0 f1 f0
 	sll	r5 r3 2
 	swoc1	f0 r1 r3
-	j	beq_cont.30540
-beq_else.30539:
-beq_cont.30540:
+	j	beq_cont.30430
+beq_else.30429:
+beq_cont.30430:
 	addi	r0 r1 1
 	lw	r30 r2 20
 	add	r2 r1 r2
 	addi	r0 r1 4
 	sub	r2 r1 r25
-	blez	r25 ble_tail_else.30541
+	blez	r25 ble_tail_else.30431
 	jr	r31
-ble_tail_else.30541:
+ble_tail_else.30431:
 	lw	r30 r1 24
 	lw	r1 r3 8
 	addi	r0 r4 0
 	sll	r2 r5 2
 	lwo	r3 r5 r3
 	sub	r4 r3 r25
-	blez	r25 ble_tail_else.30543
+	blez	r25 ble_tail_else.30433
 	jr	r31
-ble_tail_else.30543:
+ble_tail_else.30433:
 	lw	r1 r3 12
 	sll	r2 r4 2
 	lwo	r3 r4 r3
 	addi	r0 r4 0
 	sw	r2 r30 32
 	sub	r3 r4 r25
-	beq	r25 r0 beq_else.30545
+	beq	r25 r0 beq_else.30435
 	sw	r31 r30 36
 	addi	r30 r30 40
 	jal	calc_diffuse_using_1point.3102
 	addi	r30 r30 -40
 	lw	r30 r31 36
-	j	beq_cont.30546
-beq_else.30545:
-beq_cont.30546:
+	j	beq_cont.30436
+beq_else.30435:
+beq_cont.30436:
 	addi	r0 r1 1
 	lw	r30 r2 32
 	add	r2 r1 r2
 	lw	r30 r1 24
 	j	do_without_neighbors.3111
-beq_tail_else.30517:
+beq_tail_else.30407:
 	sll	r1 r1 2
 	lwo	r4 r1 r1
 	addi	r0 r2 4
 	sub	r6 r2 r25
-	blez	r25 ble_tail_else.30547
+	blez	r25 ble_tail_else.30437
 	jr	r31
-ble_tail_else.30547:
+ble_tail_else.30437:
 	lw	r1 r2 8
 	addi	r0 r3 0
 	sll	r6 r4 2
 	lwo	r2 r4 r2
 	sub	r3 r2 r25
-	blez	r25 ble_tail_else.30549
+	blez	r25 ble_tail_else.30439
 	jr	r31
-ble_tail_else.30549:
+ble_tail_else.30439:
 	lw	r1 r2 12
 	sll	r6 r3 2
 	lwo	r2 r3 r2
@@ -24874,40 +24708,40 @@ ble_tail_else.30549:
 	sw	r1 r30 36
 	sw	r6 r30 40
 	sub	r2 r3 r25
-	beq	r25 r0 beq_else.30551
+	beq	r25 r0 beq_else.30441
 	sw	r31 r30 44
 	addi	r30 r30 48
 	mov	r2 r6
 	jal	calc_diffuse_using_1point.3102
 	addi	r30 r30 -48
 	lw	r30 r31 44
-	j	beq_cont.30552
-beq_else.30551:
-beq_cont.30552:
+	j	beq_cont.30442
+beq_else.30441:
+beq_cont.30442:
 	addi	r0 r1 1
 	lw	r30 r2 40
 	add	r2 r1 r1
 	addi	r0 r2 4
 	sub	r1 r2 r25
-	blez	r25 ble_tail_else.30553
+	blez	r25 ble_tail_else.30443
 	jr	r31
-ble_tail_else.30553:
+ble_tail_else.30443:
 	lw	r30 r2 36
 	lw	r2 r3 8
 	addi	r0 r4 0
 	sll	r1 r5 2
 	lwo	r3 r5 r3
 	sub	r4 r3 r25
-	blez	r25 ble_tail_else.30555
+	blez	r25 ble_tail_else.30445
 	jr	r31
-ble_tail_else.30555:
+ble_tail_else.30445:
 	lw	r2 r3 12
 	sll	r1 r4 2
 	lwo	r3 r4 r3
 	addi	r0 r4 0
 	sw	r1 r30 44
 	sub	r3 r4 r25
-	beq	r25 r0 beq_else.30557
+	beq	r25 r0 beq_else.30447
 	lw	r2 r3 20
 	lw	r2 r4 28
 	lw	r2 r5 4
@@ -25018,41 +24852,41 @@ ble_tail_else.30555:
 	add.s	f0 f1 f0
 	sll	r5 r3 2
 	swoc1	f0 r1 r3
-	j	beq_cont.30558
-beq_else.30557:
-beq_cont.30558:
+	j	beq_cont.30448
+beq_else.30447:
+beq_cont.30448:
 	addi	r0 r1 1
 	lw	r30 r2 44
 	add	r2 r1 r2
 	addi	r0 r1 4
 	sub	r2 r1 r25
-	blez	r25 ble_tail_else.30559
+	blez	r25 ble_tail_else.30449
 	jr	r31
-ble_tail_else.30559:
+ble_tail_else.30449:
 	lw	r30 r1 36
 	lw	r1 r3 8
 	addi	r0 r4 0
 	sll	r2 r5 2
 	lwo	r3 r5 r3
 	sub	r4 r3 r25
-	blez	r25 ble_tail_else.30561
+	blez	r25 ble_tail_else.30451
 	jr	r31
-ble_tail_else.30561:
+ble_tail_else.30451:
 	lw	r1 r3 12
 	sll	r2 r4 2
 	lwo	r3 r4 r3
 	addi	r0 r4 0
 	sw	r2 r30 52
 	sub	r3 r4 r25
-	beq	r25 r0 beq_else.30563
+	beq	r25 r0 beq_else.30453
 	sw	r31 r30 56
 	addi	r30 r30 60
 	jal	calc_diffuse_using_1point.3102
 	addi	r30 r30 -60
 	lw	r30 r31 56
-	j	beq_cont.30564
-beq_else.30563:
-beq_cont.30564:
+	j	beq_cont.30454
+beq_else.30453:
+beq_cont.30454:
 	addi	r0 r1 1
 	lw	r30 r2 52
 	add	r2 r1 r2
@@ -25061,24 +24895,24 @@ beq_cont.30564:
 pretrace_diffuse_rays.3140:
 	addi	r0 r3 4
 	sub	r2 r3 r25
-	blez	r25 ble_tail_else.30565
+	blez	r25 ble_tail_else.30455
 	jr	r31
-ble_tail_else.30565:
+ble_tail_else.30455:
 	lw	r1 r3 8
 	sll	r2 r4 2
 	lwo	r3 r4 r3
 	addi	r0 r4 0
 	sub	r4 r3 r25
-	blez	r25 ble_tail_else.30567
+	blez	r25 ble_tail_else.30457
 	jr	r31
-ble_tail_else.30567:
+ble_tail_else.30457:
 	lw	r1 r3 12
 	sll	r2 r4 2
 	lwo	r3 r4 r3
 	addi	r0 r4 0
 	sw	r2 r30 0
 	sub	r3 r4 r25
-	beq	r25 r0 beq_else.30569
+	beq	r25 r0 beq_else.30459
 	lw	r1 r3 24
 	addi	r0 r4 0
 	sll	r4 r4 2
@@ -25209,32 +25043,32 @@ ble_tail_else.30567:
 	lwoc1	r4 r6 f0
 	sll	r5 r4 2
 	swoc1	f0 r2 r4
-	j	beq_cont.30570
-beq_else.30569:
-beq_cont.30570:
+	j	beq_cont.30460
+beq_else.30459:
+beq_cont.30460:
 	addi	r0 r2 1
 	lw	r30 r3 0
 	add	r3 r2 r2
 	addi	r0 r3 4
 	sub	r2 r3 r25
-	blez	r25 ble_tail_else.30571
+	blez	r25 ble_tail_else.30461
 	jr	r31
-ble_tail_else.30571:
+ble_tail_else.30461:
 	lw	r1 r3 8
 	sll	r2 r4 2
 	lwo	r3 r4 r3
 	addi	r0 r4 0
 	sub	r4 r3 r25
-	blez	r25 ble_tail_else.30573
+	blez	r25 ble_tail_else.30463
 	jr	r31
-ble_tail_else.30573:
+ble_tail_else.30463:
 	lw	r1 r3 12
 	sll	r2 r4 2
 	lwo	r3 r4 r3
 	addi	r0 r4 0
 	sw	r2 r30 20
 	sub	r3 r4 r25
-	beq	r25 r0 beq_else.30575
+	beq	r25 r0 beq_else.30465
 	lw	r1 r3 24
 	addi	r0 r4 0
 	sll	r4 r4 2
@@ -25359,15 +25193,15 @@ ble_tail_else.30573:
 	mtc1	r24 f1
 	sub.s	f1 f0 f30
 	mfc1	f30 r25
-	blez	r25 bfle_nontail_else.30577
+	blez	r25 bfle_nontail_else.30467
 	addi	r0 r2 1
-	j	bfle_nontail_cont.30578
-bfle_nontail_else.30577:
+	j	bfle_nontail_cont.30468
+bfle_nontail_else.30467:
 	addi	r0 r2 0
-bfle_nontail_cont.30578:
+bfle_nontail_cont.30468:
 	addi	r0 r4 0
 	sub	r2 r4 r25
-	beq	r25 r0 beq_else.30579
+	beq	r25 r0 beq_else.30469
 	addi	r0 r1 119
 	sll	r1 r1 2
 	lwo	r3 r1 r1
@@ -25380,8 +25214,8 @@ bfle_nontail_cont.30578:
 	jal	trace_diffuse_ray.3086
 	addi	r30 r30 -40
 	lw	r30 r31 36
-	j	beq_cont.30580
-beq_else.30579:
+	j	beq_cont.30470
+beq_else.30469:
 	sll	r1 r1 2
 	lwo	r3 r1 r1
 	lui	r24 17174
@@ -25393,7 +25227,7 @@ beq_else.30579:
 	jal	trace_diffuse_ray.3086
 	addi	r30 r30 -40
 	lw	r30 r31 36
-beq_cont.30580:
+beq_cont.30470:
 	addi	r0 r4 116
 	lw	r30 r1 32
 	lw	r30 r2 28
@@ -25434,9 +25268,9 @@ beq_cont.30580:
 	lwoc1	r4 r6 f0
 	sll	r5 r4 2
 	swoc1	f0 r2 r4
-	j	beq_cont.30576
-beq_else.30575:
-beq_cont.30576:
+	j	beq_cont.30466
+beq_else.30465:
+beq_cont.30466:
 	addi	r0 r2 1
 	lw	r30 r3 20
 	add	r3 r2 r2
@@ -25444,9 +25278,9 @@ beq_cont.30576:
 pretrace_pixels.3143:
 	addi	r0 r4 0
 	sub	r4 r2 r25
-	blez	r25 ble_tail_else.30581
+	blez	r25 ble_tail_else.30471
 	jr	r31
-ble_tail_else.30581:
+ble_tail_else.30471:
 	addi	r30 r30 0
 	sw	r1 r30 0
 	sw	r31 r30 4
@@ -25587,66 +25421,60 @@ ble_tail_else.30581:
 	lwoc1	r1 r2 f5
 	mul.s	f4 f5 f4
 	add.s	f0 f4 f0
-	sw	r1 r30 28
-	sw	r31 r30 32
-	addi	r30 r30 36
-	jal	min_caml_sqrt
-	addi	r30 r30 -36
-	lw	r30 r31 32
+	sqrt.s	f0 f0
 	lui	r24 0
 	ori	r24 r24 0
-	mtc1	r24 f1
-	sub.s	f0 f1 f30
+	mtc1	r24 f4
+	sub.s	f0 f4 f30
 	mfc1	f30 r25
 	sll	r25 r25 1
-	beq	r25 r0 bfeq_nontail_else.30583
-	addi	r0 r1 0
-	j	bfeq_nontail_cont.30584
-bfeq_nontail_else.30583:
-	addi	r0 r1 1
-bfeq_nontail_cont.30584:
+	beq	r25 r0 bfeq_nontail_else.30473
 	addi	r0 r2 0
-	sub	r1 r2 r25
-	beq	r25 r0 beq_else.30585
+	j	bfeq_nontail_cont.30474
+bfeq_nontail_else.30473:
+	addi	r0 r2 1
+bfeq_nontail_cont.30474:
+	addi	r0 r3 0
+	sub	r2 r3 r25
+	beq	r25 r0 beq_else.30475
 	lui	r24 16256
 	ori	r24 r24 0
 	mtc1	r24 f0
-	j	beq_cont.30586
-beq_else.30585:
+	j	beq_cont.30476
+beq_else.30475:
 	lui	r24 16256
 	ori	r24 r24 0
-	mtc1	r24 f1
-	div.s	f1 f0 f0
-beq_cont.30586:
-	addi	r0 r1 0
+	mtc1	r24 f4
+	div.s	f4 f0 f0
+beq_cont.30476:
 	addi	r0 r2 0
+	addi	r0 r3 0
+	sll	r3 r3 2
+	lwoc1	r1 r3 f4
+	mul.s	f4 f0 f4
 	sll	r2 r2 2
-	lw	r30 r3 28
-	lwoc1	r3 r2 f1
-	mul.s	f1 f0 f1
-	sll	r1 r1 2
-	swoc1	f1 r3 r1
-	addi	r0 r1 1
+	swoc1	f4 r1 r2
 	addi	r0 r2 1
+	addi	r0 r3 1
+	sll	r3 r3 2
+	lwoc1	r1 r3 f4
+	mul.s	f4 f0 f4
 	sll	r2 r2 2
-	lwoc1	r3 r2 f1
-	mul.s	f1 f0 f1
-	sll	r1 r1 2
-	swoc1	f1 r3 r1
-	addi	r0 r1 2
+	swoc1	f4 r1 r2
 	addi	r0 r2 2
+	addi	r0 r3 2
+	sll	r3 r3 2
+	lwoc1	r1 r3 f4
+	mul.s	f4 f0 f0
 	sll	r2 r2 2
-	lwoc1	r3 r2 f1
-	mul.s	f1 f0 f0
-	sll	r1 r1 2
-	swoc1	f0 r3 r1
-	addi	r30 r30 32
+	swoc1	f0 r1 r2
+	addi	r30 r30 28
 	sw	r1 r30 0
 	sw	r31 r30 4
 	jal	min_caml_load_rgb
 	mov	r1 r1
 	lw	r30 r31 4
-	addi	r30 r30 -32
+	addi	r30 r30 -28
 	lui	r24 0
 	ori	r24 r24 0
 	mtc1	r24 f0
@@ -25659,21 +25487,21 @@ beq_cont.30586:
 	addi	r0 r2 2
 	sll	r2 r2 2
 	swoc1	f0 r1 r2
-	addi	r30 r30 32
+	addi	r30 r30 28
 	sw	r1 r30 0
 	sw	r31 r30 4
 	jal	min_caml_load_startp
 	mov	r1 r1
 	lw	r30 r31 4
-	addi	r30 r30 -32
-	addi	r30 r30 32
+	addi	r30 r30 -28
+	addi	r30 r30 28
 	sw	r1 r30 0
 	sw	r31 r30 4
 	jal	min_caml_load_viewpoint
 	mov	r2 r1
 	lw	r30 r1 0
 	lw	r30 r31 4
-	addi	r30 r30 -32
+	addi	r30 r30 -28
 	addi	r0 r3 0
 	addi	r0 r4 0
 	sll	r4 r4 2
@@ -25696,40 +25524,41 @@ beq_cont.30586:
 	lui	r24 16256
 	ori	r24 r24 0
 	mtc1	r24 f0
-	addi	r30 r30 32
+	addi	r30 r30 28
 	sw	r1 r30 0
 	sw	r31 r30 4
 	jal	min_caml_load_ptrace_dirvec
 	mov	r2 r1
 	lw	r30 r1 0
 	lw	r30 r31 4
-	addi	r30 r30 -32
+	addi	r30 r30 -28
 	lw	r30 r3 8
 	sll	r3 r4 2
 	lw	r30 r5 4
 	lwo	r5 r4 r4
 	lui	r24 0
 	ori	r24 r24 0
-	mtc1	r24 f1
-	sw	r31 r30 32
-	addi	r30 r30 36
+	mtc1	r24 f4
+	sw	r31 r30 28
+	addi	r30 r30 32
 	mov	r3 r4
+	mov.s	f4 f1
 	jal	trace_ray.3080
-	addi	r30 r30 -36
-	lw	r30 r31 32
+	addi	r30 r30 -32
+	lw	r30 r31 28
 	lw	r30 r1 8
 	sll	r1 r2 2
 	lw	r30 r3 4
 	lwo	r3 r2 r2
 	lw	r2 r2 0
-	addi	r30 r30 32
+	addi	r30 r30 28
 	sw	r1 r30 0
 	sw	r31 r30 4
 	jal	min_caml_load_rgb
 	mov	r4 r1
 	lw	r30 r1 0
 	lw	r30 r31 4
-	addi	r30 r30 -32
+	addi	r30 r30 -28
 	addi	r0 r5 0
 	addi	r0 r6 0
 	sll	r6 r6 2
@@ -25763,28 +25592,28 @@ beq_cont.30586:
 	lwo	r6 r7 r6
 	addi	r0 r7 0
 	sub	r7 r6 r25
-	blez	r25 ble_nontail_else.30587
-	j	ble_nontail_cont.30588
-ble_nontail_else.30587:
+	blez	r25 ble_nontail_else.30477
+	j	ble_nontail_cont.30478
+ble_nontail_else.30477:
 	lw	r2 r6 12
 	sll	r4 r7 2
 	lwo	r6 r7 r6
 	addi	r0 r7 0
-	sw	r2 r30 32
+	sw	r2 r30 28
 	sub	r6 r7 r25
-	beq	r25 r0 beq_else.30589
+	beq	r25 r0 beq_else.30479
 	lw	r2 r6 24
 	addi	r0 r7 0
 	sll	r7 r7 2
 	lwo	r6 r7 r6
-	addi	r30 r30 36
+	addi	r30 r30 32
 	sw	r1 r30 0
 	sw	r31 r30 4
 	jal	min_caml_load_diffuse_ray
 	mov	r7 r1
 	lw	r30 r1 0
 	lw	r30 r31 4
-	addi	r30 r30 -36
+	addi	r30 r30 -32
 	lui	r24 0
 	ori	r24 r24 0
 	mtc1	r24 f0
@@ -25799,28 +25628,28 @@ ble_nontail_else.30587:
 	swoc1	f0 r7 r8
 	lw	r2 r7 28
 	lw	r2 r8 4
-	addi	r30 r30 36
+	addi	r30 r30 32
 	sw	r1 r30 0
 	sw	r31 r30 4
 	jal	min_caml_load_dirvecs
 	mov	r9 r1
 	lw	r30 r1 0
 	lw	r30 r31 4
-	addi	r30 r30 -36
+	addi	r30 r30 -32
 	sll	r6 r6 2
 	lwo	r9 r6 r6
 	sll	r4 r9 2
 	lwo	r7 r9 r7
 	sll	r4 r9 2
 	lwo	r8 r9 r8
-	addi	r30 r30 36
+	addi	r30 r30 32
 	sw	r1 r30 0
 	sw	r31 r30 4
 	jal	min_caml_load_startp_fast
 	mov	r9 r1
 	lw	r30 r1 0
 	lw	r30 r31 4
-	addi	r30 r30 -36
+	addi	r30 r30 -32
 	addi	r0 r10 0
 	addi	r0 r11 0
 	sll	r11 r11 2
@@ -25839,33 +25668,33 @@ ble_nontail_else.30587:
 	lwoc1	r8 r11 f0
 	sll	r10 r10 2
 	swoc1	f0 r9 r10
-	addi	r30 r30 36
+	addi	r30 r30 32
 	sw	r1 r30 0
 	sw	r31 r30 4
 	jal	min_caml_load_n_objects
 	mov	r9 r1
 	lw	r30 r1 0
 	lw	r30 r31 4
-	addi	r30 r30 -36
+	addi	r30 r30 -32
 	addi	r0 r10 0
 	sll	r10 r10 2
 	lwo	r9 r10 r9
 	addi	r0 r10 1
 	sub	r9 r10 r9
-	sw	r4 r30 36
-	sw	r8 r30 40
-	sw	r7 r30 44
-	sw	r6 r30 48
-	sw	r31 r30 52
-	addi	r30 r30 56
+	sw	r4 r30 32
+	sw	r8 r30 36
+	sw	r7 r30 40
+	sw	r6 r30 44
+	sw	r31 r30 48
+	addi	r30 r30 52
 	mov	r2 r9
 	mov	r1 r8
 	jal	setup_startp_constants.2991
-	addi	r30 r30 -56
-	lw	r30 r31 52
+	addi	r30 r30 -52
+	lw	r30 r31 48
 	addi	r0 r1 118
 	sll	r1 r2 2
-	lw	r30 r3 48
+	lw	r30 r3 44
 	lwo	r3 r2 r2
 	lw	r2 r2 0
 	addi	r0 r4 0
@@ -25873,7 +25702,7 @@ ble_nontail_else.30587:
 	lwoc1	r2 r4 f0
 	addi	r0 r4 0
 	sll	r4 r4 2
-	lw	r30 r5 44
+	lw	r30 r5 40
 	lwoc1	r5 r4 f1
 	mul.s	f0 f1 f0
 	addi	r0 r4 1
@@ -25897,15 +25726,15 @@ ble_nontail_else.30587:
 	mtc1	r24 f1
 	sub.s	f1 f0 f30
 	mfc1	f30 r25
-	blez	r25 bfle_nontail_else.30591
+	blez	r25 bfle_nontail_else.30481
 	addi	r0 r2 1
-	j	bfle_nontail_cont.30592
-bfle_nontail_else.30591:
+	j	bfle_nontail_cont.30482
+bfle_nontail_else.30481:
 	addi	r0 r2 0
-bfle_nontail_cont.30592:
+bfle_nontail_cont.30482:
 	addi	r0 r4 0
 	sub	r2 r4 r25
-	beq	r25 r0 beq_else.30593
+	beq	r25 r0 beq_else.30483
 	addi	r0 r1 119
 	sll	r1 r1 2
 	lwo	r3 r1 r1
@@ -25913,47 +25742,47 @@ bfle_nontail_cont.30592:
 	ori	r24 r24 0
 	mtc1	r24 f1
 	div.s	f0 f1 f0
-	sw	r31 r30 52
-	addi	r30 r30 56
+	sw	r31 r30 48
+	addi	r30 r30 52
 	jal	trace_diffuse_ray.3086
-	addi	r30 r30 -56
-	lw	r30 r31 52
-	j	beq_cont.30594
-beq_else.30593:
+	addi	r30 r30 -52
+	lw	r30 r31 48
+	j	beq_cont.30484
+beq_else.30483:
 	sll	r1 r1 2
 	lwo	r3 r1 r1
 	lui	r24 17174
 	ori	r24 r24 0
 	mtc1	r24 f1
 	div.s	f0 f1 f0
-	sw	r31 r30 52
-	addi	r30 r30 56
+	sw	r31 r30 48
+	addi	r30 r30 52
 	jal	trace_diffuse_ray.3086
-	addi	r30 r30 -56
-	lw	r30 r31 52
-beq_cont.30594:
+	addi	r30 r30 -52
+	lw	r30 r31 48
+beq_cont.30484:
 	addi	r0 r4 116
-	lw	r30 r1 48
-	lw	r30 r2 44
-	lw	r30 r3 40
-	sw	r31 r30 52
-	addi	r30 r30 56
-	jal	iter_trace_diffuse_rays.3089
-	addi	r30 r30 -56
-	lw	r30 r31 52
-	lw	r30 r1 32
-	lw	r1 r2 20
+	lw	r30 r1 44
+	lw	r30 r2 40
 	lw	r30 r3 36
+	sw	r31 r30 48
+	addi	r30 r30 52
+	jal	iter_trace_diffuse_rays.3089
+	addi	r30 r30 -52
+	lw	r30 r31 48
+	lw	r30 r1 28
+	lw	r1 r2 20
+	lw	r30 r3 32
 	sll	r3 r3 2
 	lwo	r2 r3 r2
-	addi	r30 r30 52
+	addi	r30 r30 48
 	sw	r1 r30 0
 	sw	r31 r30 4
 	jal	min_caml_load_diffuse_ray
 	mov	r3 r1
 	lw	r30 r1 0
 	lw	r30 r31 4
-	addi	r30 r30 -52
+	addi	r30 r30 -48
 	addi	r0 r4 0
 	addi	r0 r5 0
 	sll	r5 r5 2
@@ -25972,17 +25801,17 @@ beq_cont.30594:
 	lwoc1	r3 r5 f0
 	sll	r4 r3 2
 	swoc1	f0 r2 r3
-	j	beq_cont.30590
-beq_else.30589:
-beq_cont.30590:
+	j	beq_cont.30480
+beq_else.30479:
+beq_cont.30480:
 	addi	r0 r2 1
-	lw	r30 r1 32
-	sw	r31 r30 52
-	addi	r30 r30 56
+	lw	r30 r1 28
+	sw	r31 r30 48
+	addi	r30 r30 52
 	jal	pretrace_diffuse_rays.3140
-	addi	r30 r30 -56
-	lw	r30 r31 52
-ble_nontail_cont.30588:
+	addi	r30 r30 -52
+	lw	r30 r31 48
+ble_nontail_cont.30478:
 	addi	r0 r1 1
 	lw	r30 r2 8
 	sub	r2 r1 r2
@@ -25991,13 +25820,13 @@ ble_nontail_cont.30588:
 	add	r3 r1 r1
 	addi	r0 r3 5
 	sub	r3 r1 r25
-	blez	r25 ble_nontail_else.30595
+	blez	r25 ble_nontail_else.30485
 	mov	r3 r1
-	j	ble_nontail_cont.30596
-ble_nontail_else.30595:
+	j	ble_nontail_cont.30486
+ble_nontail_else.30485:
 	addi	r0 r3 5
 	sub	r1 r3 r3
-ble_nontail_cont.30596:
+ble_nontail_cont.30486:
 	lwc1	 r30 f0 20
 	lwc1	 r30 f1 16
 	lwc1	 r30 f2 12
@@ -26016,7 +25845,7 @@ scan_pixel.3154:
 	sll	r7 r7 2
 	lwo	r6 r7 r6
 	sub	r6 r1 r25
-	blez	r25 ble_tail_else.30597
+	blez	r25 ble_tail_else.30487
 	addi	r30 r30 0
 	sw	r1 r30 0
 	sw	r31 r30 4
@@ -26060,10 +25889,10 @@ scan_pixel.3154:
 	addi	r0 r7 1
 	add	r2 r7 r7
 	sub	r6 r7 r25
-	blez	r25 ble_nontail_else.30598
+	blez	r25 ble_nontail_else.30488
 	addi	r0 r6 0
 	sub	r2 r6 r25
-	blez	r25 ble_nontail_else.30600
+	blez	r25 ble_nontail_else.30490
 	addi	r30 r30 0
 	sw	r1 r30 0
 	sw	r31 r30 4
@@ -26078,27 +25907,27 @@ scan_pixel.3154:
 	addi	r0 r7 1
 	add	r1 r7 r7
 	sub	r6 r7 r25
-	blez	r25 ble_nontail_else.30602
+	blez	r25 ble_nontail_else.30492
 	addi	r0 r6 0
 	sub	r1 r6 r25
-	blez	r25 ble_nontail_else.30604
+	blez	r25 ble_nontail_else.30494
 	addi	r0 r6 1
-	j	ble_nontail_cont.30605
-ble_nontail_else.30604:
+	j	ble_nontail_cont.30495
+ble_nontail_else.30494:
 	addi	r0 r6 0
-ble_nontail_cont.30605:
-	j	ble_nontail_cont.30603
-ble_nontail_else.30602:
+ble_nontail_cont.30495:
+	j	ble_nontail_cont.30493
+ble_nontail_else.30492:
 	addi	r0 r6 0
-ble_nontail_cont.30603:
-	j	ble_nontail_cont.30601
-ble_nontail_else.30600:
+ble_nontail_cont.30493:
+	j	ble_nontail_cont.30491
+ble_nontail_else.30490:
 	addi	r0 r6 0
-ble_nontail_cont.30601:
-	j	ble_nontail_cont.30599
-ble_nontail_else.30598:
+ble_nontail_cont.30491:
+	j	ble_nontail_cont.30489
+ble_nontail_else.30488:
 	addi	r0 r6 0
-ble_nontail_cont.30599:
+ble_nontail_cont.30489:
 	addi	r0 r7 0
 	sw	r5 r30 0
 	sw	r3 r30 4
@@ -26106,7 +25935,7 @@ ble_nontail_cont.30599:
 	sw	r4 r30 12
 	sw	r1 r30 16
 	sub	r6 r7 r25
-	beq	r25 r0 beq_else.30606
+	beq	r25 r0 beq_else.30496
 	addi	r0 r6 0
 	sll	r1 r7 2
 	lwo	r4 r7 r7
@@ -26115,9 +25944,9 @@ ble_nontail_cont.30599:
 	sll	r6 r10 2
 	lwo	r9 r10 r9
 	sub	r8 r9 r25
-	blez	r25 ble_nontail_else.30608
-	j	ble_nontail_cont.30609
-ble_nontail_else.30608:
+	blez	r25 ble_nontail_else.30498
+	j	ble_nontail_cont.30499
+ble_nontail_else.30498:
 	sll	r1 r8 2
 	lwo	r4 r8 r8
 	lw	r8 r8 8
@@ -26129,20 +25958,20 @@ ble_nontail_else.30608:
 	sll	r6 r10 2
 	lwo	r9 r10 r9
 	sub	r9 r8 r25
-	beq	r25 r0 beq_else.30610
+	beq	r25 r0 beq_else.30500
 	addi	r0 r8 0
-	j	beq_cont.30611
-beq_else.30610:
+	j	beq_cont.30501
+beq_else.30500:
 	sll	r1 r9 2
 	lwo	r5 r9 r9
 	lw	r9 r9 8
 	sll	r6 r10 2
 	lwo	r9 r10 r9
 	sub	r9 r8 r25
-	beq	r25 r0 beq_else.30612
+	beq	r25 r0 beq_else.30502
 	addi	r0 r8 0
-	j	beq_cont.30613
-beq_else.30612:
+	j	beq_cont.30503
+beq_else.30502:
 	addi	r0 r9 1
 	sub	r1 r9 r9
 	sll	r9 r9 2
@@ -26151,10 +25980,10 @@ beq_else.30612:
 	sll	r6 r10 2
 	lwo	r9 r10 r9
 	sub	r9 r8 r25
-	beq	r25 r0 beq_else.30614
+	beq	r25 r0 beq_else.30504
 	addi	r0 r8 0
-	j	beq_cont.30615
-beq_else.30614:
+	j	beq_cont.30505
+beq_else.30504:
 	addi	r0 r9 1
 	add	r1 r9 r9
 	sll	r9 r9 2
@@ -26163,24 +25992,24 @@ beq_else.30614:
 	sll	r6 r10 2
 	lwo	r9 r10 r9
 	sub	r9 r8 r25
-	beq	r25 r0 beq_else.30616
+	beq	r25 r0 beq_else.30506
 	addi	r0 r8 0
-	j	beq_cont.30617
-beq_else.30616:
+	j	beq_cont.30507
+beq_else.30506:
 	addi	r0 r8 1
-beq_cont.30617:
-beq_cont.30615:
-beq_cont.30613:
-beq_cont.30611:
+beq_cont.30507:
+beq_cont.30505:
+beq_cont.30503:
+beq_cont.30501:
 	addi	r0 r9 0
 	sub	r8 r9 r25
-	beq	r25 r0 beq_else.30618
+	beq	r25 r0 beq_else.30508
 	lw	r7 r7 12
 	sll	r6 r8 2
 	lwo	r7 r8 r7
 	addi	r0 r8 0
 	sub	r7 r8 r25
-	beq	r25 r0 beq_else.30620
+	beq	r25 r0 beq_else.30510
 	sw	r31 r30 20
 	addi	r30 r30 24
 	mov	r2 r3
@@ -26190,9 +26019,9 @@ beq_cont.30611:
 	jal	calc_diffuse_using_5points.3105
 	addi	r30 r30 -24
 	lw	r30 r31 20
-	j	beq_cont.30621
-beq_else.30620:
-beq_cont.30621:
+	j	beq_cont.30511
+beq_else.30510:
+beq_cont.30511:
 	addi	r0 r6 1
 	lw	r30 r1 16
 	lw	r30 r2 8
@@ -26204,8 +26033,8 @@ beq_cont.30621:
 	jal	try_exploit_neighbors.3127
 	addi	r30 r30 -24
 	lw	r30 r31 20
-	j	beq_cont.30619
-beq_else.30618:
+	j	beq_cont.30509
+beq_else.30508:
 	sll	r1 r7 2
 	lwo	r4 r7 r7
 	lw	r7 r8 8
@@ -26213,16 +26042,16 @@ beq_else.30618:
 	sll	r6 r10 2
 	lwo	r8 r10 r8
 	sub	r9 r8 r25
-	blez	r25 ble_nontail_else.30622
-	j	ble_nontail_cont.30623
-ble_nontail_else.30622:
+	blez	r25 ble_nontail_else.30512
+	j	ble_nontail_cont.30513
+ble_nontail_else.30512:
 	lw	r7 r8 12
 	sll	r6 r9 2
 	lwo	r8 r9 r8
 	addi	r0 r9 0
 	sw	r7 r30 20
 	sub	r8 r9 r25
-	beq	r25 r0 beq_else.30624
+	beq	r25 r0 beq_else.30514
 	lw	r7 r8 20
 	lw	r7 r9 28
 	lw	r7 r10 4
@@ -26334,9 +26163,9 @@ ble_nontail_else.30622:
 	add.s	f0 f1 f0
 	sll	r4 r2 2
 	swoc1	f0 r1 r2
-	j	beq_cont.30625
-beq_else.30624:
-beq_cont.30625:
+	j	beq_cont.30515
+beq_else.30514:
+beq_cont.30515:
 	addi	r0 r2 1
 	lw	r30 r1 20
 	lw	r1 r3 8
@@ -26344,23 +26173,23 @@ beq_cont.30625:
 	sll	r2 r5 2
 	lwo	r3 r5 r3
 	sub	r4 r3 r25
-	blez	r25 ble_nontail_else.30626
-	j	ble_nontail_cont.30627
-ble_nontail_else.30626:
+	blez	r25 ble_nontail_else.30516
+	j	ble_nontail_cont.30517
+ble_nontail_else.30516:
 	lw	r1 r3 12
 	sll	r2 r4 2
 	lwo	r3 r4 r3
 	addi	r0 r4 0
 	sub	r3 r4 r25
-	beq	r25 r0 beq_else.30628
+	beq	r25 r0 beq_else.30518
 	sw	r31 r30 32
 	addi	r30 r30 36
 	jal	calc_diffuse_using_1point.3102
 	addi	r30 r30 -36
 	lw	r30 r31 32
-	j	beq_cont.30629
-beq_else.30628:
-beq_cont.30629:
+	j	beq_cont.30519
+beq_else.30518:
+beq_cont.30519:
 	addi	r0 r2 2
 	lw	r30 r1 20
 	sw	r31 r30 32
@@ -26368,12 +26197,12 @@ beq_cont.30629:
 	jal	do_without_neighbors.3111
 	addi	r30 r30 -36
 	lw	r30 r31 32
-ble_nontail_cont.30627:
-ble_nontail_cont.30623:
-beq_cont.30619:
-ble_nontail_cont.30609:
-	j	beq_cont.30607
-beq_else.30606:
+ble_nontail_cont.30517:
+ble_nontail_cont.30513:
+beq_cont.30509:
+ble_nontail_cont.30499:
+	j	beq_cont.30497
+beq_else.30496:
 	sll	r1 r6 2
 	lwo	r4 r6 r6
 	addi	r0 r7 0
@@ -26382,16 +26211,16 @@ beq_else.30606:
 	sll	r7 r10 2
 	lwo	r8 r10 r8
 	sub	r9 r8 r25
-	blez	r25 ble_nontail_else.30630
-	j	ble_nontail_cont.30631
-ble_nontail_else.30630:
+	blez	r25 ble_nontail_else.30520
+	j	ble_nontail_cont.30521
+ble_nontail_else.30520:
 	lw	r6 r8 12
 	sll	r7 r9 2
 	lwo	r8 r9 r8
 	addi	r0 r9 0
 	sw	r6 r30 32
 	sub	r8 r9 r25
-	beq	r25 r0 beq_else.30632
+	beq	r25 r0 beq_else.30522
 	sw	r31 r30 36
 	addi	r30 r30 40
 	mov	r2 r7
@@ -26399,9 +26228,9 @@ ble_nontail_else.30630:
 	jal	calc_diffuse_using_1point.3102
 	addi	r30 r30 -40
 	lw	r30 r31 36
-	j	beq_cont.30633
-beq_else.30632:
-beq_cont.30633:
+	j	beq_cont.30523
+beq_else.30522:
+beq_cont.30523:
 	addi	r0 r1 1
 	lw	r30 r2 32
 	lw	r2 r3 8
@@ -26409,15 +26238,15 @@ beq_cont.30633:
 	sll	r1 r5 2
 	lwo	r3 r5 r3
 	sub	r4 r3 r25
-	blez	r25 ble_nontail_else.30634
-	j	ble_nontail_cont.30635
-ble_nontail_else.30634:
+	blez	r25 ble_nontail_else.30524
+	j	ble_nontail_cont.30525
+ble_nontail_else.30524:
 	lw	r2 r3 12
 	sll	r1 r4 2
 	lwo	r3 r4 r3
 	addi	r0 r4 0
 	sub	r3 r4 r25
-	beq	r25 r0 beq_else.30636
+	beq	r25 r0 beq_else.30526
 	lw	r2 r3 20
 	lw	r2 r4 28
 	lw	r2 r5 4
@@ -26529,9 +26358,9 @@ ble_nontail_else.30634:
 	add.s	f0 f1 f0
 	sll	r4 r2 2
 	swoc1	f0 r1 r2
-	j	beq_cont.30637
-beq_else.30636:
-beq_cont.30637:
+	j	beq_cont.30527
+beq_else.30526:
+beq_cont.30527:
 	addi	r0 r2 2
 	lw	r30 r1 32
 	lw	r1 r3 8
@@ -26539,23 +26368,23 @@ beq_cont.30637:
 	sll	r2 r5 2
 	lwo	r3 r5 r3
 	sub	r4 r3 r25
-	blez	r25 ble_nontail_else.30638
-	j	ble_nontail_cont.30639
-ble_nontail_else.30638:
+	blez	r25 ble_nontail_else.30528
+	j	ble_nontail_cont.30529
+ble_nontail_else.30528:
 	lw	r1 r3 12
 	sll	r2 r4 2
 	lwo	r3 r4 r3
 	addi	r0 r4 0
 	sub	r3 r4 r25
-	beq	r25 r0 beq_else.30640
+	beq	r25 r0 beq_else.30530
 	sw	r31 r30 44
 	addi	r30 r30 48
 	jal	calc_diffuse_using_1point.3102
 	addi	r30 r30 -48
 	lw	r30 r31 44
-	j	beq_cont.30641
-beq_else.30640:
-beq_cont.30641:
+	j	beq_cont.30531
+beq_else.30530:
+beq_cont.30531:
 	addi	r0 r2 3
 	lw	r30 r1 32
 	sw	r31 r30 44
@@ -26563,10 +26392,10 @@ beq_cont.30641:
 	jal	do_without_neighbors.3111
 	addi	r30 r30 -48
 	lw	r30 r31 44
-ble_nontail_cont.30639:
-ble_nontail_cont.30635:
-ble_nontail_cont.30631:
-beq_cont.30607:
+ble_nontail_cont.30529:
+ble_nontail_cont.30525:
+ble_nontail_cont.30521:
+beq_cont.30497:
 	addi	r30 r30 44
 	sw	r1 r30 0
 	sw	r31 r30 4
@@ -26584,18 +26413,18 @@ beq_cont.30607:
 	lw	r30 r31 44
 	addi	r0 r2 255
 	sub	r1 r2 r25
-	blez	r25 ble_nontail_else.30642
+	blez	r25 ble_nontail_else.30532
 	addi	r0 r1 255
-	j	ble_nontail_cont.30643
-ble_nontail_else.30642:
+	j	ble_nontail_cont.30533
+ble_nontail_else.30532:
 	addi	r0 r2 0
 	sub	r2 r1 r25
-	blez	r25 ble_nontail_else.30644
+	blez	r25 ble_nontail_else.30534
 	addi	r0 r1 0
-	j	ble_nontail_cont.30645
-ble_nontail_else.30644:
-ble_nontail_cont.30645:
-ble_nontail_cont.30643:
+	j	ble_nontail_cont.30535
+ble_nontail_else.30534:
+ble_nontail_cont.30535:
+ble_nontail_cont.30533:
 	sw	r31 r30 44
 	addi	r30 r30 48
 	jal	min_caml_print_int
@@ -26624,18 +26453,18 @@ ble_nontail_cont.30643:
 	lw	r30 r31 44
 	addi	r0 r2 255
 	sub	r1 r2 r25
-	blez	r25 ble_nontail_else.30646
+	blez	r25 ble_nontail_else.30536
 	addi	r0 r1 255
-	j	ble_nontail_cont.30647
-ble_nontail_else.30646:
+	j	ble_nontail_cont.30537
+ble_nontail_else.30536:
 	addi	r0 r2 0
 	sub	r2 r1 r25
-	blez	r25 ble_nontail_else.30648
+	blez	r25 ble_nontail_else.30538
 	addi	r0 r1 0
-	j	ble_nontail_cont.30649
-ble_nontail_else.30648:
-ble_nontail_cont.30649:
-ble_nontail_cont.30647:
+	j	ble_nontail_cont.30539
+ble_nontail_else.30538:
+ble_nontail_cont.30539:
+ble_nontail_cont.30537:
 	sw	r31 r30 44
 	addi	r30 r30 48
 	jal	min_caml_print_int
@@ -26664,18 +26493,18 @@ ble_nontail_cont.30647:
 	lw	r30 r31 44
 	addi	r0 r2 255
 	sub	r1 r2 r25
-	blez	r25 ble_nontail_else.30650
+	blez	r25 ble_nontail_else.30540
 	addi	r0 r1 255
-	j	ble_nontail_cont.30651
-ble_nontail_else.30650:
+	j	ble_nontail_cont.30541
+ble_nontail_else.30540:
 	addi	r0 r2 0
 	sub	r2 r1 r25
-	blez	r25 ble_nontail_else.30652
+	blez	r25 ble_nontail_else.30542
 	addi	r0 r1 0
-	j	ble_nontail_cont.30653
-ble_nontail_else.30652:
-ble_nontail_cont.30653:
-ble_nontail_cont.30651:
+	j	ble_nontail_cont.30543
+ble_nontail_else.30542:
+ble_nontail_cont.30543:
+ble_nontail_cont.30541:
 	sw	r31 r30 44
 	addi	r30 r30 48
 	jal	min_caml_print_int
@@ -26702,7 +26531,7 @@ ble_nontail_cont.30651:
 	sll	r3 r3 2
 	lwo	r2 r3 r2
 	sub	r2 r1 r25
-	blez	r25 ble_tail_else.30654
+	blez	r25 ble_tail_else.30544
 	addi	r30 r30 44
 	sw	r1 r30 0
 	sw	r31 r30 4
@@ -26748,10 +26577,10 @@ ble_nontail_cont.30651:
 	lw	r30 r5 8
 	add	r5 r3 r3
 	sub	r2 r3 r25
-	blez	r25 ble_nontail_else.30655
+	blez	r25 ble_nontail_else.30545
 	addi	r0 r2 0
 	sub	r5 r2 r25
-	blez	r25 ble_nontail_else.30657
+	blez	r25 ble_nontail_else.30547
 	addi	r30 r30 44
 	sw	r1 r30 0
 	sw	r31 r30 4
@@ -26766,31 +26595,31 @@ ble_nontail_cont.30651:
 	addi	r0 r3 1
 	add	r1 r3 r3
 	sub	r2 r3 r25
-	blez	r25 ble_nontail_else.30659
+	blez	r25 ble_nontail_else.30549
 	addi	r0 r2 0
 	sub	r1 r2 r25
-	blez	r25 ble_nontail_else.30661
+	blez	r25 ble_nontail_else.30551
 	addi	r0 r2 1
-	j	ble_nontail_cont.30662
-ble_nontail_else.30661:
+	j	ble_nontail_cont.30552
+ble_nontail_else.30551:
 	addi	r0 r2 0
-ble_nontail_cont.30662:
-	j	ble_nontail_cont.30660
-ble_nontail_else.30659:
+ble_nontail_cont.30552:
+	j	ble_nontail_cont.30550
+ble_nontail_else.30549:
 	addi	r0 r2 0
-ble_nontail_cont.30660:
-	j	ble_nontail_cont.30658
-ble_nontail_else.30657:
+ble_nontail_cont.30550:
+	j	ble_nontail_cont.30548
+ble_nontail_else.30547:
 	addi	r0 r2 0
-ble_nontail_cont.30658:
-	j	ble_nontail_cont.30656
-ble_nontail_else.30655:
+ble_nontail_cont.30548:
+	j	ble_nontail_cont.30546
+ble_nontail_else.30545:
 	addi	r0 r2 0
-ble_nontail_cont.30656:
+ble_nontail_cont.30546:
 	addi	r0 r3 0
 	sw	r1 r30 44
 	sub	r2 r3 r25
-	beq	r25 r0 beq_else.30663
+	beq	r25 r0 beq_else.30553
 	addi	r0 r6 0
 	lw	r30 r3 4
 	lw	r30 r2 0
@@ -26802,8 +26631,8 @@ ble_nontail_cont.30656:
 	jal	try_exploit_neighbors.3127
 	addi	r30 r30 -52
 	lw	r30 r31 48
-	j	beq_cont.30664
-beq_else.30663:
+	j	beq_cont.30554
+beq_else.30553:
 	sll	r1 r2 2
 	lwo	r4 r2 r2
 	addi	r0 r3 0
@@ -26812,16 +26641,16 @@ beq_else.30663:
 	sll	r3 r8 2
 	lwo	r6 r8 r6
 	sub	r7 r6 r25
-	blez	r25 ble_nontail_else.30665
-	j	ble_nontail_cont.30666
-ble_nontail_else.30665:
+	blez	r25 ble_nontail_else.30555
+	j	ble_nontail_cont.30556
+ble_nontail_else.30555:
 	lw	r2 r6 12
 	sll	r3 r7 2
 	lwo	r6 r7 r6
 	addi	r0 r7 0
 	sw	r2 r30 48
 	sub	r6 r7 r25
-	beq	r25 r0 beq_else.30667
+	beq	r25 r0 beq_else.30557
 	lw	r2 r6 20
 	lw	r2 r7 28
 	lw	r2 r8 4
@@ -26933,9 +26762,9 @@ ble_nontail_else.30665:
 	add.s	f0 f1 f0
 	sll	r4 r2 2
 	swoc1	f0 r1 r2
-	j	beq_cont.30668
-beq_else.30667:
-beq_cont.30668:
+	j	beq_cont.30558
+beq_else.30557:
+beq_cont.30558:
 	addi	r0 r2 1
 	lw	r30 r1 48
 	lw	r1 r3 8
@@ -26943,23 +26772,23 @@ beq_cont.30668:
 	sll	r2 r5 2
 	lwo	r3 r5 r3
 	sub	r4 r3 r25
-	blez	r25 ble_nontail_else.30669
-	j	ble_nontail_cont.30670
-ble_nontail_else.30669:
+	blez	r25 ble_nontail_else.30559
+	j	ble_nontail_cont.30560
+ble_nontail_else.30559:
 	lw	r1 r3 12
 	sll	r2 r4 2
 	lwo	r3 r4 r3
 	addi	r0 r4 0
 	sub	r3 r4 r25
-	beq	r25 r0 beq_else.30671
+	beq	r25 r0 beq_else.30561
 	sw	r31 r30 60
 	addi	r30 r30 64
 	jal	calc_diffuse_using_1point.3102
 	addi	r30 r30 -64
 	lw	r30 r31 60
-	j	beq_cont.30672
-beq_else.30671:
-beq_cont.30672:
+	j	beq_cont.30562
+beq_else.30561:
+beq_cont.30562:
 	addi	r0 r2 2
 	lw	r30 r1 48
 	sw	r31 r30 60
@@ -26967,9 +26796,9 @@ beq_cont.30672:
 	jal	do_without_neighbors.3111
 	addi	r30 r30 -64
 	lw	r30 r31 60
-ble_nontail_cont.30670:
-ble_nontail_cont.30666:
-beq_cont.30664:
+ble_nontail_cont.30560:
+ble_nontail_cont.30556:
+beq_cont.30554:
 	addi	r30 r30 60
 	sw	r1 r30 0
 	sw	r31 r30 4
@@ -26987,18 +26816,18 @@ beq_cont.30664:
 	lw	r30 r31 60
 	addi	r0 r2 255
 	sub	r1 r2 r25
-	blez	r25 ble_nontail_else.30673
+	blez	r25 ble_nontail_else.30563
 	addi	r0 r1 255
-	j	ble_nontail_cont.30674
-ble_nontail_else.30673:
+	j	ble_nontail_cont.30564
+ble_nontail_else.30563:
 	addi	r0 r2 0
 	sub	r2 r1 r25
-	blez	r25 ble_nontail_else.30675
+	blez	r25 ble_nontail_else.30565
 	addi	r0 r1 0
-	j	ble_nontail_cont.30676
-ble_nontail_else.30675:
-ble_nontail_cont.30676:
-ble_nontail_cont.30674:
+	j	ble_nontail_cont.30566
+ble_nontail_else.30565:
+ble_nontail_cont.30566:
+ble_nontail_cont.30564:
 	sw	r31 r30 60
 	addi	r30 r30 64
 	jal	min_caml_print_int
@@ -27027,18 +26856,18 @@ ble_nontail_cont.30674:
 	lw	r30 r31 60
 	addi	r0 r2 255
 	sub	r1 r2 r25
-	blez	r25 ble_nontail_else.30677
+	blez	r25 ble_nontail_else.30567
 	addi	r0 r1 255
-	j	ble_nontail_cont.30678
-ble_nontail_else.30677:
+	j	ble_nontail_cont.30568
+ble_nontail_else.30567:
 	addi	r0 r2 0
 	sub	r2 r1 r25
-	blez	r25 ble_nontail_else.30679
+	blez	r25 ble_nontail_else.30569
 	addi	r0 r1 0
-	j	ble_nontail_cont.30680
-ble_nontail_else.30679:
-ble_nontail_cont.30680:
-ble_nontail_cont.30678:
+	j	ble_nontail_cont.30570
+ble_nontail_else.30569:
+ble_nontail_cont.30570:
+ble_nontail_cont.30568:
 	sw	r31 r30 60
 	addi	r30 r30 64
 	jal	min_caml_print_int
@@ -27067,18 +26896,18 @@ ble_nontail_cont.30678:
 	lw	r30 r31 60
 	addi	r0 r2 255
 	sub	r1 r2 r25
-	blez	r25 ble_nontail_else.30681
+	blez	r25 ble_nontail_else.30571
 	addi	r0 r1 255
-	j	ble_nontail_cont.30682
-ble_nontail_else.30681:
+	j	ble_nontail_cont.30572
+ble_nontail_else.30571:
 	addi	r0 r2 0
 	sub	r2 r1 r25
-	blez	r25 ble_nontail_else.30683
+	blez	r25 ble_nontail_else.30573
 	addi	r0 r1 0
-	j	ble_nontail_cont.30684
-ble_nontail_else.30683:
-ble_nontail_cont.30684:
-ble_nontail_cont.30682:
+	j	ble_nontail_cont.30574
+ble_nontail_else.30573:
+ble_nontail_cont.30574:
+ble_nontail_cont.30572:
 	sw	r31 r30 60
 	addi	r30 r30 64
 	jal	min_caml_print_int
@@ -27098,9 +26927,9 @@ ble_nontail_cont.30682:
 	lw	r30 r4 12
 	lw	r30 r5 0
 	j	scan_pixel.3154
-ble_tail_else.30654:
+ble_tail_else.30544:
 	jr	r31
-ble_tail_else.30597:
+ble_tail_else.30487:
 	jr	r31
 scan_line.3160:
 	addi	r30 r30 0
@@ -27115,7 +26944,7 @@ scan_line.3160:
 	sll	r7 r7 2
 	lwo	r6 r7 r6
 	sub	r6 r1 r25
-	blez	r25 ble_tail_else.30687
+	blez	r25 ble_tail_else.30577
 	addi	r30 r30 0
 	sw	r1 r30 0
 	sw	r31 r30 4
@@ -27135,7 +26964,7 @@ scan_line.3160:
 	sw	r1 r30 12
 	sw	r3 r30 16
 	sub	r6 r1 r25
-	blez	r25 ble_nontail_else.30688
+	blez	r25 ble_nontail_else.30578
 	addi	r0 r6 1
 	add	r1 r6 r6
 	addi	r30 r30 20
@@ -27259,9 +27088,9 @@ scan_line.3160:
 	jal	pretrace_pixels.3143
 	addi	r30 r30 -28
 	lw	r30 r31 24
-	j	ble_nontail_cont.30689
-ble_nontail_else.30688:
-ble_nontail_cont.30689:
+	j	ble_nontail_cont.30579
+ble_nontail_else.30578:
+ble_nontail_cont.30579:
 	addi	r0 r1 0
 	addi	r30 r30 24
 	sw	r1 r30 0
@@ -27275,7 +27104,7 @@ ble_nontail_cont.30689:
 	sll	r3 r3 2
 	lwo	r2 r3 r2
 	sub	r2 r1 r25
-	blez	r25 ble_nontail_else.30690
+	blez	r25 ble_nontail_else.30580
 	addi	r30 r30 24
 	sw	r1 r30 0
 	sw	r31 r30 4
@@ -27321,10 +27150,10 @@ ble_nontail_cont.30689:
 	lw	r30 r5 12
 	add	r5 r3 r3
 	sub	r2 r3 r25
-	blez	r25 ble_nontail_else.30692
+	blez	r25 ble_nontail_else.30582
 	addi	r0 r2 0
 	sub	r5 r2 r25
-	blez	r25 ble_nontail_else.30694
+	blez	r25 ble_nontail_else.30584
 	addi	r30 r30 24
 	sw	r1 r30 0
 	sw	r31 r30 4
@@ -27338,23 +27167,23 @@ ble_nontail_cont.30689:
 	lwo	r2 r3 r2
 	addi	r0 r3 1
 	sub	r2 r3 r25
-	blez	r25 ble_nontail_else.30696
+	blez	r25 ble_nontail_else.30586
 	addi	r0 r2 0
-	j	ble_nontail_cont.30697
-ble_nontail_else.30696:
+	j	ble_nontail_cont.30587
+ble_nontail_else.30586:
 	addi	r0 r2 0
-ble_nontail_cont.30697:
-	j	ble_nontail_cont.30695
-ble_nontail_else.30694:
+ble_nontail_cont.30587:
+	j	ble_nontail_cont.30585
+ble_nontail_else.30584:
 	addi	r0 r2 0
-ble_nontail_cont.30695:
-	j	ble_nontail_cont.30693
-ble_nontail_else.30692:
+ble_nontail_cont.30585:
+	j	ble_nontail_cont.30583
+ble_nontail_else.30582:
 	addi	r0 r2 0
-ble_nontail_cont.30693:
+ble_nontail_cont.30583:
 	addi	r0 r3 0
 	sub	r2 r3 r25
-	beq	r25 r0 beq_else.30698
+	beq	r25 r0 beq_else.30588
 	addi	r0 r6 0
 	lw	r30 r3 8
 	lw	r30 r2 4
@@ -27366,8 +27195,8 @@ ble_nontail_cont.30693:
 	jal	try_exploit_neighbors.3127
 	addi	r30 r30 -28
 	lw	r30 r31 24
-	j	beq_cont.30699
-beq_else.30698:
+	j	beq_cont.30589
+beq_else.30588:
 	sll	r1 r1 2
 	lwo	r4 r1 r1
 	addi	r0 r2 0
@@ -27376,16 +27205,16 @@ beq_else.30698:
 	sll	r2 r7 2
 	lwo	r3 r7 r3
 	sub	r6 r3 r25
-	blez	r25 ble_nontail_else.30700
-	j	ble_nontail_cont.30701
-ble_nontail_else.30700:
+	blez	r25 ble_nontail_else.30590
+	j	ble_nontail_cont.30591
+ble_nontail_else.30590:
 	lw	r1 r3 12
 	sll	r2 r6 2
 	lwo	r3 r6 r3
 	addi	r0 r6 0
 	sw	r1 r30 24
 	sub	r3 r6 r25
-	beq	r25 r0 beq_else.30702
+	beq	r25 r0 beq_else.30592
 	lw	r1 r3 20
 	lw	r1 r6 28
 	lw	r1 r7 4
@@ -27497,9 +27326,9 @@ ble_nontail_else.30700:
 	add.s	f0 f1 f0
 	sll	r4 r2 2
 	swoc1	f0 r1 r2
-	j	beq_cont.30703
-beq_else.30702:
-beq_cont.30703:
+	j	beq_cont.30593
+beq_else.30592:
+beq_cont.30593:
 	addi	r0 r2 1
 	lw	r30 r1 24
 	lw	r1 r3 8
@@ -27507,23 +27336,23 @@ beq_cont.30703:
 	sll	r2 r5 2
 	lwo	r3 r5 r3
 	sub	r4 r3 r25
-	blez	r25 ble_nontail_else.30704
-	j	ble_nontail_cont.30705
-ble_nontail_else.30704:
+	blez	r25 ble_nontail_else.30594
+	j	ble_nontail_cont.30595
+ble_nontail_else.30594:
 	lw	r1 r3 12
 	sll	r2 r4 2
 	lwo	r3 r4 r3
 	addi	r0 r4 0
 	sub	r3 r4 r25
-	beq	r25 r0 beq_else.30706
+	beq	r25 r0 beq_else.30596
 	sw	r31 r30 36
 	addi	r30 r30 40
 	jal	calc_diffuse_using_1point.3102
 	addi	r30 r30 -40
 	lw	r30 r31 36
-	j	beq_cont.30707
-beq_else.30706:
-beq_cont.30707:
+	j	beq_cont.30597
+beq_else.30596:
+beq_cont.30597:
 	addi	r0 r2 2
 	lw	r30 r1 24
 	sw	r31 r30 36
@@ -27531,9 +27360,9 @@ beq_cont.30707:
 	jal	do_without_neighbors.3111
 	addi	r30 r30 -40
 	lw	r30 r31 36
-ble_nontail_cont.30705:
-ble_nontail_cont.30701:
-beq_cont.30699:
+ble_nontail_cont.30595:
+ble_nontail_cont.30591:
+beq_cont.30589:
 	addi	r30 r30 36
 	sw	r1 r30 0
 	sw	r31 r30 4
@@ -27551,18 +27380,18 @@ beq_cont.30699:
 	lw	r30 r31 36
 	addi	r0 r2 255
 	sub	r1 r2 r25
-	blez	r25 ble_nontail_else.30708
+	blez	r25 ble_nontail_else.30598
 	addi	r0 r1 255
-	j	ble_nontail_cont.30709
-ble_nontail_else.30708:
+	j	ble_nontail_cont.30599
+ble_nontail_else.30598:
 	addi	r0 r2 0
 	sub	r2 r1 r25
-	blez	r25 ble_nontail_else.30710
+	blez	r25 ble_nontail_else.30600
 	addi	r0 r1 0
-	j	ble_nontail_cont.30711
-ble_nontail_else.30710:
-ble_nontail_cont.30711:
-ble_nontail_cont.30709:
+	j	ble_nontail_cont.30601
+ble_nontail_else.30600:
+ble_nontail_cont.30601:
+ble_nontail_cont.30599:
 	sw	r31 r30 36
 	addi	r30 r30 40
 	jal	min_caml_print_int
@@ -27591,18 +27420,18 @@ ble_nontail_cont.30709:
 	lw	r30 r31 36
 	addi	r0 r2 255
 	sub	r1 r2 r25
-	blez	r25 ble_nontail_else.30712
+	blez	r25 ble_nontail_else.30602
 	addi	r0 r1 255
-	j	ble_nontail_cont.30713
-ble_nontail_else.30712:
+	j	ble_nontail_cont.30603
+ble_nontail_else.30602:
 	addi	r0 r2 0
 	sub	r2 r1 r25
-	blez	r25 ble_nontail_else.30714
+	blez	r25 ble_nontail_else.30604
 	addi	r0 r1 0
-	j	ble_nontail_cont.30715
-ble_nontail_else.30714:
-ble_nontail_cont.30715:
-ble_nontail_cont.30713:
+	j	ble_nontail_cont.30605
+ble_nontail_else.30604:
+ble_nontail_cont.30605:
+ble_nontail_cont.30603:
 	sw	r31 r30 36
 	addi	r30 r30 40
 	jal	min_caml_print_int
@@ -27631,18 +27460,18 @@ ble_nontail_cont.30713:
 	lw	r30 r31 36
 	addi	r0 r2 255
 	sub	r1 r2 r25
-	blez	r25 ble_nontail_else.30716
+	blez	r25 ble_nontail_else.30606
 	addi	r0 r1 255
-	j	ble_nontail_cont.30717
-ble_nontail_else.30716:
+	j	ble_nontail_cont.30607
+ble_nontail_else.30606:
 	addi	r0 r2 0
 	sub	r2 r1 r25
-	blez	r25 ble_nontail_else.30718
+	blez	r25 ble_nontail_else.30608
 	addi	r0 r1 0
-	j	ble_nontail_cont.30719
-ble_nontail_else.30718:
-ble_nontail_cont.30719:
-ble_nontail_cont.30717:
+	j	ble_nontail_cont.30609
+ble_nontail_else.30608:
+ble_nontail_cont.30609:
+ble_nontail_cont.30607:
 	sw	r31 r30 36
 	addi	r30 r30 40
 	jal	min_caml_print_int
@@ -27664,9 +27493,9 @@ ble_nontail_cont.30717:
 	jal	scan_pixel.3154
 	addi	r30 r30 -40
 	lw	r30 r31 36
-	j	ble_nontail_cont.30691
-ble_nontail_else.30690:
-ble_nontail_cont.30691:
+	j	ble_nontail_cont.30581
+ble_nontail_else.30580:
+ble_nontail_cont.30581:
 	addi	r0 r1 1
 	lw	r30 r2 12
 	add	r2 r1 r2
@@ -27675,12 +27504,12 @@ ble_nontail_cont.30691:
 	add	r3 r1 r1
 	addi	r0 r3 5
 	sub	r3 r1 r25
-	blez	r25 ble_nontail_else.30720
-	j	ble_nontail_cont.30721
-ble_nontail_else.30720:
+	blez	r25 ble_nontail_else.30610
+	j	ble_nontail_cont.30611
+ble_nontail_else.30610:
 	addi	r0 r3 5
 	sub	r1 r3 r1
-ble_nontail_cont.30721:
+ble_nontail_cont.30611:
 	addi	r30 r30 36
 	sw	r1 r30 0
 	sw	r31 r30 4
@@ -27693,7 +27522,7 @@ ble_nontail_cont.30721:
 	sll	r4 r4 2
 	lwo	r3 r4 r3
 	sub	r3 r2 r25
-	blez	r25 ble_tail_else.30722
+	blez	r25 ble_tail_else.30612
 	addi	r30 r30 36
 	sw	r1 r30 0
 	sw	r31 r30 4
@@ -27710,7 +27539,7 @@ ble_nontail_cont.30721:
 	sw	r1 r30 36
 	sw	r2 r30 40
 	sub	r3 r2 r25
-	blez	r25 ble_nontail_else.30723
+	blez	r25 ble_nontail_else.30613
 	addi	r0 r3 1
 	add	r2 r3 r3
 	addi	r30 r30 44
@@ -27834,9 +27663,9 @@ ble_nontail_cont.30721:
 	jal	pretrace_pixels.3143
 	addi	r30 r30 -52
 	lw	r30 r31 48
-	j	ble_nontail_cont.30724
-ble_nontail_else.30723:
-ble_nontail_cont.30724:
+	j	ble_nontail_cont.30614
+ble_nontail_else.30613:
+ble_nontail_cont.30614:
 	addi	r0 r1 0
 	lw	r30 r2 40
 	lw	r30 r3 16
@@ -27855,20 +27684,20 @@ ble_nontail_cont.30724:
 	add	r3 r2 r2
 	addi	r0 r3 5
 	sub	r3 r2 r25
-	blez	r25 ble_nontail_else.30725
+	blez	r25 ble_nontail_else.30615
 	mov	r5 r2
-	j	ble_nontail_cont.30726
-ble_nontail_else.30725:
+	j	ble_nontail_cont.30616
+ble_nontail_else.30615:
 	addi	r0 r3 5
 	sub	r2 r3 r5
-ble_nontail_cont.30726:
+ble_nontail_cont.30616:
 	lw	r30 r2 4
 	lw	r30 r3 8
 	lw	r30 r4 16
 	j	scan_line.3160
-ble_tail_else.30722:
+ble_tail_else.30612:
 	jr	r31
-ble_tail_else.30687:
+ble_tail_else.30577:
 	jr	r31
 create_pixel.3168:
 	addi	r0 r1 3
@@ -28255,9 +28084,9 @@ create_pixel.3168:
 init_line_elements.3170:
 	addi	r0 r3 0
 	sub	r3 r2 r25
-	blez	r25 ble_tail_else.30729
+	blez	r25 ble_tail_else.30619
 	jr	r31
-ble_tail_else.30729:
+ble_tail_else.30619:
 	addi	r0 r3 3
 	lui	r24 0
 	ori	r24 r24 0
@@ -28649,10 +28478,10 @@ ble_tail_else.30729:
 	sub	r2 r1 r1
 	addi	r0 r2 0
 	sub	r2 r1 r25
-	blez	r25 ble_tail_else.30730
+	blez	r25 ble_tail_else.30620
 	mov	r1 r4
 	jr	r31
-ble_tail_else.30730:
+ble_tail_else.30620:
 	sw	r1 r30 104
 	sw	r31 r30 108
 	addi	r30 r30 112
@@ -28667,10 +28496,10 @@ ble_tail_else.30730:
 	sub	r2 r1 r1
 	addi	r0 r2 0
 	sub	r2 r1 r25
-	blez	r25 ble_tail_else.30731
+	blez	r25 ble_tail_else.30621
 	mov	r1 r4
 	jr	r31
-ble_tail_else.30731:
+ble_tail_else.30621:
 	addi	r0 r2 3
 	lui	r24 0
 	ori	r24 r24 0
@@ -29061,10 +28890,10 @@ ble_tail_else.30731:
 	sub	r2 r1 r1
 	addi	r0 r2 0
 	sub	r2 r1 r25
-	blez	r25 ble_tail_else.30732
+	blez	r25 ble_tail_else.30622
 	mov	r1 r4
 	jr	r31
-ble_tail_else.30732:
+ble_tail_else.30622:
 	sw	r1 r30 208
 	sw	r31 r30 212
 	addi	r30 r30 216
@@ -29082,34 +28911,30 @@ ble_tail_else.30732:
 calc_dirvec.3180:
 	addi	r0 r4 5
 	sub	r4 r1 r25
-	blez	r25 ble_tail_else.30733
+	blez	r25 ble_tail_else.30623
 	mul.s	f1 f1 f0
 	lui	r24 15820
 	ori	r24 r24 52429
 	mtc1	r24 f1
 	add.s	f0 f1 f0
-	sw	r3 r30 0
-	sw	r2 r30 4
-	swc1	f3 r30 8
-	sw	r1 r30 12
-	swc1	f2 r30 16
-	sw	r31 r30 20
-	addi	r30 r30 24
-	jal	min_caml_sqrt
-	addi	r30 r30 -24
-	lw	r30 r31 20
+	sqrt.s	f0 f0
 	lui	r24 16256
 	ori	r24 r24 0
 	mtc1	r24 f1
 	div.s	f1 f0 f1
-	swc1	f0 r30 20
+	sw	r3 r30 0
+	sw	r2 r30 4
+	swc1	f3 r30 8
+	sw	r1 r30 12
+	swc1	f0 r30 16
+	swc1	f2 r30 20
 	sw	r31 r30 24
 	addi	r30 r30 28
 	mov.s	f1 f0
 	jal	min_caml_atan
 	addi	r30 r30 -28
 	lw	r30 r31 24
-	lwc1	 r30 f1 16
+	lwc1	 r30 f1 20
 	mul.s	f0 f1 f0
 	swc1	f0 r30 24
 	sw	r31 r30 28
@@ -29127,7 +28952,7 @@ calc_dirvec.3180:
 	lw	r30 r31 32
 	lwc1	 r30 f1 28
 	div.s	f1 f0 f0
-	lwc1	 r30 f1 20
+	lwc1	 r30 f1 16
 	mul.s	f0 f1 f0
 	addi	r0 r1 1
 	lw	r30 r2 12
@@ -29137,22 +28962,17 @@ calc_dirvec.3180:
 	ori	r24 r24 52429
 	mtc1	r24 f2
 	add.s	f1 f2 f1
-	swc1	f0 r30 32
-	sw	r1 r30 36
-	sw	r31 r30 40
-	addi	r30 r30 44
-	mov.s	f1 f0
-	jal	min_caml_sqrt
-	addi	r30 r30 -44
-	lw	r30 r31 40
+	sqrt.s	f1 f1
 	lui	r24 16256
 	ori	r24 r24 0
-	mtc1	r24 f1
-	div.s	f1 f0 f1
-	swc1	f0 r30 40
+	mtc1	r24 f2
+	div.s	f2 f1 f2
+	swc1	f0 r30 32
+	sw	r1 r30 36
+	swc1	f1 r30 40
 	sw	r31 r30 44
 	addi	r30 r30 48
-	mov.s	f1 f0
+	mov.s	f2 f0
 	jal	min_caml_atan
 	addi	r30 r30 -48
 	lw	r30 r31 44
@@ -29177,13 +28997,13 @@ calc_dirvec.3180:
 	lwc1	 r30 f1 40
 	mul.s	f0 f1 f1
 	lwc1	 r30 f0 32
-	lwc1	 r30 f2 16
+	lwc1	 r30 f2 20
 	lwc1	 r30 f3 8
 	lw	r30 r1 36
 	lw	r30 r2 4
 	lw	r30 r3 0
 	j	calc_dirvec.3180
-ble_tail_else.30733:
+ble_tail_else.30623:
 	mul.s	f0 f0 f2
 	mul.s	f1 f1 f3
 	add.s	f2 f3 f2
@@ -29191,133 +29011,120 @@ ble_tail_else.30733:
 	ori	r24 r24 0
 	mtc1	r24 f3
 	add.s	f2 f3 f2
-	sw	r3 r30 0
-	sw	r2 r30 4
-	swc1	f1 r30 52
-	swc1	f0 r30 56
-	sw	r31 r30 60
-	addi	r30 r30 64
-	mov.s	f2 f0
-	jal	min_caml_sqrt
-	addi	r30 r30 -64
-	lw	r30 r31 60
-	lwc1	 r30 f1 56
-	div.s	f1 f0 f1
-	lwc1	 r30 f2 52
-	div.s	f2 f0 f2
+	sqrt.s	f2 f2
+	div.s	f0 f2 f0
+	div.s	f1 f2 f1
 	lui	r24 16256
 	ori	r24 r24 0
 	mtc1	r24 f3
-	div.s	f3 f0 f0
-	addi	r30 r30 60
+	div.s	f3 f2 f2
+	addi	r30 r30 52
 	sw	r1 r30 0
 	sw	r31 r30 4
 	jal	min_caml_load_dirvecs
 	mov	r1 r1
 	lw	r30 r31 4
-	addi	r30 r30 -60
-	lw	r30 r2 4
+	addi	r30 r30 -52
 	sll	r2 r2 2
 	lwo	r1 r2 r1
-	lw	r30 r2 0
-	sll	r2 r3 2
-	lwo	r1 r3 r3
-	lw	r3 r3 0
+	sll	r3 r2 2
+	lwo	r1 r2 r2
+	lw	r2 r2 0
 	addi	r0 r4 0
 	sll	r4 r4 2
-	swoc1	f1 r3 r4
+	swoc1	f0 r2 r4
 	addi	r0 r4 1
 	sll	r4 r4 2
-	swoc1	f2 r3 r4
+	swoc1	f1 r2 r4
 	addi	r0 r4 2
 	sll	r4 r4 2
-	swoc1	f0 r3 r4
-	addi	r0 r3 40
-	add	r2 r3 r3
-	sll	r3 r3 2
-	lwo	r1 r3 r3
-	lw	r3 r3 0
-	neg.s	f2 f3
-	addi	r0 r4 0
-	sll	r4 r4 2
-	swoc1	f1 r3 r4
-	addi	r0 r4 1
-	sll	r4 r4 2
-	swoc1	f0 r3 r4
-	addi	r0 r4 2
-	sll	r4 r4 2
-	swoc1	f3 r3 r4
-	addi	r0 r3 80
-	add	r2 r3 r3
-	sll	r3 r3 2
-	lwo	r1 r3 r3
-	lw	r3 r3 0
+	swoc1	f2 r2 r4
+	addi	r0 r2 40
+	add	r3 r2 r2
+	sll	r2 r2 2
+	lwo	r1 r2 r2
+	lw	r2 r2 0
 	neg.s	f1 f3
+	addi	r0 r4 0
+	sll	r4 r4 2
+	swoc1	f0 r2 r4
+	addi	r0 r4 1
+	sll	r4 r4 2
+	swoc1	f2 r2 r4
+	addi	r0 r4 2
+	sll	r4 r4 2
+	swoc1	f3 r2 r4
+	addi	r0 r2 80
+	add	r3 r2 r2
+	sll	r2 r2 2
+	lwo	r1 r2 r2
+	lw	r2 r2 0
+	neg.s	f0 f3
+	neg.s	f1 f4
+	addi	r0 r4 0
+	sll	r4 r4 2
+	swoc1	f2 r2 r4
+	addi	r0 r4 1
+	sll	r4 r4 2
+	swoc1	f3 r2 r4
+	addi	r0 r4 2
+	sll	r4 r4 2
+	swoc1	f4 r2 r4
+	addi	r0 r2 1
+	add	r3 r2 r2
+	sll	r2 r2 2
+	lwo	r1 r2 r2
+	lw	r2 r2 0
+	neg.s	f0 f3
+	neg.s	f1 f4
+	neg.s	f2 f5
+	addi	r0 r4 0
+	sll	r4 r4 2
+	swoc1	f3 r2 r4
+	addi	r0 r4 1
+	sll	r4 r4 2
+	swoc1	f4 r2 r4
+	addi	r0 r4 2
+	sll	r4 r4 2
+	swoc1	f5 r2 r4
+	addi	r0 r2 41
+	add	r3 r2 r2
+	sll	r2 r2 2
+	lwo	r1 r2 r2
+	lw	r2 r2 0
+	neg.s	f0 f3
 	neg.s	f2 f4
 	addi	r0 r4 0
 	sll	r4 r4 2
-	swoc1	f0 r3 r4
+	swoc1	f3 r2 r4
 	addi	r0 r4 1
 	sll	r4 r4 2
-	swoc1	f3 r3 r4
+	swoc1	f4 r2 r4
 	addi	r0 r4 2
 	sll	r4 r4 2
-	swoc1	f4 r3 r4
-	addi	r0 r3 1
-	add	r2 r3 r3
-	sll	r3 r3 2
-	lwo	r1 r3 r3
-	lw	r3 r3 0
-	neg.s	f1 f3
-	neg.s	f2 f4
-	neg.s	f0 f5
-	addi	r0 r4 0
-	sll	r4 r4 2
-	swoc1	f3 r3 r4
-	addi	r0 r4 1
-	sll	r4 r4 2
-	swoc1	f4 r3 r4
-	addi	r0 r4 2
-	sll	r4 r4 2
-	swoc1	f5 r3 r4
-	addi	r0 r3 41
-	add	r2 r3 r3
-	sll	r3 r3 2
-	lwo	r1 r3 r3
-	lw	r3 r3 0
-	neg.s	f1 f3
-	neg.s	f0 f4
-	addi	r0 r4 0
-	sll	r4 r4 2
-	swoc1	f3 r3 r4
-	addi	r0 r4 1
-	sll	r4 r4 2
-	swoc1	f4 r3 r4
-	addi	r0 r4 2
-	sll	r4 r4 2
-	swoc1	f2 r3 r4
-	addi	r0 r3 81
-	add	r2 r3 r2
+	swoc1	f1 r2 r4
+	addi	r0 r2 81
+	add	r3 r2 r2
 	sll	r2 r2 2
 	lwo	r1 r2 r1
 	lw	r1 r1 0
-	neg.s	f0 f0
+	neg.s	f2 f2
 	addi	r0 r2 0
 	sll	r2 r2 2
-	swoc1	f0 r1 r2
+	swoc1	f2 r1 r2
 	addi	r0 r2 1
 	sll	r2 r2 2
-	swoc1	f1 r1 r2
+	swoc1	f0 r1 r2
 	addi	r0 r2 2
 	sll	r2 r2 2
-	swoc1	f2 r1 r2
+	swoc1	f1 r1 r2
 	jr	r31
 calc_dirvecs.3188:
 	addi	r0 r4 0
 	sub	r4 r1 r25
-	blez	r25 ble_tail_else.30735
+	blez	r25 ble_tail_else.30625
 	jr	r31
-ble_tail_else.30735:
+ble_tail_else.30625:
 	sw	r1 r30 0
 	swc1	f0 r30 4
 	sw	r3 r30 8
@@ -29391,17 +29198,17 @@ ble_tail_else.30735:
 	add	r3 r2 r2
 	addi	r0 r3 5
 	sub	r3 r2 r25
-	blez	r25 ble_nontail_else.30737
-	j	ble_nontail_cont.30738
-ble_nontail_else.30737:
+	blez	r25 ble_nontail_else.30627
+	j	ble_nontail_cont.30628
+ble_nontail_else.30627:
 	addi	r0 r3 5
 	sub	r2 r3 r2
-ble_nontail_cont.30738:
+ble_nontail_cont.30628:
 	addi	r0 r3 0
 	sub	r3 r1 r25
-	blez	r25 ble_tail_else.30739
+	blez	r25 ble_tail_else.30629
 	jr	r31
-ble_tail_else.30739:
+ble_tail_else.30629:
 	sw	r1 r30 16
 	sw	r2 r30 20
 	sw	r31 r30 24
@@ -29473,21 +29280,21 @@ ble_tail_else.30739:
 	add	r3 r2 r2
 	addi	r0 r3 5
 	sub	r3 r2 r25
-	blez	r25 ble_nontail_else.30741
-	j	ble_nontail_cont.30742
-ble_nontail_else.30741:
+	blez	r25 ble_nontail_else.30631
+	j	ble_nontail_cont.30632
+ble_nontail_else.30631:
 	addi	r0 r3 5
 	sub	r2 r3 r2
-ble_nontail_cont.30742:
+ble_nontail_cont.30632:
 	lwc1	 r30 f0 4
 	lw	r30 r3 8
 	j	calc_dirvecs.3188
 calc_dirvec_rows.3193:
 	addi	r0 r4 0
 	sub	r4 r1 r25
-	blez	r25 ble_tail_else.30743
+	blez	r25 ble_tail_else.30633
 	jr	r31
-ble_tail_else.30743:
+ble_tail_else.30633:
 	sw	r1 r30 0
 	sw	r3 r30 4
 	sw	r2 r30 8
@@ -29574,12 +29381,12 @@ ble_tail_else.30743:
 	add	r3 r2 r2
 	addi	r0 r4 5
 	sub	r4 r2 r25
-	blez	r25 ble_nontail_else.30745
-	j	ble_nontail_cont.30746
-ble_nontail_else.30745:
+	blez	r25 ble_nontail_else.30635
+	j	ble_nontail_cont.30636
+ble_nontail_else.30635:
 	addi	r0 r4 5
 	sub	r2 r4 r2
-ble_nontail_cont.30746:
+ble_nontail_cont.30636:
 	lwc1	 r30 f0 16
 	lw	r30 r4 4
 	sw	r31 r30 20
@@ -29596,20 +29403,20 @@ ble_nontail_cont.30746:
 	add	r3 r2 r2
 	addi	r0 r3 5
 	sub	r3 r2 r25
-	blez	r25 ble_nontail_else.30747
-	j	ble_nontail_cont.30748
-ble_nontail_else.30747:
+	blez	r25 ble_nontail_else.30637
+	j	ble_nontail_cont.30638
+ble_nontail_else.30637:
 	addi	r0 r3 5
 	sub	r2 r3 r2
-ble_nontail_cont.30748:
+ble_nontail_cont.30638:
 	addi	r0 r3 4
 	lw	r30 r4 4
 	add	r4 r3 r3
 	addi	r0 r4 0
 	sub	r4 r1 r25
-	blez	r25 ble_tail_else.30749
+	blez	r25 ble_tail_else.30639
 	jr	r31
-ble_tail_else.30749:
+ble_tail_else.30639:
 	sw	r1 r30 20
 	sw	r3 r30 24
 	sw	r2 r30 28
@@ -29642,12 +29449,12 @@ ble_tail_else.30749:
 	add	r3 r2 r2
 	addi	r0 r3 5
 	sub	r3 r2 r25
-	blez	r25 ble_nontail_else.30751
-	j	ble_nontail_cont.30752
-ble_nontail_else.30751:
+	blez	r25 ble_nontail_else.30641
+	j	ble_nontail_cont.30642
+ble_nontail_else.30641:
 	addi	r0 r3 5
 	sub	r2 r3 r2
-ble_nontail_cont.30752:
+ble_nontail_cont.30642:
 	addi	r0 r3 4
 	lw	r30 r4 24
 	add	r4 r3 r3
@@ -29655,9 +29462,9 @@ ble_nontail_cont.30752:
 create_dirvec_elements.3199:
 	addi	r0 r3 0
 	sub	r3 r2 r25
-	blez	r25 ble_tail_else.30753
+	blez	r25 ble_tail_else.30643
 	jr	r31
-ble_tail_else.30753:
+ble_tail_else.30643:
 	addi	r0 r3 3
 	lui	r24 0
 	ori	r24 r24 0
@@ -29701,9 +29508,9 @@ ble_tail_else.30753:
 	sub	r2 r1 r1
 	addi	r0 r2 0
 	sub	r2 r1 r25
-	blez	r25 ble_tail_else.30755
+	blez	r25 ble_tail_else.30645
 	jr	r31
-ble_tail_else.30755:
+ble_tail_else.30645:
 	addi	r0 r2 3
 	lui	r24 0
 	ori	r24 r24 0
@@ -29746,9 +29553,9 @@ ble_tail_else.30755:
 	sub	r2 r1 r1
 	addi	r0 r2 0
 	sub	r2 r1 r25
-	blez	r25 ble_tail_else.30757
+	blez	r25 ble_tail_else.30647
 	jr	r31
-ble_tail_else.30757:
+ble_tail_else.30647:
 	addi	r0 r2 3
 	lui	r24 0
 	ori	r24 r24 0
@@ -29791,9 +29598,9 @@ ble_tail_else.30757:
 	sub	r2 r1 r1
 	addi	r0 r2 0
 	sub	r2 r1 r25
-	blez	r25 ble_tail_else.30759
+	blez	r25 ble_tail_else.30649
 	jr	r31
-ble_tail_else.30759:
+ble_tail_else.30649:
 	addi	r0 r2 3
 	lui	r24 0
 	ori	r24 r24 0
@@ -29836,9 +29643,9 @@ ble_tail_else.30759:
 	sub	r2 r1 r1
 	addi	r0 r2 0
 	sub	r2 r1 r25
-	blez	r25 ble_tail_else.30761
+	blez	r25 ble_tail_else.30651
 	jr	r31
-ble_tail_else.30761:
+ble_tail_else.30651:
 	addi	r0 r2 3
 	lui	r24 0
 	ori	r24 r24 0
@@ -29881,9 +29688,9 @@ ble_tail_else.30761:
 	sub	r2 r1 r1
 	addi	r0 r2 0
 	sub	r2 r1 r25
-	blez	r25 ble_tail_else.30763
+	blez	r25 ble_tail_else.30653
 	jr	r31
-ble_tail_else.30763:
+ble_tail_else.30653:
 	addi	r0 r2 3
 	lui	r24 0
 	ori	r24 r24 0
@@ -29926,9 +29733,9 @@ ble_tail_else.30763:
 	sub	r2 r1 r1
 	addi	r0 r2 0
 	sub	r2 r1 r25
-	blez	r25 ble_tail_else.30765
+	blez	r25 ble_tail_else.30655
 	jr	r31
-ble_tail_else.30765:
+ble_tail_else.30655:
 	addi	r0 r2 3
 	lui	r24 0
 	ori	r24 r24 0
@@ -29971,9 +29778,9 @@ ble_tail_else.30765:
 	sub	r2 r1 r1
 	addi	r0 r2 0
 	sub	r2 r1 r25
-	blez	r25 ble_tail_else.30767
+	blez	r25 ble_tail_else.30657
 	jr	r31
-ble_tail_else.30767:
+ble_tail_else.30657:
 	addi	r0 r2 3
 	lui	r24 0
 	ori	r24 r24 0
@@ -30019,9 +29826,9 @@ ble_tail_else.30767:
 create_dirvecs.3202:
 	addi	r0 r2 0
 	sub	r2 r1 r25
-	blez	r25 ble_tail_else.30769
+	blez	r25 ble_tail_else.30659
 	jr	r31
-ble_tail_else.30769:
+ble_tail_else.30659:
 	addi	r30 r30 0
 	sw	r1 r30 0
 	sw	r31 r30 4
@@ -30371,9 +30178,9 @@ ble_tail_else.30769:
 	sub	r2 r1 r1
 	addi	r0 r2 0
 	sub	r2 r1 r25
-	blez	r25 ble_tail_else.30771
+	blez	r25 ble_tail_else.30661
 	jr	r31
-ble_tail_else.30771:
+ble_tail_else.30661:
 	addi	r30 r30 76
 	sw	r1 r30 0
 	sw	r31 r30 4
@@ -30684,9 +30491,9 @@ ble_tail_else.30771:
 	sub	r2 r1 r1
 	addi	r0 r2 0
 	sub	r2 r1 r25
-	blez	r25 ble_tail_else.30773
+	blez	r25 ble_tail_else.30663
 	jr	r31
-ble_tail_else.30773:
+ble_tail_else.30663:
 	addi	r30 r30 144
 	sw	r1 r30 0
 	sw	r31 r30 4
@@ -30958,9 +30765,9 @@ ble_tail_else.30773:
 	sub	r2 r1 r1
 	addi	r0 r2 0
 	sub	r2 r1 r25
-	blez	r25 ble_tail_else.30775
+	blez	r25 ble_tail_else.30665
 	jr	r31
-ble_tail_else.30775:
+ble_tail_else.30665:
 	addi	r30 r30 204
 	sw	r1 r30 0
 	sw	r31 r30 4
@@ -31195,9 +31002,9 @@ ble_tail_else.30775:
 init_dirvec_constants.3204:
 	addi	r0 r3 0
 	sub	r3 r2 r25
-	blez	r25 ble_tail_else.30777
+	blez	r25 ble_tail_else.30667
 	jr	r31
-ble_tail_else.30777:
+ble_tail_else.30667:
 	sll	r2 r3 2
 	lwo	r1 r3 r3
 	addi	r30 r30 0
@@ -31227,9 +31034,9 @@ ble_tail_else.30777:
 	sub	r2 r1 r1
 	addi	r0 r2 0
 	sub	r2 r1 r25
-	blez	r25 ble_tail_else.30779
+	blez	r25 ble_tail_else.30669
 	jr	r31
-ble_tail_else.30779:
+ble_tail_else.30669:
 	sll	r1 r2 2
 	lw	r30 r3 0
 	lwo	r3 r2 r2
@@ -31249,9 +31056,9 @@ ble_tail_else.30779:
 	addi	r0 r5 0
 	sw	r1 r30 8
 	sub	r5 r4 r25
-	blez	r25 ble_nontail_else.30781
-	j	ble_nontail_cont.30782
-ble_nontail_else.30781:
+	blez	r25 ble_nontail_else.30671
+	j	ble_nontail_cont.30672
+ble_nontail_else.30671:
 	addi	r30 r30 12
 	sw	r1 r30 0
 	sw	r31 r30 4
@@ -31268,10 +31075,10 @@ ble_nontail_else.30781:
 	addi	r0 r9 1
 	sw	r2 r30 12
 	sub	r8 r9 r25
-	beq	r25 r0 beq_else.30783
+	beq	r25 r0 beq_else.30673
 	addi	r0 r9 2
 	sub	r8 r9 r25
-	beq	r25 r0 beq_else.30785
+	beq	r25 r0 beq_else.30675
 	sw	r6 r30 16
 	sw	r4 r30 20
 	sw	r31 r30 24
@@ -31285,8 +31092,8 @@ ble_nontail_else.30781:
 	sll	r2 r3 2
 	lw	r30 r4 16
 	swo	r1 r4 r3
-	j	beq_cont.30786
-beq_else.30785:
+	j	beq_cont.30676
+beq_else.30675:
 	sw	r6 r30 16
 	sw	r4 r30 20
 	sw	r31 r30 24
@@ -31300,9 +31107,9 @@ beq_else.30785:
 	sll	r2 r3 2
 	lw	r30 r4 16
 	swo	r1 r4 r3
-beq_cont.30786:
-	j	beq_cont.30784
-beq_else.30783:
+beq_cont.30676:
+	j	beq_cont.30674
+beq_else.30673:
 	sw	r6 r30 16
 	sw	r4 r30 20
 	sw	r31 r30 24
@@ -31316,7 +31123,7 @@ beq_else.30783:
 	sll	r2 r3 2
 	lw	r30 r4 16
 	swo	r1 r4 r3
-beq_cont.30784:
+beq_cont.30674:
 	addi	r0 r1 1
 	sub	r2 r1 r2
 	lw	r30 r1 12
@@ -31325,15 +31132,15 @@ beq_cont.30784:
 	jal	iter_setup_dirvec_constants.2986
 	addi	r30 r30 -28
 	lw	r30 r31 24
-ble_nontail_cont.30782:
+ble_nontail_cont.30672:
 	addi	r0 r1 1
 	lw	r30 r2 8
 	sub	r2 r1 r1
 	addi	r0 r2 0
 	sub	r2 r1 r25
-	blez	r25 ble_tail_else.30787
+	blez	r25 ble_tail_else.30677
 	jr	r31
-ble_tail_else.30787:
+ble_tail_else.30677:
 	sll	r1 r2 2
 	lw	r30 r3 0
 	lwo	r3 r2 r2
@@ -31363,9 +31170,9 @@ ble_tail_else.30787:
 	sub	r2 r1 r1
 	addi	r0 r2 0
 	sub	r2 r1 r25
-	blez	r25 ble_tail_else.30789
+	blez	r25 ble_tail_else.30679
 	jr	r31
-ble_tail_else.30789:
+ble_tail_else.30679:
 	sll	r1 r2 2
 	lw	r30 r3 0
 	lwo	r3 r2 r2
@@ -31385,9 +31192,9 @@ ble_tail_else.30789:
 	addi	r0 r5 0
 	sw	r1 r30 28
 	sub	r5 r4 r25
-	blez	r25 ble_nontail_else.30791
-	j	ble_nontail_cont.30792
-ble_nontail_else.30791:
+	blez	r25 ble_nontail_else.30681
+	j	ble_nontail_cont.30682
+ble_nontail_else.30681:
 	addi	r30 r30 32
 	sw	r1 r30 0
 	sw	r31 r30 4
@@ -31404,10 +31211,10 @@ ble_nontail_else.30791:
 	addi	r0 r9 1
 	sw	r2 r30 32
 	sub	r8 r9 r25
-	beq	r25 r0 beq_else.30793
+	beq	r25 r0 beq_else.30683
 	addi	r0 r9 2
 	sub	r8 r9 r25
-	beq	r25 r0 beq_else.30795
+	beq	r25 r0 beq_else.30685
 	sw	r6 r30 36
 	sw	r4 r30 40
 	sw	r31 r30 44
@@ -31421,8 +31228,8 @@ ble_nontail_else.30791:
 	sll	r2 r3 2
 	lw	r30 r4 36
 	swo	r1 r4 r3
-	j	beq_cont.30796
-beq_else.30795:
+	j	beq_cont.30686
+beq_else.30685:
 	sw	r6 r30 36
 	sw	r4 r30 40
 	sw	r31 r30 44
@@ -31436,9 +31243,9 @@ beq_else.30795:
 	sll	r2 r3 2
 	lw	r30 r4 36
 	swo	r1 r4 r3
-beq_cont.30796:
-	j	beq_cont.30794
-beq_else.30793:
+beq_cont.30686:
+	j	beq_cont.30684
+beq_else.30683:
 	sw	r6 r30 36
 	sw	r4 r30 40
 	sw	r31 r30 44
@@ -31452,7 +31259,7 @@ beq_else.30793:
 	sll	r2 r3 2
 	lw	r30 r4 36
 	swo	r1 r4 r3
-beq_cont.30794:
+beq_cont.30684:
 	addi	r0 r1 1
 	sub	r2 r1 r2
 	lw	r30 r1 32
@@ -31461,7 +31268,7 @@ beq_cont.30794:
 	jal	iter_setup_dirvec_constants.2986
 	addi	r30 r30 -48
 	lw	r30 r31 44
-ble_nontail_cont.30792:
+ble_nontail_cont.30682:
 	addi	r0 r1 1
 	lw	r30 r2 28
 	sub	r2 r1 r2
@@ -31470,9 +31277,9 @@ ble_nontail_cont.30792:
 init_vecset_constants.3207:
 	addi	r0 r2 0
 	sub	r2 r1 r25
-	blez	r25 ble_tail_else.30797
+	blez	r25 ble_tail_else.30687
 	jr	r31
-ble_tail_else.30797:
+ble_tail_else.30687:
 	addi	r30 r30 0
 	sw	r1 r30 0
 	sw	r31 r30 4
@@ -31503,9 +31310,9 @@ ble_tail_else.30797:
 	sw	r1 r30 0
 	sw	r2 r30 4
 	sub	r5 r4 r25
-	blez	r25 ble_nontail_else.30799
-	j	ble_nontail_cont.30800
-ble_nontail_else.30799:
+	blez	r25 ble_nontail_else.30689
+	j	ble_nontail_cont.30690
+ble_nontail_else.30689:
 	addi	r30 r30 8
 	sw	r1 r30 0
 	sw	r31 r30 4
@@ -31522,10 +31329,10 @@ ble_nontail_else.30799:
 	addi	r0 r9 1
 	sw	r3 r30 8
 	sub	r8 r9 r25
-	beq	r25 r0 beq_else.30801
+	beq	r25 r0 beq_else.30691
 	addi	r0 r9 2
 	sub	r8 r9 r25
-	beq	r25 r0 beq_else.30803
+	beq	r25 r0 beq_else.30693
 	sw	r6 r30 12
 	sw	r4 r30 16
 	sw	r31 r30 20
@@ -31539,8 +31346,8 @@ ble_nontail_else.30799:
 	sll	r2 r3 2
 	lw	r30 r4 12
 	swo	r1 r4 r3
-	j	beq_cont.30804
-beq_else.30803:
+	j	beq_cont.30694
+beq_else.30693:
 	sw	r6 r30 12
 	sw	r4 r30 16
 	sw	r31 r30 20
@@ -31554,9 +31361,9 @@ beq_else.30803:
 	sll	r2 r3 2
 	lw	r30 r4 12
 	swo	r1 r4 r3
-beq_cont.30804:
-	j	beq_cont.30802
-beq_else.30801:
+beq_cont.30694:
+	j	beq_cont.30692
+beq_else.30691:
 	sw	r6 r30 12
 	sw	r4 r30 16
 	sw	r31 r30 20
@@ -31570,7 +31377,7 @@ beq_else.30801:
 	sll	r2 r3 2
 	lw	r30 r4 12
 	swo	r1 r4 r3
-beq_cont.30802:
+beq_cont.30692:
 	addi	r0 r1 1
 	sub	r2 r1 r2
 	lw	r30 r1 8
@@ -31579,7 +31386,7 @@ beq_cont.30802:
 	jal	iter_setup_dirvec_constants.2986
 	addi	r30 r30 -24
 	lw	r30 r31 20
-ble_nontail_cont.30800:
+ble_nontail_cont.30690:
 	addi	r0 r1 118
 	sll	r1 r1 2
 	lw	r30 r2 4
@@ -31622,9 +31429,9 @@ ble_nontail_cont.30800:
 	sub	r3 r4 r3
 	addi	r0 r4 0
 	sub	r4 r3 r25
-	blez	r25 ble_nontail_else.30805
-	j	ble_nontail_cont.30806
-ble_nontail_else.30805:
+	blez	r25 ble_nontail_else.30695
+	j	ble_nontail_cont.30696
+ble_nontail_else.30695:
 	addi	r30 r30 20
 	sw	r1 r30 0
 	sw	r31 r30 4
@@ -31641,10 +31448,10 @@ ble_nontail_else.30805:
 	addi	r0 r8 1
 	sw	r1 r30 20
 	sub	r7 r8 r25
-	beq	r25 r0 beq_else.30807
+	beq	r25 r0 beq_else.30697
 	addi	r0 r8 2
 	sub	r7 r8 r25
-	beq	r25 r0 beq_else.30809
+	beq	r25 r0 beq_else.30699
 	sw	r5 r30 24
 	sw	r3 r30 28
 	sw	r31 r30 32
@@ -31658,8 +31465,8 @@ ble_nontail_else.30805:
 	sll	r2 r3 2
 	lw	r30 r4 24
 	swo	r1 r4 r3
-	j	beq_cont.30810
-beq_else.30809:
+	j	beq_cont.30700
+beq_else.30699:
 	sw	r5 r30 24
 	sw	r3 r30 28
 	sw	r31 r30 32
@@ -31673,9 +31480,9 @@ beq_else.30809:
 	sll	r2 r3 2
 	lw	r30 r4 24
 	swo	r1 r4 r3
-beq_cont.30810:
-	j	beq_cont.30808
-beq_else.30807:
+beq_cont.30700:
+	j	beq_cont.30698
+beq_else.30697:
 	sw	r5 r30 24
 	sw	r3 r30 28
 	sw	r31 r30 32
@@ -31689,7 +31496,7 @@ beq_else.30807:
 	sll	r2 r3 2
 	lw	r30 r4 24
 	swo	r1 r4 r3
-beq_cont.30808:
+beq_cont.30698:
 	addi	r0 r1 1
 	sub	r2 r1 r2
 	lw	r30 r1 20
@@ -31698,7 +31505,7 @@ beq_cont.30808:
 	jal	iter_setup_dirvec_constants.2986
 	addi	r30 r30 -36
 	lw	r30 r31 32
-ble_nontail_cont.30806:
+ble_nontail_cont.30696:
 	addi	r0 r2 116
 	lw	r30 r1 4
 	sw	r31 r30 32
@@ -31711,9 +31518,9 @@ ble_nontail_cont.30806:
 	sub	r2 r1 r1
 	addi	r0 r2 0
 	sub	r2 r1 r25
-	blez	r25 ble_tail_else.30811
+	blez	r25 ble_tail_else.30701
 	jr	r31
-ble_tail_else.30811:
+ble_tail_else.30701:
 	addi	r30 r30 32
 	sw	r1 r30 0
 	sw	r31 r30 4
@@ -31768,9 +31575,9 @@ ble_tail_else.30811:
 	sub	r3 r4 r3
 	addi	r0 r4 0
 	sub	r4 r3 r25
-	blez	r25 ble_nontail_else.30813
-	j	ble_nontail_cont.30814
-ble_nontail_else.30813:
+	blez	r25 ble_nontail_else.30703
+	j	ble_nontail_cont.30704
+ble_nontail_else.30703:
 	addi	r30 r30 40
 	sw	r1 r30 0
 	sw	r31 r30 4
@@ -31787,10 +31594,10 @@ ble_nontail_else.30813:
 	addi	r0 r8 1
 	sw	r1 r30 40
 	sub	r7 r8 r25
-	beq	r25 r0 beq_else.30815
+	beq	r25 r0 beq_else.30705
 	addi	r0 r8 2
 	sub	r7 r8 r25
-	beq	r25 r0 beq_else.30817
+	beq	r25 r0 beq_else.30707
 	sw	r5 r30 44
 	sw	r3 r30 48
 	sw	r31 r30 52
@@ -31804,8 +31611,8 @@ ble_nontail_else.30813:
 	sll	r2 r3 2
 	lw	r30 r4 44
 	swo	r1 r4 r3
-	j	beq_cont.30818
-beq_else.30817:
+	j	beq_cont.30708
+beq_else.30707:
 	sw	r5 r30 44
 	sw	r3 r30 48
 	sw	r31 r30 52
@@ -31819,9 +31626,9 @@ beq_else.30817:
 	sll	r2 r3 2
 	lw	r30 r4 44
 	swo	r1 r4 r3
-beq_cont.30818:
-	j	beq_cont.30816
-beq_else.30815:
+beq_cont.30708:
+	j	beq_cont.30706
+beq_else.30705:
 	sw	r5 r30 44
 	sw	r3 r30 48
 	sw	r31 r30 52
@@ -31835,7 +31642,7 @@ beq_else.30815:
 	sll	r2 r3 2
 	lw	r30 r4 44
 	swo	r1 r4 r3
-beq_cont.30816:
+beq_cont.30706:
 	addi	r0 r1 1
 	sub	r2 r1 r2
 	lw	r30 r1 40
@@ -31844,7 +31651,7 @@ beq_cont.30816:
 	jal	iter_setup_dirvec_constants.2986
 	addi	r30 r30 -56
 	lw	r30 r31 52
-ble_nontail_cont.30814:
+ble_nontail_cont.30704:
 	addi	r0 r2 117
 	lw	r30 r1 36
 	sw	r31 r30 52
@@ -31857,9 +31664,9 @@ ble_nontail_cont.30814:
 	sub	r2 r1 r1
 	addi	r0 r2 0
 	sub	r2 r1 r25
-	blez	r25 ble_tail_else.30819
+	blez	r25 ble_tail_else.30709
 	jr	r31
-ble_tail_else.30819:
+ble_tail_else.30709:
 	addi	r30 r30 52
 	sw	r1 r30 0
 	sw	r31 r30 4
@@ -31890,9 +31697,9 @@ ble_tail_else.30819:
 	sw	r1 r30 52
 	sw	r2 r30 56
 	sub	r5 r4 r25
-	blez	r25 ble_nontail_else.30821
-	j	ble_nontail_cont.30822
-ble_nontail_else.30821:
+	blez	r25 ble_nontail_else.30711
+	j	ble_nontail_cont.30712
+ble_nontail_else.30711:
 	addi	r30 r30 60
 	sw	r1 r30 0
 	sw	r31 r30 4
@@ -31909,10 +31716,10 @@ ble_nontail_else.30821:
 	addi	r0 r9 1
 	sw	r3 r30 60
 	sub	r8 r9 r25
-	beq	r25 r0 beq_else.30823
+	beq	r25 r0 beq_else.30713
 	addi	r0 r9 2
 	sub	r8 r9 r25
-	beq	r25 r0 beq_else.30825
+	beq	r25 r0 beq_else.30715
 	sw	r6 r30 64
 	sw	r4 r30 68
 	sw	r31 r30 72
@@ -31926,8 +31733,8 @@ ble_nontail_else.30821:
 	sll	r2 r3 2
 	lw	r30 r4 64
 	swo	r1 r4 r3
-	j	beq_cont.30826
-beq_else.30825:
+	j	beq_cont.30716
+beq_else.30715:
 	sw	r6 r30 64
 	sw	r4 r30 68
 	sw	r31 r30 72
@@ -31941,9 +31748,9 @@ beq_else.30825:
 	sll	r2 r3 2
 	lw	r30 r4 64
 	swo	r1 r4 r3
-beq_cont.30826:
-	j	beq_cont.30824
-beq_else.30823:
+beq_cont.30716:
+	j	beq_cont.30714
+beq_else.30713:
 	sw	r6 r30 64
 	sw	r4 r30 68
 	sw	r31 r30 72
@@ -31957,7 +31764,7 @@ beq_else.30823:
 	sll	r2 r3 2
 	lw	r30 r4 64
 	swo	r1 r4 r3
-beq_cont.30824:
+beq_cont.30714:
 	addi	r0 r1 1
 	sub	r2 r1 r2
 	lw	r30 r1 60
@@ -31966,7 +31773,7 @@ beq_cont.30824:
 	jal	iter_setup_dirvec_constants.2986
 	addi	r30 r30 -76
 	lw	r30 r31 72
-ble_nontail_cont.30822:
+ble_nontail_cont.30712:
 	addi	r0 r2 118
 	lw	r30 r1 56
 	sw	r31 r30 72
@@ -31979,9 +31786,9 @@ ble_nontail_cont.30822:
 	sub	r2 r1 r1
 	addi	r0 r2 0
 	sub	r2 r1 r25
-	blez	r25 ble_tail_else.30827
+	blez	r25 ble_tail_else.30717
 	jr	r31
-ble_tail_else.30827:
+ble_tail_else.30717:
 	addi	r30 r30 72
 	sw	r1 r30 0
 	sw	r31 r30 4
@@ -32145,9 +31952,9 @@ setup_rect_reflection.3218:
 	addi	r0 r5 0
 	sw	r2 r30 36
 	sub	r5 r4 r25
-	blez	r25 ble_nontail_else.30829
-	j	ble_nontail_cont.30830
-ble_nontail_else.30829:
+	blez	r25 ble_nontail_else.30719
+	j	ble_nontail_cont.30720
+ble_nontail_else.30719:
 	addi	r30 r30 40
 	sw	r1 r30 0
 	sw	r31 r30 4
@@ -32161,10 +31968,10 @@ ble_nontail_else.30829:
 	lw	r5 r6 4
 	addi	r0 r7 1
 	sub	r6 r7 r25
-	beq	r25 r0 beq_else.30831
+	beq	r25 r0 beq_else.30721
 	addi	r0 r7 2
 	sub	r6 r7 r25
-	beq	r25 r0 beq_else.30833
+	beq	r25 r0 beq_else.30723
 	sw	r1 r30 40
 	sw	r4 r30 44
 	sw	r31 r30 48
@@ -32178,8 +31985,8 @@ ble_nontail_else.30829:
 	sll	r2 r3 2
 	lw	r30 r4 40
 	swo	r1 r4 r3
-	j	beq_cont.30834
-beq_else.30833:
+	j	beq_cont.30724
+beq_else.30723:
 	sw	r1 r30 40
 	sw	r4 r30 44
 	sw	r31 r30 48
@@ -32193,9 +32000,9 @@ beq_else.30833:
 	sll	r2 r3 2
 	lw	r30 r4 40
 	swo	r1 r4 r3
-beq_cont.30834:
-	j	beq_cont.30832
-beq_else.30831:
+beq_cont.30724:
+	j	beq_cont.30722
+beq_else.30721:
 	sw	r1 r30 40
 	sw	r4 r30 44
 	sw	r31 r30 48
@@ -32209,7 +32016,7 @@ beq_else.30831:
 	sll	r2 r3 2
 	lw	r30 r4 40
 	swo	r1 r4 r3
-beq_cont.30832:
+beq_cont.30722:
 	addi	r0 r1 1
 	sub	r2 r1 r2
 	lw	r30 r1 36
@@ -32218,7 +32025,7 @@ beq_cont.30832:
 	jal	iter_setup_dirvec_constants.2986
 	addi	r30 r30 -52
 	lw	r30 r31 48
-ble_nontail_cont.30830:
+ble_nontail_cont.30720:
 	addi	r30 r30 48
 	sw	r1 r30 0
 	sw	r31 r30 4
@@ -32317,9 +32124,9 @@ ble_nontail_cont.30830:
 	addi	r0 r5 0
 	sw	r2 r30 64
 	sub	r5 r4 r25
-	blez	r25 ble_nontail_else.30835
-	j	ble_nontail_cont.30836
-ble_nontail_else.30835:
+	blez	r25 ble_nontail_else.30725
+	j	ble_nontail_cont.30726
+ble_nontail_else.30725:
 	addi	r30 r30 68
 	sw	r1 r30 0
 	sw	r31 r30 4
@@ -32333,10 +32140,10 @@ ble_nontail_else.30835:
 	lw	r5 r6 4
 	addi	r0 r7 1
 	sub	r6 r7 r25
-	beq	r25 r0 beq_else.30837
+	beq	r25 r0 beq_else.30727
 	addi	r0 r7 2
 	sub	r6 r7 r25
-	beq	r25 r0 beq_else.30839
+	beq	r25 r0 beq_else.30729
 	sw	r1 r30 68
 	sw	r4 r30 72
 	sw	r31 r30 76
@@ -32350,8 +32157,8 @@ ble_nontail_else.30835:
 	sll	r2 r3 2
 	lw	r30 r4 68
 	swo	r1 r4 r3
-	j	beq_cont.30840
-beq_else.30839:
+	j	beq_cont.30730
+beq_else.30729:
 	sw	r1 r30 68
 	sw	r4 r30 72
 	sw	r31 r30 76
@@ -32365,9 +32172,9 @@ beq_else.30839:
 	sll	r2 r3 2
 	lw	r30 r4 68
 	swo	r1 r4 r3
-beq_cont.30840:
-	j	beq_cont.30838
-beq_else.30837:
+beq_cont.30730:
+	j	beq_cont.30728
+beq_else.30727:
 	sw	r1 r30 68
 	sw	r4 r30 72
 	sw	r31 r30 76
@@ -32381,7 +32188,7 @@ beq_else.30837:
 	sll	r2 r3 2
 	lw	r30 r4 68
 	swo	r1 r4 r3
-beq_cont.30838:
+beq_cont.30728:
 	addi	r0 r1 1
 	sub	r2 r1 r2
 	lw	r30 r1 64
@@ -32390,7 +32197,7 @@ beq_cont.30838:
 	jal	iter_setup_dirvec_constants.2986
 	addi	r30 r30 -80
 	lw	r30 r31 76
-ble_nontail_cont.30836:
+ble_nontail_cont.30726:
 	addi	r30 r30 76
 	sw	r1 r30 0
 	sw	r31 r30 4
@@ -32490,9 +32297,9 @@ ble_nontail_cont.30836:
 	addi	r0 r5 0
 	sw	r2 r30 92
 	sub	r5 r4 r25
-	blez	r25 ble_nontail_else.30841
-	j	ble_nontail_cont.30842
-ble_nontail_else.30841:
+	blez	r25 ble_nontail_else.30731
+	j	ble_nontail_cont.30732
+ble_nontail_else.30731:
 	addi	r30 r30 96
 	sw	r1 r30 0
 	sw	r31 r30 4
@@ -32506,10 +32313,10 @@ ble_nontail_else.30841:
 	lw	r5 r6 4
 	addi	r0 r7 1
 	sub	r6 r7 r25
-	beq	r25 r0 beq_else.30843
+	beq	r25 r0 beq_else.30733
 	addi	r0 r7 2
 	sub	r6 r7 r25
-	beq	r25 r0 beq_else.30845
+	beq	r25 r0 beq_else.30735
 	sw	r1 r30 96
 	sw	r4 r30 100
 	sw	r31 r30 104
@@ -32523,8 +32330,8 @@ ble_nontail_else.30841:
 	sll	r2 r3 2
 	lw	r30 r4 96
 	swo	r1 r4 r3
-	j	beq_cont.30846
-beq_else.30845:
+	j	beq_cont.30736
+beq_else.30735:
 	sw	r1 r30 96
 	sw	r4 r30 100
 	sw	r31 r30 104
@@ -32538,9 +32345,9 @@ beq_else.30845:
 	sll	r2 r3 2
 	lw	r30 r4 96
 	swo	r1 r4 r3
-beq_cont.30846:
-	j	beq_cont.30844
-beq_else.30843:
+beq_cont.30736:
+	j	beq_cont.30734
+beq_else.30733:
 	sw	r1 r30 96
 	sw	r4 r30 100
 	sw	r31 r30 104
@@ -32554,7 +32361,7 @@ beq_else.30843:
 	sll	r2 r3 2
 	lw	r30 r4 96
 	swo	r1 r4 r3
-beq_cont.30844:
+beq_cont.30734:
 	addi	r0 r1 1
 	sub	r2 r1 r2
 	lw	r30 r1 92
@@ -32563,7 +32370,7 @@ beq_cont.30844:
 	jal	iter_setup_dirvec_constants.2986
 	addi	r30 r30 -108
 	lw	r30 r31 104
-ble_nontail_cont.30842:
+ble_nontail_cont.30732:
 	addi	r30 r30 104
 	sw	r1 r30 0
 	sw	r31 r30 4
@@ -32782,9 +32589,9 @@ setup_surface_reflection.3221:
 	addi	r0 r5 0
 	sw	r2 r30 28
 	sub	r5 r4 r25
-	blez	r25 ble_nontail_else.30848
-	j	ble_nontail_cont.30849
-ble_nontail_else.30848:
+	blez	r25 ble_nontail_else.30738
+	j	ble_nontail_cont.30739
+ble_nontail_else.30738:
 	addi	r30 r30 32
 	sw	r1 r30 0
 	sw	r31 r30 4
@@ -32798,10 +32605,10 @@ ble_nontail_else.30848:
 	lw	r5 r6 4
 	addi	r0 r7 1
 	sub	r6 r7 r25
-	beq	r25 r0 beq_else.30850
+	beq	r25 r0 beq_else.30740
 	addi	r0 r7 2
 	sub	r6 r7 r25
-	beq	r25 r0 beq_else.30852
+	beq	r25 r0 beq_else.30742
 	sw	r1 r30 32
 	sw	r4 r30 36
 	sw	r31 r30 40
@@ -32815,8 +32622,8 @@ ble_nontail_else.30848:
 	sll	r2 r3 2
 	lw	r30 r4 32
 	swo	r1 r4 r3
-	j	beq_cont.30853
-beq_else.30852:
+	j	beq_cont.30743
+beq_else.30742:
 	sw	r1 r30 32
 	sw	r4 r30 36
 	sw	r31 r30 40
@@ -32830,9 +32637,9 @@ beq_else.30852:
 	sll	r2 r3 2
 	lw	r30 r4 32
 	swo	r1 r4 r3
-beq_cont.30853:
-	j	beq_cont.30851
-beq_else.30850:
+beq_cont.30743:
+	j	beq_cont.30741
+beq_else.30740:
 	sw	r1 r30 32
 	sw	r4 r30 36
 	sw	r31 r30 40
@@ -32846,7 +32653,7 @@ beq_else.30850:
 	sll	r2 r3 2
 	lw	r30 r4 32
 	swo	r1 r4 r3
-beq_cont.30851:
+beq_cont.30741:
 	addi	r0 r1 1
 	sub	r2 r1 r2
 	lw	r30 r1 28
@@ -32855,7 +32662,7 @@ beq_cont.30851:
 	jal	iter_setup_dirvec_constants.2986
 	addi	r30 r30 -44
 	lw	r30 r31 40
-ble_nontail_cont.30849:
+ble_nontail_cont.30739:
 	addi	r30 r30 40
 	sw	r1 r30 0
 	sw	r31 r30 4
@@ -33000,9 +32807,9 @@ rt.3226:
 	sub	r2 r3 r2
 	addi	r0 r3 0
 	sub	r3 r2 r25
-	blez	r25 ble_nontail_else.30855
-	j	ble_nontail_cont.30856
-ble_nontail_else.30855:
+	blez	r25 ble_nontail_else.30745
+	j	ble_nontail_cont.30746
+ble_nontail_else.30745:
 	addi	r0 r3 3
 	lui	r24 0
 	ori	r24 r24 0
@@ -33394,10 +33201,10 @@ ble_nontail_else.30855:
 	sub	r2 r1 r1
 	addi	r0 r2 0
 	sub	r2 r1 r25
-	blez	r25 ble_nontail_else.30857
+	blez	r25 ble_nontail_else.30747
 	mov	r1 r4
-	j	ble_nontail_cont.30858
-ble_nontail_else.30857:
+	j	ble_nontail_cont.30748
+ble_nontail_else.30747:
 	sw	r1 r30 120
 	sw	r31 r30 124
 	addi	r30 r30 128
@@ -33416,8 +33223,8 @@ ble_nontail_else.30857:
 	jal	init_line_elements.3170
 	addi	r30 r30 -128
 	lw	r30 r31 124
-ble_nontail_cont.30858:
-ble_nontail_cont.30856:
+ble_nontail_cont.30748:
+ble_nontail_cont.30746:
 	addi	r30 r30 124
 	sw	r1 r30 0
 	sw	r31 r30 4
@@ -33458,9 +33265,9 @@ ble_nontail_cont.30856:
 	sub	r2 r3 r2
 	addi	r0 r3 0
 	sub	r3 r2 r25
-	blez	r25 ble_nontail_else.30859
-	j	ble_nontail_cont.30860
-ble_nontail_else.30859:
+	blez	r25 ble_nontail_else.30749
+	j	ble_nontail_cont.30750
+ble_nontail_else.30749:
 	addi	r0 r3 3
 	lui	r24 0
 	ori	r24 r24 0
@@ -33852,10 +33659,10 @@ ble_nontail_else.30859:
 	sub	r2 r1 r1
 	addi	r0 r2 0
 	sub	r2 r1 r25
-	blez	r25 ble_nontail_else.30861
+	blez	r25 ble_nontail_else.30751
 	mov	r1 r4
-	j	ble_nontail_cont.30862
-ble_nontail_else.30861:
+	j	ble_nontail_cont.30752
+ble_nontail_else.30751:
 	sw	r1 r30 236
 	sw	r31 r30 240
 	addi	r30 r30 244
@@ -33874,8 +33681,8 @@ ble_nontail_else.30861:
 	jal	init_line_elements.3170
 	addi	r30 r30 -244
 	lw	r30 r31 240
-ble_nontail_cont.30862:
-ble_nontail_cont.30860:
+ble_nontail_cont.30752:
+ble_nontail_cont.30750:
 	addi	r30 r30 240
 	sw	r1 r30 0
 	sw	r31 r30 4
@@ -33916,9 +33723,9 @@ ble_nontail_cont.30860:
 	sub	r2 r3 r2
 	addi	r0 r3 0
 	sub	r3 r2 r25
-	blez	r25 ble_nontail_else.30863
-	j	ble_nontail_cont.30864
-ble_nontail_else.30863:
+	blez	r25 ble_nontail_else.30753
+	j	ble_nontail_cont.30754
+ble_nontail_else.30753:
 	addi	r0 r3 3
 	lui	r24 0
 	ori	r24 r24 0
@@ -34310,10 +34117,10 @@ ble_nontail_else.30863:
 	sub	r2 r1 r1
 	addi	r0 r2 0
 	sub	r2 r1 r25
-	blez	r25 ble_nontail_else.30865
+	blez	r25 ble_nontail_else.30755
 	mov	r1 r4
-	j	ble_nontail_cont.30866
-ble_nontail_else.30865:
+	j	ble_nontail_cont.30756
+ble_nontail_else.30755:
 	sw	r1 r30 352
 	sw	r31 r30 356
 	addi	r30 r30 360
@@ -34332,8 +34139,8 @@ ble_nontail_else.30865:
 	jal	init_line_elements.3170
 	addi	r30 r30 -360
 	lw	r30 r31 356
-ble_nontail_cont.30866:
-ble_nontail_cont.30864:
+ble_nontail_cont.30756:
+ble_nontail_cont.30754:
 	sw	r1 r30 356
 	sw	r31 r30 360
 	addi	r30 r30 364
@@ -34454,7 +34261,7 @@ ble_nontail_cont.30864:
 	lw	r30 r31 384
 	addi	r0 r2 0
 	sub	r1 r2 r25
-	beq	r25 r0 beq_else.30867
+	beq	r25 r0 beq_else.30757
 	addi	r0 r1 1
 	sw	r1 r30 384
 	sw	r31 r30 388
@@ -34464,7 +34271,7 @@ ble_nontail_cont.30864:
 	lw	r30 r31 388
 	addi	r0 r2 0
 	sub	r1 r2 r25
-	beq	r25 r0 beq_else.30869
+	beq	r25 r0 beq_else.30759
 	addi	r0 r1 2
 	sw	r1 r30 388
 	sw	r31 r30 392
@@ -34474,7 +34281,7 @@ ble_nontail_cont.30864:
 	lw	r30 r31 392
 	addi	r0 r2 0
 	sub	r1 r2 r25
-	beq	r25 r0 beq_else.30871
+	beq	r25 r0 beq_else.30761
 	addi	r0 r1 3
 	sw	r1 r30 392
 	sw	r31 r30 396
@@ -34484,7 +34291,7 @@ ble_nontail_cont.30864:
 	lw	r30 r31 396
 	addi	r0 r2 0
 	sub	r1 r2 r25
-	beq	r25 r0 beq_else.30873
+	beq	r25 r0 beq_else.30763
 	addi	r0 r1 4
 	sw	r1 r30 396
 	sw	r31 r30 400
@@ -34494,15 +34301,15 @@ ble_nontail_cont.30864:
 	lw	r30 r31 400
 	addi	r0 r2 0
 	sub	r1 r2 r25
-	beq	r25 r0 beq_else.30875
+	beq	r25 r0 beq_else.30765
 	addi	r0 r1 5
 	sw	r31 r30 400
 	addi	r30 r30 404
 	jal	read_object.2881
 	addi	r30 r30 -404
 	lw	r30 r31 400
-	j	beq_cont.30876
-beq_else.30875:
+	j	beq_cont.30766
+beq_else.30765:
 	addi	r30 r30 400
 	sw	r1 r30 0
 	sw	r31 r30 4
@@ -34514,9 +34321,9 @@ beq_else.30875:
 	sll	r2 r2 2
 	lw	r30 r3 396
 	swo	r3 r1 r2
-beq_cont.30876:
-	j	beq_cont.30874
-beq_else.30873:
+beq_cont.30766:
+	j	beq_cont.30764
+beq_else.30763:
 	addi	r30 r30 400
 	sw	r1 r30 0
 	sw	r31 r30 4
@@ -34528,9 +34335,9 @@ beq_else.30873:
 	sll	r2 r2 2
 	lw	r30 r3 392
 	swo	r3 r1 r2
-beq_cont.30874:
-	j	beq_cont.30872
-beq_else.30871:
+beq_cont.30764:
+	j	beq_cont.30762
+beq_else.30761:
 	addi	r30 r30 400
 	sw	r1 r30 0
 	sw	r31 r30 4
@@ -34542,9 +34349,9 @@ beq_else.30871:
 	sll	r2 r2 2
 	lw	r30 r3 388
 	swo	r3 r1 r2
-beq_cont.30872:
-	j	beq_cont.30870
-beq_else.30869:
+beq_cont.30762:
+	j	beq_cont.30760
+beq_else.30759:
 	addi	r30 r30 400
 	sw	r1 r30 0
 	sw	r31 r30 4
@@ -34556,9 +34363,9 @@ beq_else.30869:
 	sll	r2 r2 2
 	lw	r30 r3 384
 	swo	r3 r1 r2
-beq_cont.30870:
-	j	beq_cont.30868
-beq_else.30867:
+beq_cont.30760:
+	j	beq_cont.30758
+beq_else.30757:
 	addi	r30 r30 400
 	sw	r1 r30 0
 	sw	r31 r30 4
@@ -34570,7 +34377,7 @@ beq_else.30867:
 	sll	r2 r2 2
 	lw	r30 r3 380
 	swo	r3 r1 r2
-beq_cont.30868:
+beq_cont.30758:
 	addi	r0 r1 0
 	addi	r0 r2 0
 	sw	r1 r30 400
@@ -34582,7 +34389,7 @@ beq_cont.30868:
 	lw	r30 r31 408
 	addi	r0 r2 -1
 	sub	r1 r2 r25
-	beq	r25 r0 beq_else.30877
+	beq	r25 r0 beq_else.30767
 	addi	r0 r2 1
 	sw	r1 r30 408
 	sw	r2 r30 412
@@ -34593,7 +34400,7 @@ beq_cont.30868:
 	lw	r30 r31 416
 	addi	r0 r2 -1
 	sub	r1 r2 r25
-	beq	r25 r0 beq_else.30879
+	beq	r25 r0 beq_else.30769
 	addi	r0 r2 2
 	sw	r1 r30 416
 	sw	r2 r30 420
@@ -34604,7 +34411,7 @@ beq_cont.30868:
 	lw	r30 r31 424
 	addi	r0 r2 -1
 	sub	r1 r2 r25
-	beq	r25 r0 beq_else.30881
+	beq	r25 r0 beq_else.30771
 	addi	r0 r2 3
 	sw	r1 r30 424
 	sw	r2 r30 428
@@ -34615,7 +34422,7 @@ beq_cont.30868:
 	lw	r30 r31 432
 	addi	r0 r2 -1
 	sub	r1 r2 r25
-	beq	r25 r0 beq_else.30883
+	beq	r25 r0 beq_else.30773
 	addi	r0 r2 4
 	sw	r1 r30 432
 	sw	r2 r30 436
@@ -34626,7 +34433,7 @@ beq_cont.30868:
 	lw	r30 r31 440
 	addi	r0 r2 -1
 	sub	r1 r2 r25
-	beq	r25 r0 beq_else.30885
+	beq	r25 r0 beq_else.30775
 	addi	r0 r2 5
 	sw	r1 r30 440
 	sw	r31 r30 444
@@ -34639,8 +34446,8 @@ beq_cont.30868:
 	sll	r2 r2 2
 	lw	r30 r3 440
 	swo	r3 r1 r2
-	j	beq_cont.30886
-beq_else.30885:
+	j	beq_cont.30776
+beq_else.30775:
 	addi	r0 r1 5
 	addi	r0 r2 -1
 	sw	r31 r30 444
@@ -34648,13 +34455,13 @@ beq_else.30885:
 	jal	min_caml_create_array
 	addi	r30 r30 -448
 	lw	r30 r31 444
-beq_cont.30886:
+beq_cont.30776:
 	lw	r30 r2 428
 	sll	r2 r2 2
 	lw	r30 r3 432
 	swo	r3 r1 r2
-	j	beq_cont.30884
-beq_else.30883:
+	j	beq_cont.30774
+beq_else.30773:
 	addi	r0 r1 4
 	addi	r0 r2 -1
 	sw	r31 r30 444
@@ -34662,13 +34469,13 @@ beq_else.30883:
 	jal	min_caml_create_array
 	addi	r30 r30 -448
 	lw	r30 r31 444
-beq_cont.30884:
+beq_cont.30774:
 	lw	r30 r2 420
 	sll	r2 r2 2
 	lw	r30 r3 424
 	swo	r3 r1 r2
-	j	beq_cont.30882
-beq_else.30881:
+	j	beq_cont.30772
+beq_else.30771:
 	addi	r0 r1 3
 	addi	r0 r2 -1
 	sw	r31 r30 444
@@ -34676,13 +34483,13 @@ beq_else.30881:
 	jal	min_caml_create_array
 	addi	r30 r30 -448
 	lw	r30 r31 444
-beq_cont.30882:
+beq_cont.30772:
 	lw	r30 r2 412
 	sll	r2 r2 2
 	lw	r30 r3 416
 	swo	r3 r1 r2
-	j	beq_cont.30880
-beq_else.30879:
+	j	beq_cont.30770
+beq_else.30769:
 	addi	r0 r1 2
 	addi	r0 r2 -1
 	sw	r31 r30 444
@@ -34690,13 +34497,13 @@ beq_else.30879:
 	jal	min_caml_create_array
 	addi	r30 r30 -448
 	lw	r30 r31 444
-beq_cont.30880:
+beq_cont.30770:
 	lw	r30 r2 404
 	sll	r2 r2 2
 	lw	r30 r3 408
 	swo	r3 r1 r2
-	j	beq_cont.30878
-beq_else.30877:
+	j	beq_cont.30768
+beq_else.30767:
 	addi	r0 r1 1
 	addi	r0 r2 -1
 	sw	r31 r30 444
@@ -34704,13 +34511,13 @@ beq_else.30877:
 	jal	min_caml_create_array
 	addi	r30 r30 -448
 	lw	r30 r31 444
-beq_cont.30878:
+beq_cont.30768:
 	addi	r0 r2 0
 	sll	r2 r2 2
 	lwo	r1 r2 r2
 	addi	r0 r3 -1
 	sub	r2 r3 r25
-	beq	r25 r0 beq_else.30887
+	beq	r25 r0 beq_else.30777
 	addi	r30 r30 444
 	sw	r1 r30 0
 	sw	r31 r30 4
@@ -34733,7 +34540,7 @@ beq_cont.30878:
 	lw	r30 r31 452
 	addi	r0 r2 -1
 	sub	r1 r2 r25
-	beq	r25 r0 beq_else.30889
+	beq	r25 r0 beq_else.30779
 	addi	r0 r2 1
 	sw	r1 r30 452
 	sw	r2 r30 456
@@ -34744,7 +34551,7 @@ beq_cont.30878:
 	lw	r30 r31 460
 	addi	r0 r2 -1
 	sub	r1 r2 r25
-	beq	r25 r0 beq_else.30891
+	beq	r25 r0 beq_else.30781
 	addi	r0 r2 2
 	sw	r1 r30 460
 	sw	r2 r30 464
@@ -34755,7 +34562,7 @@ beq_cont.30878:
 	lw	r30 r31 468
 	addi	r0 r2 -1
 	sub	r1 r2 r25
-	beq	r25 r0 beq_else.30893
+	beq	r25 r0 beq_else.30783
 	addi	r0 r2 3
 	sw	r1 r30 468
 	sw	r2 r30 472
@@ -34766,7 +34573,7 @@ beq_cont.30878:
 	lw	r30 r31 476
 	addi	r0 r2 -1
 	sub	r1 r2 r25
-	beq	r25 r0 beq_else.30895
+	beq	r25 r0 beq_else.30785
 	addi	r0 r2 4
 	sw	r1 r30 476
 	sw	r31 r30 480
@@ -34779,8 +34586,8 @@ beq_cont.30878:
 	sll	r2 r2 2
 	lw	r30 r3 476
 	swo	r3 r1 r2
-	j	beq_cont.30896
-beq_else.30895:
+	j	beq_cont.30786
+beq_else.30785:
 	addi	r0 r1 4
 	addi	r0 r2 -1
 	sw	r31 r30 480
@@ -34788,13 +34595,13 @@ beq_else.30895:
 	jal	min_caml_create_array
 	addi	r30 r30 -484
 	lw	r30 r31 480
-beq_cont.30896:
+beq_cont.30786:
 	lw	r30 r2 464
 	sll	r2 r2 2
 	lw	r30 r3 468
 	swo	r3 r1 r2
-	j	beq_cont.30894
-beq_else.30893:
+	j	beq_cont.30784
+beq_else.30783:
 	addi	r0 r1 3
 	addi	r0 r2 -1
 	sw	r31 r30 480
@@ -34802,13 +34609,13 @@ beq_else.30893:
 	jal	min_caml_create_array
 	addi	r30 r30 -484
 	lw	r30 r31 480
-beq_cont.30894:
+beq_cont.30784:
 	lw	r30 r2 456
 	sll	r2 r2 2
 	lw	r30 r3 460
 	swo	r3 r1 r2
-	j	beq_cont.30892
-beq_else.30891:
+	j	beq_cont.30782
+beq_else.30781:
 	addi	r0 r1 2
 	addi	r0 r2 -1
 	sw	r31 r30 480
@@ -34816,13 +34623,13 @@ beq_else.30891:
 	jal	min_caml_create_array
 	addi	r30 r30 -484
 	lw	r30 r31 480
-beq_cont.30892:
+beq_cont.30782:
 	lw	r30 r2 448
 	sll	r2 r2 2
 	lw	r30 r3 452
 	swo	r3 r1 r2
-	j	beq_cont.30890
-beq_else.30889:
+	j	beq_cont.30780
+beq_else.30779:
 	addi	r0 r1 1
 	addi	r0 r2 -1
 	sw	r31 r30 480
@@ -34830,13 +34637,13 @@ beq_else.30889:
 	jal	min_caml_create_array
 	addi	r30 r30 -484
 	lw	r30 r31 480
-beq_cont.30890:
+beq_cont.30780:
 	addi	r0 r2 0
 	sll	r2 r2 2
 	lwo	r1 r2 r2
 	addi	r0 r3 -1
 	sub	r2 r3 r25
-	beq	r25 r0 beq_else.30897
+	beq	r25 r0 beq_else.30787
 	addi	r30 r30 480
 	sw	r1 r30 0
 	sw	r31 r30 4
@@ -34854,12 +34661,12 @@ beq_cont.30890:
 	jal	read_and_network.2889
 	addi	r30 r30 -484
 	lw	r30 r31 480
-	j	beq_cont.30898
-beq_else.30897:
-beq_cont.30898:
-	j	beq_cont.30888
-beq_else.30887:
-beq_cont.30888:
+	j	beq_cont.30788
+beq_else.30787:
+beq_cont.30788:
+	j	beq_cont.30778
+beq_else.30777:
+beq_cont.30778:
 	addi	r30 r30 480
 	sw	r1 r30 0
 	sw	r31 r30 4
@@ -34881,7 +34688,7 @@ beq_cont.30888:
 	lw	r30 r31 496
 	addi	r0 r2 -1
 	sub	r1 r2 r25
-	beq	r25 r0 beq_else.30899
+	beq	r25 r0 beq_else.30789
 	addi	r0 r2 1
 	sw	r1 r30 496
 	sw	r2 r30 500
@@ -34892,7 +34699,7 @@ beq_cont.30888:
 	lw	r30 r31 504
 	addi	r0 r2 -1
 	sub	r1 r2 r25
-	beq	r25 r0 beq_else.30901
+	beq	r25 r0 beq_else.30791
 	addi	r0 r2 2
 	sw	r1 r30 504
 	sw	r2 r30 508
@@ -34903,7 +34710,7 @@ beq_cont.30888:
 	lw	r30 r31 512
 	addi	r0 r2 -1
 	sub	r1 r2 r25
-	beq	r25 r0 beq_else.30903
+	beq	r25 r0 beq_else.30793
 	addi	r0 r2 3
 	sw	r1 r30 512
 	sw	r2 r30 516
@@ -34914,7 +34721,7 @@ beq_cont.30888:
 	lw	r30 r31 520
 	addi	r0 r2 -1
 	sub	r1 r2 r25
-	beq	r25 r0 beq_else.30905
+	beq	r25 r0 beq_else.30795
 	addi	r0 r2 4
 	sw	r1 r30 520
 	sw	r2 r30 524
@@ -34925,7 +34732,7 @@ beq_cont.30888:
 	lw	r30 r31 528
 	addi	r0 r2 -1
 	sub	r1 r2 r25
-	beq	r25 r0 beq_else.30907
+	beq	r25 r0 beq_else.30797
 	addi	r0 r2 5
 	sw	r1 r30 528
 	sw	r31 r30 532
@@ -34938,8 +34745,8 @@ beq_cont.30888:
 	sll	r2 r2 2
 	lw	r30 r3 528
 	swo	r3 r1 r2
-	j	beq_cont.30908
-beq_else.30907:
+	j	beq_cont.30798
+beq_else.30797:
 	addi	r0 r1 5
 	addi	r0 r2 -1
 	sw	r31 r30 532
@@ -34947,13 +34754,13 @@ beq_else.30907:
 	jal	min_caml_create_array
 	addi	r30 r30 -536
 	lw	r30 r31 532
-beq_cont.30908:
+beq_cont.30798:
 	lw	r30 r2 516
 	sll	r2 r2 2
 	lw	r30 r3 520
 	swo	r3 r1 r2
-	j	beq_cont.30906
-beq_else.30905:
+	j	beq_cont.30796
+beq_else.30795:
 	addi	r0 r1 4
 	addi	r0 r2 -1
 	sw	r31 r30 532
@@ -34961,13 +34768,13 @@ beq_else.30905:
 	jal	min_caml_create_array
 	addi	r30 r30 -536
 	lw	r30 r31 532
-beq_cont.30906:
+beq_cont.30796:
 	lw	r30 r2 508
 	sll	r2 r2 2
 	lw	r30 r3 512
 	swo	r3 r1 r2
-	j	beq_cont.30904
-beq_else.30903:
+	j	beq_cont.30794
+beq_else.30793:
 	addi	r0 r1 3
 	addi	r0 r2 -1
 	sw	r31 r30 532
@@ -34975,13 +34782,13 @@ beq_else.30903:
 	jal	min_caml_create_array
 	addi	r30 r30 -536
 	lw	r30 r31 532
-beq_cont.30904:
+beq_cont.30794:
 	lw	r30 r2 500
 	sll	r2 r2 2
 	lw	r30 r3 504
 	swo	r3 r1 r2
-	j	beq_cont.30902
-beq_else.30901:
+	j	beq_cont.30792
+beq_else.30791:
 	addi	r0 r1 2
 	addi	r0 r2 -1
 	sw	r31 r30 532
@@ -34989,14 +34796,14 @@ beq_else.30901:
 	jal	min_caml_create_array
 	addi	r30 r30 -536
 	lw	r30 r31 532
-beq_cont.30902:
+beq_cont.30792:
 	lw	r30 r2 492
 	sll	r2 r2 2
 	lw	r30 r3 496
 	swo	r3 r1 r2
 	mov	r2 r1
-	j	beq_cont.30900
-beq_else.30899:
+	j	beq_cont.30790
+beq_else.30789:
 	addi	r0 r1 1
 	addi	r0 r2 -1
 	sw	r31 r30 532
@@ -35005,13 +34812,13 @@ beq_else.30899:
 	addi	r30 r30 -536
 	lw	r30 r31 532
 	mov	r2 r1
-beq_cont.30900:
+beq_cont.30790:
 	addi	r0 r1 0
 	sll	r1 r1 2
 	lwo	r2 r1 r1
 	addi	r0 r3 -1
 	sub	r1 r3 r25
-	beq	r25 r0 beq_else.30909
+	beq	r25 r0 beq_else.30799
 	addi	r0 r1 1
 	addi	r0 r3 0
 	sw	r2 r30 532
@@ -35024,7 +34831,7 @@ beq_cont.30900:
 	lw	r30 r31 544
 	addi	r0 r2 -1
 	sub	r1 r2 r25
-	beq	r25 r0 beq_else.30911
+	beq	r25 r0 beq_else.30801
 	addi	r0 r2 1
 	sw	r1 r30 544
 	sw	r2 r30 548
@@ -35035,7 +34842,7 @@ beq_cont.30900:
 	lw	r30 r31 552
 	addi	r0 r2 -1
 	sub	r1 r2 r25
-	beq	r25 r0 beq_else.30913
+	beq	r25 r0 beq_else.30803
 	addi	r0 r2 2
 	sw	r1 r30 552
 	sw	r2 r30 556
@@ -35046,7 +34853,7 @@ beq_cont.30900:
 	lw	r30 r31 560
 	addi	r0 r2 -1
 	sub	r1 r2 r25
-	beq	r25 r0 beq_else.30915
+	beq	r25 r0 beq_else.30805
 	addi	r0 r2 3
 	sw	r1 r30 560
 	sw	r2 r30 564
@@ -35057,7 +34864,7 @@ beq_cont.30900:
 	lw	r30 r31 568
 	addi	r0 r2 -1
 	sub	r1 r2 r25
-	beq	r25 r0 beq_else.30917
+	beq	r25 r0 beq_else.30807
 	addi	r0 r2 4
 	sw	r1 r30 568
 	sw	r31 r30 572
@@ -35070,8 +34877,8 @@ beq_cont.30900:
 	sll	r2 r2 2
 	lw	r30 r3 568
 	swo	r3 r1 r2
-	j	beq_cont.30918
-beq_else.30917:
+	j	beq_cont.30808
+beq_else.30807:
 	addi	r0 r1 4
 	addi	r0 r2 -1
 	sw	r31 r30 572
@@ -35079,13 +34886,13 @@ beq_else.30917:
 	jal	min_caml_create_array
 	addi	r30 r30 -576
 	lw	r30 r31 572
-beq_cont.30918:
+beq_cont.30808:
 	lw	r30 r2 556
 	sll	r2 r2 2
 	lw	r30 r3 560
 	swo	r3 r1 r2
-	j	beq_cont.30916
-beq_else.30915:
+	j	beq_cont.30806
+beq_else.30805:
 	addi	r0 r1 3
 	addi	r0 r2 -1
 	sw	r31 r30 572
@@ -35093,13 +34900,13 @@ beq_else.30915:
 	jal	min_caml_create_array
 	addi	r30 r30 -576
 	lw	r30 r31 572
-beq_cont.30916:
+beq_cont.30806:
 	lw	r30 r2 548
 	sll	r2 r2 2
 	lw	r30 r3 552
 	swo	r3 r1 r2
-	j	beq_cont.30914
-beq_else.30913:
+	j	beq_cont.30804
+beq_else.30803:
 	addi	r0 r1 2
 	addi	r0 r2 -1
 	sw	r31 r30 572
@@ -35107,14 +34914,14 @@ beq_else.30913:
 	jal	min_caml_create_array
 	addi	r30 r30 -576
 	lw	r30 r31 572
-beq_cont.30914:
+beq_cont.30804:
 	lw	r30 r2 540
 	sll	r2 r2 2
 	lw	r30 r3 544
 	swo	r3 r1 r2
 	mov	r2 r1
-	j	beq_cont.30912
-beq_else.30911:
+	j	beq_cont.30802
+beq_else.30801:
 	addi	r0 r1 1
 	addi	r0 r2 -1
 	sw	r31 r30 572
@@ -35123,13 +34930,13 @@ beq_else.30911:
 	addi	r30 r30 -576
 	lw	r30 r31 572
 	mov	r2 r1
-beq_cont.30912:
+beq_cont.30802:
 	addi	r0 r1 0
 	sll	r1 r1 2
 	lwo	r2 r1 r1
 	addi	r0 r3 -1
 	sub	r1 r3 r25
-	beq	r25 r0 beq_else.30919
+	beq	r25 r0 beq_else.30809
 	addi	r0 r1 2
 	sw	r2 r30 572
 	sw	r31 r30 576
@@ -35141,28 +34948,28 @@ beq_cont.30912:
 	sll	r2 r2 2
 	lw	r30 r3 572
 	swo	r3 r1 r2
-	j	beq_cont.30920
-beq_else.30919:
+	j	beq_cont.30810
+beq_else.30809:
 	addi	r0 r1 2
 	sw	r31 r30 576
 	addi	r30 r30 580
 	jal	min_caml_create_array
 	addi	r30 r30 -580
 	lw	r30 r31 576
-beq_cont.30920:
+beq_cont.30810:
 	lw	r30 r2 488
 	sll	r2 r2 2
 	lw	r30 r3 532
 	swo	r3 r1 r2
-	j	beq_cont.30910
-beq_else.30909:
+	j	beq_cont.30800
+beq_else.30799:
 	addi	r0 r1 1
 	sw	r31 r30 576
 	addi	r30 r30 580
 	jal	min_caml_create_array
 	addi	r30 r30 -580
 	lw	r30 r31 576
-beq_cont.30910:
+beq_cont.30800:
 	lw	r30 r2 484
 	sll	r2 r2 2
 	lw	r30 r3 480
@@ -35778,9 +35585,9 @@ beq_cont.30910:
 	addi	r0 r4 0
 	sw	r1 r30 688
 	sub	r4 r3 r25
-	blez	r25 ble_nontail_else.30921
-	j	ble_nontail_cont.30922
-ble_nontail_else.30921:
+	blez	r25 ble_nontail_else.30811
+	j	ble_nontail_cont.30812
+ble_nontail_else.30811:
 	addi	r30 r30 692
 	sw	r1 r30 0
 	sw	r31 r30 4
@@ -35797,10 +35604,10 @@ ble_nontail_else.30921:
 	addi	r0 r8 1
 	sw	r2 r30 692
 	sub	r7 r8 r25
-	beq	r25 r0 beq_else.30923
+	beq	r25 r0 beq_else.30813
 	addi	r0 r8 2
 	sub	r7 r8 r25
-	beq	r25 r0 beq_else.30925
+	beq	r25 r0 beq_else.30815
 	sw	r5 r30 696
 	sw	r3 r30 700
 	sw	r31 r30 704
@@ -35814,8 +35621,8 @@ ble_nontail_else.30921:
 	sll	r2 r3 2
 	lw	r30 r4 696
 	swo	r1 r4 r3
-	j	beq_cont.30926
-beq_else.30925:
+	j	beq_cont.30816
+beq_else.30815:
 	sw	r5 r30 696
 	sw	r3 r30 700
 	sw	r31 r30 704
@@ -35829,9 +35636,9 @@ beq_else.30925:
 	sll	r2 r3 2
 	lw	r30 r4 696
 	swo	r1 r4 r3
-beq_cont.30926:
-	j	beq_cont.30924
-beq_else.30923:
+beq_cont.30816:
+	j	beq_cont.30814
+beq_else.30813:
 	sw	r5 r30 696
 	sw	r3 r30 700
 	sw	r31 r30 704
@@ -35845,7 +35652,7 @@ beq_else.30923:
 	sll	r2 r3 2
 	lw	r30 r4 696
 	swo	r1 r4 r3
-beq_cont.30924:
+beq_cont.30814:
 	addi	r0 r1 1
 	sub	r2 r1 r2
 	lw	r30 r1 692
@@ -35854,7 +35661,7 @@ beq_cont.30924:
 	jal	iter_setup_dirvec_constants.2986
 	addi	r30 r30 -708
 	lw	r30 r31 704
-ble_nontail_cont.30922:
+ble_nontail_cont.30812:
 	addi	r0 r2 118
 	lw	r30 r1 688
 	sw	r31 r30 704
@@ -35958,9 +35765,9 @@ ble_nontail_cont.30922:
 	sub	r1 r2 r1
 	addi	r0 r2 0
 	sub	r2 r1 r25
-	blez	r25 ble_nontail_else.30927
-	j	ble_nontail_cont.30928
-ble_nontail_else.30927:
+	blez	r25 ble_nontail_else.30817
+	j	ble_nontail_cont.30818
+ble_nontail_else.30817:
 	addi	r30 r30 704
 	sw	r1 r30 0
 	sw	r31 r30 4
@@ -35974,9 +35781,9 @@ ble_nontail_else.30927:
 	lw	r2 r3 8
 	addi	r0 r4 2
 	sub	r3 r4 r25
-	beq	r25 r0 beq_else.30929
-	j	beq_cont.30930
-beq_else.30929:
+	beq	r25 r0 beq_else.30819
+	j	beq_cont.30820
+beq_else.30819:
 	lui	r24 16256
 	ori	r24 r24 0
 	mtc1	r24 f0
@@ -35990,43 +35797,43 @@ beq_else.30929:
 	mtc1	r24 f1
 	sub.s	f0 f1 f30
 	mfc1	f30 r25
-	blez	r25 bfle_nontail_else.30931
+	blez	r25 bfle_nontail_else.30821
 	addi	r0 r3 1
-	j	bfle_nontail_cont.30932
-bfle_nontail_else.30931:
+	j	bfle_nontail_cont.30822
+bfle_nontail_else.30821:
 	addi	r0 r3 0
-bfle_nontail_cont.30932:
+bfle_nontail_cont.30822:
 	addi	r0 r4 0
 	sub	r3 r4 r25
-	beq	r25 r0 beq_else.30933
+	beq	r25 r0 beq_else.30823
 	lw	r2 r3 4
 	addi	r0 r4 1
 	sub	r3 r4 r25
-	beq	r25 r0 beq_else.30935
+	beq	r25 r0 beq_else.30825
 	addi	r0 r4 2
 	sub	r3 r4 r25
-	beq	r25 r0 beq_else.30937
-	j	beq_cont.30938
-beq_else.30937:
+	beq	r25 r0 beq_else.30827
+	j	beq_cont.30828
+beq_else.30827:
 	sw	r31 r30 704
 	addi	r30 r30 708
 	jal	setup_surface_reflection.3221
 	addi	r30 r30 -708
 	lw	r30 r31 704
-beq_cont.30938:
-	j	beq_cont.30936
-beq_else.30935:
+beq_cont.30828:
+	j	beq_cont.30826
+beq_else.30825:
 	sw	r31 r30 704
 	addi	r30 r30 708
 	jal	setup_rect_reflection.3218
 	addi	r30 r30 -708
 	lw	r30 r31 704
-beq_cont.30936:
-	j	beq_cont.30934
-beq_else.30933:
-beq_cont.30934:
-beq_cont.30930:
-ble_nontail_cont.30928:
+beq_cont.30826:
+	j	beq_cont.30824
+beq_else.30823:
+beq_cont.30824:
+beq_cont.30820:
+ble_nontail_cont.30818:
 	addi	r0 r1 0
 	addi	r0 r2 0
 	addi	r30 r30 704
@@ -36164,7 +35971,7 @@ ble_nontail_cont.30928:
 	sll	r4 r4 2
 	lwo	r3 r4 r3
 	sub	r3 r2 r25
-	blez	r25 ble_tail_else.30939
+	blez	r25 ble_tail_else.30829
 	addi	r30 r30 712
 	sw	r1 r30 0
 	sw	r31 r30 4
@@ -36180,7 +35987,7 @@ ble_nontail_cont.30928:
 	sub	r3 r4 r3
 	sw	r2 r30 712
 	sub	r3 r2 r25
-	blez	r25 ble_nontail_else.30940
+	blez	r25 ble_nontail_else.30830
 	addi	r0 r3 1
 	addi	r30 r30 716
 	sw	r1 r30 0
@@ -36304,9 +36111,9 @@ ble_nontail_cont.30928:
 	jal	pretrace_pixels.3143
 	addi	r30 r30 -728
 	lw	r30 r31 724
-	j	ble_nontail_cont.30941
-ble_nontail_else.30940:
-ble_nontail_cont.30941:
+	j	ble_nontail_cont.30831
+ble_nontail_else.30830:
+ble_nontail_cont.30831:
 	addi	r0 r1 0
 	lw	r30 r2 712
 	lw	r30 r3 124
@@ -36323,7 +36130,7 @@ ble_nontail_cont.30941:
 	lw	r30 r3 356
 	lw	r30 r4 124
 	j	scan_line.3160
-ble_tail_else.30939:
+ble_tail_else.30829:
 	jr	r31
 _min_caml_start:
 	lui	r27 32
