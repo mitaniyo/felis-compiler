@@ -35,6 +35,7 @@ min_caml_read_int:
 	addi r0 r2 0 # read?
 	addi r0 r3 0 # sgn
 _io_read_int_loop:
+	addi r0 r4 0
 	in r4
 	addi r4 r25 -32
 	blez r25 _io_read_int_check_end
@@ -72,6 +73,7 @@ min_caml_read_float:
 	mtc1 r8 f31
 	cvt.s.w f31 f2 # f2 = 10.0
 _io_read_float_integer_part:
+	addi r0 r4 0
 	in r4
 	addi r4 r25 -32
 	blez r25 _io_read_float_check_end
@@ -90,6 +92,7 @@ _io_read_float_change_sgn:
 	addi r3 r3 1
 	j _io_read_float_integer_part
 _io_read_float_decimal_part:
+	addi r0 r4 0
 	in r4
 	addi r4 r25 -32
 	blez r25 _io_read_float_check_end
