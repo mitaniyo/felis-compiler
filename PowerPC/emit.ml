@@ -104,6 +104,9 @@ and g' oc = function (* 各命令のアセンブリ生成 (caml2html: emit_gprim
 	  Printf.fprintf oc "\tori %s %s %d\n" (reg x) (reg x) lo
       (*Printf.fprintf oc "\tlis\t%s, %d\n" r n;
       Printf.fprintf oc "\tori\t%s, %s, %d\n" r r m*)
+  | NonTail(x), FLi(d) when d = 0.0 ->
+      Printf.fprintf oc "\taddi\tr0 %s 0\n" (reg reg_fimm);
+	  Printf.fprintf oc "\tmtc1\t%s %s\n" (reg reg_fimm) (reg x)
   | NonTail(x), FLi(d) ->
   	  let hi = gethi d in
   	  let lo = getlo d in
