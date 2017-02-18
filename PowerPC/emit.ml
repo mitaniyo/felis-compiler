@@ -105,8 +105,7 @@ and g' oc = function (* 各命令のアセンブリ生成 (caml2html: emit_gprim
       (*Printf.fprintf oc "\tlis\t%s, %d\n" r n;
       Printf.fprintf oc "\tori\t%s, %s, %d\n" r r m*)
   | NonTail(x), FLi(d) when d = 0.0 ->
-      Printf.fprintf oc "\taddi\tr0 %s 0\n" (reg reg_fimm);
-	  Printf.fprintf oc "\tmtc1\t%s %s\n" (reg reg_fimm) (reg x)
+	  Printf.fprintf oc "\tmtc1\tr0 %s\n" (reg x)
   | NonTail(x), FLi(d) ->
   	  let hi = gethi d in
   	  let lo = getlo d in
@@ -138,7 +137,7 @@ and g' oc = function (* 各命令のアセンブリ生成 (caml2html: emit_gprim
   | NonTail(x), Sub(y, C(z)) -> Printf.fprintf oc "\taddi\t%s %s %d\n" (reg y) (reg x) (-z)
   (*| NonTail(x), Slw(y, V(z)) -> Printf.fprintf oc "\tslw\t%s, %s, %s\n" (reg x) (reg y) (reg z)
   | NonTail(x), Slw(y, C(z)) -> Printf.fprintf oc "\tslwi\t%s, %s, %d\n" (reg x) (reg y) z*)
-  | NonTail(x), Mul(y, C(z)) -> let l = small_log z in 
+  | NonTail(x), Mul(y, C(z)) -> let l = small_log z in
     if l >= 0 then Printf.fprintf oc "\tsll\t%s %s %d\n" (reg y) (reg x) l
     else Printf.fprintf oc "\tmult\t%s %s %d\n" (reg y) (reg x) z
   | NonTail(x), Mul(y, V(z)) -> Printf.fprintf oc "\tmult\t%s %s %s\n" (reg y) (reg z) (reg x)
@@ -257,7 +256,7 @@ and g' oc = function (* 各命令のアセンブリ生成 (caml2html: emit_gprim
   | NonTail(z), IfLE(x, V(y), e1, e2) ->
       Printf.fprintf oc "\tsub\t%s %s %s\n" (reg x) (reg y) (reg reg_cond);
       g'_non_tail_if oc (NonTail(z)) e2 e1 "ble_nontail" "blez"
-      
+
   (*| NonTail(z), IfLE(x, V(y), e1, e2) ->
       Printf.fprintf oc "\tcmpw\tcr7, %s, %s\n" (reg x) (reg y);
       g'_non_tail_if oc (NonTail(z)) e1 e2 "ble" "bgt"*)
