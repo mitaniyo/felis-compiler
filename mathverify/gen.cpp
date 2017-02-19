@@ -9,21 +9,21 @@ int main(){
 		printf("let y = %.9f in\n", sin(i));
 		printf("let z = x -. y in\n");
 		printf("let w = if z < 0.0 then -.z else z in\n");
-		printf("let p = if w > 0.0000001 then ((print_char 119); 0) else ((print_char 97); 1) in\n");
+		printf("let p = if w > fabs (0.000003 *. %d.0) then ((print_char 119); 0) else ((print_char 97); 1) in\n", i);
 	}
 	for(int i = -100; i <= 100; ++i){
 		printf("let x = cos (%d.0) in\n", i);
 		printf("let y = %.9f in\n", cos(i));
 		printf("let z = x -. y in\n");
 		printf("let w = if z < 0.0 then -.z else z in\n");
-		printf("let p = if w > 0.0000001 then ((print_char 119); 0) else ((print_char 97); 1) in\n");
+		printf("let p = if w > fabs (0.000003 *. %d.0) then ((print_char 119); 0) else ((print_char 97); 1) in\n", i);
 	}
 	for(int i = -100; i <= 100; ++i){
 		printf("let x = atan (%d.0) in\n", i);
 		printf("let y = %.9f in\n", atan(i));
 		printf("let z = x -. y in\n");
 		printf("let w = if z < 0.0 then -.z else z in\n");
-		printf("let p = if w > 0.0000001 then ((print_char 119); 0) else ((print_char 97); 1) in\n");
+		printf("let p = if w > fabs (0.0000001 *. y) then ((print_char 119); 0) else ((print_char 97); 1) in\n");
 	}
 	printf("()\n");
 	return 0;

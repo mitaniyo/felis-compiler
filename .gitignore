@@ -28,5 +28,6 @@ min-caml.opt
 !/mathverify/*.cpp
 /rt/raytracer/out
 /rt/raytracer/test
+/rt/raytracer/minrt
 /gctest
 
