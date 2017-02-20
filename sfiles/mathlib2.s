@@ -347,9 +347,7 @@ floor.203:
 	lui	r24 19200
 	ori	r24 r24 0
 	mtc1	r24 f2
-	lui	r24 0
-	ori	r24 r24 0
-	mtc1	r24 f1
+	mtc1	r0 f1
 	lui	r24 51968
 	ori	r24 r24 0
 	mtc1	r24 f1
@@ -374,15 +372,11 @@ bfle_tail_else.1298:
 	addi	r0 r3 0
 	addi	r0 r4 2
 	div	r3 r4 r3
-	lui	r24 0
-	ori	r24 r24 0
-	mtc1	r24 f3
+	mtc1	r0 f3
 	lui	r24 16384
 	ori	r24 r24 0
 	mtc1	r24 f3
-	lui	r24 0
-	ori	r24 r24 0
-	mtc1	r24 f3
+	mtc1	r0 f3
 	sub.s	f3 f0 f30
 	mfc1	f30 r25
 	blez	r25 bfle_tail_else.1299
@@ -568,9 +562,7 @@ int_of_float.205:
 	lui	r24 19200
 	ori	r24 r24 0
 	mtc1	r24 f2
-	lui	r24 0
-	ori	r24 r24 0
-	mtc1	r24 f1
+	mtc1	r0 f1
 	lui	r24 51968
 	ori	r24 r24 0
 	mtc1	r24 f1
@@ -595,15 +587,11 @@ bfle_nontail_else.1314:
 	addi	r0 r3 0
 	addi	r0 r4 2
 	div	r3 r4 r3
-	lui	r24 0
-	ori	r24 r24 0
-	mtc1	r24 f3
+	mtc1	r0 f3
 	lui	r24 16384
 	ori	r24 r24 0
 	mtc1	r24 f3
-	lui	r24 0
-	ori	r24 r24 0
-	mtc1	r24 f3
+	mtc1	r0 f3
 	sub.s	f3 f0 f30
 	mfc1	f30 r25
 	blez	r25 bfle_nontail_else.1316
@@ -708,9 +696,7 @@ normalize.207:
 	lui	r24 19200
 	ori	r24 r24 0
 	mtc1	r24 f4
-	lui	r24 0
-	ori	r24 r24 0
-	mtc1	r24 f5
+	mtc1	r0 f5
 	lui	r24 51968
 	ori	r24 r24 0
 	mtc1	r24 f5
@@ -740,15 +726,11 @@ bfle_nontail_else.1329:
 	addi	r0 r3 0
 	addi	r0 r4 2
 	div	r3 r4 r3
-	lui	r24 0
-	ori	r24 r24 0
-	mtc1	r24 f6
+	mtc1	r0 f6
 	lui	r24 16384
 	ori	r24 r24 0
 	mtc1	r24 f6
-	lui	r24 0
-	ori	r24 r24 0
-	mtc1	r24 f6
+	mtc1	r0 f6
 	sub.s	f6 f3 f30
 	mfc1	f30 r25
 	blez	r25 bfle_nontail_else.1331
@@ -808,9 +790,7 @@ bfle_nontail_cont.1328:
 	lui	r24 19200
 	ori	r24 r24 0
 	mtc1	r24 f4
-	lui	r24 0
-	ori	r24 r24 0
-	mtc1	r24 f5
+	mtc1	r0 f5
 	lui	r24 51968
 	ori	r24 r24 0
 	mtc1	r24 f5
@@ -884,9 +864,7 @@ bfle_tail_else.1340:
 	lui	r24 19200
 	ori	r24 r24 0
 	mtc1	r24 f4
-	lui	r24 0
-	ori	r24 r24 0
-	mtc1	r24 f5
+	mtc1	r0 f5
 	lui	r24 51968
 	ori	r24 r24 0
 	mtc1	r24 f5
@@ -962,9 +940,7 @@ ble_tail_else.1333:
 	lui	r24 19200
 	ori	r24 r24 0
 	mtc1	r24 f4
-	lui	r24 0
-	ori	r24 r24 0
-	mtc1	r24 f5
+	mtc1	r0 f5
 	lui	r24 51968
 	ori	r24 r24 0
 	mtc1	r24 f5
@@ -1039,9 +1015,7 @@ bfle_tail_else.1352:
 	lui	r24 19200
 	ori	r24 r24 0
 	mtc1	r24 f4
-	lui	r24 0
-	ori	r24 r24 0
-	mtc1	r24 f5
+	mtc1	r0 f5
 	lui	r24 51968
 	ori	r24 r24 0
 	mtc1	r24 f5
@@ -1114,9 +1088,7 @@ bfle_tail_else.1358:
 	lui	r24 19200
 	ori	r24 r24 0
 	mtc1	r24 f4
-	lui	r24 0
-	ori	r24 r24 0
-	mtc1	r24 f5
+	mtc1	r0 f5
 	lui	r24 51968
 	ori	r24 r24 0
 	mtc1	r24 f5
@@ -1146,15 +1118,11 @@ bfle_nontail_else.1361:
 	addi	r0 r3 0
 	addi	r0 r4 2
 	div	r3 r4 r3
-	lui	r24 0
-	ori	r24 r24 0
-	mtc1	r24 f6
+	mtc1	r0 f6
 	lui	r24 16384
 	ori	r24 r24 0
 	mtc1	r24 f6
-	lui	r24 0
-	ori	r24 r24 0
-	mtc1	r24 f6
+	mtc1	r0 f6
 	sub.s	f6 f3 f30
 	mfc1	f30 r25
 	blez	r25 bfle_nontail_else.1363
@@ -1213,9 +1181,7 @@ bfle_nontail_cont.1360:
 	lui	r24 19200
 	ori	r24 r24 0
 	mtc1	r24 f4
-	lui	r24 0
-	ori	r24 r24 0
-	mtc1	r24 f5
+	mtc1	r0 f5
 	lui	r24 51968
 	ori	r24 r24 0
 	mtc1	r24 f5
@@ -1289,9 +1255,7 @@ bfle_tail_else.1372:
 	lui	r24 19200
 	ori	r24 r24 0
 	mtc1	r24 f4
-	lui	r24 0
-	ori	r24 r24 0
-	mtc1	r24 f5
+	mtc1	r0 f5
 	lui	r24 51968
 	ori	r24 r24 0
 	mtc1	r24 f5
@@ -1367,9 +1331,7 @@ ble_tail_else.1365:
 	lui	r24 19200
 	ori	r24 r24 0
 	mtc1	r24 f4
-	lui	r24 0
-	ori	r24 r24 0
-	mtc1	r24 f5
+	mtc1	r0 f5
 	lui	r24 51968
 	ori	r24 r24 0
 	mtc1	r24 f5
@@ -1444,9 +1406,7 @@ bfle_tail_else.1384:
 	lui	r24 19200
 	ori	r24 r24 0
 	mtc1	r24 f4
-	lui	r24 0
-	ori	r24 r24 0
-	mtc1	r24 f5
+	mtc1	r0 f5
 	lui	r24 51968
 	ori	r24 r24 0
 	mtc1	r24 f5
@@ -1646,9 +1606,7 @@ cos.213:
 	lui	r24 19200
 	ori	r24 r24 0
 	mtc1	r24 f4
-	lui	r24 0
-	ori	r24 r24 0
-	mtc1	r24 f5
+	mtc1	r0 f5
 	lui	r24 51968
 	ori	r24 r24 0
 	mtc1	r24 f5
@@ -1734,9 +1692,7 @@ bfle_nontail_else.1400:
 	lui	r24 19200
 	ori	r24 r24 0
 	mtc1	r24 f4
-	lui	r24 0
-	ori	r24 r24 0
-	mtc1	r24 f5
+	mtc1	r0 f5
 	lui	r24 51968
 	ori	r24 r24 0
 	mtc1	r24 f5
@@ -1806,9 +1762,7 @@ ble_nontail_else.1406:
 ble_nontail_cont.1407:
 bfle_nontail_cont.1401:
 bfle_nontail_cont.1393:
-	lui	r24 0
-	ori	r24 r24 0
-	mtc1	r24 f1
+	mtc1	r0 f1
 	sub.s	f1 f0 f30
 	mfc1	f30 r25
 	blez	r25 bfle_nontail_else.1408
@@ -1895,9 +1849,7 @@ bfle_nontail_cont.1413:
 bfle_tail_else.1416:
 	mul.s	f0 f0 f0
 	mul.s	f0 f0 f2
-	lui	r24 32768
-	ori	r24 r24 0
-	mtc1	r24 f3
+	mtc1	r0 f3
 	mul.s	f3 f2 f3
 	lui	r24 1185
 	ori	r24 r24 42673
@@ -2040,9 +1992,7 @@ sin.215:
 	lui	r24 19200
 	ori	r24 r24 0
 	mtc1	r24 f4
-	lui	r24 0
-	ori	r24 r24 0
-	mtc1	r24 f5
+	mtc1	r0 f5
 	lui	r24 51968
 	ori	r24 r24 0
 	mtc1	r24 f5
@@ -2128,9 +2078,7 @@ bfle_nontail_else.1427:
 	lui	r24 19200
 	ori	r24 r24 0
 	mtc1	r24 f4
-	lui	r24 0
-	ori	r24 r24 0
-	mtc1	r24 f5
+	mtc1	r0 f5
 	lui	r24 51968
 	ori	r24 r24 0
 	mtc1	r24 f5
@@ -2233,9 +2181,7 @@ bfle_nontail_else.1435:
 bfle_nontail_else.1437:
 bfle_nontail_cont.1438:
 bfle_nontail_cont.1436:
-	lui	r24 0
-	ori	r24 r24 0
-	mtc1	r24 f1
+	mtc1	r0 f1
 	sub.s	f1 f0 f30
 	mfc1	f30 r25
 	blez	r25 bfle_nontail_else.1439
@@ -2248,9 +2194,7 @@ bfle_nontail_else.1439:
 	ori	r24 r24 0
 	mtc1	r24 f1
 bfle_nontail_cont.1440:
-	lui	r24 0
-	ori	r24 r24 0
-	mtc1	r24 f2
+	mtc1	r0 f2
 	sub.s	f2 f0 f30
 	mfc1	f30 r25
 	blez	r25 bfle_nontail_else.1441
@@ -2431,9 +2375,7 @@ atan_sub.217:
 	div.s	f1 f0 f0
 	lwc1	 r30 f1 12
 	sub.s	f1 f0 f0
-	lui	r24 0
-	ori	r24 r24 0
-	mtc1	r24 f2
+	mtc1	r0 f2
 	sub.s	f0 f2 f30
 	mfc1	f30 r25
 	blez	r25 bfle_nontail_else.1447
@@ -2478,9 +2420,7 @@ bfle_nontail_cont.1448:
 	div.s	f1 f0 f0
 	lwc1	 r30 f1 12
 	sub.s	f1 f0 f0
-	lui	r24 0
-	ori	r24 r24 0
-	mtc1	r24 f2
+	mtc1	r0 f2
 	sub.s	f0 f2 f30
 	mfc1	f30 r25
 	blez	r25 bfle_nontail_else.1451
@@ -2548,9 +2488,7 @@ beq_tail_else.1449:
 	div.s	f1 f0 f0
 	lwc1	 r30 f1 12
 	sub.s	f1 f0 f0
-	lui	r24 0
-	ori	r24 r24 0
-	mtc1	r24 f2
+	mtc1	r0 f2
 	sub.s	f0 f2 f30
 	mfc1	f30 r25
 	blez	r25 bfle_nontail_else.1455
@@ -2589,30 +2527,22 @@ beq_tail_else.1446:
 	jr	r31
 min_caml_atan:
 atan.222:
-	lui	r24 0
-	ori	r24 r24 0
-	mtc1	r24 f1
+	mtc1	r0 f1
 	sub.s	f1 f0 f30
 	mfc1	f30 r25
 	blez	r25 bfle_tail_else.1458
 	neg.s	f0 f0
-	lui	r24 0
-	ori	r24 r24 0
-	mtc1	r24 f1
+	mtc1	r0 f1
 	sub.s	f1 f0 f30
 	mfc1	f30 r25
 	blez	r25 bfle_nontail_else.1459
 	neg.s	f0 f0
-	lui	r24 0
-	ori	r24 r24 0
-	mtc1	r24 f1
+	mtc1	r0 f1
 	sub.s	f1 f0 f30
 	mfc1	f30 r25
 	blez	r25 bfle_nontail_else.1461
 	neg.s	f0 f0
-	lui	r24 0
-	ori	r24 r24 0
-	mtc1	r24 f1
+	mtc1	r0 f1
 	sub.s	f1 f0 f30
 	mfc1	f30 r25
 	blez	r25 bfle_nontail_else.1463
@@ -2625,9 +2555,7 @@ atan.222:
 	neg.s	f0 f0
 	j	bfle_nontail_cont.1464
 bfle_nontail_else.1463:
-	lui	r24 0
-	ori	r24 r24 0
-	mtc1	r24 f1
+	mtc1	r0 f1
 	sub.s	f0 f1 f30
 	mfc1	f30 r25
 	sll	r25 r25 1
@@ -2636,9 +2564,7 @@ bfle_nontail_else.1463:
 	ori	r24 r24 4059
 	mtc1	r24 f1
 	addi	r0 r1 0
-	lui	r24 0
-	ori	r24 r24 0
-	mtc1	r24 f1
+	mtc1	r0 f1
 	lui	r24 16384
 	ori	r24 r24 0
 	mtc1	r24 f2
@@ -2657,9 +2583,7 @@ bfle_nontail_cont.1464:
 	neg.s	f0 f0
 	j	bfle_nontail_cont.1462
 bfle_nontail_else.1461:
-	lui	r24 0
-	ori	r24 r24 0
-	mtc1	r24 f1
+	mtc1	r0 f1
 	sub.s	f0 f1 f30
 	mfc1	f30 r25
 	sll	r25 r25 1
@@ -2668,9 +2592,7 @@ bfle_nontail_else.1461:
 	ori	r24 r24 4059
 	mtc1	r24 f1
 	addi	r0 r1 0
-	lui	r24 0
-	ori	r24 r24 0
-	mtc1	r24 f1
+	mtc1	r0 f1
 	lui	r24 16384
 	ori	r24 r24 0
 	mtc1	r24 f2
@@ -2709,9 +2631,7 @@ bfle_nontail_else.1461:
 	div.s	f1 f0 f0
 	lwc1	 r30 f1 8
 	sub.s	f1 f0 f0
-	lui	r24 0
-	ori	r24 r24 0
-	mtc1	r24 f2
+	mtc1	r0 f2
 	sub.s	f0 f2 f30
 	mfc1	f30 r25
 	blez	r25 bfle_nontail_else.1469
@@ -2757,9 +2677,7 @@ bfle_nontail_cont.1462:
 	neg.s	f0 f0
 	j	bfle_nontail_cont.1460
 bfle_nontail_else.1459:
-	lui	r24 0
-	ori	r24 r24 0
-	mtc1	r24 f1
+	mtc1	r0 f1
 	sub.s	f0 f1 f30
 	mfc1	f30 r25
 	sll	r25 r25 1
@@ -2768,9 +2686,7 @@ bfle_nontail_else.1459:
 	ori	r24 r24 4059
 	mtc1	r24 f1
 	addi	r0 r1 0
-	lui	r24 0
-	ori	r24 r24 0
-	mtc1	r24 f1
+	mtc1	r0 f1
 	lui	r24 16384
 	ori	r24 r24 0
 	mtc1	r24 f2
@@ -2789,9 +2705,7 @@ bfle_nontail_cont.1460:
 	neg.s	f0 f0
 	jr	r31
 bfle_tail_else.1458:
-	lui	r24 0
-	ori	r24 r24 0
-	mtc1	r24 f1
+	mtc1	r0 f1
 	sub.s	f0 f1 f30
 	mfc1	f30 r25
 	sll	r25 r25 1
@@ -2800,9 +2714,7 @@ bfle_tail_else.1458:
 	ori	r24 r24 4059
 	mtc1	r24 f1
 	addi	r0 r1 0
-	lui	r24 0
-	ori	r24 r24 0
-	mtc1	r24 f1
+	mtc1	r0 f1
 	lui	r24 16384
 	ori	r24 r24 0
 	mtc1	r24 f2
@@ -2841,9 +2753,7 @@ bfle_tail_else.1458:
 	div.s	f1 f0 f0
 	lwc1	 r30 f1 28
 	sub.s	f1 f0 f0
-	lui	r24 0
-	ori	r24 r24 0
-	mtc1	r24 f2
+	mtc1	r0 f2
 	sub.s	f0 f2 f30
 	mfc1	f30 r25
 	blez	r25 bfle_nontail_else.1476
