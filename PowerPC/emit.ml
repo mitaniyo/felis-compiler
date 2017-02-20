@@ -414,7 +414,7 @@ let h oc { name = Id.L(x); args = _; fargs = _; body = e; ret = _ } =
   stacktypemap := [];
   g oc (Tail, e)
 
-let f oc hasextvar (Prog(data, fundefs, e)) =
+let f oc hasextvar printaa (Prog(data, fundefs, e)) =
 	Format.eprintf "generating assembly...\n";
 	(* do not use data section *)
 	List.iter (fun fundef -> h oc fundef) fundefs;
@@ -427,6 +427,9 @@ let f oc hasextvar (Prog(data, fundefs, e)) =
     (Printf.fprintf oc "\tjal\tmin_caml_globals\n";
     Printf.fprintf oc "\taddi\t%s %s %d\n" "r0" "r31" 0)
   else ());
+  (if printaa = 1 then
+    ((Printf.fprintf oc "\taddi\t%s %s %d\n" "r0" "r1" 170);
+    (Printf.fprintf oc "\tout\t%s\n" "r1")) else ());
 	g oc (NonTail("r0"), e);
 	Printf.fprintf oc "halt\n"
 

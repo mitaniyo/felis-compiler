@@ -1,6 +1,7 @@
 let limit = ref 1000
 let isLib = ref 0
 let hasExtvar = ref 0
+let printaa = ref 0
 
 let rec iter n e = (* 最適化処理をくりかえす (caml2html: main_iter) *)
   Format.eprintf "iteration %d@." n;
@@ -14,7 +15,7 @@ let rec iter n e = (* 最適化処理をくりかえす (caml2html: main_iter) *
 let lexbuf outchan l = (* バッファをコンパイルしてチャンネルへ出力する (caml2html: main_lexbuf) *)
   Id.counter := 0;
   Typing.extenv := M.empty;
-  Emit.f outchan (!hasExtvar)
+  Emit.f outchan (!hasExtvar) (!printaa)
     (RegAlloc.f
     (Virtual.f
        (Closure.f
@@ -69,7 +70,8 @@ let () = (* ここからコンパイラの実行が開始される (caml2html: m
     [("-inline", Arg.Int(fun i -> Inline.threshold := i), "maximum size of functions inlined");
      ("-iter", Arg.Int(fun i -> limit := i), "maximum number of optimizations iterated");
      ("-lib", Arg.Int(fun i -> isLib := i), "set 1 if no function should be eliminated");
-     ("-extvar", Arg.Int(fun i -> hasExtvar := i), "set 1 if the program has ext variable (not function)")]
+     ("-extvar", Arg.Int(fun i -> hasExtvar := i), "set 1 if the program has ext variable (not function)");
+     ("-aa", Arg.Int(fun i -> printaa := i), "for server")]
     (fun s -> files := !files @ [s])
     ("Mitou Min-Caml Compiler (C) Eijiro Sumii\n" ^
      Printf.sprintf "usage: %s [-inline m] [-iter n] ...filenames without \".ml\"..." Sys.argv.(0));
