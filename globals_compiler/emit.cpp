@@ -30,6 +30,7 @@ void li(int id, int val){
 	}else{
 		printf("lui r%d %d\n", id, val >> 16);
 		printf("addi r%d r%d %d\n", id, id, val & ((1 << 16) - 1));
+		fprintf(stderr, "___ %d\n", val & ((1 << 16) - 1));
 	}
 }
 
@@ -37,6 +38,7 @@ void fli(int id, float f){
 	pair<int, int> bits = getbits(f);
 	printf("lui r24 %d\n", bits.first);
 	printf("addi r24 r24 %d\n", bits.second);
+	fprintf(stderr, "___ %d\n", bits.second);
 	printf("mtc1 r24 f%d\n", id);
 }
 
@@ -70,7 +72,7 @@ void addVec(int id, int adr = -1){
 	int type = vars[id].type;
 	string obj = vars[id].obj;
 	bool isPub = vars[id].isPub;
-	if(len == 0) len++;
+	//if(len == 0) len++;
 	if(type == 0 || adr != -1){
 		// int
 		int val;

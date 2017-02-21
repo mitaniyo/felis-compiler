@@ -40,7 +40,7 @@ vec and_net
 vec or_net_tmp
 1 3 and_net.(0) 0
 vec or_net
-1 1 or_net_tmp 1
+1 2 or_net_tmp 1
 
 vec solver_dist
 1 1 0.0 1
@@ -105,7 +105,7 @@ tuple dummy_vs_tmp
 2 dummyf
 2 dummyff
 0
-vecv dummy_vs
+vec dummy_vs
 0 2 dummy_vs_tmp 0
 vec dirvecs
 5 2 dummy_vs 1

@@ -1,5 +1,6 @@
 min_caml_create_array:
 	addi r1 r3 0
+	beq r1 r0 _create_array_return
 	addi r1 r1 -1
 	sll r1 r1 2
 _create_array_loop:
@@ -15,6 +16,7 @@ _create_array_return:
 
 min_caml_create_float_array:
 	addi r1 r3 0
+	beq r1 r0 _create_float_array_return
 	addi r1 r1 -1
 	sll r1 r1 2
 _create_float_array_loop:

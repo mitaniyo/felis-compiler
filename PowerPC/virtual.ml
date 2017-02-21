@@ -123,18 +123,6 @@ let rec g env = function (* 式の仮想マシンコード生成 (caml2html: vir
 	    if not (S.mem x s) then load else (* [XX] a little ad hoc optimization *)
 	    Let((x, t), Ld(y, C(offset)), load)) in
       load
- (* | Closure.Get (x, y) -> (* 配列の読み出し *)
-      let offset = Id.genid "o" in  
-  (match M.find x env with
-     | Type.Array (Type.Unit) -> Ans (Nop)
-     | Type.Array (Type.Float) ->
-         Let ((offset, Type.Int), Slw (y, C (3)), 
-        Ans (Lfd (x, V (offset))))
-     | Type.Array (_) ->
-         Let ((offset, Type.Int), Slw (y, C (2)),
-        Ans (Lwz (x, V (offset))))
-     | _ -> assert false)
-*)
   | Closure.Get(x, y) -> (* 配列の読み出し (caml2html: virtual_get) *)
       let offset = Id.genid "o" in
       (match M.find x env with
