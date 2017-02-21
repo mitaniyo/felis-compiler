@@ -122,13 +122,15 @@ and g' oc = function (* 各命令のアセンブリ生成 (caml2html: emit_gprim
   | NonTail(x), Add(y, C(z)) -> failwith "too large z"
   | NonTail(x), Sub(y, V(z)) -> Printf.fprintf oc "\tsub\t%s %s %s\n" (reg y) (reg z) (reg x)
   | NonTail(x), Sub(y, C(z)) -> Printf.fprintf oc "\taddi\t%s %s %d\n" (reg y) (reg x) (-z)
-  | NonTail(x), Mul(y, C(z)) -> let l = small_log z in
+  | NonTail(x), Mul(y, C(z)) -> (*let l = small_log z in
     if l >= 0 then Printf.fprintf oc "\tsll\t%s %s %d\n" (reg y) (reg x) l
-    else Printf.fprintf oc "\tmult\t%s %s %d\n" (reg y) (reg x) z
+    else Printf.fprintf oc "\tmult\t%s %s %d\n" (reg y) (reg x) z*)
+    Printf.fprintf oc "\tmulti %s %s %d\n" (reg y) (reg x) z
   | NonTail(x), Mul(y, V(z)) -> Printf.fprintf oc "\tmult\t%s %s %s\n" (reg y) (reg z) (reg x)
-  | NonTail(x), Div(y, C(z)) -> let l = small_log z in
+  | NonTail(x), Div(y, C(z)) -> (*let l = small_log z in
     if l >= 0 then Printf.fprintf oc "\tsrl\t%s %s %d\n" (reg y) (reg x) l
-    else Printf.fprintf oc "\tdiv\t%s %s %d\n" (reg y) (reg x) z
+    else Printf.fprintf oc "\tdiv\t%s %s %d\n" (reg y) (reg x) z*)
+    Printf.fprintf oc "\tdivi %s %s %d\n" (reg y) (reg x) z
   | NonTail(x), Div(y, V(z)) -> Printf.fprintf oc "\tdiv\t%s %s %s\n" (reg y) (reg z) (reg x)
   | NonTail(x), Ld(y, V(z)) -> Printf.fprintf oc "\tlwo\t%s %s %s\n" (reg y) (reg z) (reg x)
   | NonTail(x), Ld(y, C(z)) -> Printf.fprintf oc "\tlw\t%s %s %d\n" (reg y) (reg x) z
@@ -205,7 +207,7 @@ and g' oc = function (* 各命令のアセンブリ生成 (caml2html: emit_gprim
   | Tail, IfFEq(x, y, e1, e2) ->
   	  Printf.fprintf oc "\tsub.s\t%s %s %s\n" (reg x) (reg y) (reg reg_fcond);
   	  Printf.fprintf oc "\tmfc1\t%s %s\n" (reg reg_fcond) (reg reg_cond);
-  	  Printf.fprintf oc "\tsll\t%s %s %d\n" (reg reg_cond) (reg reg_cond) 1;
+  	  (*Printf.fprintf oc "\tsll\t%s %s %d\n" (reg reg_cond) (reg reg_cond) 1;*)
       g'_tail_if oc e2 e1 "bfeq_tail" "beq"
   | Tail, IfFLE(x, y, e1, e2) ->
   	  Printf.fprintf oc "\tsub.s\t%s %s %s\n" (reg x) (reg y) (reg reg_fcond);
@@ -237,7 +239,7 @@ and g' oc = function (* 各命令のアセンブリ生成 (caml2html: emit_gprim
   | NonTail(z), IfFEq(x, y, e1, e2) ->
   	  Printf.fprintf oc "\tsub.s\t%s %s %s\n" (reg x) (reg y) (reg reg_fcond);
   	  Printf.fprintf oc "\tmfc1\t%s %s\n" (reg reg_fcond) (reg reg_cond);
-  	  Printf.fprintf oc "\tsll\t%s %s %d\n" (reg reg_cond) (reg reg_cond) 1;
+  	  (*Printf.fprintf oc "\tsll\t%s %s %d\n" (reg reg_cond) (reg reg_cond) 1;*)
       g'_non_tail_if oc (NonTail(z)) e2 e1 "bfeq_nontail" "beq"
   | NonTail(z), IfFLE(x, y, e1, e2) -> (* x <= y, x - y <= 0 *)
   	  Printf.fprintf oc "\tsub.s\t%s %s %s\n" (reg x) (reg y) (reg reg_fcond);
