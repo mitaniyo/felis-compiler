@@ -779,7 +779,7 @@ beq_cont.28486:
 	addi	r30 r30 -112
 	lw	r30 r31 108
 	mov	r2 r27
-	addi	r27 r27 48
+	addi	r27 r27 44
 	sw	r1 r2 40
 	lw	r30 r1 88
 	sw	r1 r2 36
@@ -31342,7 +31342,7 @@ ble_nontail_cont.30720:
 	lw	r30 r31 4
 	addi	r30 r30 -48
 	mov	r2 r27
-	addi	r27 r27 16
+	addi	r27 r27 12
 	lwc1	 r30 f0 16
 	swc1	f0 r2 8
 	lw	r30 r3 36
@@ -31512,7 +31512,7 @@ ble_nontail_cont.30726:
 	lw	r30 r31 4
 	addi	r30 r30 -76
 	mov	r2 r27
-	addi	r27 r27 16
+	addi	r27 r27 12
 	lwc1	 r30 f0 16
 	swc1	f0 r2 8
 	lw	r30 r3 64
@@ -31683,7 +31683,7 @@ ble_nontail_cont.30732:
 	lw	r30 r31 4
 	addi	r30 r30 -104
 	mov	r2 r27
-	addi	r27 r27 16
+	addi	r27 r27 12
 	lwc1	 r30 f0 16
 	swc1	f0 r2 8
 	lw	r30 r3 92
@@ -31973,7 +31973,7 @@ ble_nontail_cont.30739:
 	lw	r30 r31 4
 	addi	r30 r30 -40
 	mov	r2 r27
-	addi	r27 r27 16
+	addi	r27 r27 12
 	lwc1	 r30 f0 8
 	swc1	f0 r2 8
 	lw	r30 r3 28

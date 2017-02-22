@@ -200,6 +200,7 @@ void addTuple(int id){
 
 	positions[name] = hp;
 	hp += vec.size() * 4;
+	printf("addi r27 r27 %d\n", vec.size() * 4);
 
 	string nxtName = id + 1 < vars.size() ? vars[id + 1].name : "return";
 	printf("j %s\n", ("generate_" + nxtName).c_str());
