@@ -35288,6 +35288,8 @@ _min_caml_start:
 	lui	r27 32
 	jal	min_caml_globals
 	addi	r0 r31 0
+	addi	r0 r1 170
+	out	r1
 	addi	r0 r1 128
 	addi	r0 r2 128
 	sw	r31 r30 0
