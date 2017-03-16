@@ -3,6 +3,9 @@ MinCaml コンパイラの改造
 
 sfiles/ 以下のファイルが課題の実行に必要なプログラムです。
 
+sfiles/ 以下の
+array.s, globals.s, io2.s, mathlib2.s, math_primitive2.s, minrt128aa.s をまとめてアセンブルすると実行ファイルが得られる
+
 仕様
 ファイルをまたいで用いたい関数のラベルは min_caml ではじめる
 外部変数定義ファイルは存在すれば一つでなければならない (外部関数の定義には複数ファイルを用いて良い)
@@ -16,6 +19,13 @@ make native-code
 外部変数がある場合
 ./min-caml.opt -extvar 1 file
 エントリポイントの直後に外部変数生成コードへのジャンプを挿入する
+
+cserver の仕様に従ったアセンブラ (0xaa を出力してから入力を読み込む) を出力するときは -aa 1 をつける
+
+sfiles/minrt128aa.s は
+./min-caml.opt -extvar 1 -aa 1 -inline 100 rt/raytracer/programs/minrt128
+として得られる
+
 
 ライブラリ関数定義ファイルのコンパイル方法
 ./min-caml.opt -lib 1 file
